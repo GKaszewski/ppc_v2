@@ -36,3 +36,5 @@ script = ExtResource("5_geu10")
 eye_left = NodePath("../Root/Left Eye")
 eye_right = NodePath("../Root/Right Eye")
 player_controller = NodePath("..")
+
+[node name="CoyoteTimer" type="Timer" parent="."]
