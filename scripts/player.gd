@@ -1,3 +1,4 @@
+class_name PlayerController
 extends CharacterBody2D
 
 @export var speed: float = 300.0

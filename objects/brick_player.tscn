@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bqi5s710xb1ju"]
+[gd_scene load_steps=7 format=3 uid="uid://bqi5s710xb1ju"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_8j4h4"]
 [ext_resource type="Texture2D" uid="uid://b7gp0gqvkv8j4" path="res://sprites/MrBrick_base.png" id="2_bc55y"]
 [ext_resource type="Texture2D" uid="uid://jl1gwqchhpdc" path="res://sprites/left_eye.png" id="3_2srrh"]
 [ext_resource type="Texture2D" uid="uid://iiawtnwmeny3" path="res://sprites/right_eye.png" id="4_ccn81"]
+[ext_resource type="Script" path="res://scripts/components/flip_player.gd" id="5_geu10"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hdsg1"]
 size = Vector2(16, 31)
@@ -29,3 +30,9 @@ hframes = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_hdsg1")
+
+[node name="FlipPlayerComponent" type="Node2D" parent="." node_paths=PackedStringArray("eye_left", "eye_right", "player_controller")]
+script = ExtResource("5_geu10")
+eye_left = NodePath("../Root/Left Eye")
+eye_right = NodePath("../Root/Right Eye")
+player_controller = NodePath("..")
