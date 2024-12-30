@@ -16,6 +16,7 @@ config/name_localized={
 "pl": "Przygody Pana Cegły"
 }
 config/version="in-dev"
+run/main_scene="res://scenes/test.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 boot_splash/show_image=false
 boot_splash/fullsize=false

@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_epuj5"]
 [ext_resource type="Script" path="res://scripts/components/collectable.gd" id="2_y0k47"]
-[ext_resource type="Resource" uid="uid://bc0esas5r2uy8" path="res://resources/collectables/coin.tres" id="3_fm2fq"]
+[ext_resource type="Resource" uid="uid://vql535ckoeqm" path="res://resources/collectables/coin.tres" id="3_fm2fq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3ask2"]
 radius = 9.0

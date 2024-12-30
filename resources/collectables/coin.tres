@@ -1,7 +1,7 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bc0esas5r2uy8"]
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://vql535ckoeqm"]
 
-[ext_resource type="Script" path="res://scripts/resources/collectable_resource.gd" id="1_nmrta"]
+[ext_resource type="Script" path="res://scripts/resources/collectable_resource.gd" id="1_veemo"]
 
 [resource]
-script = ExtResource("1_nmrta")
+script = ExtResource("1_veemo")
 amount = 1
