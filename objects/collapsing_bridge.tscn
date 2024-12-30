@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://ct8fim6mduyl3"]
+
+[ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_rka1x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l44jt"]
+size = Vector2(16, 4)
+
+[node name="Collapsing Bridge" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_l44jt")
+one_way_collision = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_rka1x")
+hframes = 12
+vframes = 12
+frame = 56

@@ -48,6 +48,9 @@ func _physics_process(delta):
 
 	if Input.is_action_pressed("jump") and (is_on_floor() or coyote_mode):
 		jump()
+	
+	if Input.is_action_just_pressed("down"):
+		position.y += 1
 		
 	var direction = Input.get_axis("left", "right")
 	if direction:

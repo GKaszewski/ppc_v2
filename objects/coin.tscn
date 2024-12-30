@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://54w4wisfj8v8"]
+
+[ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_epuj5"]
+[ext_resource type="Script" path="res://scripts/components/collectable.gd" id="2_y0k47"]
+[ext_resource type="Resource" uid="uid://bc0esas5r2uy8" path="res://resources/collectables/coin.tres" id="3_fm2fq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3ask2"]
+radius = 9.0
+
+[node name="Coin" type="Area2D"]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3ask2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_epuj5")
+hframes = 12
+vframes = 12
+frame = 51
+
+[node name="Collectable" type="Node" parent="." node_paths=PackedStringArray("area2d") groups=["coins"]]
+script = ExtResource("2_y0k47")
+area2d = NodePath("..")
+collectable_data = ExtResource("3_fm2fq")

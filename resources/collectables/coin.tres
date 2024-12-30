@@ -1,0 +1,7 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bc0esas5r2uy8"]
+
+[ext_resource type="Script" path="res://scripts/resources/collectable_resource.gd" id="1_nmrta"]
+
+[resource]
+script = ExtResource("1_nmrta")
+amount = 1
