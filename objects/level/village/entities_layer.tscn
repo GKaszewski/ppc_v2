@@ -1,0 +1,143 @@
+[gd_scene load_steps=7 format=4 uid="uid://dnufqkeiyi5ya"]
+
+[ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_51i2x"]
+[ext_resource type="PackedScene" uid="uid://54w4wisfj8v8" path="res://objects/coin.tscn" id="2_2l4v1"]
+[ext_resource type="PackedScene" uid="uid://ct8fim6mduyl3" path="res://objects/collapsing_bridge.tscn" id="3_ukc1k"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8idcv"]
+texture = ExtResource("1_51i2x")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+11:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+9:1/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+9:2/0 = 0
+10:2/0 = 0
+11:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+8:3/0 = 0
+9:3/0 = 0
+10:3/0 = 0
+11:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+7:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -4, -8, -4)
+7:4/0/physics_layer_0/polygon_0/one_way = true
+8:4/0 = 0
+8:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -4, -8, -4)
+8:4/0/physics_layer_0/polygon_0/one_way = true
+9:4/0 = 0
+9:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -4, -8, -4)
+9:4/0/physics_layer_0/polygon_0/one_way = true
+10:4/0 = 0
+10:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -4, -8, -4)
+10:4/0/physics_layer_0/polygon_0/one_way = true
+11:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+8:5/0 = 0
+9:5/0 = 0
+10:5/0 = 0
+11:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+6:6/0 = 0
+7:6/0 = 0
+8:6/0 = 0
+9:6/0 = 0
+9:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -4, -8, -4)
+9:6/0/physics_layer_0/polygon_0/one_way = true
+10:6/0 = 0
+10:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -4, -8, -4)
+10:6/0/physics_layer_0/polygon_0/one_way = true
+11:6/0 = 0
+11:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -4, -8, -4)
+11:6/0/physics_layer_0/polygon_0/one_way = true
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+5:7/0 = 0
+7:7/0 = 0
+7:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -4, -8, -4)
+7:7/0/physics_layer_0/polygon_0/one_way = true
+8:7/0 = 0
+9:7/0 = 0
+10:7/0 = 0
+11:7/0 = 0
+1:8/0 = 0
+2:8/0 = 0
+3:8/0 = 0
+4:8/0 = 0
+5:8/0 = 0
+6:8/0 = 0
+7:8/0 = 0
+8:8/0 = 0
+9:8/0 = 0
+10:8/0 = 0
+1:9/0 = 0
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_v3eon"]
+scenes/1/scene = ExtResource("2_2l4v1")
+scenes/2/scene = ExtResource("3_ukc1k")
+
+[sub_resource type="TileSet" id="TileSet_yf4x4"]
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 5
+sources/0 = SubResource("TileSetAtlasSource_8idcv")
+sources/1 = SubResource("TileSetScenesCollectionSource_v3eon")
+
+[node name="Entities layer" type="TileMapLayer"]
+tile_map_data = PackedByteArray("AAAJAPz/AAAHAAMAAAAJAP3/AAAHAAQAAAAKAPz/AAAIAAMAAAALAPz/AAAIAAMAAAAMAPz/AAAJAAMAAAANAPz/AAAKAAMAAAANAP3/AAAKAAQAAAAUAPz/AAAGAAMAADAVAPz/AAAGAAMAADAWAPz/AAAGAAMAADAcAAMAAAAGAAMAAGAPAPn/AAADAAYAAAAWAP3/AAALAAQAAAAWAP7/AAALAAQAAAAWAP//AAALAAQAAAAWAAAAAAALAAQAAAAWAAEAAAALAAQAAAAWAAIAAAALAAQAAAAWAAMAAAALAAQAAAAaAAMAAAAGAAQAAAAWAPn/AQAAAAAAAQAXAPn/AQAAAAAAAQAYAPn/AQAAAAAAAQAZAPn/AQAAAAAAAQAaAPn/AQAAAAAAAQAZAPj/AQAAAAAAAQAYAPj/AQAAAAAAAQAXAPj/AQAAAAAAAQAYAPf/AQAAAAAAAQAKAP3/AQAAAAAAAgALAP3/AQAAAAAAAgAMAP3/AQAAAAAAAgA=")
+tile_set = SubResource("TileSet_yf4x4")

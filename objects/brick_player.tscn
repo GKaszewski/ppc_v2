@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bqi5s710xb1ju"]
+[gd_scene load_steps=11 format=3 uid="uid://bqi5s710xb1ju"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_8j4h4"]
 [ext_resource type="Texture2D" uid="uid://b7gp0gqvkv8j4" path="res://sprites/MrBrick_base.png" id="2_bc55y"]
@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://iiawtnwmeny3" path="res://sprites/right_eye.png" id="4_ccn81"]
 [ext_resource type="Script" path="res://scripts/components/flip_player.gd" id="5_geu10"]
 [ext_resource type="Script" path="res://scripts/components/score.gd" id="6_fowa2"]
+[ext_resource type="Script" path="res://scripts/components/health.gd" id="7_tqjk8"]
+[ext_resource type="Script" path="res://scripts/components/player_death.gd" id="8_1v23d"]
+[ext_resource type="Script" path="res://scripts/components/knockback.gd" id="9_rjyu4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hdsg1"]
 size = Vector2(16, 31)
@@ -46,3 +49,18 @@ player_controller = NodePath("..")
 
 [node name="ScoreComponent" type="Node" parent="."]
 script = ExtResource("6_fowa2")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("7_tqjk8")
+
+[node name="PlayerDeathComponent" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("8_1v23d")
+
+[node name="KnockbackComponent" type="Node" parent="." node_paths=PackedStringArray("character_body")]
+script = ExtResource("9_rjyu4")
+character_body = NodePath("..")
+knockback_force = 1500.0
+
+[connection signal="on_death" from="HealthComponent" to="PlayerDeathComponent" method="_on_health_component_on_death"]
+[connection signal="on_health_change" from="HealthComponent" to="KnockbackComponent" method="_on_health_component_on_health_change"]

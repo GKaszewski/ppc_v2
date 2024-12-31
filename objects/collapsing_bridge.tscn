@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://ct8fim6mduyl3"]
+[gd_scene load_steps=5 format=3 uid="uid://ct8fim6mduyl3"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_rka1x"]
+[ext_resource type="Script" path="res://scripts/components/collapsable.gd" id="2_3vvum"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l44jt"]
 size = Vector2(16, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sfbe2"]
+size = Vector2(16, 2)
 
 [node name="Collapsing Bridge" type="StaticBody2D"]
 
@@ -17,3 +21,30 @@ texture = ExtResource("1_rka1x")
 hframes = 12
 vframes = 12
 frame = 56
+
+[node name="Collapsable detector" type="Area2D" parent="."]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collapsable detector"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_sfbe2")
+
+[node name="ToCollapseTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="ResetTimer" type="Timer" parent="."]
+
+[node name="CollapsableComponent" type="Node" parent="." node_paths=PackedStringArray("to_collapse_timer", "reset_timer", "sprite2d", "collision_shape")]
+script = ExtResource("2_3vvum")
+to_collapse_timer = NodePath("../ToCollapseTimer")
+reset_timer = NodePath("../ResetTimer")
+sprite2d = NodePath("../Sprite2D")
+collision_shape = NodePath("../CollisionShape2D")
+collapse_time = 2.0
+reset_time = 3.0
+anim_time = 0.5
+
+[connection signal="body_entered" from="Collapsable detector" to="CollapsableComponent" method="_on_collapsable_detector_body_entered"]
+[connection signal="body_exited" from="Collapsable detector" to="CollapsableComponent" method="_on_collapsable_detector_body_exited"]
+[connection signal="timeout" from="ToCollapseTimer" to="CollapsableComponent" method="_on_to_collapse_timer_timeout"]
+[connection signal="timeout" from="ResetTimer" to="CollapsableComponent" method="_on_reset_timer_timeout"]

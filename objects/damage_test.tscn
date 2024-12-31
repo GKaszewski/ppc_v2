@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmvipsoauefs3"]
+
+[ext_resource type="Script" path="res://scripts/components/damage.gd" id="1_qhm3r"]
+[ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_yevdj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pn1xh"]
+size = Vector2(8, 16)
+
+[node name="Damage" type="Area2D"]
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_pn1xh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_yevdj")
+hframes = 12
+vframes = 12
+frame = 59
+
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("area2d")]
+script = ExtResource("1_qhm3r")
+area2d = NodePath("..")
