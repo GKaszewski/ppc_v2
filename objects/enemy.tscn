@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://bwdlmualj6xbw"]
+
+[ext_resource type="Texture2D" uid="uid://xes6mt2dd5gu" path="res://sprites/robot_cutout.png" id="1_uh38l"]
+[ext_resource type="Script" path="res://scripts/components/health.gd" id="2_o170m"]
+[ext_resource type="Script" path="res://scripts/components/damage.gd" id="3_8jl3u"]
+[ext_resource type="Script" path="res://scripts/components/side_to_side_movement.gd" id="4_gbsq8"]
+[ext_resource type="Script" path="res://scripts/components/periodic_shooting.gd" id="5_m03v0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pwwji"]
+size = Vector2(18, 27)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ejbqt"]
+size = Vector2(18, 27)
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_pwwji")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_uh38l")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_o170m")
+
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("area2d")]
+script = ExtResource("3_8jl3u")
+area2d = NodePath("../Hitbox")
+
+[node name="SideToSideMovement" type="Node" parent="." node_paths=PackedStringArray("root", "sprite2d", "left_ray", "right_ray")]
+script = ExtResource("4_gbsq8")
+root = NodePath("..")
+sprite2d = NodePath("../Sprite2D")
+speed = 60.0
+wait_time = 0.5
+left_ray = NodePath("../Left Ray")
+right_ray = NodePath("../Right Ray")
+
+[node name="PeriodicShootingComponent" type="Node" parent="." node_paths=PackedStringArray("side_to_side_movement", "root")]
+script = ExtResource("5_m03v0")
+side_to_side_movement = NodePath("../SideToSideMovement")
+root = NodePath("..")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_ejbqt")
+debug_color = Color(0.913521, 0.265052, 0.323172, 0.42)
+
+[node name="Left Ray" type="RayCast2D" parent="."]
+position = Vector2(-16, 13)
+
+[node name="Right Ray" type="RayCast2D" parent="."]
+position = Vector2(16, 13)

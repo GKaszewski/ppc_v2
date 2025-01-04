@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://54w4wisfj8v8"]
+[gd_scene load_steps=6 format=3 uid="uid://54w4wisfj8v8"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_epuj5"]
 [ext_resource type="Script" path="res://scripts/components/collectable.gd" id="2_y0k47"]
 [ext_resource type="Resource" uid="uid://vql535ckoeqm" path="res://resources/collectables/coin.tres" id="3_fm2fq"]
+[ext_resource type="Script" path="res://scripts/components/fade_away.gd" id="4_fx1h2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3ask2"]
 radius = 9.0
@@ -24,3 +25,10 @@ frame = 51
 script = ExtResource("2_y0k47")
 area2d = NodePath("..")
 collectable_data = ExtResource("3_fm2fq")
+
+[node name="FadeAwayComponent" type="Node" parent="." node_paths=PackedStringArray("sprite2d", "root", "area2d")]
+script = ExtResource("4_fx1h2")
+sprite2d = NodePath("../Sprite2D")
+fade_duration = 0.4
+root = NodePath("..")
+area2d = NodePath("..")

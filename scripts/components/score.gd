@@ -15,6 +15,5 @@ func on_collected(amount: int) -> void:
 		return
 
 	game_manager.add_coins(amount)
-	print("Coins: ", game_manager.get_coins())
 	# todo: play sound
 	# todo: update ui

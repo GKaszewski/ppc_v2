@@ -2,6 +2,7 @@ class_name CollectableComponent
 extends Node
 
 var root: Node
+var has_fade_away: bool = false
 
 @export var area2d: Area2D
 @export var collectable_data: Resource
@@ -16,7 +17,11 @@ func _ready() -> void:
 
 	root = get_parent()
 
+	if root.has_node("FadeAwayComponent"):
+		has_fade_away = true
+
 func _on_area2d_body_entered(body: Node2D) -> void:
 	if body.has_node("CanPickUpComponent"):
 		collected.emit(collectable_data.amount)
-		root.queue_free()
+		if not has_fade_away:
+			root.queue_free()

@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://bhc7y4xugu4q7"]
+
+[ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_w543f"]
+[ext_resource type="Script" path="res://scripts/components/damage.gd" id="2_qkwsu"]
+[ext_resource type="Script" path="res://scripts/components/bullet.gd" id="3_keogl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_txsw8"]
+radius = 4.0
+
+[node name="Bullet" type="Area2D"]
+collision_layer = 8
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_txsw8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_w543f")
+hframes = 12
+vframes = 12
+frame = 79
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(2.38419e-07, 2.38419e-07)
+scale = Vector2(0.4, 0.4)
+
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("area2d")]
+script = ExtResource("2_qkwsu")
+area2d = NodePath("..")
+
+[node name="BulletComponent" type="Node2D" parent="." node_paths=PackedStringArray("root", "area2d", "visibility_notifier", "timer")]
+script = ExtResource("3_keogl")
+root = NodePath("..")
+speed = 100.0
+area2d = NodePath("..")
+visibility_notifier = NodePath("../VisibleOnScreenNotifier2D")
+timer = NodePath("../Timer")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
