@@ -14,6 +14,7 @@ func _ready() -> void:
 	root = get_parent()
 	visibility_notifier.screen_exited.connect(_on_screen_exited)
 	area2d.body_entered.connect(on_area2d_body_entered)
+	area2d.area_entered.connect(on_area2d_area_entered)
 
 	timer.wait_time = life_time
 	timer.timeout.connect(on_timer_timeout)
@@ -28,6 +29,10 @@ func _on_screen_exited() -> void:
 
 
 func on_area2d_body_entered(_body: Node2D) -> void:
+	root.queue_free()
+
+
+func on_area2d_area_entered(_area: Area2D) -> void:
 	root.queue_free()
 
 

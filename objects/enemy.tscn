@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bwdlmualj6xbw"]
+[gd_scene load_steps=9 format=3 uid="uid://bwdlmualj6xbw"]
 
 [ext_resource type="Texture2D" uid="uid://xes6mt2dd5gu" path="res://sprites/robot_cutout.png" id="1_uh38l"]
 [ext_resource type="Script" path="res://scripts/components/health.gd" id="2_o170m"]
 [ext_resource type="Script" path="res://scripts/components/damage.gd" id="3_8jl3u"]
 [ext_resource type="Script" path="res://scripts/components/side_to_side_movement.gd" id="4_gbsq8"]
 [ext_resource type="Script" path="res://scripts/components/periodic_shooting.gd" id="5_m03v0"]
+[ext_resource type="Script" path="res://scripts/components/enemy_death.gd" id="6_6p3gr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pwwji"]
 size = Vector2(18, 27)
@@ -42,6 +43,13 @@ right_ray = NodePath("../Right Ray")
 script = ExtResource("5_m03v0")
 side_to_side_movement = NodePath("../SideToSideMovement")
 root = NodePath("..")
+
+[node name="EnemyDeathComponent" type="Node" parent="." node_paths=PackedStringArray("root", "collision_shape_2d", "health_component")]
+script = ExtResource("6_6p3gr")
+root = NodePath("..")
+tween_duration = 0.1
+collision_shape_2d = NodePath("../Hitbox/CollisionShape2D")
+health_component = NodePath("../HealthComponent")
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 8

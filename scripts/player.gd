@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var speed: float = 300.0
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var last_direction: Vector2 = Vector2.RIGHT
 
 @onready var root = $Root
 @onready var coyote_timer: Timer = $CoyoteTimer
@@ -52,7 +53,10 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("down"):
 		position.y += 1
 		
-	var direction = Input.get_axis("left", "right")
+	var direction := Input.get_axis("left", "right")
+	if direction != 0:
+		last_direction = handle_direction(direction)
+	
 	if direction:
 		velocity.x = direction * speed
 	else:
@@ -69,3 +73,11 @@ func calculate_gravity() -> float:
 
 func on_coyote_timer_timeout():
 	coyote_mode = false
+
+	
+func handle_direction(input_dir: float) -> Vector2:
+	if input_dir > 0:
+		return Vector2.RIGHT
+	elif input_dir < 0:
+		return Vector2.LEFT
+	return last_direction

@@ -6,7 +6,7 @@ extends Node2D
 @export var player_controller: PlayerController
 
 func _process(_delta: float) -> void:
-	var velocity = player_controller.velocity
+	var velocity := player_controller.last_direction
 	if velocity.x < 0:
 		eye_left.frame = 1
 		eye_right.frame = 1

@@ -32,7 +32,7 @@ func throw_brick() -> void:
 	var brick_instance: Node2D = brick_scene.instantiate()
 	var brick: BulletComponent = brick_instance.get_node("BulletComponent")
 	brick_instance.position = player_controller.position
-	brick.direction = Vector2.RIGHT if player_controller.velocity.x >= 0.0 else Vector2.LEFT
+	brick.direction = player_controller.last_direction
 	get_tree().current_scene.add_child(brick_instance)
 	
 	can_throw = false
