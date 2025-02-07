@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://h60obxmju6mo"]
+[gd_scene load_steps=22 format=4 uid="uid://h60obxmju6mo"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_5lb42"]
 [ext_resource type="TileSet" uid="uid://cl4bn8lofqvky" path="res://tileset/village/tileset_village.tres" id="1_d680t"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://ct8fim6mduyl3" path="res://objects/collapsing_bridge.tscn" id="6_84ckv"]
 [ext_resource type="PackedScene" uid="uid://bwdlmualj6xbw" path="res://objects/enemy.tscn" id="7_qgddg"]
 [ext_resource type="PackedScene" uid="uid://bhc7y4xugu4q7" path="res://objects/bullet.tscn" id="8_c68mx"]
+[ext_resource type="PackedScene" uid="uid://dfwpha0d18dmn" path="res://objects/cannon_ray_down.tscn" id="9_ysd8p"]
+[ext_resource type="PackedScene" uid="uid://d3lt4rhxduv44" path="res://objects/cannon_ray_left.tscn" id="10_7v2ff"]
 
 [sub_resource type="Gradient" id="Gradient_anvhr"]
 offsets = PackedFloat32Array(1)
@@ -432,3 +434,15 @@ position = Vector2(85, -89)
 
 [node name="Bullet3" parent="." instance=ExtResource("8_c68mx")]
 position = Vector2(307, 0)
+
+[node name="Cannon Ray" parent="." instance=ExtResource("9_ysd8p")]
+position = Vector2(328, -48)
+
+[node name="Cannon Ray2" parent="." instance=ExtResource("9_ysd8p")]
+position = Vector2(343, -48)
+
+[node name="Cannon Ray3" parent="." instance=ExtResource("9_ysd8p")]
+position = Vector2(360, -48)
+
+[node name="Cannon Ray4" parent="." instance=ExtResource("10_7v2ff")]
+position = Vector2(445, 57)

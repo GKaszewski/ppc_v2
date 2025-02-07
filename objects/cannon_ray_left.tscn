@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3lt4rhxduv44"]
+
+[ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_l5x2w"]
+[ext_resource type="Script" path="res://scripts/components/damage.gd" id="2_68sgi"]
+[ext_resource type="Script" path="res://scripts/components/beam_component.gd" id="3_mcbof"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ptfn7"]
+size = Vector2(16, 8)
+
+[node name="Cannon Ray" type="Area2D"]
+collision_layer = 0
+collision_mask = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_repeat = 2
+rotation = 1.5708
+texture = ExtResource("1_l5x2w")
+region_enabled = true
+region_rect = Rect2(176, 64, 16, 16)
+region_filter_clip_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ptfn7")
+
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("area2d")]
+script = ExtResource("2_68sgi")
+area2d = NodePath("..")
+
+[node name="BeamComponent" type="Node2D" parent="." node_paths=PackedStringArray("root", "sprite2d", "collision_shape")]
+position = Vector2(8, 0)
+script = ExtResource("3_mcbof")
+direction = Vector2(-1, 0)
+root = NodePath("..")
+sprite2d = NodePath("../Sprite2D")
+collision_shape = NodePath("../CollisionShape2D")
