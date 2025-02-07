@@ -5,7 +5,7 @@ var root: Node
 var has_fade_away: bool = false
 
 @export var area2d: Area2D
-@export var collectable_data: Resource
+@export var collectable_data: CollectableResource
 
 signal collected(amount: int)
 
