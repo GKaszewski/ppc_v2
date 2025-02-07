@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dstko446qydsc"]
+
+[ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_6gptm"]
+
+[node name="Cannon" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_6gptm")
+hframes = 12
+vframes = 12
+frame = 42
