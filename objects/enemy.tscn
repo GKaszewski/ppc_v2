@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bwdlmualj6xbw"]
+[gd_scene load_steps=10 format=3 uid="uid://bwdlmualj6xbw"]
 
 [ext_resource type="Texture2D" uid="uid://xes6mt2dd5gu" path="res://sprites/robot_cutout.png" id="1_uh38l"]
 [ext_resource type="Script" path="res://scripts/components/health.gd" id="2_o170m"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/components/side_to_side_movement.gd" id="4_gbsq8"]
 [ext_resource type="Script" path="res://scripts/components/periodic_shooting.gd" id="5_m03v0"]
 [ext_resource type="Script" path="res://scripts/components/enemy_death.gd" id="6_6p3gr"]
+[ext_resource type="Script" path="res://scripts/components/flashing_component.gd" id="7_xsaiy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pwwji"]
 size = Vector2(18, 27)
@@ -65,3 +66,8 @@ position = Vector2(-16, 13)
 
 [node name="Right Ray" type="RayCast2D" parent="."]
 position = Vector2(16, 13)
+
+[node name="FlashingComponent" type="Node" parent="." node_paths=PackedStringArray("sprite", "health_component")]
+script = ExtResource("7_xsaiy")
+sprite = NodePath("../Sprite2D")
+health_component = NodePath("../HealthComponent")
