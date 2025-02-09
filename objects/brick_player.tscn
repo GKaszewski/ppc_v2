@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bqi5s710xb1ju"]
+[gd_scene load_steps=17 format=3 uid="uid://bqi5s710xb1ju"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_8j4h4"]
 [ext_resource type="Texture2D" uid="uid://b7gp0gqvkv8j4" path="res://sprites/MrBrick_base.png" id="2_bc55y"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bymro4t7angv5" path="res://objects/brick.tscn" id="11_qutq2"]
 [ext_resource type="Script" path="res://scripts/components/stomp_damage_component.gd" id="12_payr4"]
 [ext_resource type="Script" path="res://scripts/components/flashing_component.gd" id="13_hrtyn"]
+[ext_resource type="Script" path="res://scripts/components/invulnerability_component.gd" id="14_jopig"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hdsg1"]
 size = Vector2(16, 31)
@@ -109,6 +110,10 @@ script = ExtResource("13_hrtyn")
 sprite = NodePath("../Root/Right Eye")
 flash_duration = 1.0
 health_component = NodePath("../HealthComponent")
+
+[node name="InvulnerabilityComponent" type="Node" parent="." node_paths=PackedStringArray("flashing_component")]
+script = ExtResource("14_jopig")
+flashing_component = NodePath("../FlashingComponent Base")
 
 [connection signal="on_death" from="HealthComponent" to="PlayerDeathComponent" method="_on_health_component_on_death"]
 [connection signal="on_health_change" from="HealthComponent" to="KnockbackComponent" method="_on_health_component_on_health_change"]
