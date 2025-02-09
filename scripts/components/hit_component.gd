@@ -9,6 +9,7 @@ extends Node
 func _ready() -> void:
 	if health_component:
 		health_component.on_health_change.connect(on_health_change)
+		health_component.on_death.connect(on_death)
 
 	if not sprite:
 		printerr("No sprite assigned!")
@@ -31,3 +32,9 @@ func on_health_change(delta: float, _total_health: float) -> void:
 		activate()
 		await get_tree().create_timer(hit_duration).timeout
 		deactivate()
+
+
+func on_death() -> void:
+	activate()
+	await get_tree().create_timer(hit_duration).timeout
+	deactivate()
