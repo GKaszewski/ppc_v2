@@ -5,6 +5,7 @@ extends CharacterBody2D
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var last_direction: Vector2 = Vector2.RIGHT
+var previous_velocity: Vector2 = Vector2.ZERO
 
 @onready var root = $Root
 @onready var coyote_timer: Timer = $CoyoteTimer
@@ -62,6 +63,7 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 	
+	previous_velocity = velocity
 	move_and_slide()
 	
 func jump():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bqi5s710xb1ju"]
+[gd_scene load_steps=15 format=3 uid="uid://bqi5s710xb1ju"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_8j4h4"]
 [ext_resource type="Texture2D" uid="uid://b7gp0gqvkv8j4" path="res://sprites/MrBrick_base.png" id="2_bc55y"]
@@ -11,9 +11,13 @@
 [ext_resource type="Script" path="res://scripts/components/knockback.gd" id="9_rjyu4"]
 [ext_resource type="Script" path="res://scripts/components/brick_throw.gd" id="10_u0v3b"]
 [ext_resource type="PackedScene" uid="uid://bymro4t7angv5" path="res://objects/brick.tscn" id="11_qutq2"]
+[ext_resource type="Script" path="res://scripts/components/StompDamageComponent.gd" id="12_0nvxt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hdsg1"]
 size = Vector2(16, 31)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vad0t"]
+size = Vector2(16, 32)
 
 [node name="Brick Player" type="CharacterBody2D"]
 collision_layer = 4
@@ -45,6 +49,14 @@ eye_left = NodePath("../Root/Left Eye")
 eye_right = NodePath("../Root/Right Eye")
 player_controller = NodePath("..")
 
+[node name="StompDamageArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StompDamageArea"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_vad0t")
+
 [node name="CoyoteTimer" type="Timer" parent="."]
 
 [node name="CanPickUpComponent" type="Node" parent="."]
@@ -72,6 +84,12 @@ player_controller = NodePath("..")
 timer = NodePath("../ThrowTimer")
 
 [node name="ThrowTimer" type="Timer" parent="."]
+
+[node name="StompDamageComponent" type="Node" parent="." node_paths=PackedStringArray("area2d", "root")]
+script = ExtResource("12_0nvxt")
+damage = 4.0
+area2d = NodePath("../StompDamageArea")
+root = NodePath("..")
 
 [connection signal="on_death" from="HealthComponent" to="PlayerDeathComponent" method="_on_health_component_on_death"]
 [connection signal="on_health_change" from="HealthComponent" to="KnockbackComponent" method="_on_health_component_on_health_change"]
