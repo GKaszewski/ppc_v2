@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://bwdlmualj6xbw"]
+[gd_scene load_steps=13 format=3 uid="uid://bwdlmualj6xbw"]
 
+[ext_resource type="Shader" uid="uid://bs4xvm4qkurpr" path="res://shaders/hit_flash.tres" id="1_ep4yr"]
 [ext_resource type="Texture2D" uid="uid://xes6mt2dd5gu" path="res://sprites/robot_cutout.png" id="1_uh38l"]
 [ext_resource type="Script" path="res://scripts/components/health.gd" id="2_o170m"]
 [ext_resource type="Script" path="res://scripts/components/damage.gd" id="3_8jl3u"]
@@ -7,9 +8,15 @@
 [ext_resource type="Script" path="res://scripts/components/periodic_shooting.gd" id="5_m03v0"]
 [ext_resource type="Script" path="res://scripts/components/enemy_death.gd" id="6_6p3gr"]
 [ext_resource type="Script" path="res://scripts/components/flashing_component.gd" id="7_xsaiy"]
+[ext_resource type="Script" path="res://scripts/components/hit_component.gd" id="9_0qjr4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pwwji"]
 size = Vector2(18, 27)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j18j0"]
+shader = ExtResource("1_ep4yr")
+shader_parameter/enabled = false
+shader_parameter/tint = Color(1, 1, 1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ejbqt"]
 size = Vector2(18, 27)
@@ -22,6 +29,7 @@ position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_pwwji")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_j18j0")
 texture = ExtResource("1_uh38l")
 
 [node name="HealthComponent" type="Node" parent="."]
@@ -41,6 +49,7 @@ left_ray = NodePath("../Left Ray")
 right_ray = NodePath("../Right Ray")
 
 [node name="PeriodicShootingComponent" type="Node" parent="." node_paths=PackedStringArray("side_to_side_movement", "root")]
+process_mode = 3
 script = ExtResource("5_m03v0")
 side_to_side_movement = NodePath("../SideToSideMovement")
 root = NodePath("..")
@@ -68,6 +77,12 @@ position = Vector2(-16, 13)
 position = Vector2(16, 13)
 
 [node name="FlashingComponent" type="Node" parent="." node_paths=PackedStringArray("sprite", "health_component")]
+process_mode = 3
 script = ExtResource("7_xsaiy")
+sprite = NodePath("../Sprite2D")
+health_component = NodePath("../HealthComponent")
+
+[node name="HitComponent" type="Node" parent="." node_paths=PackedStringArray("sprite", "health_component")]
+script = ExtResource("9_0qjr4")
 sprite = NodePath("../Sprite2D")
 health_component = NodePath("../HealthComponent")
