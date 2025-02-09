@@ -19,11 +19,11 @@ func _ready() -> void:
 	root = get_parent()
 	
 	if not sprite2d:
-		print("SideToSideMovement node missing Sprite2D child.")
+		printerr("SideToSideMovement node missing Sprite2D child.")
 		return
 
 	if not left_ray or not right_ray:
-		print("SideToSideMovement node missing RayCast2D children.")
+		printerr("SideToSideMovement node missing RayCast2D children.")
 		return
 
 	setup_timer()

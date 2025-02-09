@@ -13,7 +13,7 @@ func _ready() -> void:
 	if area2d:
 		area2d.body_entered.connect(_on_area2d_body_entered)
 	else:
-		print("Collectable node missing Area2D child.")
+		printerr("Collectable node missing Area2D child.")
 
 	root = get_parent()
 

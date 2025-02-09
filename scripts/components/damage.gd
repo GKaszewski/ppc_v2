@@ -15,7 +15,6 @@ func _ready() -> void:
 
 func deal_damage(target: HealthComponent) -> void:
 	target.decrease_health(damage)
-	print("Dealt damage to target!")
 
 
 func on_area2d_body_entered(body: Node2D) -> void:
