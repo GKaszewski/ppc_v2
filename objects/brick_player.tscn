@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bqi5s710xb1ju"]
+[gd_scene load_steps=19 format=3 uid="uid://bqi5s710xb1ju"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_8j4h4"]
 [ext_resource type="Texture2D" uid="uid://b7gp0gqvkv8j4" path="res://sprites/MrBrick_base.png" id="2_bc55y"]
@@ -14,12 +14,16 @@
 [ext_resource type="Script" path="res://scripts/components/stomp_damage_component.gd" id="12_payr4"]
 [ext_resource type="Script" path="res://scripts/components/flashing_component.gd" id="13_hrtyn"]
 [ext_resource type="Script" path="res://scripts/components/invulnerability_component.gd" id="14_jopig"]
+[ext_resource type="Script" path="res://scripts/components/magnetic_skill.gd" id="15_4df3h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hdsg1"]
 size = Vector2(16, 31)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vad0t"]
 size = Vector2(16, 32)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ps31c"]
+radius = 48.0
 
 [node name="Brick Player" type="CharacterBody2D"]
 collision_layer = 4
@@ -114,6 +118,19 @@ health_component = NodePath("../HealthComponent")
 [node name="InvulnerabilityComponent" type="Node" parent="." node_paths=PackedStringArray("flashing_component")]
 script = ExtResource("14_jopig")
 flashing_component = NodePath("../FlashingComponent Base")
+
+[node name="MagneticSkillComponent" type="Node" parent="." node_paths=PackedStringArray("magnetic_area", "root")]
+script = ExtResource("15_4df3h")
+magnetic_area = NodePath("../MagneticArea")
+root = NodePath("..")
+magnetic_move_duration = 0.9
+
+[node name="MagneticArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MagneticArea"]
+shape = SubResource("CircleShape2D_ps31c")
 
 [connection signal="on_death" from="HealthComponent" to="PlayerDeathComponent" method="_on_health_component_on_death"]
 [connection signal="on_health_change" from="HealthComponent" to="KnockbackComponent" method="_on_health_component_on_health_change"]
