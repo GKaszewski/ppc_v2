@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://bcmx07k12gcsc"]
+
+[ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_xusxl"]
+[ext_resource type="Script" path="res://scripts/components/bullet.gd" id="2_ilnf5"]
+[ext_resource type="Script" path="res://scripts/components/damage.gd" id="3_htddx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ar0xf"]
+size = Vector2(16, 10)
+
+[node name="Brick" type="Area2D"]
+collision_layer = 16
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ar0xf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_xusxl")
+hframes = 12
+vframes = 12
+frame = 80
+
+[node name="BulletComponent" type="Node" parent="." node_paths=PackedStringArray("root", "area2d", "visibility_notifier", "timer")]
+script = ExtResource("2_ilnf5")
+root = NodePath("..")
+speed = 120.0
+area2d = NodePath("..")
+visibility_notifier = NodePath("../VisibleOnScreenNotifier2D")
+life_time = 2.0
+timer = NodePath("../Timer")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, 2.38419e-07)
+scale = Vector2(0.8, 0.5)
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("area2d")]
+script = ExtResource("3_htddx")
+area2d = NodePath("..")
+is_ice_brick = true
