@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://qq5g75cinhap"]
+
+[node name="Camera Manager" type="Node"]
+
+[node name="Camera Nodes" type="StaticBody2D" parent="."]
