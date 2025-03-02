@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dfwpha0d18dmn"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_rwgpm"]
-[ext_resource type="Script" path="res://scripts/components/damage.gd" id="2_3cgd2"]
+[ext_resource type="Script" path="res://scripts/components/damage_component.gd" id="2_cprue"]
 [ext_resource type="Script" path="res://scripts/components/beam_component.gd" id="3_jlh0s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ptfn7"]
@@ -21,7 +21,7 @@ region_rect = Rect2(176, 64, 16, 16)
 shape = SubResource("RectangleShape2D_ptfn7")
 
 [node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("area2d")]
-script = ExtResource("2_3cgd2")
+script = ExtResource("2_cprue")
 area2d = NodePath("..")
 
 [node name="BeamComponent" type="Node2D" parent="." node_paths=PackedStringArray("root", "sprite2d", "collision_shape")]

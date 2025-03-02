@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://daau4j5hbklk0"]
+[gd_scene load_steps=7 format=3 uid="uid://daau4j5hbklk0"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_52l28"]
 [ext_resource type="Script" path="res://scripts/components/bullet.gd" id="2_hjcob"]
-[ext_resource type="Script" path="res://scripts/components/damage.gd" id="3_3ylb6"]
+[ext_resource type="Script" path="res://scripts/components/damage_component.gd" id="3_sog2h"]
+[ext_resource type="Resource" uid="uid://obodgnkhxuhe" path="res://resources/status_effect/fire.tres" id="4_xx5l4"]
+[ext_resource type="Script" path="res://scripts/components/effect_inflictor_component.gd" id="5_ofrqk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ar0xf"]
 size = Vector2(16, 10)
@@ -36,6 +38,10 @@ scale = Vector2(0.8, 0.5)
 [node name="Timer" type="Timer" parent="."]
 
 [node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("area2d")]
-script = ExtResource("3_3ylb6")
+script = ExtResource("3_sog2h")
 area2d = NodePath("..")
-is_fire_brick = true
+status_effect_data = ExtResource("4_xx5l4")
+
+[node name="EffectInflictorComponent" type="Node" parent="." node_paths=PackedStringArray("damage")]
+script = ExtResource("5_ofrqk")
+damage = NodePath("../DamageComponent")

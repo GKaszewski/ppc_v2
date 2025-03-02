@@ -1,4 +1,4 @@
-﻿class_name StompDamageComponent
+class_name StompDamageComponent
 extends Node
 
 @export var damage: float = 0.25
@@ -44,4 +44,4 @@ func on_area2d_body_entered(body: Node2D) -> void:
 					damage_component.set_process(false)
 					await get_tree().process_frame
 					damage_component.set_process(true)
-			
+				

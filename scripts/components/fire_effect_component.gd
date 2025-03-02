@@ -1,56 +1,49 @@
 ﻿class_name FireEffectComponent
 extends Node
 
-@export var duration: float = 1.0
-@export var damage_per_second: float = 1.0
 @export var health_component: HealthComponent
+@export var status_effect_component: StatusEffectComponent
 @export var root: Node2D
 
-var timer: Timer
-var should_deal_damage: bool = false
-var time_elapsed: float      = 0.0
+var data: StatusEffectDataResource = null
+var should_deal_damage: bool       = false
+var time_elapsed: float            = 0.0
 
 
 func _ready() -> void:
 	if not health_component:
 		health_component = root.get_node("HealthComponent")
+	if not status_effect_component:
+		status_effect_component = root.get_node("StatusEffectComponent")
 
 	if not health_component:
 		printerr("No HealthComponent assigned!")
 		return
+	if not status_effect_component:
+		printerr("No StatusEffectComponent assigned!")
+		return
 
-	timer = Timer.new()
-	timer.timeout.connect(on_timer_timeout)
-	prepare_timer()
-	add_child(timer)
+	status_effect_component.effect_applied.connect(on_effect_applied)
+	status_effect_component.effect_removed.connect(on_effect_removed)
 
 
 func _process(delta: float) -> void:
-	if not should_deal_damage or not health_component:
+	if not should_deal_damage or not health_component or not data:
 		return
 
 	time_elapsed += delta
 	if time_elapsed >= 1.0:
-		health_component.decrease_health(damage_per_second)
+		health_component.decrease_health(data.damage_per_second)
 		time_elapsed = 0.0
 
 
-func on_timer_timeout() -> void:
-	deactivate()
+func on_effect_applied(effect_data: StatusEffectDataResource) -> void:
+	if effect_data.effect_type == StatusEffectComponent.EffectType.FIRE:
+		data = effect_data
+		should_deal_damage = true
 
 
-func activate() -> void:
-	should_deal_damage = true
-	timer.start()
-
-
-func deactivate() -> void:
-	should_deal_damage = false
-	timer.stop()
-
-
-func prepare_timer() -> void:
-	timer.set_wait_time(duration)
-	timer.set_one_shot(true)
-	timer.stop()
-	time_elapsed = 0.0
+func on_effect_removed(effect_type: StatusEffectComponent.EffectType) -> void:
+	if effect_type == StatusEffectComponent.EffectType.FIRE:
+		data = null
+		should_deal_damage = false

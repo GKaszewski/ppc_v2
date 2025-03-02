@@ -3,8 +3,8 @@ extends Node
 
 @export var damage: float = 0.25
 @export var area2d: Area2D
-@export var is_fire_brick: bool = false
-@export var is_ice_brick: bool = false
+@export var status_effect_data: StatusEffectDataResource
+signal effect_inflicted(target: Node2D, effect: StatusEffectDataResource)
 
 
 func _ready() -> void:
@@ -23,18 +23,12 @@ func on_area2d_body_entered(body: Node2D) -> void:
 	if body.has_node("HealthComponent"):
 		var health_component: HealthComponent                   = body.get_node("HealthComponent")
 		var invulnerability_component: InvulnerabilityComponent = body.get_node_or_null("InvulnerabilityComponent")
-		var fire_effect_component: FireEffectComponent          = body.get_node_or_null("FireEffectComponent")
-		var ice_effect_component: IceEffectComponent            = body.get_node_or_null("IceEffectComponent")
 
 		if invulnerability_component and invulnerability_component.is_invulnerable():
 			return
 
-		if fire_effect_component and is_fire_brick:
-			fire_effect_component.activate()
-			return
-
-		if ice_effect_component and is_ice_brick:
-			ice_effect_component.activate()
+		if status_effect_data.effect_type != StatusEffectComponent.EffectType.NONE:
+			effect_inflicted.emit(body, status_effect_data)
 			return
 
 		deal_damage(health_component)

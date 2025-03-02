@@ -1,52 +1,49 @@
 class_name IceEffectComponent
 extends Node
 
-@export var duration: float = 1.0
-@export var side_to_side_movement: SideToSideMovement
-@export var periodic_shooting: PeriodicShootingComponent
+@export var components_to_disable: Array = []
+@export var status_effect_component: StatusEffectComponent
 
-var timer: Timer
-var is_frozen: bool       = false
-var movement_speed: float = 0.0
+var data: StatusEffectDataResource = null
 
 
 func _ready() -> void:
-	timer = Timer.new()
-	timer.timeout.connect(on_timer_timeout)
-	prepare_timer()
-	add_child(timer)
+	if not status_effect_component:
+		status_effect_component = get_node("StatusEffectComponent")
 
-	if side_to_side_movement:
-		movement_speed = side_to_side_movement.speed
-
-
-func _process(_delta: float) -> void:
-	if not side_to_side_movement or not periodic_shooting:
+	if not status_effect_component:
+		printerr("No StatusEffectComponent assigned!")
 		return
 
-	if is_frozen:
-		side_to_side_movement.process_mode = PROCESS_MODE_DISABLED
-		periodic_shooting.process_mode = PROCESS_MODE_DISABLED
-	else:
-		side_to_side_movement.process_mode = PROCESS_MODE_ALWAYS
-		periodic_shooting.process_mode = PROCESS_MODE_ALWAYS
+	status_effect_component.effect_applied.connect(on_effect_applied)
+	status_effect_component.effect_removed.connect(on_effect_removed)
 
 
-func on_timer_timeout() -> void:
-	deactivate()
+func on_effect_applied(effect_data: StatusEffectDataResource) -> void:
+	if effect_data.effect_type == StatusEffectComponent.EffectType.ICE:
+		data = effect_data
+		apply_freeze()
 
 
-func activate() -> void:
-	is_frozen = true
-	timer.start()
+func on_effect_removed(effect_type: StatusEffectComponent.EffectType) -> void:
+	if effect_type == StatusEffectComponent.EffectType.ICE:
+		data = null
+		remove_freeze()
 
 
-func deactivate() -> void:
-	is_frozen = false
-	timer.stop()
+func apply_freeze() -> void:
+	for component_path in components_to_disable:
+		var component: Node = get_node_or_null(component_path)
+		if not component:
+			continue
+
+		component.process_mode = PROCESS_MODE_DISABLED
 
 
-func prepare_timer() -> void:
-	timer.set_wait_time(duration)
-	timer.set_one_shot(true)
-	timer.stop()
+func remove_freeze() -> void:
+	for component_path in components_to_disable:
+		var component: Node = get_node_or_null(component_path)
+		if not component:
+			continue
+
+		component.process_mode = PROCESS_MODE_ALWAYS

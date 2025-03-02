@@ -1,14 +1,15 @@
-[gd_scene load_steps=15 format=3 uid="uid://bwdlmualj6xbw"]
+[gd_scene load_steps=16 format=3 uid="uid://bwdlmualj6xbw"]
 
 [ext_resource type="Shader" uid="uid://bs4xvm4qkurpr" path="res://shaders/hit_flash.tres" id="1_ep4yr"]
 [ext_resource type="Texture2D" uid="uid://xes6mt2dd5gu" path="res://sprites/robot_cutout.png" id="1_uh38l"]
 [ext_resource type="Script" path="res://scripts/components/health.gd" id="2_o170m"]
-[ext_resource type="Script" path="res://scripts/components/damage.gd" id="3_8jl3u"]
+[ext_resource type="Script" path="res://scripts/components/damage_component.gd" id="4_4eajk"]
 [ext_resource type="Script" path="res://scripts/components/side_to_side_movement.gd" id="4_gbsq8"]
 [ext_resource type="Script" path="res://scripts/components/periodic_shooting.gd" id="5_m03v0"]
 [ext_resource type="Script" path="res://scripts/components/enemy_death.gd" id="6_6p3gr"]
 [ext_resource type="Script" path="res://scripts/components/flashing_component.gd" id="7_xsaiy"]
 [ext_resource type="Script" path="res://scripts/components/hit_component.gd" id="9_0qjr4"]
+[ext_resource type="Script" path="res://scripts/components/status_effect_component.gd" id="10_5i27q"]
 [ext_resource type="Script" path="res://scripts/components/fire_effect_component.gd" id="10_ej8vg"]
 [ext_resource type="Script" path="res://scripts/components/ice_effect_component.gd" id="11_pq0k7"]
 
@@ -38,7 +39,7 @@ texture = ExtResource("1_uh38l")
 script = ExtResource("2_o170m")
 
 [node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("area2d")]
-script = ExtResource("3_8jl3u")
+script = ExtResource("4_4eajk")
 area2d = NodePath("../Hitbox")
 
 [node name="SideToSideMovement" type="Node" parent="." node_paths=PackedStringArray("root", "sprite2d", "left_ray", "right_ray")]
@@ -89,15 +90,16 @@ script = ExtResource("9_0qjr4")
 sprite = NodePath("../Sprite2D")
 health_component = NodePath("../HealthComponent")
 
-[node name="FireEffectComponent" type="Node" parent="." node_paths=PackedStringArray("health_component", "root")]
+[node name="StatusEffectComponent" type="Node" parent="."]
+script = ExtResource("10_5i27q")
+
+[node name="FireEffectComponent" type="Node" parent="." node_paths=PackedStringArray("health_component", "status_effect_component", "root")]
 script = ExtResource("10_ej8vg")
-duration = 5.0
-damage_per_second = 0.1
 health_component = NodePath("../HealthComponent")
+status_effect_component = NodePath("../StatusEffectComponent")
 root = NodePath("..")
 
-[node name="IceEffectComponent" type="Node" parent="." node_paths=PackedStringArray("side_to_side_movement", "periodic_shooting")]
+[node name="IceEffectComponent" type="Node" parent="." node_paths=PackedStringArray("status_effect_component")]
 script = ExtResource("11_pq0k7")
-duration = 3.0
-side_to_side_movement = NodePath("../SideToSideMovement")
-periodic_shooting = NodePath("../PeriodicShootingComponent")
+components_to_disable = [NodePath("../SideToSideMovement"), NodePath("../PeriodicShootingComponent")]
+status_effect_component = NodePath("../StatusEffectComponent")

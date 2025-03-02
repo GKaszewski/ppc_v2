@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bhc7y4xugu4q7"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_w543f"]
-[ext_resource type="Script" path="res://scripts/components/damage.gd" id="2_qkwsu"]
+[ext_resource type="Script" path="res://scripts/components/damage_component.gd" id="2_ll0xw"]
 [ext_resource type="Script" path="res://scripts/components/bullet.gd" id="3_keogl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_txsw8"]
@@ -26,7 +26,7 @@ position = Vector2(2.38419e-07, 2.38419e-07)
 scale = Vector2(0.4, 0.4)
 
 [node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("area2d")]
-script = ExtResource("2_qkwsu")
+script = ExtResource("2_ll0xw")
 area2d = NodePath("..")
 
 [node name="BulletComponent" type="Node2D" parent="." node_paths=PackedStringArray("root", "area2d", "visibility_notifier", "timer")]

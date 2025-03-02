@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="StatusEffectDataResource" load_steps=2 format=3 uid="uid://02l4nbnf2aft"]
+
+[ext_resource type="Script" path="res://scripts/resources/status_effect_data_resource.gd" id="1_kqthd"]
+
+[resource]
+script = ExtResource("1_kqthd")
+effect_type = 2
+duration = 3.0
+damage_per_second = 0.0
