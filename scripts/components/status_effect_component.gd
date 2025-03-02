@@ -6,41 +6,40 @@ enum EffectType {
 	FIRE,
 	ICE
 }
-var active_effect: StatusEffectDataResource = null
-var timer: Timer
-var is_active: bool                         = false
-var time_elapsed: float                     = 0.0
+var active_effects: Array = []
 signal effect_applied(effect_data: StatusEffectDataResource)
 signal effect_removed(effect_type: EffectType)
 
 
-func _ready() -> void:
-	timer = Timer.new()
-	timer.timeout.connect(on_timer_timeout)
-	add_child(timer)
-
-
 func apply_effect(effect_data: StatusEffectDataResource) -> void:
-	if is_active:
-		return
+	var data: StatusEffectDataResource = effect_data.duplicate()
 
-	is_active = true
-	active_effect = effect_data
-	prepare_timer()
-	effect_applied.emit(active_effect)
-	timer.start()
+	var timer: Timer = create_timer(effect_data.duration, data)
 
+	var new_effect: Dictionary = {
+									 "data": data,
+									 "elapsed_time": 0.0,
+									 "timer": timer
+								 }
 
-func remove_effect() -> void:
-	is_active = false
-	effect_removed.emit(active_effect.effect_type)
-
-
-func on_timer_timeout() -> void:
-	remove_effect()
+	active_effects.append(new_effect)
+	effect_applied.emit(effect_data)
 
 
-func prepare_timer() -> void:
-	timer.set_wait_time(active_effect.duration)
-	timer.set_one_shot(true)
-	timer.stop()
+func remove_effect(effect_data: StatusEffectDataResource) -> void:
+	for i in range(active_effects.size()):
+		if active_effects[i].data == effect_data:
+			active_effects[i].timer.queue_free()
+			active_effects.remove_at(i)
+			effect_removed.emit(effect_data.effect_type)
+			return
+
+
+func create_timer(duration: float, effect_data: StatusEffectDataResource) -> Timer:
+	var timer = Timer.new()
+	timer.wait_time = duration
+	timer.one_shot = true
+	timer.autostart = true
+	timer.timeout.connect(func(): remove_effect(effect_data))
+	add_child(timer)
+	return timer

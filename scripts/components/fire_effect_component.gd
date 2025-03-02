@@ -1,4 +1,4 @@
-﻿class_name FireEffectComponent
+class_name FireEffectComponent
 extends Node
 
 @export var health_component: HealthComponent

@@ -27,7 +27,7 @@ func on_area2d_body_entered(body: Node2D) -> void:
 		if invulnerability_component and invulnerability_component.is_invulnerable():
 			return
 
-		if status_effect_data.effect_type != StatusEffectComponent.EffectType.NONE:
+		if status_effect_data and status_effect_data.effect_type != StatusEffectComponent.EffectType.NONE:
 			effect_inflicted.emit(body, status_effect_data)
 			return
 

@@ -1,4 +1,4 @@
-﻿class_name EffectInflictorComponent
+class_name EffectInflictorComponent
 extends Node
 
 @export var damage: DamageComponent
@@ -18,5 +18,3 @@ func on_effect_inflicted(target: Node2D, effect: StatusEffectDataResource) -> vo
 		return
 
 	status_effect_component.apply_effect(effect)
-
-

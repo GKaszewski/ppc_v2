@@ -5,6 +5,7 @@ extends Node
 @export var status_effect_component: StatusEffectComponent
 
 var data: StatusEffectDataResource = null
+var ice_effects_applied: int       = 0
 
 
 func _ready() -> void:
@@ -22,19 +23,21 @@ func _ready() -> void:
 func on_effect_applied(effect_data: StatusEffectDataResource) -> void:
 	if effect_data.effect_type == StatusEffectComponent.EffectType.ICE:
 		data = effect_data
+		ice_effects_applied += 1
 		apply_freeze()
 
 
 func on_effect_removed(effect_type: StatusEffectComponent.EffectType) -> void:
 	if effect_type == StatusEffectComponent.EffectType.ICE:
 		data = null
+		ice_effects_applied -= 1
 		remove_freeze()
 
 
 func apply_freeze() -> void:
 	for component_path in components_to_disable:
 		var component: Node = get_node_or_null(component_path)
-		if not component:
+		if not component or ice_effects_applied == 0:
 			continue
 
 		component.process_mode = PROCESS_MODE_DISABLED
@@ -43,7 +46,7 @@ func apply_freeze() -> void:
 func remove_freeze() -> void:
 	for component_path in components_to_disable:
 		var component: Node = get_node_or_null(component_path)
-		if not component:
+		if not component or ice_effects_applied > 0:
 			continue
 
 		component.process_mode = PROCESS_MODE_ALWAYS
