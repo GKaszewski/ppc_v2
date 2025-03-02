@@ -29,7 +29,6 @@ func on_area2d_body_entered(body: Node2D) -> void:
 
 		if status_effect_data and status_effect_data.effect_type != StatusEffectComponent.EffectType.NONE:
 			effect_inflicted.emit(body, status_effect_data)
-			return
 
 		deal_damage(health_component)
 

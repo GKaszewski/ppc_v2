@@ -39,6 +39,7 @@ scale = Vector2(0.8, 0.5)
 
 [node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("area2d")]
 script = ExtResource("3_sog2h")
+damage = 0.1
 area2d = NodePath("..")
 status_effect_data = ExtResource("4_xx5l4")
 
