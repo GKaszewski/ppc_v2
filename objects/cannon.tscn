@@ -1,11 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://dstko446qydsc"]
+[gd_scene load_steps=5 format=3 uid="uid://dstko446qydsc"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_6gptm"]
+[ext_resource type="Script" path="res://scripts/components/destroyable_component.gd" id="2_2tib2"]
+[ext_resource type="Script" path="res://scripts/components/health.gd" id="3_vevhj"]
 
-[node name="Cannon" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j5sus"]
+size = Vector2(16, 16)
+
+[node name="Cannon" type="StaticBody2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_6gptm")
 hframes = 12
 vframes = 12
 frame = 42
+
+[node name="DestroyableComponent" type="Node" parent="." node_paths=PackedStringArray("root", "health_component")]
+script = ExtResource("2_2tib2")
+root = NodePath("..")
+health_component = NodePath("../HealthComponent")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("3_vevhj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_j5sus")
