@@ -27,8 +27,8 @@
      inkscape:deskcolor="#505050"
      inkscape:document-units="px"
      inkscape:zoom="4.1513748"
-     inkscape:cx="93.703898"
-     inkscape:cy="34.566862"
+     inkscape:cx="39.986753"
+     inkscape:cy="96.474064"
      inkscape:window-width="2560"
      inkscape:window-height="1374"
      inkscape:window-x="0"
@@ -99,7 +99,7 @@
     <path
        id="rect1"
        style="display:inline;fill:#21a65d;stroke-width:1.6"
-       d="M 43,0 C 19,0 0,22.4 0,51.2 V 64 H 192 V 51.2 C 192,22.4 173,0 149,0 Z"
+       d="M 43,0 C 19,0 0,22.400001 0,51.2 V 64 H 192 V 51.2 C 192,22.400001 173,0 149,0 Z"
        inkscape:label="top" />
   </g>
 </svg>

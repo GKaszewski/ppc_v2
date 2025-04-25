@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bqi5s710xb1ju"]
+[gd_scene load_steps=21 format=3 uid="uid://bqi5s710xb1ju"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_8j4h4"]
 [ext_resource type="Texture2D" uid="uid://b7gp0gqvkv8j4" path="res://sprites/MrBrick_base.png" id="2_bc55y"]
@@ -15,6 +15,8 @@
 [ext_resource type="Script" path="res://scripts/components/flashing_component.gd" id="13_hrtyn"]
 [ext_resource type="Script" path="res://scripts/components/invulnerability_component.gd" id="14_jopig"]
 [ext_resource type="Script" path="res://scripts/components/magnetic_skill.gd" id="15_4df3h"]
+[ext_resource type="Script" path="res://scripts/components/can_be_launched_component.gd" id="16_kemlv"]
+[ext_resource type="Script" path="res://scripts/components/trigger_lever_component.gd" id="17_hglfj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hdsg1"]
 size = Vector2(16, 31)
@@ -27,7 +29,7 @@ radius = 48.0
 
 [node name="Brick Player" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 11
+collision_mask = 43
 script = ExtResource("1_8j4h4")
 
 [node name="Root" type="Node2D" parent="."]
@@ -131,6 +133,12 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MagneticArea"]
 shape = SubResource("CircleShape2D_ps31c")
+
+[node name="CanBeLaunchedComponent" type="Node" parent="."]
+script = ExtResource("16_kemlv")
+
+[node name="TriggerLeverComponent" type="Node" parent="."]
+script = ExtResource("17_hglfj")
 
 [connection signal="on_death" from="HealthComponent" to="PlayerDeathComponent" method="_on_health_component_on_death"]
 [connection signal="on_health_change" from="HealthComponent" to="KnockbackComponent" method="_on_health_component_on_health_change"]

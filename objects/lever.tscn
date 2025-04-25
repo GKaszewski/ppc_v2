@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bd51frym6mm7v"]
+
+[ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_psg62"]
+[ext_resource type="Script" path="res://scripts/components/lever_component.gd" id="2_0p0wb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ke5tv"]
+size = Vector2(12, 13)
+
+[node name="Lever" type="Area2D" groups=["levers"]]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_ke5tv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_psg62")
+hframes = 12
+vframes = 12
+frame = 75
+
+[node name="LeverComponent" type="Node" parent="." node_paths=PackedStringArray("area2d", "sprite2d")]
+script = ExtResource("2_0p0wb")
+area2d = NodePath("..")
+sprite2d = NodePath("../Sprite2D")
+start_animation_index = 75

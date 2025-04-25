@@ -46,11 +46,12 @@ project/assembly_name="Mr. Brick Adventures"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
+enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg", "res://addons/rmsmartshape/plugin.cfg")
 
 [global_group]
 
 coins=""
+levers=""
 
 [input]
 
@@ -88,6 +89,7 @@ attack={
 2d_physics/layer_3="Player"
 2d_physics/layer_4="Enemy"
 2d_physics/layer_5="player projectiles"
+2d_physics/layer_6="Environment"
 
 [physics]
 

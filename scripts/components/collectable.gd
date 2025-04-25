@@ -6,8 +6,8 @@ var has_fade_away: bool = false
 
 @export var area2d: Area2D
 @export var collectable_data: CollectableResource
-
 signal collected(amount: int)
+
 
 func _ready() -> void:
 	if area2d:
@@ -19,6 +19,7 @@ func _ready() -> void:
 
 	if root.has_node("FadeAwayComponent"):
 		has_fade_away = true
+
 
 func _on_area2d_body_entered(body: Node2D) -> void:
 	if body.has_node("CanPickUpComponent"):

@@ -75,9 +75,11 @@ debug_color = Color(0.913521, 0.265052, 0.323172, 0.42)
 
 [node name="Left Ray" type="RayCast2D" parent="."]
 position = Vector2(-16, 13)
+target_position = Vector2(0, 8)
 
 [node name="Right Ray" type="RayCast2D" parent="."]
 position = Vector2(16, 13)
+target_position = Vector2(0, 8)
 
 [node name="FlashingComponent" type="Node" parent="." node_paths=PackedStringArray("sprite", "health_component")]
 process_mode = 3

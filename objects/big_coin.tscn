@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://bargnp4twtmxg"]
+
+[ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_aya2w"]
+[ext_resource type="Script" path="res://scripts/components/collectable.gd" id="2_7cph7"]
+[ext_resource type="Resource" uid="uid://bsnr5v2b2mfsl" path="res://resources/collectables/big_coin.tres" id="3_lk3av"]
+[ext_resource type="Script" path="res://scripts/components/fade_away.gd" id="4_wkrj0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3ask2"]
+radius = 9.0
+
+[node name="Big Coin" type="Area2D"]
+scale = Vector2(2, 2)
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3ask2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_aya2w")
+hframes = 12
+vframes = 12
+frame = 51
+
+[node name="Collectable" type="Node" parent="." node_paths=PackedStringArray("area2d") groups=["coins"]]
+script = ExtResource("2_7cph7")
+area2d = NodePath("..")
+collectable_data = ExtResource("3_lk3av")
+
+[node name="FadeAwayComponent" type="Node" parent="." node_paths=PackedStringArray("sprite2d", "root", "area2d")]
+script = ExtResource("4_wkrj0")
+sprite2d = NodePath("../Sprite2D")
+fade_duration = 0.4
+root = NodePath("..")
+area2d = NodePath("..")

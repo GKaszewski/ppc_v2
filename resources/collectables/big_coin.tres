@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="CollectableResource" load_steps=2 format=3 uid="uid://bsnr5v2b2mfsl"]
+
+[ext_resource type="Script" path="res://scripts/resources/collectable_resource.gd" id="1_fudbo"]
+
+[resource]
+script = ExtResource("1_fudbo")
+amount = 5
