@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://bwdlmualj6xbw"]
 
 [ext_resource type="Shader" uid="uid://bs4xvm4qkurpr" path="res://shaders/hit_flash.tres" id="1_ep4yr"]
-[ext_resource type="Texture2D" uid="uid://xes6mt2dd5gu" path="res://sprites/robot_cutout.png" id="1_uh38l"]
+[ext_resource type="Texture2D" uid="uid://cu72810eyk4dx" path="res://sprites/enemy-robot.png" id="2_hjtwe"]
 [ext_resource type="Script" path="res://scripts/components/health.gd" id="2_o170m"]
 [ext_resource type="Script" path="res://scripts/components/damage_component.gd" id="4_4eajk"]
 [ext_resource type="Script" path="res://scripts/components/side_to_side_movement.gd" id="4_gbsq8"]
@@ -16,7 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://dyev46uqusimi" path="res://sfx/shoot.wav" id="14_tdjks"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pwwji"]
-size = Vector2(18, 27)
+size = Vector2(25, 31)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j18j0"]
 shader = ExtResource("1_ep4yr")
@@ -24,18 +24,24 @@ shader_parameter/enabled = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ejbqt"]
-size = Vector2(18, 27)
+size = Vector2(25, 31)
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.5)
+position = Vector2(-1.5, 0.5)
 shape = SubResource("RectangleShape2D_pwwji")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_j18j0")
-texture = ExtResource("1_uh38l")
+texture = ExtResource("2_hjtwe")
+
+[node name="right bullet spawn" type="Node2D" parent="Sprite2D"]
+position = Vector2(16, 7)
+
+[node name="left bullet spawn" type="Node2D" parent="Sprite2D"]
+position = Vector2(-17, 7)
 
 [node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("hurt_fx")]
 script = ExtResource("2_o170m")
@@ -54,11 +60,13 @@ wait_time = 0.5
 left_ray = NodePath("../Left Ray")
 right_ray = NodePath("../Right Ray")
 
-[node name="PeriodicShootingComponent" type="Node" parent="." node_paths=PackedStringArray("side_to_side_movement", "root")]
+[node name="PeriodicShootingComponent" type="Node" parent="." node_paths=PackedStringArray("side_to_side_movement", "root", "bullet_spawn_right", "bullet_spawn_left")]
 process_mode = 3
 script = ExtResource("5_m03v0")
 side_to_side_movement = NodePath("../SideToSideMovement")
 root = NodePath("..")
+bullet_spawn_right = NodePath("../Sprite2D/right bullet spawn")
+bullet_spawn_left = NodePath("../Sprite2D/left bullet spawn")
 
 [node name="EnemyDeathComponent" type="Node" parent="." node_paths=PackedStringArray("root", "collision_shape_2d", "health_component")]
 script = ExtResource("6_6p3gr")
@@ -72,7 +80,7 @@ collision_layer = 8
 collision_mask = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(0, 0.5)
+position = Vector2(-1.5, 0.5)
 shape = SubResource("RectangleShape2D_ejbqt")
 debug_color = Color(0.913521, 0.265052, 0.323172, 0.42)
 

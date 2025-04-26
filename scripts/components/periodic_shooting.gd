@@ -6,6 +6,8 @@ extends Node
 @export var shoot_direction: Vector2 = Vector2.RIGHT
 @export var side_to_side_movement: SideToSideMovement
 @export var root: Node2D
+@export var bullet_spawn_right: Node2D
+@export var bullet_spawn_left: Node2D
 
 var timer: Timer
 
@@ -19,13 +21,15 @@ func _process(_delta: float) -> void:
 	if side_to_side_movement:
 		shoot_direction = side_to_side_movement.direction if side_to_side_movement.direction != Vector2.ZERO else Vector2.RIGHT
 
+
 func shoot() -> void:
 	if shoot_direction == Vector2.ZERO:
 		return
-		
-	var bullet_instance: Node2D = bullet_scene.instantiate()
+
+	var bullet_instance: Node2D           = bullet_scene.instantiate()
 	var bullet_component: BulletComponent = bullet_instance.get_node("BulletComponent")
-	bullet_instance.position = root.position
+	var spawn_position: Vector2           = bullet_spawn_right.global_position if shoot_direction == Vector2.RIGHT else bullet_spawn_left.global_position
+	bullet_instance.position = spawn_position
 	bullet_component.direction = shoot_direction
 	get_tree().current_scene.add_child(bullet_instance)
 

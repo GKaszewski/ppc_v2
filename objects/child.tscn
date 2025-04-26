@@ -21,7 +21,6 @@ shape = SubResource("RectangleShape2D_dj5g5")
 [node name="Root" type="Node2D" parent="."]
 
 [node name="Body" type="Node2D" parent="Root"]
-scale = Vector2(0.5, 0.5)
 
 [node name="Base" type="Sprite2D" parent="Root/Body"]
 texture = ExtResource("1_jcisc")
@@ -37,7 +36,7 @@ texture = ExtResource("3_k41y7")
 hframes = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="Root"]
-position = Vector2(6, 1)
+position = Vector2(3, 1)
 rotation = 0.785398
 texture = ExtResource("4_vq1oq")
 
