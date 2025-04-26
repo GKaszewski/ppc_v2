@@ -28,6 +28,7 @@ config/icon="res://icon.svg"
 
 GameManager="*res://objects/game_manager.tscn"
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
+GUIDE="*res://addons/guide/guide.gd"
 
 [display]
 
@@ -46,7 +47,7 @@ project/assembly_name="Mr. Brick Adventures"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg", "res://addons/rmsmartshape/plugin.cfg")
+enabled=PackedStringArray("res://addons/guide/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
 
 [global_group]
 
