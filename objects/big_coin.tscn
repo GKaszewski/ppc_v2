@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bargnp4twtmxg"]
+[gd_scene load_steps=7 format=3 uid="uid://bargnp4twtmxg"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_aya2w"]
 [ext_resource type="Script" path="res://scripts/components/collectable.gd" id="2_7cph7"]
 [ext_resource type="Resource" uid="uid://bsnr5v2b2mfsl" path="res://resources/collectables/big_coin.tres" id="3_lk3av"]
 [ext_resource type="Script" path="res://scripts/components/fade_away.gd" id="4_wkrj0"]
+[ext_resource type="AudioStream" uid="uid://bceic1csr8rq3" path="res://sfx/pickup_coin_2.wav" id="5_dbffd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3ask2"]
 radius = 9.0
@@ -22,10 +23,11 @@ hframes = 12
 vframes = 12
 frame = 51
 
-[node name="Collectable" type="Node" parent="." node_paths=PackedStringArray("area2d") groups=["coins"]]
+[node name="Collectable" type="Node" parent="." node_paths=PackedStringArray("area2d", "sfx") groups=["coins"]]
 script = ExtResource("2_7cph7")
 area2d = NodePath("..")
 collectable_data = ExtResource("3_lk3av")
+sfx = NodePath("../sfx")
 
 [node name="FadeAwayComponent" type="Node" parent="." node_paths=PackedStringArray("sprite2d", "root", "area2d")]
 script = ExtResource("4_wkrj0")
@@ -33,3 +35,7 @@ sprite2d = NodePath("../Sprite2D")
 fade_duration = 0.4
 root = NodePath("..")
 area2d = NodePath("..")
+
+[node name="sfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_dbffd")
+volume_db = -5.0

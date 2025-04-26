@@ -12,10 +12,8 @@ func _ready() -> void:
 	await get_tree().process_frame
 	if not lever:
 		var levers_nodes := get_tree().get_nodes_in_group("levers")
-		print("Found levers: ", levers_nodes)
 		for lever_node in levers_nodes:
 			var lever_component: LeverComponent = lever_node.get_node_or_null("LeverComponent")
-			print("Lever component: ", lever_component)
 			if lever_component:
 				lever_component.activated.connect(on_lever_activated)
 	else:
@@ -27,7 +25,6 @@ func _ready() -> void:
 
 
 func on_lever_activated() -> void:
-	print("Lever activated, moving cage.")
 	var tween: Tween          = create_tween()
 	var end_position: Vector2 = root.position + move_value
 	tween.tween_property(root, "position", end_position, tween_duration)

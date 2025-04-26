@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bwdlmualj6xbw"]
+[gd_scene load_steps=18 format=3 uid="uid://bwdlmualj6xbw"]
 
 [ext_resource type="Shader" uid="uid://bs4xvm4qkurpr" path="res://shaders/hit_flash.tres" id="1_ep4yr"]
 [ext_resource type="Texture2D" uid="uid://xes6mt2dd5gu" path="res://sprites/robot_cutout.png" id="1_uh38l"]
@@ -12,6 +12,8 @@
 [ext_resource type="Script" path="res://scripts/components/status_effect_component.gd" id="10_5i27q"]
 [ext_resource type="Script" path="res://scripts/components/fire_effect_component.gd" id="10_ej8vg"]
 [ext_resource type="Script" path="res://scripts/components/ice_effect_component.gd" id="11_pq0k7"]
+[ext_resource type="AudioStream" uid="uid://b3tsqhr06pbrs" path="res://sfx/enemy_hurt.wav" id="13_u4k3d"]
+[ext_resource type="AudioStream" uid="uid://dyev46uqusimi" path="res://sfx/shoot.wav" id="14_tdjks"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pwwji"]
 size = Vector2(18, 27)
@@ -35,8 +37,9 @@ shape = SubResource("RectangleShape2D_pwwji")
 material = SubResource("ShaderMaterial_j18j0")
 texture = ExtResource("1_uh38l")
 
-[node name="HealthComponent" type="Node" parent="."]
+[node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("hurt_fx")]
 script = ExtResource("2_o170m")
+hurt_fx = NodePath("../sfx_hurt")
 
 [node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("area2d")]
 script = ExtResource("4_4eajk")
@@ -105,3 +108,9 @@ root = NodePath("..")
 script = ExtResource("11_pq0k7")
 components_to_disable = [NodePath("../SideToSideMovement"), NodePath("../PeriodicShootingComponent")]
 status_effect_component = NodePath("../StatusEffectComponent")
+
+[node name="sfx_hurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_u4k3d")
+
+[node name="sfx_shoot" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_tdjks")

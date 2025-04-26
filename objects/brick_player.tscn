@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bqi5s710xb1ju"]
+[gd_scene load_steps=24 format=3 uid="uid://bqi5s710xb1ju"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_8j4h4"]
 [ext_resource type="Texture2D" uid="uid://b7gp0gqvkv8j4" path="res://sprites/MrBrick_base.png" id="2_bc55y"]
@@ -17,6 +17,9 @@
 [ext_resource type="Script" path="res://scripts/components/magnetic_skill.gd" id="15_4df3h"]
 [ext_resource type="Script" path="res://scripts/components/can_be_launched_component.gd" id="16_kemlv"]
 [ext_resource type="Script" path="res://scripts/components/trigger_lever_component.gd" id="17_hglfj"]
+[ext_resource type="AudioStream" uid="uid://duj2q0rqytaxg" path="res://sfx/jump.wav" id="18_pysae"]
+[ext_resource type="AudioStream" uid="uid://bmfn6p88gy575" path="res://sfx/player_hurt.wav" id="19_7anly"]
+[ext_resource type="AudioStream" uid="uid://ycgtf6wj7mto" path="res://sfx/heal.wav" id="20_bptj5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hdsg1"]
 size = Vector2(16, 31)
@@ -27,10 +30,11 @@ size = Vector2(16, 32)
 [sub_resource type="CircleShape2D" id="CircleShape2D_ps31c"]
 radius = 48.0
 
-[node name="Brick Player" type="CharacterBody2D"]
+[node name="Brick Player" type="CharacterBody2D" node_paths=PackedStringArray("jump_sfx")]
 collision_layer = 4
 collision_mask = 43
 script = ExtResource("1_8j4h4")
+jump_sfx = NodePath("sfx_jump")
 
 [node name="Root" type="Node2D" parent="."]
 
@@ -72,8 +76,10 @@ shape = SubResource("RectangleShape2D_vad0t")
 [node name="ScoreComponent" type="Node" parent="."]
 script = ExtResource("6_fowa2")
 
-[node name="HealthComponent" type="Node" parent="."]
+[node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("hurt_fx", "heal_fx")]
 script = ExtResource("7_tqjk8")
+hurt_fx = NodePath("../sfx_hurt")
+heal_fx = NodePath("../sfx_heal")
 
 [node name="PlayerDeathComponent" type="Node" parent="."]
 process_mode = 3
@@ -139,6 +145,15 @@ script = ExtResource("16_kemlv")
 
 [node name="TriggerLeverComponent" type="Node" parent="."]
 script = ExtResource("17_hglfj")
+
+[node name="sfx_jump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("18_pysae")
+
+[node name="sfx_hurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("19_7anly")
+
+[node name="sfx_heal" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("20_bptj5")
 
 [connection signal="on_death" from="HealthComponent" to="PlayerDeathComponent" method="_on_health_component_on_death"]
 [connection signal="on_health_change" from="HealthComponent" to="KnockbackComponent" method="_on_health_component_on_health_change"]

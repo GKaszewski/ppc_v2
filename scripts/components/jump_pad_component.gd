@@ -28,6 +28,8 @@ func _on_body_entered(body: Node2D) -> void:
 	if body is PlayerController:
 		handle_launchpad_animation()
 		body.velocity.y = -jump_force
+		if body.jump_sfx:
+			body.jump_sfx.play()
 
 
 func handle_launchpad_animation() -> void:

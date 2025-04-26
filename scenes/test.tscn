@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://h60obxmju6mo"]
+[gd_scene load_steps=34 format=4 uid="uid://h60obxmju6mo"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_5lb42"]
 [ext_resource type="TileSet" uid="uid://cl4bn8lofqvky" path="res://tileset/village/tileset_village.tres" id="1_d680t"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://dstko446qydsc" path="res://objects/cannon.tscn" id="11_qv64j"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="13_rsy5s"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="14_mjvn7"]
+[ext_resource type="PackedScene" uid="uid://d0s2abysa86rq" path="res://objects/child.tscn" id="21_8rhdx"]
 
 [sub_resource type="Gradient" id="Gradient_anvhr"]
 offsets = PackedFloat32Array(1)
@@ -506,3 +507,6 @@ follow_target = NodePath("../Brick Player")
 tween_resource = SubResource("Resource_lsjk3")
 follow_damping = true
 limit_target = NodePath("../Terrain Layer")
+
+[node name="Child" parent="." instance=ExtResource("21_8rhdx")]
+position = Vector2(880, -570)

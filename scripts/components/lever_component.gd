@@ -29,7 +29,6 @@ func _on_body_entered(body: Node2D) -> void:
 
 
 func activate() -> void:
-	print("Lever activated.")
 	activated.emit()
 	sprite2d.frame = start_animation_index + 1
 	var timer := get_tree().create_timer(animation_duration)
