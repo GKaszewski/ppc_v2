@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://scripts/components/player_death.gd" id="8_1v23d"]
 [ext_resource type="Script" path="res://scripts/components/knockback.gd" id="9_rjyu4"]
 [ext_resource type="Script" path="res://scripts/components/brick_throw.gd" id="10_u0v3b"]
-[ext_resource type="PackedScene" uid="uid://5surx230gfw3" path="res://objects/exploding_brick.tscn" id="11_nd7nl"]
+[ext_resource type="PackedScene" uid="uid://bymro4t7angv5" path="res://objects/brick.tscn" id="11_4d0cj"]
 [ext_resource type="Script" path="res://scripts/components/stomp_damage_component.gd" id="12_payr4"]
 [ext_resource type="Script" path="res://scripts/components/flashing_component.gd" id="13_hrtyn"]
 [ext_resource type="Script" path="res://scripts/components/invulnerability_component.gd" id="14_jopig"]
@@ -92,7 +92,7 @@ knockback_force = 1500.0
 
 [node name="BrickThrowComponent" type="Node" parent="." node_paths=PackedStringArray("player_controller", "timer")]
 script = ExtResource("10_u0v3b")
-brick_scene = ExtResource("11_nd7nl")
+brick_scene = ExtResource("11_4d0cj")
 fire_rate = 0.3
 player_controller = NodePath("..")
 timer = NodePath("../ThrowTimer")

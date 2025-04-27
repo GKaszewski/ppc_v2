@@ -23,7 +23,7 @@ frame = 80
 [node name="BulletComponent" type="Node" parent="." node_paths=PackedStringArray("root", "area2d", "visibility_notifier", "timer")]
 script = ExtResource("2_i6t5k")
 root = NodePath("..")
-speed = 120.0
+speed = 320.0
 area2d = NodePath("..")
 visibility_notifier = NodePath("../VisibleOnScreenNotifier2D")
 life_time = 2.0
