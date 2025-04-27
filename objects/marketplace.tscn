@@ -1,0 +1,58 @@
+[gd_scene load_steps=11 format=3 uid="uid://dlm2ri562fynd"]
+
+[ext_resource type="LabelSettings" uid="uid://rvn5ivivfvv6" path="res://resources/ui/hud_label_settings.tres" id="1_7r0u8"]
+[ext_resource type="Script" path="res://scripts/marketplace.gd" id="1_ncpyg"]
+[ext_resource type="FontFile" uid="uid://xm0vbusjr7b7" path="res://fonts/PressStart2P-Regular.ttf" id="2_ho1tm"]
+[ext_resource type="Script" path="res://scripts/resources/skill_data.gd" id="2_pg4mc"]
+[ext_resource type="Resource" uid="uid://dw5ee2lpeypnb" path="res://resources/skills/brick_throw.tres" id="3_bk5yi"]
+[ext_resource type="Resource" uid="uid://cdp8sex36vdq2" path="res://resources/skills/explosive_brick.tres" id="4_tx0n3"]
+[ext_resource type="Resource" uid="uid://2glvryih82t1" path="res://resources/skills/fire_brick.tres" id="5_fqx8e"]
+[ext_resource type="Resource" uid="uid://cx5fsbexblp60" path="res://resources/skills/ice_brick.tres" id="6_6665y"]
+[ext_resource type="Resource" uid="uid://d3bjre2etov1n" path="res://resources/skills/magnetic.tres" id="7_ukny6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c56bj"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="Marketplace" type="Control" node_paths=PackedStringArray("grid")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ncpyg")
+skill_data = Array[ExtResource("2_pg4mc")]([ExtResource("3_bk5yi"), ExtResource("4_tx0n3"), ExtResource("5_fqx8e"), ExtResource("6_6665y"), ExtResource("7_ukny6")])
+grid = NodePath("Panel/VBoxContainer/GridContainer")
+font = ExtResource("2_ho1tm")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_c56bj")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "marketplace"
+label_settings = ExtResource("1_7r0u8")
+horizontal_alignment = 1
+uppercase = true
+
+[node name="GridContainer" type="GridContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 3

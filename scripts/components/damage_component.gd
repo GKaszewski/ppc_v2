@@ -28,7 +28,6 @@ func _process(_delta: float) -> void:
 		return
 	if damage_timer:
 		return
-
 	process_entity_and_apply_damage(current_target)
 
 
@@ -63,6 +62,9 @@ func process_entity_and_apply_damage(body: Node2D) -> void:
 func on_area2d_body_entered(body: Node2D) -> void:
 	current_target = body
 
+	if not check_if_processing_is_on():
+		return
+
 	if damage_timer:
 		damage_timer.start()
 
@@ -77,8 +79,16 @@ func on_area2d_body_exited(body: Node2D) -> void:
 
 
 func on_area2d_area_entered(area: Area2D) -> void:
+	if not check_if_processing_is_on():
+		return
+
 	if area == area2d:
 		return
+
 	var parent := area.get_parent()
 	if parent.has_node("DamageComponent"):
 		process_entity_and_apply_damage(parent)
+
+
+func check_if_processing_is_on() -> bool:
+	return self.process_mode == PROCESS_MODE_INHERIT or self.process_mode == PROCESS_MODE_ALWAYS

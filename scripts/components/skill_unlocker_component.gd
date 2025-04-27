@@ -6,19 +6,20 @@ extends Node
 @onready var game_manager: GM = $"/root/GameManager"
 
 
-func try_unlock_skill(skill_data: SkillData) -> void:
+func try_unlock_skill(skill_data: SkillData) -> bool:
 	if not game_manager:
-		return
+		return false
 
 	if game_manager.is_skill_unlocked(skill_data.name):
-		return
+		return false
 
 	if game_manager.get_coins() < skill_data.cost:
-		return
+		return false
 
 	game_manager.remove_coins(skill_data.cost)
 	game_manager.unlock_skill(skill_data.name)
 	skill_manager.add_skill(skill_data)
+	return true
 
 
 func _input(event: InputEvent) -> void:

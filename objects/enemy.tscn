@@ -113,7 +113,7 @@ root = NodePath("..")
 
 [node name="IceEffectComponent" type="Node" parent="." node_paths=PackedStringArray("status_effect_component")]
 script = ExtResource("11_pq0k7")
-components_to_disable = [NodePath("../SideToSideMovement"), NodePath("../PeriodicShootingComponent")]
+components_to_disable = [NodePath("../SideToSideMovement"), NodePath("../PeriodicShootingComponent"), NodePath("../DamageComponent")]
 status_effect_component = NodePath("../StatusEffectComponent")
 
 [node name="sfx_hurt" type="AudioStreamPlayer2D" parent="."]

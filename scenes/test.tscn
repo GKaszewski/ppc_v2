@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://h60obxmju6mo"]
+[gd_scene load_steps=32 format=4 uid="uid://h60obxmju6mo"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_5lb42"]
 [ext_resource type="TileSet" uid="uid://cl4bn8lofqvky" path="res://tileset/village/tileset_village.tres" id="1_d680t"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="14_mjvn7"]
 [ext_resource type="PackedScene" uid="uid://dtjrpkhssq32a" path="res://objects/bg.tscn" id="14_ws5fk"]
 [ext_resource type="PackedScene" uid="uid://bqom4cm7r18db" path="res://objects/killzone.tscn" id="20_8a4vc"]
+[ext_resource type="PackedScene" uid="uid://dlm2ri562fynd" path="res://objects/marketplace.tscn" id="20_ss8k0"]
 [ext_resource type="PackedScene" uid="uid://d0s2abysa86rq" path="res://objects/child.tscn" id="21_8rhdx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cagp7"]
@@ -480,5 +481,18 @@ position = Vector2(877, -577)
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("1_gbpkv")]
 
+[node name="Marketplace" parent="CanvasLayer" node_paths=PackedStringArray("root", "skill_unlocker") instance=ExtResource("20_ss8k0")]
+visible = false
+custom_minimum_size = Vector2(480, 240)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+root = NodePath(".")
+skill_unlocker = NodePath("../../Brick Player/SkillUnlockerComponent")
+
 [node name="Killzone" parent="." instance=ExtResource("20_8a4vc")]
 position = Vector2(0, 990)
+
+[editable path="Brick Player"]

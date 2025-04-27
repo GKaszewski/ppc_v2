@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="SkillData" load_steps=3 format=3 uid="uid://d3bjre2etov1n"]
+[gd_resource type="Resource" script_class="SkillData" load_steps=4 format=3 uid="uid://d3bjre2etov1n"]
 
+[ext_resource type="Texture2D" uid="uid://cvhoq7aubxlmq" path="res://sprites/ui/magnetic_skill_icon.png" id="1_16qcg"]
 [ext_resource type="PackedScene" uid="uid://cunyndudjh2he" path="res://objects/player_skills/magnetic_skill.tscn" id="1_er41s"]
 [ext_resource type="Script" path="res://scripts/resources/skill_data.gd" id="1_r01oq"]
 
@@ -14,3 +15,4 @@ config = {
 "root": NodePath(".")
 }
 cost = 70
+icon = ExtResource("1_16qcg")

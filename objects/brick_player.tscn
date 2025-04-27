@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bqi5s710xb1ju"]
+[gd_scene load_steps=29 format=3 uid="uid://bqi5s710xb1ju"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_8j4h4"]
 [ext_resource type="Texture2D" uid="uid://b7gp0gqvkv8j4" path="res://sprites/MrBrick_base.png" id="2_bc55y"]
@@ -14,8 +14,11 @@
 [ext_resource type="Script" path="res://scripts/components/invulnerability_component.gd" id="14_jopig"]
 [ext_resource type="Script" path="res://scripts/components/can_be_launched_component.gd" id="16_kemlv"]
 [ext_resource type="Resource" uid="uid://dw5ee2lpeypnb" path="res://resources/skills/brick_throw.tres" id="16_smbir"]
+[ext_resource type="Resource" uid="uid://2glvryih82t1" path="res://resources/skills/fire_brick.tres" id="17_6y5qu"]
 [ext_resource type="Script" path="res://scripts/components/trigger_lever_component.gd" id="17_hglfj"]
 [ext_resource type="AudioStream" uid="uid://duj2q0rqytaxg" path="res://sfx/jump.wav" id="18_pysae"]
+[ext_resource type="Resource" uid="uid://cx5fsbexblp60" path="res://resources/skills/ice_brick.tres" id="18_umfbf"]
+[ext_resource type="Resource" uid="uid://cdp8sex36vdq2" path="res://resources/skills/explosive_brick.tres" id="19_5wjb7"]
 [ext_resource type="AudioStream" uid="uid://bmfn6p88gy575" path="res://sfx/player_hurt.wav" id="19_7anly"]
 [ext_resource type="AudioStream" uid="uid://ycgtf6wj7mto" path="res://sfx/heal.wav" id="20_bptj5"]
 [ext_resource type="Script" path="res://scripts/skill_manager.gd" id="20_ppfy7"]
@@ -124,7 +127,7 @@ root = NodePath("..")
 
 [node name="SkillManager" type="Node" parent="."]
 script = ExtResource("20_ppfy7")
-available_skills = Array[ExtResource("21_d0oiv")]([ExtResource("22_vnsgd"), ExtResource("16_smbir")])
+available_skills = Array[ExtResource("21_d0oiv")]([ExtResource("22_vnsgd"), ExtResource("17_6y5qu"), ExtResource("16_smbir"), ExtResource("18_umfbf"), ExtResource("19_5wjb7")])
 
 [node name="SkillUnlockerComponent" type="Node" parent="." node_paths=PackedStringArray("skill_manager")]
 script = ExtResource("23_qsv2c")

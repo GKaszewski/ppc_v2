@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://vql535ckoeqm"]
+[gd_resource type="Resource" script_class="CollectableResource" load_steps=2 format=3 uid="uid://vql535ckoeqm"]
 
 [ext_resource type="Script" path="res://scripts/resources/collectable_resource.gd" id="1_veemo"]
 
