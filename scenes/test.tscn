@@ -1,7 +1,8 @@
-[gd_scene load_steps=29 format=4 uid="uid://h60obxmju6mo"]
+[gd_scene load_steps=30 format=4 uid="uid://h60obxmju6mo"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_5lb42"]
 [ext_resource type="TileSet" uid="uid://cl4bn8lofqvky" path="res://tileset/village/tileset_village.tres" id="1_d680t"]
+[ext_resource type="PackedScene" uid="uid://byxf45ukq82pe" path="res://objects/hud.tscn" id="1_gbpkv"]
 [ext_resource type="Texture2D" uid="uid://dxvevrm15uus1" path="res://sprites/flowers_tileset.png" id="3_235u2"]
 [ext_resource type="PackedScene" uid="uid://54w4wisfj8v8" path="res://objects/coin.tscn" id="3_ygehw"]
 [ext_resource type="PackedScene" uid="uid://bqi5s710xb1ju" path="res://objects/brick_player.tscn" id="4_hetw8"]
@@ -473,3 +474,7 @@ metadata/_edit_lock_ = true
 
 [node name="Child" parent="." instance=ExtResource("21_8rhdx")]
 position = Vector2(877, -577)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("1_gbpkv")]

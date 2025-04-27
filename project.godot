@@ -53,6 +53,7 @@ enabled=PackedStringArray("res://addons/guide/plugin.cfg", "res://addons/phantom
 
 coins=""
 levers=""
+player=""
 
 [input]
 
