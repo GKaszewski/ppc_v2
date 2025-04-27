@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqom4cm7r18db"]
+
+[ext_resource type="Script" path="res://scripts/components/damage_component.gd" id="1_un3fl"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_cr00c"]
+
+[node name="Killzone" type="Area2D"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("WorldBoundaryShape2D_cr00c")
+
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("area2d")]
+script = ExtResource("1_un3fl")
+damage = 999999.0
+area2d = NodePath("..")

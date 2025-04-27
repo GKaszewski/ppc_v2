@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://h60obxmju6mo"]
+[gd_scene load_steps=31 format=4 uid="uid://h60obxmju6mo"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_5lb42"]
 [ext_resource type="TileSet" uid="uid://cl4bn8lofqvky" path="res://tileset/village/tileset_village.tres" id="1_d680t"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="13_rsy5s"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="14_mjvn7"]
 [ext_resource type="PackedScene" uid="uid://dtjrpkhssq32a" path="res://objects/bg.tscn" id="14_ws5fk"]
+[ext_resource type="PackedScene" uid="uid://bqom4cm7r18db" path="res://objects/killzone.tscn" id="20_8a4vc"]
 [ext_resource type="PackedScene" uid="uid://d0s2abysa86rq" path="res://objects/child.tscn" id="21_8rhdx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cagp7"]
@@ -478,3 +479,6 @@ position = Vector2(877, -577)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("1_gbpkv")]
+
+[node name="Killzone" parent="." instance=ExtResource("20_8a4vc")]
+position = Vector2(0, 990)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bqi5s710xb1ju"]
+[gd_scene load_steps=26 format=3 uid="uid://bqi5s710xb1ju"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_8j4h4"]
 [ext_resource type="Texture2D" uid="uid://b7gp0gqvkv8j4" path="res://sprites/MrBrick_base.png" id="2_bc55y"]
@@ -9,17 +9,19 @@
 [ext_resource type="Script" path="res://scripts/components/health.gd" id="7_tqjk8"]
 [ext_resource type="Script" path="res://scripts/components/player_death.gd" id="8_1v23d"]
 [ext_resource type="Script" path="res://scripts/components/knockback.gd" id="9_rjyu4"]
-[ext_resource type="Script" path="res://scripts/components/brick_throw.gd" id="10_u0v3b"]
-[ext_resource type="PackedScene" uid="uid://bymro4t7angv5" path="res://objects/brick.tscn" id="11_4d0cj"]
 [ext_resource type="Script" path="res://scripts/components/stomp_damage_component.gd" id="12_payr4"]
 [ext_resource type="Script" path="res://scripts/components/flashing_component.gd" id="13_hrtyn"]
 [ext_resource type="Script" path="res://scripts/components/invulnerability_component.gd" id="14_jopig"]
-[ext_resource type="Script" path="res://scripts/components/magnetic_skill.gd" id="15_4df3h"]
 [ext_resource type="Script" path="res://scripts/components/can_be_launched_component.gd" id="16_kemlv"]
+[ext_resource type="Resource" uid="uid://dw5ee2lpeypnb" path="res://resources/skills/brick_throw.tres" id="16_smbir"]
 [ext_resource type="Script" path="res://scripts/components/trigger_lever_component.gd" id="17_hglfj"]
 [ext_resource type="AudioStream" uid="uid://duj2q0rqytaxg" path="res://sfx/jump.wav" id="18_pysae"]
 [ext_resource type="AudioStream" uid="uid://bmfn6p88gy575" path="res://sfx/player_hurt.wav" id="19_7anly"]
 [ext_resource type="AudioStream" uid="uid://ycgtf6wj7mto" path="res://sfx/heal.wav" id="20_bptj5"]
+[ext_resource type="Script" path="res://scripts/skill_manager.gd" id="20_ppfy7"]
+[ext_resource type="Script" path="res://scripts/resources/skill_data.gd" id="21_d0oiv"]
+[ext_resource type="Resource" uid="uid://d3bjre2etov1n" path="res://resources/skills/magnetic.tres" id="22_vnsgd"]
+[ext_resource type="Script" path="res://scripts/components/skill_unlocker_component.gd" id="23_qsv2c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hdsg1"]
 size = Vector2(16, 31)
@@ -90,20 +92,11 @@ script = ExtResource("9_rjyu4")
 character_body = NodePath("..")
 knockback_force = 1500.0
 
-[node name="BrickThrowComponent" type="Node" parent="." node_paths=PackedStringArray("player_controller", "timer")]
-script = ExtResource("10_u0v3b")
-brick_scene = ExtResource("11_4d0cj")
-fire_rate = 0.3
-player_controller = NodePath("..")
-timer = NodePath("../ThrowTimer")
-
 [node name="ThrowTimer" type="Timer" parent="."]
 
-[node name="StompDamageComponent" type="Node" parent="." node_paths=PackedStringArray("area2d", "root")]
-script = ExtResource("12_payr4")
-damage = 4.0
-area2d = NodePath("../StompDamageArea")
-root = NodePath("..")
+[node name="InvulnerabilityComponent" type="Node" parent="." node_paths=PackedStringArray("flashing_component")]
+script = ExtResource("14_jopig")
+flashing_component = NodePath("../FlashingComponent Base")
 
 [node name="FlashingComponent Base" type="Node" parent="." node_paths=PackedStringArray("sprite", "health_component")]
 script = ExtResource("13_hrtyn")
@@ -123,15 +116,19 @@ sprite = NodePath("../Root/Right Eye")
 flash_duration = 1.0
 health_component = NodePath("../HealthComponent")
 
-[node name="InvulnerabilityComponent" type="Node" parent="." node_paths=PackedStringArray("flashing_component")]
-script = ExtResource("14_jopig")
-flashing_component = NodePath("../FlashingComponent Base")
-
-[node name="MagneticSkillComponent" type="Node" parent="." node_paths=PackedStringArray("magnetic_area", "root")]
-script = ExtResource("15_4df3h")
-magnetic_area = NodePath("../MagneticArea")
+[node name="StompDamageComponent" type="Node" parent="." node_paths=PackedStringArray("area2d", "root")]
+script = ExtResource("12_payr4")
+damage = 4.0
+area2d = NodePath("../StompDamageArea")
 root = NodePath("..")
-magnetic_move_duration = 0.9
+
+[node name="SkillManager" type="Node" parent="."]
+script = ExtResource("20_ppfy7")
+available_skills = Array[ExtResource("21_d0oiv")]([ExtResource("22_vnsgd"), ExtResource("16_smbir")])
+
+[node name="SkillUnlockerComponent" type="Node" parent="." node_paths=PackedStringArray("skill_manager")]
+script = ExtResource("23_qsv2c")
+skill_manager = NodePath("../SkillManager")
 
 [node name="MagneticArea" type="Area2D" parent="."]
 collision_layer = 0

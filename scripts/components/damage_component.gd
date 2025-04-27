@@ -4,6 +4,9 @@ extends Node
 @export var damage: float = 0.25
 @export var area2d: Area2D
 @export var status_effect_data: StatusEffectDataResource
+@export var damage_timer: Timer
+
+var current_target: Node = null
 signal effect_inflicted(target: Node2D, effect: StatusEffectDataResource)
 
 
@@ -13,13 +16,34 @@ func _ready() -> void:
 		return
 
 	area2d.body_entered.connect(on_area2d_body_entered)
+	area2d.body_exited.connect(on_area2d_body_exited)
+	area2d.area_entered.connect(on_area2d_area_entered)
+
+	if damage_timer:
+		damage_timer.timeout.connect(on_damage_timer_timeout)
+
+
+func _process(_delta: float) -> void:
+	if not current_target:
+		return
+	if damage_timer:
+		return
+
+	process_entity_and_apply_damage(current_target)
 
 
 func deal_damage(target: HealthComponent) -> void:
 	target.decrease_health(damage)
 
 
-func on_area2d_body_entered(body: Node2D) -> void:
+func on_damage_timer_timeout() -> void:
+	if not current_target:
+		return
+
+	process_entity_and_apply_damage(current_target)
+
+
+func process_entity_and_apply_damage(body: Node2D) -> void:
 	if body.has_node("HealthComponent"):
 		var health_component: HealthComponent                   = body.get_node("HealthComponent")
 		var invulnerability_component: InvulnerabilityComponent = body.get_node_or_null("InvulnerabilityComponent")
@@ -34,3 +58,27 @@ func on_area2d_body_entered(body: Node2D) -> void:
 
 		if invulnerability_component:
 			invulnerability_component.activate()
+
+
+func on_area2d_body_entered(body: Node2D) -> void:
+	current_target = body
+
+	if damage_timer:
+		damage_timer.start()
+
+	process_entity_and_apply_damage(body)
+
+
+func on_area2d_body_exited(body: Node2D) -> void:
+	if body == current_target:
+		current_target = null
+		if damage_timer:
+			damage_timer.stop()
+
+
+func on_area2d_area_entered(area: Area2D) -> void:
+	if area == area2d:
+		return
+	var parent := area.get_parent()
+	if parent.has_node("DamageComponent"):
+		process_entity_and_apply_damage(parent)
