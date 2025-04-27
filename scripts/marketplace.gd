@@ -38,10 +38,11 @@ func create_upgrade_button(skill: SkillData):
 	button.text = skill.name + " " + str(skill.cost)
 	button.flat = true
 	button.icon = skill.icon
-	
+
 	button.pressed.connect(func () -> void: _on_button_pressed(skill))
 
 	grid.add_child(button)
+	grid.queue_sort()
 
 
 func remove_button(skill: SkillData):
