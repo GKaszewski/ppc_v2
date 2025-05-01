@@ -4,6 +4,7 @@ extends Node
 @export var health_component: HealthComponent
 @export var status_effect_component: StatusEffectComponent
 @export var root: Node2D
+@export var fire_fx: GPUParticles2D
 
 var data: StatusEffectDataResource = null
 var should_deal_damage: bool       = false
@@ -41,9 +42,13 @@ func on_effect_applied(effect_data: StatusEffectDataResource) -> void:
 	if effect_data.effect_type == StatusEffectComponent.EffectType.FIRE:
 		data = effect_data
 		should_deal_damage = true
+		if fire_fx:
+			fire_fx.emitting = true
 
 
 func on_effect_removed(effect_type: StatusEffectComponent.EffectType) -> void:
 	if effect_type == StatusEffectComponent.EffectType.FIRE:
 		data = null
 		should_deal_damage = false
+		if fire_fx:
+			fire_fx.emitting = false

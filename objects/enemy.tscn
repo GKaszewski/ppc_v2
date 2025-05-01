@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bwdlmualj6xbw"]
+[gd_scene load_steps=19 format=3 uid="uid://bwdlmualj6xbw"]
 
 [ext_resource type="Shader" uid="uid://bs4xvm4qkurpr" path="res://shaders/hit_flash.tres" id="1_ep4yr"]
 [ext_resource type="Texture2D" uid="uid://cu72810eyk4dx" path="res://sprites/enemy-robot.png" id="2_hjtwe"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://scripts/components/ice_effect_component.gd" id="11_pq0k7"]
 [ext_resource type="AudioStream" uid="uid://b3tsqhr06pbrs" path="res://sfx/enemy_hurt.wav" id="13_u4k3d"]
 [ext_resource type="AudioStream" uid="uid://dyev46uqusimi" path="res://sfx/shoot.wav" id="14_tdjks"]
+[ext_resource type="PackedScene" uid="uid://dx80ivlvuuew4" path="res://objects/fire_fx.tscn" id="15_mc6rj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pwwji"]
 size = Vector2(25, 31)
@@ -115,11 +116,12 @@ health_component = NodePath("../HealthComponent")
 [node name="StatusEffectComponent" type="Node" parent="."]
 script = ExtResource("10_5i27q")
 
-[node name="FireEffectComponent" type="Node" parent="." node_paths=PackedStringArray("health_component", "status_effect_component", "root")]
+[node name="FireEffectComponent" type="Node" parent="." node_paths=PackedStringArray("health_component", "status_effect_component", "root", "fire_fx")]
 script = ExtResource("10_ej8vg")
 health_component = NodePath("../HealthComponent")
 status_effect_component = NodePath("../StatusEffectComponent")
 root = NodePath("..")
+fire_fx = NodePath("../FireFX")
 
 [node name="IceEffectComponent" type="Node" parent="." node_paths=PackedStringArray("status_effect_component")]
 script = ExtResource("11_pq0k7")
@@ -131,3 +133,8 @@ stream = ExtResource("13_u4k3d")
 
 [node name="sfx_shoot" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("14_tdjks")
+
+[node name="FireFX" parent="." instance=ExtResource("15_mc6rj")]
+position = Vector2(0, 9)
+emitting = false
+amount = 2048
