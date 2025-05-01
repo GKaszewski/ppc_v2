@@ -2,7 +2,7 @@ class_name GM
 extends Node
 
 var player_state = {
-					   "coins": 1000,
+					   "coins": 0,
 					   "lives": 3,
 					   "unlocked_skills": [],
 				   }
