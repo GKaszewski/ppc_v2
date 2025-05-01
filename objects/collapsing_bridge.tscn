@@ -40,9 +40,8 @@ to_collapse_timer = NodePath("../ToCollapseTimer")
 reset_timer = NodePath("../ResetTimer")
 sprite2d = NodePath("../Sprite2D")
 collision_shape = NodePath("../CollisionShape2D")
-collapse_time = 2.0
+collapse_time = 0.75
 reset_time = 3.0
-anim_time = 0.5
 
 [connection signal="body_entered" from="Collapsable detector" to="CollapsableComponent" method="_on_collapsable_detector_body_entered"]
 [connection signal="body_exited" from="Collapsable detector" to="CollapsableComponent" method="_on_collapsable_detector_body_exited"]

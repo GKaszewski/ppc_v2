@@ -3,6 +3,7 @@ extends Node
 
 @export var components_to_disable: Array = []
 @export var status_effect_component: StatusEffectComponent
+@export var ice_fx: Node2D
 
 var data: StatusEffectDataResource = null
 var ice_effects_applied: int       = 0
@@ -35,6 +36,9 @@ func on_effect_removed(effect_type: StatusEffectComponent.EffectType) -> void:
 
 
 func apply_freeze() -> void:
+	if ice_fx:
+		ice_fx.visible = true
+
 	for component_path in components_to_disable:
 		var component: Node = get_node_or_null(component_path)
 		if not component or ice_effects_applied == 0:
@@ -44,9 +48,15 @@ func apply_freeze() -> void:
 
 
 func remove_freeze() -> void:
+	if ice_effects_applied > 0:
+		return
+
+	if ice_fx:
+		ice_fx.visible = false
+
 	for component_path in components_to_disable:
 		var component: Node = get_node_or_null(component_path)
-		if not component or ice_effects_applied > 0:
+		if not component:
 			continue
 
 		component.process_mode = PROCESS_MODE_ALWAYS
