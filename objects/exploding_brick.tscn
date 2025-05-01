@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://5surx230gfw3"]
+[gd_scene load_steps=8 format=3 uid="uid://5surx230gfw3"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_rcgxf"]
 [ext_resource type="Script" path="res://scripts/components/bullet.gd" id="2_1i2y5"]
 [ext_resource type="Script" path="res://scripts/components/damage_component.gd" id="3_y0uai"]
 [ext_resource type="Script" path="res://scripts/components/explosive_component.gd" id="4_8lw0n"]
+[ext_resource type="PackedScene" uid="uid://dyp4i4ru2j2jh" path="res://objects/explosion_fx.tscn" id="5_6oopj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ar0xf"]
 size = Vector2(16, 10)
@@ -50,6 +51,7 @@ root = NodePath("..")
 damage = NodePath("../DamageComponent")
 area2d = NodePath("..")
 explosion_area2d = NodePath("../Explosion area")
+explosion_effect = ExtResource("5_6oopj")
 
 [node name="Explosion area" type="Area2D" parent="."]
 collision_layer = 0
@@ -57,3 +59,6 @@ collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Explosion area"]
 shape = SubResource("CircleShape2D_e6vaq")
+
+[node name="ExplosionFX" parent="." instance=ExtResource("5_6oopj")]
+randomness = 0.24

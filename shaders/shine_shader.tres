@@ -7,5 +7,5 @@ shader = ExtResource("1_a47lf")
 shader_parameter/shine_color = Color(1, 1, 1, 1)
 shader_parameter/shine_speed = -1.0
 shader_parameter/shine_size = 0.011
-shader_parameter/shine_frequency = 3.0
+shader_parameter/shine_frequency = 1.0
 shader_parameter/shine_angle_deg = 45.0

@@ -39,9 +39,10 @@ func explode() -> void:
 	timer.stop()
 
 	if explosion_effect:
-		var effect: Node2D = explosion_effect.instantiate()
-		root.get_parent().add_child(effect)
-		effect.global_position = root.global_position
+		var explosion_instance: GPUParticles2D = explosion_effect.instantiate()
+		explosion_instance.global_position = root.global_position
+		get_tree().current_scene.add_child(explosion_instance)
+		explosion_instance.emitting = true
 
 	var bodies: Array = explosion_area2d.get_overlapping_bodies()
 	for body in bodies:
