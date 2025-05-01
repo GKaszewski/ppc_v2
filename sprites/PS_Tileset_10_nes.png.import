@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cghxi204ajn0l"
-path="res://.godot/imported/sliced8.png-12803fb1057c2a107058d028827507ef.ctex"
+uid="uid://cw42lvnqxubq2"
+path="res://.godot/imported/PS_Tileset_10_nes.png-ae73e9fa6edd25baf9aa439f91105e8d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tileset/sliced/sliced8.png"
-dest_files=["res://.godot/imported/sliced8.png-12803fb1057c2a107058d028827507ef.ctex"]
+source_file="res://sprites/PS_Tileset_10_nes.png"
+dest_files=["res://.godot/imported/PS_Tileset_10_nes.png-ae73e9fa6edd25baf9aa439f91105e8d.ctex"]
 
 [params]
 

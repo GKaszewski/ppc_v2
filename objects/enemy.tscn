@@ -51,7 +51,7 @@ hurt_fx = NodePath("../sfx_hurt")
 script = ExtResource("4_4eajk")
 area2d = NodePath("../Hitbox")
 
-[node name="SideToSideMovement" type="Node" parent="." node_paths=PackedStringArray("root", "sprite2d", "left_ray", "right_ray")]
+[node name="SideToSideMovement" type="Node" parent="." node_paths=PackedStringArray("root", "sprite2d", "left_ray", "right_ray", "left_wall_ray", "right_wall_ray")]
 script = ExtResource("4_gbsq8")
 root = NodePath("..")
 sprite2d = NodePath("../Sprite2D")
@@ -59,6 +59,8 @@ speed = 60.0
 wait_time = 0.5
 left_ray = NodePath("../Left Ray")
 right_ray = NodePath("../Right Ray")
+left_wall_ray = NodePath("../Left Wall Ray")
+right_wall_ray = NodePath("../Right Wall Ray")
 
 [node name="PeriodicShootingComponent" type="Node" parent="." node_paths=PackedStringArray("side_to_side_movement", "root", "bullet_spawn_right", "bullet_spawn_left")]
 script = ExtResource("5_m03v0")
@@ -87,9 +89,17 @@ debug_color = Color(0.913521, 0.265052, 0.323172, 0.42)
 position = Vector2(-16, 13)
 target_position = Vector2(0, 8)
 
+[node name="Left Wall Ray" type="RayCast2D" parent="."]
+position = Vector2(-16, 0)
+target_position = Vector2(-8, 0)
+
 [node name="Right Ray" type="RayCast2D" parent="."]
 position = Vector2(16, 13)
 target_position = Vector2(0, 8)
+
+[node name="Right Wall Ray" type="RayCast2D" parent="."]
+position = Vector2(16, 0)
+target_position = Vector2(8, 0)
 
 [node name="FlashingComponent" type="Node" parent="." node_paths=PackedStringArray("sprite", "health_component")]
 process_mode = 3

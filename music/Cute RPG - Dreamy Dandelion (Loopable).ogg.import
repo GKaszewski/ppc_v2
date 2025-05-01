@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bludculi5i6s"
+path="res://.godot/imported/Cute RPG - Dreamy Dandelion (Loopable).ogg-0eed68e0df9a023af8d3b0722b0cfae4.oggvorbisstr"
+
+[deps]
+
+source_file="res://music/Cute RPG - Dreamy Dandelion (Loopable).ogg"
+dest_files=["res://.godot/imported/Cute RPG - Dreamy Dandelion (Loopable).ogg-0eed68e0df9a023af8d3b0722b0cfae4.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

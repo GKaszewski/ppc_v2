@@ -5,6 +5,7 @@ extends Node
 @export var sprite2d: Sprite2D
 @export var start_animation_index: int = 0
 @export var animation_duration: float = 0.5
+@export var sfx: AudioStreamPlayer2D
 signal activated
 
 
@@ -30,6 +31,8 @@ func _on_body_entered(body: Node2D) -> void:
 
 func activate() -> void:
 	activated.emit()
+	if sfx:
+		sfx.play()
 	sprite2d.frame = start_animation_index + 1
 	var timer := get_tree().create_timer(animation_duration)
 	await timer.timeout

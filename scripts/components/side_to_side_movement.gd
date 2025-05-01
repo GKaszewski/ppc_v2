@@ -1,4 +1,4 @@
-﻿class_name SideToSideMovement
+class_name SideToSideMovement
 extends Node
 
 @export var root: Node2D
@@ -7,17 +7,19 @@ extends Node
 @export var wait_time: float = 1.0
 @export var left_ray: RayCast2D
 @export var right_ray: RayCast2D
+@export var left_wall_ray: RayCast2D
+@export var right_wall_ray: RayCast2D
 
-var direction: Vector2 = Vector2.LEFT
-var new_direction: Vector2 = Vector2.LEFT
+var direction: Vector2               = Vector2.LEFT
+var new_direction: Vector2           = Vector2.LEFT
 var timer: Timer
 var triggered_direction_change: bool = false
-
 signal direction_changed()
+
 
 func _ready() -> void:
 	root = get_parent()
-	
+
 	if not sprite2d:
 		printerr("SideToSideMovement node missing Sprite2D child.")
 		return
@@ -28,19 +30,32 @@ func _ready() -> void:
 
 	setup_timer()
 	direction_changed.connect(on_direction_changed)
-		
+
 
 func _physics_process(delta: float) -> void:
 	handle_direction()
 	handle_sprite_flip()
 	handle_movement(delta)
-	
+
+
 func handle_direction() -> void:
+	# check if we are colliding with the left wall
+	if left_wall_ray.is_colliding():
+		new_direction = Vector2.RIGHT
+		direction_changed.emit()
+		return
+
+	# check if we are colliding with the right wall
+	if right_wall_ray.is_colliding():
+		new_direction = Vector2.LEFT
+		direction_changed.emit()
+		return
+
 	# we are not colliding with anything, which means we don't have ground to walk on. Stop moving.
 	if not left_ray.is_colliding() and not right_ray.is_colliding():
 		new_direction = Vector2.ZERO
 		return
-		
+
 	# If the left ray is not colliding and the right ray is colliding, that means we have ground to the right and we should change direction to the right.
 	if not left_ray.is_colliding() and right_ray.is_colliding():
 		new_direction = Vector2.RIGHT
@@ -50,16 +65,19 @@ func handle_direction() -> void:
 		new_direction = Vector2.LEFT
 		direction_changed.emit()
 		return
-		
+
+
 func handle_sprite_flip() -> void:
 	if direction == Vector2.LEFT:
 		sprite2d.flip_h = true
 	else:
 		sprite2d.flip_h = false
 
+
 func handle_movement(delta: float) -> void:
 	root.position += direction * speed * delta
-		
+
+
 func on_direction_changed() -> void:
 	if direction == new_direction or triggered_direction_change:
 		return
@@ -67,12 +85,13 @@ func on_direction_changed() -> void:
 	direction = Vector2.ZERO
 	timer.start()
 
+
 func on_timer_timeout() -> void:
 	timer.stop()
 	direction = new_direction
 	triggered_direction_change = false
-	
-	
+
+
 func setup_timer() -> void:
 	timer = Timer.new()
 	add_child(timer)
