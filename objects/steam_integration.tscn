@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cyvcg2re4qifd"]
+
+[ext_resource type="Script" uid="uid://f4y8evisxgnc" path="res://scripts/steam_integration.gd" id="1_ds8p3"]
+
+[node name="SteamIntegration" type="Node"]
+script = ExtResource("1_ds8p3")
