@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://d3lt4rhxduv44"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_l5x2w"]
-[ext_resource type="Script" path="res://scripts/components/damage_component.gd" id="2_mxy0q"]
-[ext_resource type="Script" path="res://scripts/components/beam_component.gd" id="3_mcbof"]
+[ext_resource type="Script" uid="uid://dkmxhjtmu5xlb" path="res://scripts/components/damage_component.gd" id="2_mxy0q"]
+[ext_resource type="Script" uid="uid://bejv75mi8npj0" path="res://scripts/components/beam_component.gd" id="3_mcbof"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ptfn7"]
 size = Vector2(16, 8)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dyp4i4ru2j2jh"]
 
-[ext_resource type="Script" path="res://scripts/components/cleanup_component.gd" id="1_8uvxg"]
+[ext_resource type="Script" uid="uid://f74xpfg7624d" path="res://scripts/components/cleanup_component.gd" id="1_8uvxg"]
 
 [sub_resource type="Curve" id="Curve_8umf8"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.4), 0.0, 0.0, 0, 0]
@@ -39,11 +39,11 @@ alpha_curve = SubResource("CurveTexture_w18ti")
 [node name="ExplosionFX" type="GPUParticles2D"]
 emitting = false
 amount = 2048
-process_material = SubResource("ParticleProcessMaterial_1ujje")
 lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
 fixed_fps = 24
+process_material = SubResource("ParticleProcessMaterial_1ujje")
 
 [node name="CleanUpComponent" type="Node" parent="." node_paths=PackedStringArray("root")]
 script = ExtResource("1_8uvxg")

@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://daau4j5hbklk0"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_52l28"]
-[ext_resource type="Script" path="res://scripts/components/bullet.gd" id="2_hjcob"]
-[ext_resource type="Script" path="res://scripts/components/damage_component.gd" id="3_sog2h"]
+[ext_resource type="Script" uid="uid://bh2vrkdbrtpin" path="res://scripts/components/bullet.gd" id="2_hjcob"]
+[ext_resource type="Script" uid="uid://dkmxhjtmu5xlb" path="res://scripts/components/damage_component.gd" id="3_sog2h"]
 [ext_resource type="Resource" uid="uid://obodgnkhxuhe" path="res://resources/status_effect/fire.tres" id="4_xx5l4"]
-[ext_resource type="Script" path="res://scripts/components/effect_inflictor_component.gd" id="5_ofrqk"]
+[ext_resource type="Script" uid="uid://d3brcje121krs" path="res://scripts/components/effect_inflictor_component.gd" id="5_ofrqk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ar0xf"]
 size = Vector2(16, 10)

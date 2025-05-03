@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://d08dfqmirnd66"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_1co1x"]
-[ext_resource type="Script" path="res://scripts/components/collectable.gd" id="2_cujcq"]
+[ext_resource type="Script" uid="uid://pa1bwc4no08q" path="res://scripts/components/collectable.gd" id="2_cujcq"]
 [ext_resource type="Resource" uid="uid://b6xqotmke54x" path="res://resources/collectables/big_treasure.tres" id="3_k64cr"]
-[ext_resource type="Script" path="res://scripts/components/fade_away.gd" id="4_nw7tw"]
+[ext_resource type="Script" uid="uid://bg75hnr3q6grk" path="res://scripts/components/fade_away.gd" id="4_nw7tw"]
 [ext_resource type="AudioStream" uid="uid://wr7n5ivv06ux" path="res://sfx/pickup_coin_4.wav" id="5_fxf8v"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3ask2"]

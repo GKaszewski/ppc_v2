@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cunyndudjh2he"]
 
-[ext_resource type="Script" path="res://scripts/components/magnetic_skill.gd" id="1_lwbas"]
+[ext_resource type="Script" uid="uid://ce8w71vgv37pt" path="res://scripts/components/magnetic_skill.gd" id="1_lwbas"]
 
 [node name="MagneticSkill" type="Node"]
 script = ExtResource("1_lwbas")

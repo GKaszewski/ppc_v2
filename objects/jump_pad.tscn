@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cm3rixnnev1pg"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_ctugi"]
-[ext_resource type="Script" path="res://scripts/components/jump_pad_component.gd" id="2_2ypfs"]
+[ext_resource type="Script" uid="uid://dwok2qx4wpkey" path="res://scripts/components/jump_pad_component.gd" id="2_2ypfs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ci3ij"]
 size = Vector2(16, 6)

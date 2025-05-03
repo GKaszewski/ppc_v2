@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bhc7y4xugu4q7"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_w543f"]
-[ext_resource type="Script" path="res://scripts/components/damage_component.gd" id="2_ll0xw"]
-[ext_resource type="Script" path="res://scripts/components/bullet.gd" id="3_keogl"]
+[ext_resource type="Script" uid="uid://dkmxhjtmu5xlb" path="res://scripts/components/damage_component.gd" id="2_ll0xw"]
+[ext_resource type="Script" uid="uid://bh2vrkdbrtpin" path="res://scripts/components/bullet.gd" id="3_keogl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_txsw8"]
 radius = 4.0

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ct8fim6mduyl3"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_rka1x"]
-[ext_resource type="Script" path="res://scripts/components/collapsable.gd" id="2_3vvum"]
+[ext_resource type="Script" uid="uid://r0a6xjicrh74" path="res://scripts/components/collapsable.gd" id="2_3vvum"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l44jt"]
 size = Vector2(16, 4)

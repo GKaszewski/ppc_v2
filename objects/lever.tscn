@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bd51frym6mm7v"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_psg62"]
-[ext_resource type="Script" path="res://scripts/components/lever_component.gd" id="2_0p0wb"]
+[ext_resource type="Script" uid="uid://hyuwsp1b336a" path="res://scripts/components/lever_component.gd" id="2_0p0wb"]
 [ext_resource type="AudioStream" uid="uid://beq14we7v3iw4" path="res://sfx/activate_lever.wav" id="3_gipby"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ke5tv"]
