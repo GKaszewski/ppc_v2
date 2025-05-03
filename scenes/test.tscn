@@ -571,12 +571,13 @@ position = Vector2(873, -577)
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("1_gbpkv")]
 
-[node name="Marketplace" parent="CanvasLayer" node_paths=PackedStringArray("root", "skill_unlocker") instance=ExtResource("20_ss8k0")]
+[node name="Marketplace" parent="CanvasLayer" node_paths=PackedStringArray("root", "skill_unlocker", "components_to_disable") instance=ExtResource("20_ss8k0")]
 visible = false
 custom_minimum_size = Vector2(480, 240)
 offset_top = 16.0
 root = NodePath(".")
 skill_unlocker = NodePath("../../Brick Player/SkillUnlockerComponent")
+components_to_disable = [NodePath("../../Brick Player")]
 
 [node name="Killzone" parent="." instance=ExtResource("20_8a4vc")]
 position = Vector2(0, 990)

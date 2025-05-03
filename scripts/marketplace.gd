@@ -6,8 +6,11 @@ extends Node
 @export var grid: GridContainer
 @export var font: Font
 @export var skill_unlocker: SkillUnlockerComponent
+@export var components_to_disable: Array[Node] = []
 
 @onready var game_manager: GM = $"/root/GameManager"
+
+var buttons: Array[Button] = []
 
 
 func _ready() -> void:
@@ -29,8 +32,14 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("show_marketplace"):
 		if root.is_visible():
 			root.hide()
+			for component in components_to_disable:
+				component.process_mode = PROCESS_MODE_INHERIT
 		else:
 			root.show()
+			for component in components_to_disable:
+				component.process_mode = PROCESS_MODE_DISABLED
+			if buttons:
+				buttons[0].grab_focus()
 
 
 func create_upgrade_button(skill: SkillData):
@@ -41,6 +50,7 @@ func create_upgrade_button(skill: SkillData):
 
 	button.pressed.connect(func () -> void: _on_button_pressed(skill))
 
+	buttons.append(button)
 	grid.add_child(button)
 	grid.queue_sort()
 
@@ -57,6 +67,5 @@ func _on_button_pressed(skill: SkillData) -> void:
 		return
 
 	if skill_unlocker.try_unlock_skill(skill):
-		print("Skill unlocked: ", skill.name)
 		remove_button(skill)
 		

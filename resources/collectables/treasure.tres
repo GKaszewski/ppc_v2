@@ -5,3 +5,4 @@
 [resource]
 script = ExtResource("1_w50p5")
 amount = 50
+type = 0
