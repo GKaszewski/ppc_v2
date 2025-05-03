@@ -22,9 +22,10 @@ hframes = 12
 vframes = 12
 frame = 51
 
-[node name="Collectable" type="Node" parent="." node_paths=PackedStringArray("area2d", "sfx") groups=["coins"]]
+[node name="Collectable" type="Node" parent="." node_paths=PackedStringArray("area2d", "collision_shape", "sfx") groups=["coins"]]
 script = ExtResource("2_y0k47")
 area2d = NodePath("..")
+collision_shape = NodePath("../CollisionShape2D")
 collectable_data = ExtResource("3_fm2fq")
 sfx = NodePath("../sfx")
 

@@ -123,3 +123,15 @@ func unlock_level(level_index: int) -> void:
 func try_to_go_to_next_level() -> void:
 	if player_state["current_level"] + 1 < level_scenes.size() and player_state["current_level"] + 1 in player_state["unlocked_levels"]:
 		player_state["current_level"] += 1
+
+
+func quit_game() -> void:
+	get_tree().quit()
+
+
+func pause_game() -> void:
+	Engine.time_scale = 0
+
+
+func resume_game() -> void:
+	Engine.time_scale = 1

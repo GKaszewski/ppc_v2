@@ -1,0 +1,81 @@
+[gd_scene load_steps=3 format=3 uid="uid://i6mnjbjcoqe5"]
+
+[ext_resource type="Script" uid="uid://cugifchx6jhuk" path="res://scripts/pause_menu.gd" id="1_aktha"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4ivv"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="Pause menu" type="Control" node_paths=PackedStringArray("pause_menu_control", "resume_button", "quit_button", "settings_button", "exit_to_menu_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+script = ExtResource("1_aktha")
+pause_menu_control = NodePath(".")
+resume_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/Resume Button")
+quit_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/Quit game Button")
+settings_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/Settings Button")
+exit_to_menu_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/Exit to menu Button")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -209.0
+offset_top = -128.0
+offset_right = 209.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g4ivv")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Pause" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Pause"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Spacer" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Resume Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "RESUME"
+flat = true
+
+[node name="Settings Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "SETTINGS"
+flat = true
+
+[node name="Exit to menu Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "EXIT TO MENU"
+flat = true
+
+[node name="Quit game Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "QUIT GAME"
+flat = true
