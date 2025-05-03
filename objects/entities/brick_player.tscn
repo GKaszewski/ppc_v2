@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://qeu80jy4vmuf" path="res://scripts/components/score.gd" id="6_fowa2"]
 [ext_resource type="Script" uid="uid://btfsq0bvtrx3t" path="res://scripts/components/health.gd" id="7_tqjk8"]
 [ext_resource type="Script" uid="uid://dkpu3121y88oo" path="res://scripts/components/player_death.gd" id="8_1v23d"]
-[ext_resource type="PackedScene" uid="uid://dyp4i4ru2j2jh" path="res://objects/explosion_fx.tscn" id="9_hwg11"]
+[ext_resource type="PackedScene" uid="uid://dyp4i4ru2j2jh" path="res://objects/fxs/explosion_fx.tscn" id="9_hwg11"]
 [ext_resource type="Script" uid="uid://nogmyshjrv57" path="res://scripts/components/knockback.gd" id="9_rjyu4"]
 [ext_resource type="Script" uid="uid://ulhswh4jjlc6" path="res://scripts/components/stomp_damage_component.gd" id="12_payr4"]
 [ext_resource type="Script" uid="uid://dqmbvuutd5c3c" path="res://scripts/components/flashing_component.gd" id="13_hrtyn"]

@@ -22,14 +22,17 @@ func try_unlock_skill(skill_data: SkillData) -> bool:
 	return true
 
 
+func unlock_all_skills() -> void:
+	var available_skills: Array[SkillData] = skill_manager.available_skills
+	var skills: Array[String]              = []
+
+	for skill in available_skills:
+		skills.append(skill.name)
+
+	game_manager.unlock_skills(skills)
+	skill_manager.apply_unlocked_skills()
+
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("unlock_skills"):
-		var available_skills: Array[SkillData] = skill_manager.available_skills
-		var skills: Array[String]              = []
-
-		for skill in available_skills:
-			skills.append(skill.name)
-
-		game_manager.unlock_skills(skills)
-		skill_manager.apply_unlocked_skills()
-		print("Unlocked skills: ", skills)
+		unlock_all_skills()

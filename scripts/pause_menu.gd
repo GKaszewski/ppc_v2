@@ -13,6 +13,7 @@ extends Node
 
 var is_paused: bool       = false
 var is_console_open: bool = false
+var settings_menu_instance: Control
 
 
 func _ready() -> void:
@@ -42,6 +43,8 @@ func _ready() -> void:
 	quit_button.pressed.connect(_on_quit_button_pressed)
 	settings_button.pressed.connect(_on_settings_button_pressed)
 	exit_to_menu_button.pressed.connect(_on_exit_to_menu_button_pressed)
+	Console.console_opened.connect(_on_console_open)
+	Console.console_closed.connect(_on_console_close)
 
 
 func _input(event: InputEvent) -> void:
@@ -57,6 +60,9 @@ func _input(event: InputEvent) -> void:
 
 func _on_resume_button_pressed() -> void:
 	pause_menu_control.hide()
+	if settings_menu_instance:
+		settings_menu_instance.queue_free()
+		settings_menu_instance = null
 	gm.resume_game()
 	is_paused = false
 
@@ -71,9 +77,9 @@ func _on_settings_button_pressed() -> void:
 		return
 
 	var settings_instance: Control = settings_menu.instantiate()
-	get_tree().root.add_child(settings_instance)
+	add_child(settings_instance)
 	settings_instance.show()
-	pause_menu_control.hide()
+	settings_menu_instance = settings_instance
 	gm.pause_game()
 	is_paused = true
 
@@ -87,8 +93,8 @@ func _on_exit_to_menu_button_pressed() -> void:
 
 
 func _on_console_open():
-	pass
+	is_console_open = true
 
 
 func _on_console_close():
-	pass
+	is_console_open = false

@@ -22,7 +22,7 @@ run/max_fps=144
 boot_splash/show_image=false
 boot_splash/fullsize=false
 boot_splash/use_filter=false
-config/icon="res://icon.svg"
+config/icon="uid://jix7wdn0isr3"
 
 [autoload]
 
@@ -32,6 +32,8 @@ AudioController="*res://objects/audio_controller.tscn"
 SteamIntegrationNode="*res://objects/steam_integration.tscn"
 SteamControllerInput="*res://autoloads/steam_controller_input.gd"
 Console="*res://addons/console/console.gd"
+AchievementsManager="*res://objects/achievements.tscn"
+ConfigFileHandler="*res://autoloads/config_file_handler.gd"
 
 [debug]
 
@@ -39,10 +41,11 @@ file_logging/enable_file_logging=true
 
 [display]
 
-window/size/viewport_width=640
-window/size/viewport_height=360
-window/size/window_width_override=1280
-window/size/window_height_override=720
+window/size/viewport_width=480
+window/size/viewport_height=270
+window/size/initial_position=Vector2i(400, 100)
+window/size/window_width_override=1440
+window/size/window_height_override=810
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_height"
 window/stretch/scale_mode="integer"
@@ -68,6 +71,7 @@ player=""
 
 [gui]
 
+theme/default_theme_scale=0.5
 theme/custom_font="res://fonts/PressStart2P-Regular.ttf"
 theme/default_font_antialiasing=0
 

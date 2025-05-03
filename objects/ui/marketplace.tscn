@@ -8,7 +8,7 @@
 [ext_resource type="Resource" uid="uid://2glvryih82t1" path="res://resources/skills/fire_brick.tres" id="5_fqx8e"]
 [ext_resource type="Resource" uid="uid://cx5fsbexblp60" path="res://resources/skills/ice_brick.tres" id="6_6665y"]
 [ext_resource type="Resource" uid="uid://d3bjre2etov1n" path="res://resources/skills/magnetic.tres" id="7_ukny6"]
-[ext_resource type="PackedScene" uid="uid://dtl03rod7l2t0" path="res://objects/marketplace_button.tscn" id="9_ode10"]
+[ext_resource type="PackedScene" uid="uid://dtl03rod7l2t0" path="res://objects/ui/marketplace_button.tscn" id="9_ode10"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ode10"]
 bg_color = Color(0, 0, 0, 1)

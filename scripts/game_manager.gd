@@ -103,6 +103,11 @@ func unlock_skill(skill_name: String) -> void:
 		player_state["unlocked_skills"].append(skill_name)
 
 
+func remove_skill(skill_name: String) -> void:
+	if is_skill_unlocked(skill_name):
+		player_state["unlocked_skills"].erase(skill_name)
+
+
 func unlock_skills(skill_names: Array[String]) -> void:
 	for skill_name in skill_names:
 		unlock_skill(skill_name)

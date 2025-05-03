@@ -14,8 +14,8 @@
 [ext_resource type="Script" uid="uid://dhj4qtwcqmqkj" path="res://scripts/components/ice_effect_component.gd" id="11_pq0k7"]
 [ext_resource type="AudioStream" uid="uid://b3tsqhr06pbrs" path="res://sfx/enemy_hurt.wav" id="13_u4k3d"]
 [ext_resource type="AudioStream" uid="uid://dyev46uqusimi" path="res://sfx/shoot.wav" id="14_tdjks"]
-[ext_resource type="PackedScene" uid="uid://dx80ivlvuuew4" path="res://objects/fire_fx.tscn" id="15_mc6rj"]
-[ext_resource type="PackedScene" uid="uid://ck6nml06tm6ue" path="res://objects/ice_fx.tscn" id="16_68hnm"]
+[ext_resource type="PackedScene" uid="uid://dx80ivlvuuew4" path="res://objects/fxs/fire_fx.tscn" id="15_mc6rj"]
+[ext_resource type="PackedScene" uid="uid://ck6nml06tm6ue" path="res://objects/fxs/ice_fx.tscn" id="16_68hnm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pwwji"]
 size = Vector2(25, 31)

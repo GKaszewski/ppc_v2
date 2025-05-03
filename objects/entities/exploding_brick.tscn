@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bh2vrkdbrtpin" path="res://scripts/components/bullet.gd" id="2_1i2y5"]
 [ext_resource type="Script" uid="uid://dkmxhjtmu5xlb" path="res://scripts/components/damage_component.gd" id="3_y0uai"]
 [ext_resource type="Script" uid="uid://beg4dk7d5pvhp" path="res://scripts/components/explosive_component.gd" id="4_8lw0n"]
-[ext_resource type="PackedScene" uid="uid://dyp4i4ru2j2jh" path="res://objects/explosion_fx.tscn" id="5_6oopj"]
+[ext_resource type="PackedScene" uid="uid://dyp4i4ru2j2jh" path="res://objects/fxs/explosion_fx.tscn" id="5_6oopj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ar0xf"]
 size = Vector2(16, 10)

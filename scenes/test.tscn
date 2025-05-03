@@ -1,32 +1,35 @@
-[gd_scene load_steps=39 format=4 uid="uid://h60obxmju6mo"]
+[gd_scene load_steps=42 format=4 uid="uid://h60obxmju6mo"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_5lb42"]
 [ext_resource type="TileSet" uid="uid://cl4bn8lofqvky" path="res://tileset/village/tileset_village.tres" id="1_d680t"]
-[ext_resource type="PackedScene" uid="uid://byxf45ukq82pe" path="res://objects/hud.tscn" id="1_gbpkv"]
-[ext_resource type="PackedScene" uid="uid://dyp4i4ru2j2jh" path="res://objects/explosion_fx.tscn" id="1_iqo0b"]
-[ext_resource type="PackedScene" uid="uid://dx80ivlvuuew4" path="res://objects/fire_fx.tscn" id="2_h1oxb"]
-[ext_resource type="PackedScene" uid="uid://54w4wisfj8v8" path="res://objects/coin.tscn" id="3_ygehw"]
-[ext_resource type="PackedScene" uid="uid://bqi5s710xb1ju" path="res://objects/brick_player.tscn" id="4_hetw8"]
-[ext_resource type="PackedScene" uid="uid://bargnp4twtmxg" path="res://objects/big_coin.tscn" id="5_bpga1"]
-[ext_resource type="PackedScene" uid="uid://ct8fim6mduyl3" path="res://objects/collapsing_bridge.tscn" id="6_84ckv"]
-[ext_resource type="PackedScene" uid="uid://d08dfqmirnd66" path="res://objects/big_treasure.tscn" id="6_a3vrq"]
-[ext_resource type="PackedScene" uid="uid://073ts5cxtwbl" path="res://objects/treasure.tscn" id="7_4mhb5"]
+[ext_resource type="PackedScene" uid="uid://byxf45ukq82pe" path="res://objects/ui/hud.tscn" id="1_gbpkv"]
+[ext_resource type="PackedScene" uid="uid://dyp4i4ru2j2jh" path="res://objects/fxs/explosion_fx.tscn" id="1_iqo0b"]
+[ext_resource type="PackedScene" uid="uid://dx80ivlvuuew4" path="res://objects/fxs/fire_fx.tscn" id="2_h1oxb"]
+[ext_resource type="PackedScene" uid="uid://54w4wisfj8v8" path="res://objects/entities/coin.tscn" id="3_ygehw"]
+[ext_resource type="PackedScene" uid="uid://bqi5s710xb1ju" path="res://objects/entities/brick_player.tscn" id="4_hetw8"]
+[ext_resource type="PackedScene" uid="uid://bargnp4twtmxg" path="res://objects/entities/big_coin.tscn" id="5_bpga1"]
+[ext_resource type="PackedScene" uid="uid://ct8fim6mduyl3" path="res://objects/entities/collapsing_bridge.tscn" id="6_84ckv"]
+[ext_resource type="PackedScene" uid="uid://d08dfqmirnd66" path="res://objects/entities/big_treasure.tscn" id="6_a3vrq"]
+[ext_resource type="PackedScene" uid="uid://073ts5cxtwbl" path="res://objects/entities/treasure.tscn" id="7_4mhb5"]
 [ext_resource type="Script" uid="uid://cie33tct7ehf0" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="7_jgh7o"]
-[ext_resource type="PackedScene" uid="uid://bwdlmualj6xbw" path="res://objects/enemy.tscn" id="7_qgddg"]
-[ext_resource type="PackedScene" uid="uid://cm3rixnnev1pg" path="res://objects/jump_pad.tscn" id="8_dt3jb"]
-[ext_resource type="PackedScene" uid="uid://to2xnqev0pu1" path="res://objects/cage.tscn" id="9_oiafb"]
-[ext_resource type="PackedScene" uid="uid://bd51frym6mm7v" path="res://objects/lever.tscn" id="10_gxrpi"]
+[ext_resource type="PackedScene" uid="uid://bwdlmualj6xbw" path="res://objects/entities/enemy.tscn" id="7_qgddg"]
+[ext_resource type="PackedScene" uid="uid://cm3rixnnev1pg" path="res://objects/entities/jump_pad.tscn" id="8_dt3jb"]
+[ext_resource type="PackedScene" uid="uid://to2xnqev0pu1" path="res://objects/entities/cage.tscn" id="9_oiafb"]
+[ext_resource type="PackedScene" uid="uid://bd51frym6mm7v" path="res://objects/entities/lever.tscn" id="10_gxrpi"]
 [ext_resource type="Texture2D" uid="uid://cw42lvnqxubq2" path="res://sprites/PS_Tileset_10_nes.png" id="11_cyldw"]
 [ext_resource type="Texture2D" uid="uid://dxvevrm15uus1" path="res://sprites/flowers_tileset.png" id="12_hk3do"]
-[ext_resource type="PackedScene" uid="uid://12jnkdygpxwc" path="res://objects/exit_level.tscn" id="13_kay4s"]
+[ext_resource type="PackedScene" uid="uid://12jnkdygpxwc" path="res://objects/entities/exit_level.tscn" id="13_kay4s"]
 [ext_resource type="Script" uid="uid://d23haq52m7ulv" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="13_rsy5s"]
 [ext_resource type="Script" uid="uid://ccfft4b8rwgbo" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="14_mjvn7"]
 [ext_resource type="PackedScene" uid="uid://dtjrpkhssq32a" path="res://objects/bg.tscn" id="14_ws5fk"]
-[ext_resource type="PackedScene" uid="uid://bqom4cm7r18db" path="res://objects/killzone.tscn" id="20_8a4vc"]
-[ext_resource type="PackedScene" uid="uid://dlm2ri562fynd" path="res://objects/marketplace.tscn" id="20_ss8k0"]
-[ext_resource type="PackedScene" uid="uid://d0s2abysa86rq" path="res://objects/child.tscn" id="21_8rhdx"]
+[ext_resource type="PackedScene" uid="uid://bqom4cm7r18db" path="res://objects/entities/killzone.tscn" id="20_8a4vc"]
+[ext_resource type="PackedScene" uid="uid://dlm2ri562fynd" path="res://objects/ui/marketplace.tscn" id="20_ss8k0"]
+[ext_resource type="PackedScene" uid="uid://d0s2abysa86rq" path="res://objects/entities/child.tscn" id="21_8rhdx"]
 [ext_resource type="PackedScene" uid="uid://b4pdt1gv2ymyi" path="res://objects/tooltip.tscn" id="25_ckf05"]
-[ext_resource type="PackedScene" uid="uid://i6mnjbjcoqe5" path="res://objects/pause_menu.tscn" id="25_j7bvy"]
+[ext_resource type="PackedScene" uid="uid://i6mnjbjcoqe5" path="res://objects/ui/pause_menu.tscn" id="25_j7bvy"]
+[ext_resource type="PackedScene" uid="uid://y0ae6e7t70fj" path="res://objects/ui/settings_menu.tscn" id="26_y81of"]
+[ext_resource type="PackedScene" uid="uid://cvfsbiy5ggrpg" path="res://objects/ui/input_settings.tscn" id="27_gsk6d"]
+[ext_resource type="Script" uid="uid://8r1y8elyw7kt" path="res://scripts/console_management.gd" id="28_1dqgb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cagp7"]
 texture = ExtResource("1_5lb42")
@@ -583,6 +586,9 @@ components_to_disable = [NodePath("../../Brick Player")]
 
 [node name="Pause menu" parent="CanvasLayer" instance=ExtResource("25_j7bvy")]
 visible = false
+settings_menu = ExtResource("26_y81of")
+
+[node name="Input Settings" parent="CanvasLayer" instance=ExtResource("27_gsk6d")]
 
 [node name="Killzone" parent="." instance=ExtResource("20_8a4vc")]
 position = Vector2(0, 990)
@@ -594,5 +600,11 @@ text = "Press 'down' to fall from platform!"
 [node name="Tooltip2" parent="." instance=ExtResource("25_ckf05")]
 position = Vector2(1576, -40)
 text = "Be careful!"
+
+[node name="ConsoleManagement" type="Node" parent="." node_paths=PackedStringArray("player_health", "skill_unlocker", "skill_manager")]
+script = ExtResource("28_1dqgb")
+player_health = NodePath("../Brick Player/HealthComponent")
+skill_unlocker = NodePath("../Brick Player/SkillUnlockerComponent")
+skill_manager = NodePath("../Brick Player/SkillManager")
 
 [editable path="Brick Player"]

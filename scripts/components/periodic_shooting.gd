@@ -1,7 +1,7 @@
-﻿class_name PeriodicShootingComponent
+class_name PeriodicShootingComponent
 extends Node
 
-@export var bullet_scene: PackedScene = preload("res://objects/bullet.tscn")
+@export var bullet_scene: PackedScene = preload("res://objects/entities/bullet.tscn")
 @export var shoot_interval: float = 1.0
 @export var shoot_direction: Vector2 = Vector2.RIGHT
 @export var side_to_side_movement: SideToSideMovement

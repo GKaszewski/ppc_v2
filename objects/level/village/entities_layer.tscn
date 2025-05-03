@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=4 uid="uid://dnufqkeiyi5ya"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_51i2x"]
-[ext_resource type="PackedScene" uid="uid://54w4wisfj8v8" path="res://objects/coin.tscn" id="2_2l4v1"]
-[ext_resource type="PackedScene" uid="uid://ct8fim6mduyl3" path="res://objects/collapsing_bridge.tscn" id="3_ukc1k"]
+[ext_resource type="PackedScene" uid="uid://54w4wisfj8v8" path="res://objects/entities/coin.tscn" id="2_2l4v1"]
+[ext_resource type="PackedScene" uid="uid://ct8fim6mduyl3" path="res://objects/entities/collapsing_bridge.tscn" id="3_ukc1k"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8idcv"]
 texture = ExtResource("1_51i2x")

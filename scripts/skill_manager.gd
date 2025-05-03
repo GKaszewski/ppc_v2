@@ -55,3 +55,10 @@ func apply_unlocked_skills() -> void:
 			add_skill(skill_data)
 		else:
 			remove_skill(skill_data.name)
+
+
+func get_skill_by_name(skill_name: String) -> SkillData:
+	for skill_data in available_skills:
+		if skill_data.name == skill_name:
+			return skill_data
+	return null
