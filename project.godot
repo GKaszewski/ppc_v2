@@ -31,7 +31,7 @@ PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_came
 AudioController="*res://objects/audio_controller.tscn"
 SteamIntegrationNode="*res://objects/steam_integration.tscn"
 SteamControllerInput="*res://autoloads/steam_controller_input.gd"
-Console="*res://addons/godot-console/scripts/console.gd"
+Console="*res://addons/console/console.gd"
 
 [debug]
 
@@ -58,7 +58,7 @@ movie_writer/fps=24
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot-console/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
+enabled=PackedStringArray("res://addons/console/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
 
 [global_group]
 

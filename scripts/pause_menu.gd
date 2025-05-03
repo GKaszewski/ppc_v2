@@ -11,7 +11,8 @@ extends Node
 
 @onready var gm: GM = $"/root/GameManager"
 
-var is_paused: bool = false
+var is_paused: bool       = false
+var is_console_open: bool = false
 
 
 func _ready() -> void:
@@ -44,7 +45,7 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("pause"):
+	if event.is_action_pressed("pause") and not is_console_open:
 		if is_paused:
 			_on_resume_button_pressed()
 		else:
@@ -83,3 +84,11 @@ func _on_exit_to_menu_button_pressed() -> void:
 		return
 
 	get_tree().change_scene_to_packed(exit_to_menu_scene)
+
+
+func _on_console_open():
+	pass
+
+
+func _on_console_close():
+	pass
