@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://dlm2ri562fynd"]
 
 [ext_resource type="LabelSettings" uid="uid://rvn5ivivfvv6" path="res://resources/ui/hud_label_settings.tres" id="1_7r0u8"]
-[ext_resource type="Script" path="res://scripts/marketplace.gd" id="1_ncpyg"]
+[ext_resource type="Script" uid="uid://duifmqjarjpuv" path="res://scripts/marketplace.gd" id="1_ncpyg"]
 [ext_resource type="FontFile" uid="uid://xm0vbusjr7b7" path="res://fonts/PressStart2P-Regular.ttf" id="2_ho1tm"]
-[ext_resource type="Script" path="res://scripts/resources/skill_data.gd" id="2_pg4mc"]
+[ext_resource type="Script" uid="uid://bya240e627ti6" path="res://scripts/resources/skill_data.gd" id="2_pg4mc"]
 [ext_resource type="Resource" uid="uid://dw5ee2lpeypnb" path="res://resources/skills/brick_throw.tres" id="3_bk5yi"]
 [ext_resource type="Resource" uid="uid://cdp8sex36vdq2" path="res://resources/skills/explosive_brick.tres" id="4_tx0n3"]
 [ext_resource type="Resource" uid="uid://2glvryih82t1" path="res://resources/skills/fire_brick.tres" id="5_fqx8e"]

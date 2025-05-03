@@ -17,7 +17,7 @@ config/name_localized={
 }
 config/version="in-dev"
 run/main_scene="res://scenes/test.tscn"
-config/features=PackedStringArray("4.3", "GL Compatibility")
+config/features=PackedStringArray("4.4", "GL Compatibility")
 run/max_fps=144
 boot_splash/show_image=false
 boot_splash/fullsize=false
@@ -30,10 +30,6 @@ GameManager="*res://objects/game_manager.tscn"
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 GUIDE="*res://addons/guide/guide.gd"
 AudioController="*res://objects/audio_controller.tscn"
-
-[debug]
-
-file_logging/enable_file_logging=true
 
 [display]
 

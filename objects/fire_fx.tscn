@@ -28,6 +28,6 @@ color_ramp = SubResource("GradientTexture1D_mar4t")
 
 [node name="FireFX" type="GPUParticles2D"]
 amount = 512
-process_material = SubResource("ParticleProcessMaterial_dq33o")
 lifetime = 0.5
 fixed_fps = 24
+process_material = SubResource("ParticleProcessMaterial_dq33o")

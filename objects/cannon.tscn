@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://dstko446qydsc"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_6gptm"]
-[ext_resource type="Script" path="res://scripts/components/destroyable_component.gd" id="2_2tib2"]
-[ext_resource type="Script" path="res://scripts/components/health.gd" id="3_vevhj"]
+[ext_resource type="Script" uid="uid://d01dmoafptl2p" path="res://scripts/components/destroyable_component.gd" id="2_2tib2"]
+[ext_resource type="Script" uid="uid://btfsq0bvtrx3t" path="res://scripts/components/health.gd" id="3_vevhj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j5sus"]
 size = Vector2(16, 16)

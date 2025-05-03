@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://coayig4dxelo2"]
 
-[ext_resource type="Script" path="res://scripts/components/brick_throw.gd" id="1_hniwk"]
+[ext_resource type="Script" uid="uid://cm06xg1l3xtw5" path="res://scripts/components/brick_throw.gd" id="1_hniwk"]
 [ext_resource type="PackedScene" uid="uid://bymro4t7angv5" path="res://objects/brick.tscn" id="2_4txoq"]
 
 [node name="BrickThrowComponent" type="Node"]
