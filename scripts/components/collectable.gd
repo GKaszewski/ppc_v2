@@ -7,7 +7,7 @@ var has_fade_away: bool = false
 @export var area2d: Area2D
 @export var collectable_data: CollectableResource
 @export var sfx: AudioStreamPlayer2D
-signal collected(amount: int)
+signal collected(amount: int, type: CollectableResource.CollectableType)
 
 
 func _ready() -> void:
@@ -24,7 +24,7 @@ func _ready() -> void:
 
 func _on_area2d_body_entered(body: Node2D) -> void:
 	if body.has_node("CanPickUpComponent"):
-		collected.emit(collectable_data.amount)
+		collected.emit(collectable_data.amount, collectable_data.type)
 		if sfx:
 			sfx.play()
 		if not has_fade_away:

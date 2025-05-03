@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://b4eifkc31jsun"]
+[gd_scene load_steps=3 format=3 uid="uid://b4eifkc31jsun"]
 
 [ext_resource type="Script" uid="uid://dd30bgqiagi25" path="res://scripts/game_manager.gd" id="1_58t7u"]
+[ext_resource type="PackedScene" uid="uid://h60obxmju6mo" path="res://scenes/test.tscn" id="2_bentb"]
 
 [node name="GameManager" type="Node"]
 script = ExtResource("1_58t7u")
+level_scenes = Array[PackedScene]([ExtResource("2_bentb")])
+player_state = {
+"coins": 0,
+"current_level": 0,
+"lives": 3,
+"unlocked_levels": [ExtResource("2_bentb")],
+"unlocked_skills": []
+}

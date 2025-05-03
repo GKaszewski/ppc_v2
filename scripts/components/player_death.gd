@@ -24,5 +24,6 @@ func _on_health_component_on_death() -> void:
 		gm.reset_player_state()
 	else:
 		gm.remove_lives(1)
+		gm.set_coins(0)
 
 	call_deferred("reset_scene")

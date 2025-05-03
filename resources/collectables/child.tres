@@ -5,3 +5,4 @@
 [resource]
 script = ExtResource("1_2d5tb")
 amount = 1
+type = 1

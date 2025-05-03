@@ -1,11 +1,68 @@
 class_name GM
 extends Node
 
-var player_state = {
-					   "coins": 0,
-					   "lives": 3,
-					   "unlocked_skills": [],
-				   }
+@export var level_scenes: Array[PackedScene]
+
+@export var player_state := {
+								"coins": 0,
+								"lives": 3,
+								"unlocked_skills": [],
+								"current_level": 0,
+								"unlocked_levels": [],
+							}
+
+var nodes_in_scene := []
+
+
+func _enter_tree() -> void:
+	get_tree().node_added.connect(on_node_added)
+	get_tree().node_removed.connect(on_node_removed)
+
+
+func on_node_added(node: Node) -> void:
+	nodes_in_scene.append(node)
+
+
+func on_node_removed(node: Node) -> void:
+	if node in nodes_in_scene:
+		nodes_in_scene.erase(node)
+
+
+func get_colllectable_nodes() -> Array[CollectableComponent]:
+	var collectable_nodes: Array[CollectableComponent] = []
+	for node in nodes_in_scene:
+		var collectable_component: CollectableComponent = node.get_node_or_null("Collectable")
+		if not collectable_component:
+			collectable_component = node.get_node_or_null("CollectableComponent")
+			if not collectable_component:
+				continue
+		if collectable_component.collectable_data.type == CollectableResource.CollectableType.KID:
+			print("Kid collectable found: ", collectable_component.get_parent().name)
+
+		collectable_nodes.append(collectable_component)
+	return collectable_nodes
+
+
+func get_coin_nodes() -> Array[CollectableComponent]:
+	var coin_nodes := []
+	for node in nodes_in_scene:
+		var collectable_component: CollectableComponent = node.get_node_or_null("Collectable")
+		if not collectable_component:
+			continue
+		if collectable_component.collectable_data.type == CollectableResource.CollectableType.COIN:
+			coin_nodes.append(collectable_component)
+	return coin_nodes
+
+
+func get_kid_nodes() -> Array[CollectableComponent]:
+	var kid_nodes := []
+	for node in nodes_in_scene:
+		var collectable_component: CollectableComponent = node.get_node_or_null("Collectable")
+		if not collectable_component:
+			continue
+		if collectable_component.collectable_data.type == CollectableResource.CollectableType.KID:
+			kid_nodes.append(collectable_component)
+	return kid_nodes
 
 
 func add_coins(amount: int) -> void:
@@ -60,3 +117,15 @@ func reset_player_state() -> void:
 		"lives": 3,
 		"unlocked_skills": [],
 	}
+
+
+func unlock_level(level_index: int) -> void:
+	if level_index not in player_state["unlocked_levels"]: player_state["unlocked_levels"].append(level_index)
+
+
+func try_to_go_to_next_level() -> void:
+	if player_state["current_level"] + 1 < level_scenes.size() and player_state["current_level"] + 1 in player_state["unlocked_levels"]:
+		player_state["current_level"] += 1
+		print("Going to next level: ", player_state["current_level"])
+	else:
+		print("No more levels to go to.")

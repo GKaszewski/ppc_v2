@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://12jnkdygpxwc"]
+
+[ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_agxwm"]
+[ext_resource type="Script" uid="uid://cmh8k0rdsyh7j" path="res://scripts/components/requirement_component.gd" id="2_iysc1"]
+[ext_resource type="Script" uid="uid://c8xhgkg8gcqu6" path="res://scripts/components/unlock_on_requirement_component.gd" id="3_5ktpq"]
+[ext_resource type="Script" uid="uid://bwamqffvpa452" path="res://scripts/components/exit_door_component.gd" id="4_4jgt0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yfu6m"]
+size = Vector2(28, 32)
+
+[node name="ExitLevel" type="Area2D"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+scale = Vector2(2, 2)
+texture = ExtResource("1_agxwm")
+hframes = 12
+vframes = 12
+frame = 54
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_yfu6m")
+
+[node name="RequirementComponent" type="Node" parent="."]
+script = ExtResource("2_iysc1")
+requirement_type = 1
+metadata/_custom_type_script = "uid://cmh8k0rdsyh7j"
+
+[node name="UnlockOnRequirementComponent" type="Node" parent="." node_paths=PackedStringArray("requirement_component", "unlock_target")]
+script = ExtResource("3_5ktpq")
+requirement_component = NodePath("../RequirementComponent")
+unlock_target = NodePath("../ExitDoorComponent")
+metadata/_custom_type_script = "uid://c8xhgkg8gcqu6"
+
+[node name="ExitDoorComponent" type="Node" parent="." node_paths=PackedStringArray("exit_area", "door_sprite")]
+script = ExtResource("4_4jgt0")
+exit_area = NodePath("..")
+door_sprite = NodePath("../Sprite2D")
+opened_door_frame = 88
+metadata/_custom_type_script = "uid://bwamqffvpa452"
