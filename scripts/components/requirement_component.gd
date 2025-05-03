@@ -20,7 +20,6 @@ func _ready() -> void:
 
 
 func on_collected(amount: int, type: CollectableResource.CollectableType) -> void:
-	print("Collected: ", amount, " of type: ", str(type))
 	if type != requirement_type:
 		return
 	add_progress(amount)

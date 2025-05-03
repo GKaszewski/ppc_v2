@@ -51,6 +51,11 @@ window/stretch/scale_mode="integer"
 
 project/assembly_name="Mr. Brick Adventures"
 
+[editor]
+
+movie_writer/movie_file="/home/gabriel/dev/ppc_v2/movies/movie.avi"
+movie_writer/fps=24
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/guide/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")

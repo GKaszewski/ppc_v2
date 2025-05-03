@@ -36,9 +36,6 @@ func get_colllectable_nodes() -> Array[CollectableComponent]:
 			collectable_component = node.get_node_or_null("CollectableComponent")
 			if not collectable_component:
 				continue
-		if collectable_component.collectable_data.type == CollectableResource.CollectableType.KID:
-			print("Kid collectable found: ", collectable_component.get_parent().name)
-
 		collectable_nodes.append(collectable_component)
 	return collectable_nodes
 
@@ -126,6 +123,3 @@ func unlock_level(level_index: int) -> void:
 func try_to_go_to_next_level() -> void:
 	if player_state["current_level"] + 1 < level_scenes.size() and player_state["current_level"] + 1 in player_state["unlocked_levels"]:
 		player_state["current_level"] += 1
-		print("Going to next level: ", player_state["current_level"])
-	else:
-		print("No more levels to go to.")
