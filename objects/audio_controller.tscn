@@ -6,5 +6,4 @@
 
 [node name="Background Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_fuc3i")
-autoplay = true
 parameters/looping = true

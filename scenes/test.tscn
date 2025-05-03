@@ -534,6 +534,7 @@ metadata/_edit_group_ = true
 [node name="Camera2D" type="Camera2D" parent="."]
 physics_interpolation_mode = 1
 position = Vector2(903, -118)
+process_callback = 0
 limit_left = 0
 limit_top = -896
 limit_right = 4128
