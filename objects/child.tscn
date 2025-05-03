@@ -45,9 +45,10 @@ texture = ExtResource("4_vq1oq")
 position = Vector2(4, -18)
 texture = ExtResource("5_m7x6t")
 
-[node name="Collectable" type="Node" parent="." node_paths=PackedStringArray("area2d", "sfx")]
+[node name="Collectable" type="Node" parent="." node_paths=PackedStringArray("area2d", "collision_shape", "sfx")]
 script = ExtResource("5_wc3ym")
 area2d = NodePath("..")
+collision_shape = NodePath("../CollisionShape2D")
 collectable_data = ExtResource("6_vmvuo")
 sfx = NodePath("../sfx_pickup")
 

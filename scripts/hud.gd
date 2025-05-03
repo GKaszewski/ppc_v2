@@ -33,19 +33,19 @@ func set_coins_label() -> void:
 		return
 
 	#todo: set internationalized text
-	coins_label.text = "Coins: " + str(game_manager.get_coins())
+	coins_label.text = "Coins:" + str(game_manager.get_coins())
 
 
 func set_lives_label() -> void:
 	if not game_manager:
 		return
 
-	lives_label.text = "Lives: " + str(game_manager.get_lives())
+	lives_label.text = "Lives:" + str(game_manager.get_lives())
 
 
 func set_health_progressbar() -> void:
 	if not player_health:
 		return
-	
+
 	health_progressbar.value = player_health.health
 	health_progressbar.max_value = player_health.max_health

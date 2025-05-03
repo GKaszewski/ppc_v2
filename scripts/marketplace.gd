@@ -7,6 +7,7 @@ extends Node
 @export var font: Font
 @export var skill_unlocker: SkillUnlockerComponent
 @export var components_to_disable: Array[Node] = []
+@export var marketplace_button: PackedScene
 
 @onready var game_manager: GM = $"/root/GameManager"
 
@@ -43,9 +44,8 @@ func _input(event: InputEvent) -> void:
 
 
 func create_upgrade_button(skill: SkillData):
-	var button := Button.new()
+	var button := marketplace_button.instantiate() as Button
 	button.text = skill.name + " " + str(skill.cost)
-	button.flat = true
 	button.icon = skill.icon
 
 	button.pressed.connect(func () -> void: _on_button_pressed(skill))

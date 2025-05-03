@@ -32,7 +32,7 @@ area2d = NodePath("..")
 [node name="BulletComponent" type="Node2D" parent="." node_paths=PackedStringArray("root", "area2d", "visibility_notifier", "timer")]
 script = ExtResource("3_keogl")
 root = NodePath("..")
-speed = 80.0
+speed = 120.0
 area2d = NodePath("..")
 visibility_notifier = NodePath("../VisibleOnScreenNotifier2D")
 timer = NodePath("../Timer")

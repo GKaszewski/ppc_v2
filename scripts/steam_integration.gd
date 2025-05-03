@@ -30,5 +30,4 @@ func _ready() -> void:
 
 	if not has_bought_game:
 		print("You have not bought the game.")
-		get_tree().quit(69)
 		
