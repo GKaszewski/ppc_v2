@@ -10,7 +10,7 @@ void fragment() {
 	COLOR = texture(TEXTURE, UV);
 	// Convert degrees to radians
 	float angle_rad = radians(shine_angle_deg);
-	
+
 	// Calculate direction vector for the shine line
 	vec2 shine_dir = vec2(cos(angle_rad), sin(angle_rad));
 

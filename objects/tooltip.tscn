@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4pdt1gv2ymyi"]
+
+[ext_resource type="Script" path="res://scripts/components/tooltip_component.gd" id="1_kkpqq"]
+[ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_yy7uq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hkd8b"]
+size = Vector2(12, 17)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lqw6h"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="Tooltip" type="Area2D" node_paths=PackedStringArray("area2d", "ui_root", "tooltip_label")]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_kkpqq")
+area2d = NodePath(".")
+ui_root = NodePath("Panel")
+tooltip_label = NodePath("Panel/PanelContainer/Label")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_hkd8b")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_yy7uq")
+hframes = 12
+vframes = 12
+frame = 53
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = -66.0
+offset_top = -59.0
+offset_right = 67.0
+offset_bottom = -14.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_lqw6h")
+metadata/_edit_group_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Panel/PanelContainer"]
+custom_minimum_size = Vector2(32, 8)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 8
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+clip_text = true

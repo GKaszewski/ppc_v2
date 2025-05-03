@@ -1,8 +1,10 @@
-[gd_scene load_steps=35 format=4 uid="uid://h60obxmju6mo"]
+[gd_scene load_steps=37 format=4 uid="uid://h60obxmju6mo"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_5lb42"]
 [ext_resource type="TileSet" uid="uid://cl4bn8lofqvky" path="res://tileset/village/tileset_village.tres" id="1_d680t"]
 [ext_resource type="PackedScene" uid="uid://byxf45ukq82pe" path="res://objects/hud.tscn" id="1_gbpkv"]
+[ext_resource type="PackedScene" uid="uid://dyp4i4ru2j2jh" path="res://objects/explosion_fx.tscn" id="1_iqo0b"]
+[ext_resource type="PackedScene" uid="uid://dx80ivlvuuew4" path="res://objects/fire_fx.tscn" id="2_h1oxb"]
 [ext_resource type="PackedScene" uid="uid://54w4wisfj8v8" path="res://objects/coin.tscn" id="3_ygehw"]
 [ext_resource type="PackedScene" uid="uid://bqi5s710xb1ju" path="res://objects/brick_player.tscn" id="4_hetw8"]
 [ext_resource type="PackedScene" uid="uid://bargnp4twtmxg" path="res://objects/big_coin.tscn" id="5_bpga1"]
@@ -22,7 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://bqom4cm7r18db" path="res://objects/killzone.tscn" id="20_8a4vc"]
 [ext_resource type="PackedScene" uid="uid://dlm2ri562fynd" path="res://objects/marketplace.tscn" id="20_ss8k0"]
 [ext_resource type="PackedScene" uid="uid://d0s2abysa86rq" path="res://objects/child.tscn" id="21_8rhdx"]
-[ext_resource type="AudioStream" uid="uid://bludculi5i6s" path="res://music/Cute RPG - Dreamy Dandelion (Loopable).ogg" id="23_sdibc"]
+[ext_resource type="PackedScene" uid="uid://b4pdt1gv2ymyi" path="res://objects/tooltip.tscn" id="25_ckf05"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cagp7"]
 texture = ExtResource("1_5lb42")
@@ -473,6 +475,12 @@ ease = 2
 
 [node name="World" type="Node2D"]
 
+[node name="ExplosionFX" parent="." instance=ExtResource("1_iqo0b")]
+visible = false
+
+[node name="FireFX" parent="." instance=ExtResource("2_h1oxb")]
+visible = false
+
 [node name="Background Layer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AABjAAUAAAAKAAUAAABkAAUAAAAKAAUAAABlAAUAAAAKAAUAAABmAAUAAAAKAAUAAABnAAUAAAAKAAUAAABoAAUAAAAKAAUAAABpAAUAAAAKAAUAAABqAAUAAAAKAAUAAABrAAUAAAAKAAUAAABsAAUAAAAKAAUAAABjAAQAAAAJAAUAAABkAAQAAAAJAAUAAABlAAQAAAAJAAUAAABmAAQAAAAJAAUAAABnAAQAAAAJAAUAAABoAAQAAAAJAAUAAABpAAQAAAAJAAUAAABqAAQAAAAJAAUAAABrAAQAAAAJAAUAAABsAAQAAAAJAAUAAABtAAQAAAAJAAUAAABuAAQAAAAJAAUAAABvAAQAAAAJAAUAAABwAAQAAAAJAAUAAABxAAQAAAAJAAUAAAByAAQAAAAJAAUAAABzAAQAAAAJAAUAAAB0AAQAAAAJAAUAAAB1AAQAAAAJAAUAAAB2AAQAAAAJAAUAAAB3AAQAAAAJAAUAAAB4AAQAAAAJAAUAAAB5AAQAAAAJAAUAAAB6AAQAAAAJAAUAAAB7AAQAAAAJAAUAAAB8AAQAAAAJAAUAAAB8AAUAAAAKAAUAAAB7AAUAAAAKAAUAAAB6AAUAAAAKAAUAAAB5AAUAAAAKAAUAAAB4AAUAAAAKAAUAAAB3AAUAAAAKAAUAAAB2AAUAAAAKAAUAAAB1AAUAAAAKAAUAAAB0AAUAAAAKAAUAAABzAAUAAAAKAAUAAAByAAUAAAAKAAUAAABxAAUAAAAKAAUAAABwAAUAAAAKAAUAAABvAAUAAAAKAAUAAABuAAUAAAAKAAUAAABtAAUAAAAKAAUAAABjAAYAAAAKAAUAAABjAAcAAAAKAAUAAABkAAcAAAAKAAUAAABlAAcAAAAKAAUAAABmAAcAAAAKAAUAAABnAAcAAAAKAAUAAABoAAcAAAAKAAUAAABpAAcAAAAKAAUAAABqAAcAAAAKAAUAAABrAAcAAAAKAAUAAABsAAcAAAAKAAUAAABtAAcAAAAKAAUAAABuAAcAAAAKAAUAAABvAAcAAAAKAAUAAABwAAcAAAAKAAUAAABxAAcAAAAKAAUAAAByAAcAAAAKAAUAAABzAAcAAAAKAAUAAAB0AAcAAAAKAAUAAAB1AAcAAAAKAAUAAAB2AAcAAAAKAAUAAAB3AAcAAAAKAAUAAAB4AAcAAAAKAAUAAAB5AAcAAAAKAAUAAAB6AAcAAAAKAAUAAAB7AAcAAAAKAAUAAAB7AAYAAAAKAAUAAAB8AAYAAAAKAAUAAAB8AAcAAAAKAAUAAAB6AAYAAAAKAAUAAAB5AAYAAAAKAAUAAAB4AAYAAAAKAAUAAAB3AAYAAAAKAAUAAAB2AAYAAAAKAAUAAAB1AAYAAAAKAAUAAAB0AAYAAAAKAAUAAABzAAYAAAAKAAUAAAByAAYAAAAKAAUAAABxAAYAAAAKAAUAAABwAAYAAAAKAAUAAABvAAYAAAAKAAUAAABuAAYAAAAKAAUAAABtAAYAAAAKAAUAAABsAAYAAAAKAAUAAABrAAYAAAAKAAUAAABqAAYAAAAKAAUAAABpAAYAAAAKAAUAAABoAAYAAAAKAAUAAABnAAYAAAAKAAUAAABmAAYAAAAKAAUAAABlAAYAAAAKAAUAAABkAAYAAAAKAAUAAAA=")
 tile_set = SubResource("TileSet_7ri0q")
@@ -519,6 +527,7 @@ position = Vector2(3710, 1)
 position = Vector2(3945, 33)
 
 [node name="Brick Player" parent="." instance=ExtResource("4_hetw8")]
+z_index = 5
 position = Vector2(903, -118)
 metadata/_edit_group_ = true
 
@@ -569,8 +578,12 @@ skill_unlocker = NodePath("../../Brick Player/SkillUnlockerComponent")
 [node name="Killzone" parent="." instance=ExtResource("20_8a4vc")]
 position = Vector2(0, 990)
 
-[node name="Music" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("23_sdibc")
-autoplay = true
+[node name="Tooltip" parent="." instance=ExtResource("25_ckf05")]
+position = Vector2(1016, -104)
+text = "Press 'down' to fall from platform!"
+
+[node name="Tooltip2" parent="." instance=ExtResource("25_ckf05")]
+position = Vector2(1576, -40)
+text = "Be careful!"
 
 [editable path="Brick Player"]
