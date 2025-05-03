@@ -52,3 +52,11 @@ func unlock_skill(skill_name: String) -> void:
 func unlock_skills(skill_names: Array[String]) -> void:
 	for skill_name in skill_names:
 		unlock_skill(skill_name)
+
+
+func reset_player_state() -> void:
+	player_state = {
+		"coins": 0,
+		"lives": 3,
+		"unlocked_skills": [],
+	}
