@@ -4,9 +4,8 @@
 [ext_resource type="Script" uid="uid://c3pde84b3kdco" path="res://scripts/hud.gd" id="1_ueofj"]
 [ext_resource type="FontFile" uid="uid://xm0vbusjr7b7" path="res://fonts/PressStart2P-Regular.ttf" id="1_ygmwt"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aa3sf"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mmcdi"]
 bg_color = Color(0, 0, 0, 1)
-corner_detail = 1
 
 [sub_resource type="Theme" id="Theme_auu2b"]
 default_font = ExtResource("1_ygmwt")
@@ -27,34 +26,36 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_ueofj")
-coins_label = NodePath("Panel/PanelContainer/Coins label")
-health_progressbar = NodePath("Panel/PanelContainer/ProgressBar")
-lives_label = NodePath("Panel/PanelContainer/Lives")
+coins_label = NodePath("PanelContainer/MarginContainer/HBoxContainer/Coins label")
+health_progressbar = NodePath("PanelContainer/MarginContainer/HBoxContainer/ProgressBar")
+lives_label = NodePath("PanelContainer/MarginContainer/HBoxContainer/Lives")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 16.0
 grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_aa3sf")
+theme_override_styles/panel = SubResource("StyleBoxFlat_mmcdi")
 
-[node name="PanelContainer" type="HBoxContainer" parent="Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 10
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
-[node name="Health Label" type="Label" parent="Panel/PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Health Label" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = "Health"
 label_settings = ExtResource("1_4dsh5")
 uppercase = true
 
-[node name="ProgressBar" type="ProgressBar" parent="Panel/PanelContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -65,13 +66,13 @@ step = 0.1
 value = 60.0
 show_percentage = false
 
-[node name="Lives" type="Label" parent="Panel/PanelContainer"]
+[node name="Lives" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = "Lives 3"
 label_settings = ExtResource("1_4dsh5")
 uppercase = true
 
-[node name="Coins label" type="Label" parent="Panel/PanelContainer"]
+[node name="Coins label" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = "Coins 33"
 label_settings = ExtResource("1_4dsh5")

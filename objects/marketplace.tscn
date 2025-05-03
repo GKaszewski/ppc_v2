@@ -1,6 +1,5 @@
-[gd_scene load_steps=11 format=3 uid="uid://dlm2ri562fynd"]
+[gd_scene load_steps=10 format=3 uid="uid://dlm2ri562fynd"]
 
-[ext_resource type="LabelSettings" uid="uid://rvn5ivivfvv6" path="res://resources/ui/hud_label_settings.tres" id="1_7r0u8"]
 [ext_resource type="Script" uid="uid://duifmqjarjpuv" path="res://scripts/marketplace.gd" id="1_ncpyg"]
 [ext_resource type="FontFile" uid="uid://xm0vbusjr7b7" path="res://fonts/PressStart2P-Regular.ttf" id="2_ho1tm"]
 [ext_resource type="Script" uid="uid://bya240e627ti6" path="res://scripts/resources/skill_data.gd" id="2_pg4mc"]
@@ -10,10 +9,10 @@
 [ext_resource type="Resource" uid="uid://cx5fsbexblp60" path="res://resources/skills/ice_brick.tres" id="6_6665y"]
 [ext_resource type="Resource" uid="uid://d3bjre2etov1n" path="res://resources/skills/magnetic.tres" id="7_ukny6"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c56bj"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ode10"]
 bg_color = Color(0, 0, 0, 1)
 
-[node name="Marketplace" type="Control" node_paths=PackedStringArray("grid")]
+[node name="Marketplace" type="Control" node_paths=PackedStringArray("root", "grid")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,38 +20,39 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ncpyg")
+root = NodePath(".")
 skill_data = Array[ExtResource("2_pg4mc")]([ExtResource("3_bk5yi"), ExtResource("4_tx0n3"), ExtResource("5_fqx8e"), ExtResource("6_6665y"), ExtResource("7_ukny6")])
-grid = NodePath("Panel/VBoxContainer/GridContainer")
+grid = NodePath("PanelContainer/MarginContainer/VBoxContainer/GridContainer")
 font = ExtResource("2_ho1tm")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_c56bj")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ode10")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 8
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
-[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "marketplace"
-label_settings = ExtResource("1_7r0u8")
 horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 162
 uppercase = true
 
-[node name="GridContainer" type="GridContainer" parent="Panel/VBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/h_separation = 8
-theme_override_constants/v_separation = 8
 columns = 2
