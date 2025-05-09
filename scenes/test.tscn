@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://h60obxmju6mo"]
+[gd_scene load_steps=44 format=4 uid="uid://h60obxmju6mo"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_5lb42"]
 [ext_resource type="TileSet" uid="uid://cl4bn8lofqvky" path="res://tileset/village/tileset_village.tres" id="1_d680t"]
@@ -30,6 +30,8 @@
 [ext_resource type="PackedScene" uid="uid://y0ae6e7t70fj" path="res://objects/ui/settings_menu.tscn" id="26_y81of"]
 [ext_resource type="PackedScene" uid="uid://cvfsbiy5ggrpg" path="res://objects/ui/input_settings.tscn" id="27_gsk6d"]
 [ext_resource type="Script" uid="uid://8r1y8elyw7kt" path="res://scripts/console_management.gd" id="28_1dqgb"]
+[ext_resource type="PackedScene" uid="uid://dulkm3ah4tm0u" path="res://objects/ui/death_screen.tscn" id="28_4k8fq"]
+[ext_resource type="PackedScene" uid="uid://wmw6gaisyrvx" path="res://objects/ui/game_over_screen.tscn" id="29_75pfo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cagp7"]
 texture = ExtResource("1_5lb42")
@@ -589,6 +591,13 @@ visible = false
 settings_menu = ExtResource("26_y81of")
 
 [node name="Input Settings" parent="CanvasLayer" instance=ExtResource("27_gsk6d")]
+visible = false
+
+[node name="DeathScreen" parent="CanvasLayer" instance=ExtResource("28_4k8fq")]
+visible = false
+
+[node name="GameOverScreen" parent="CanvasLayer" instance=ExtResource("29_75pfo")]
+visible = false
 
 [node name="Killzone" parent="." instance=ExtResource("20_8a4vc")]
 position = Vector2(0, 990)
