@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://byxf45ukq82pe"]
 
 [ext_resource type="LabelSettings" uid="uid://rvn5ivivfvv6" path="res://resources/ui/hud_label_settings.tres" id="1_4dsh5"]
-[ext_resource type="Script" uid="uid://c3pde84b3kdco" path="res://scripts/hud.gd" id="1_ueofj"]
+[ext_resource type="Script" uid="uid://c3pde84b3kdco" path="res://scripts/ui/hud.gd" id="1_ueofj"]
 [ext_resource type="FontFile" uid="uid://xm0vbusjr7b7" path="res://fonts/PressStart2P-Regular.ttf" id="1_ygmwt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mmcdi"]

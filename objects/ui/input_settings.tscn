@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cvfsbiy5ggrpg"]
 
 [ext_resource type="PackedScene" uid="uid://bxpr4m7lq7clh" path="res://objects/ui/input_button.tscn" id="1_h8s4o"]
-[ext_resource type="Script" uid="uid://dppwl7xie2mh" path="res://scripts/input_settings.gd" id="1_v2gus"]
+[ext_resource type="Script" uid="uid://dppwl7xie2mh" path="res://scripts/ui/input_settings.gd" id="1_v2gus"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_se25o"]
 bg_color = Color(0, 0, 0, 1)

@@ -6,14 +6,13 @@ extends Node
 @export var quit_button: Button
 @export var settings_button: Button
 @export var exit_to_menu_button: Button
-@export var settings_menu: PackedScene
+@export var settings_menu: Control
 @export var exit_to_menu_scene: PackedScene
 
 @onready var gm: GM = $"/root/GameManager"
 
 var is_paused: bool       = false
 var is_console_open: bool = false
-var settings_menu_instance: Control
 
 
 func _ready() -> void:
@@ -60,9 +59,8 @@ func _input(event: InputEvent) -> void:
 
 func _on_resume_button_pressed() -> void:
 	pause_menu_control.hide()
-	if settings_menu_instance:
-		settings_menu_instance.queue_free()
-		settings_menu_instance = null
+	if settings_menu:
+		settings_menu.hide()
 	gm.resume_game()
 	is_paused = false
 
@@ -76,10 +74,7 @@ func _on_settings_button_pressed() -> void:
 		printerr("PauseMenu: Settings menu scene not set.")
 		return
 
-	var settings_instance: Control = settings_menu.instantiate()
-	add_child(settings_instance)
-	settings_instance.show()
-	settings_menu_instance = settings_instance
+	settings_menu.show()
 	gm.pause_game()
 	is_paused = true
 
