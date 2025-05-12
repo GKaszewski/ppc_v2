@@ -21,7 +21,6 @@ func _input(event: InputEvent) -> void:
 
 	if event.is_action_released("attack") and can_throw and charge_throw_component:
 		var power_multiplier: float = charge_throw_component.stop_charging()
-		print("Power Multiplier: ", power_multiplier)
 		throw_brick(power_multiplier)
 
 

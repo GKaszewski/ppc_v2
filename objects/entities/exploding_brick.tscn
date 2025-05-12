@@ -1,10 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://5surx230gfw3"]
+[gd_scene load_steps=12 format=3 uid="uid://5surx230gfw3"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_rcgxf"]
 [ext_resource type="Script" uid="uid://dkmxhjtmu5xlb" path="res://scripts/components/damage_component.gd" id="3_y0uai"]
 [ext_resource type="Script" uid="uid://beg4dk7d5pvhp" path="res://scripts/components/explosive_component.gd" id="4_8lw0n"]
 [ext_resource type="PackedScene" uid="uid://dyp4i4ru2j2jh" path="res://objects/fxs/explosion_fx.tscn" id="5_6oopj"]
-[ext_resource type="Script" uid="uid://1tnr46o1ib4u" path="res://scripts/components/out_of_screen_component.gd" id="6_5jrjx"]
 [ext_resource type="Script" uid="uid://873un8agkyja" path="res://scripts/components/launch_component.gd" id="7_a2b5x"]
 [ext_resource type="Script" uid="uid://bvsgg8lu0a8m6" path="res://scripts/components/lifetime_component.gd" id="7_nqeob"]
 [ext_resource type="Script" uid="uid://c2gbumw4x4t1v" path="res://scripts/components/gravity_motion_component.gd" id="8_4ly8b"]
@@ -63,14 +62,10 @@ debug_color = Color(0.919034, 6.36289e-05, 0.69998, 0.42)
 [node name="ExplosionFX" parent="." instance=ExtResource("5_6oopj")]
 randomness = 0.24
 
-[node name="OutOfScreenComponent" type="Node" parent="." node_paths=PackedStringArray("visibility_notifier", "root")]
-script = ExtResource("6_5jrjx")
-visibility_notifier = NodePath("../VisibleOnScreenNotifier2D")
-root = NodePath("..")
-
 [node name="LifetimeComponent" type="Node" parent="." node_paths=PackedStringArray("root", "timer")]
 script = ExtResource("7_nqeob")
 root = NodePath("..")
+life_time = 30.0
 timer = NodePath("../Timer")
 
 [node name="LaunchComponent" type="Node2D" parent="." node_paths=PackedStringArray("root")]
