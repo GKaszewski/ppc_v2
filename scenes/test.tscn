@@ -508,7 +508,7 @@ ease = 2
 
 [sub_resource type="Resource" id="Resource_75pfo"]
 script = ExtResource("25_4k8fq")
-level_name = "World - 1"
+level_name = "Village - 1"
 metadata/_custom_type_script = "uid://cp68km8bykymb"
 
 [node name="World" type="Node2D"]
@@ -565,9 +565,10 @@ position = Vector2(3710, 1)
 [node name="Enemy7" parent="Enemies" instance=ExtResource("7_qgddg")]
 position = Vector2(3945, 33)
 
-[node name="Brick Player" parent="." instance=ExtResource("4_hetw8")]
+[node name="Brick Player" parent="." node_paths=PackedStringArray("rotation_target") instance=ExtResource("4_hetw8")]
 z_index = 5
 position = Vector2(903, -118)
+rotation_target = NodePath("Root/Base")
 metadata/_edit_group_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]

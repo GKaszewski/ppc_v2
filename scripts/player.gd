@@ -17,6 +17,7 @@ var previous_velocity: Vector2 = Vector2.ZERO
 @export var coyote_mode: bool = false
 @export var was_last_floor: bool = false
 @export var jump_sfx: AudioStreamPlayer2D
+@export var rotation_target: Node2D
 
 @onready var jump_velocity: float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
 @onready var jump_gravity: float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
@@ -30,11 +31,11 @@ func _ready() -> void:
 
 func _process(_delta):
 	if velocity.x > 0.0:
-		root.rotation = deg_to_rad(-10)
+		rotation_target.rotation = deg_to_rad(-10)
 	elif velocity.x < 0.0:
-		root.rotation = deg_to_rad(10)
+		rotation_target.rotation = deg_to_rad(10)
 	else:
-		root.rotation = 0
+		rotation_target.rotation = 0
 
 
 func _physics_process(delta):
