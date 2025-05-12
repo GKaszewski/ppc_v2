@@ -32,7 +32,7 @@ func add_skill(skill_data: SkillData) -> void:
 
 			skill_instance[key] = value
 
-	add_child(skill_instance)
+	owner.add_child(skill_instance)
 	active_components[skill_data.name] = skill_instance
 
 

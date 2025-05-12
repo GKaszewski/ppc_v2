@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://873un8agkyja" path="res://scripts/components/launch_component.gd" id="7_a2b5x"]
 [ext_resource type="Script" uid="uid://bvsgg8lu0a8m6" path="res://scripts/components/lifetime_component.gd" id="7_nqeob"]
 [ext_resource type="Script" uid="uid://c2gbumw4x4t1v" path="res://scripts/components/gravity_motion_component.gd" id="8_4ly8b"]
-[ext_resource type="Script" uid="uid://ciowd622nk0i7" path="res://scripts/components/chargable_component.gd" id="9_a2b5x"]
+[ext_resource type="Script" uid="uid://bgty7040ams6s" path="res://scripts/components/projectile_init_component.gd" id="8_nqeob"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ar0xf"]
 size = Vector2(16, 10)
@@ -85,5 +85,7 @@ collision_layer = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BulletArea"]
 shape = SubResource("RectangleShape2D_nqeob")
 
-[node name="ChargableComponent" type="Node" parent="."]
-script = ExtResource("9_a2b5x")
+[node name="ProjectileInitComponent" type="Node" parent="." node_paths=PackedStringArray("launch_component")]
+script = ExtResource("8_nqeob")
+launch_component = NodePath("../LaunchComponent")
+metadata/_custom_type_script = "uid://bgty7040ams6s"

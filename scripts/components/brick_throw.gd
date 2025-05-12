@@ -5,7 +5,7 @@ extends Node
 @export var fire_rate: float = 1.0
 @export var player_controller: PlayerController
 @export var timer: Timer
-@export var charge_throw_component: ChargeThrowComponent
+@export var throw_input_behavior: ThrowInputResource
 
 var can_throw: bool = true
 
@@ -14,14 +14,18 @@ func _ready() -> void:
 	setup_timer()
 	can_throw = true
 
+	if throw_input_behavior:
+		throw_input_behavior.throw_requested.connect(throw_brick)
+
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("attack") and can_throw and charge_throw_component:
-		charge_throw_component.start_charging()
+	if throw_input_behavior:
+		throw_input_behavior.process_input(event)
 
-	if event.is_action_released("attack") and can_throw and charge_throw_component:
-		var power_multiplier: float = charge_throw_component.stop_charging()
-		throw_brick(power_multiplier)
+
+func _process(delta: float) -> void:
+	if throw_input_behavior:
+		throw_input_behavior.update(delta)
 
 
 func setup_timer() -> void:
@@ -36,18 +40,17 @@ func on_timer_timeout() -> void:
 
 
 func throw_brick(power_multiplier: float = 1.0) -> void:
-	var brick_instance: Node2D = brick_scene.instantiate()
+	var instance: Node2D =  brick_scene.instantiate()
+	var init             := instance.get_node_or_null("ProjectileInitComponent") as ProjectileInitComponent
+	if init:
+		init.initialize({
+			"position": player_controller.global_position,
+			"rotation": player_controller.rotation,
+			"direction": player_controller.last_direction,
+			"power_multiplier": power_multiplier
+		})
 
-	var launch_component    := brick_instance.get_node_or_null("LaunchComponent") as LaunchComponent
-	var chargable_component := brick_instance.get_node_or_null("ChargableComponent") as ChargableComponent
-	if launch_component:
-		launch_component.initial_direction = player_controller.last_direction
-		launch_component.spawn_position = player_controller.global_position
-		launch_component.spawn_rotation = player_controller.rotation
-		launch_component.speed *= power_multiplier if chargable_component else 1.0
-
-	brick_instance.global_position = player_controller.global_position
-	get_tree().current_scene.add_child(brick_instance)
+	get_tree().current_scene.add_child(instance)
 
 	can_throw = false
 	timer.start()

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ChargeThrowInputResource" load_steps=2 format=3 uid="uid://diuv6pr6a0dup"]
+
+[ext_resource type="Script" uid="uid://dl1kpll33o6mv" path="res://scripts/resources/charge_throw_input_resource.gd" id="1_6fb6k"]
+
+[resource]
+script = ExtResource("1_6fb6k")
+min_power = 0.5
+max_power = 2.0
+max_charge_time = 1.5
+min_charge_duration = 0.1
+metadata/_custom_type_script = "uid://dl1kpll33o6mv"
