@@ -27,10 +27,14 @@ func shoot() -> void:
 		return
 
 	var bullet_instance: Node2D           = bullet_scene.instantiate()
-	var bullet_component: BulletComponent = bullet_instance.get_node("BulletComponent")
+	var launch_component: LaunchComponent = bullet_instance.get_node_or_null("LaunchComponent")
 	var spawn_position: Vector2           = bullet_spawn_right.global_position if shoot_direction == Vector2.RIGHT else bullet_spawn_left.global_position
+	if launch_component:
+		launch_component.initial_direction = shoot_direction
+		launch_component.spawn_position = spawn_position
+		launch_component.spawn_rotation = root.rotation
+
 	bullet_instance.position = spawn_position
-	bullet_component.direction = shoot_direction
 	get_tree().current_scene.add_child(bullet_instance)
 
 

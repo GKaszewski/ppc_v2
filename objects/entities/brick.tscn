@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bymro4t7angv5"]
+[gd_scene load_steps=6 format=3 uid="uid://bymro4t7angv5"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_1c3jb"]
-[ext_resource type="Script" uid="uid://bh2vrkdbrtpin" path="res://scripts/components/bullet.gd" id="2_i6t5k"]
+[ext_resource type="Script" uid="uid://cdnwrn8v05qhi" path="res://scripts/components/bullet_component.gd" id="2_i6t5k"]
 [ext_resource type="Script" uid="uid://dkmxhjtmu5xlb" path="res://scripts/components/damage_component.gd" id="3_8xipx"]
+[ext_resource type="Script" uid="uid://1tnr46o1ib4u" path="res://scripts/components/out_of_screen_component.gd" id="4_rdtjq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ar0xf"]
 size = Vector2(16, 10)
@@ -20,12 +21,11 @@ hframes = 12
 vframes = 12
 frame = 80
 
-[node name="BulletComponent" type="Node" parent="." node_paths=PackedStringArray("root", "area2d", "visibility_notifier", "timer")]
+[node name="BulletComponent" type="Node" parent="." node_paths=PackedStringArray("root", "area2d", "timer")]
 script = ExtResource("2_i6t5k")
 root = NodePath("..")
 speed = 320.0
 area2d = NodePath("..")
-visibility_notifier = NodePath("../VisibleOnScreenNotifier2D")
 life_time = 2.0
 timer = NodePath("../Timer")
 
@@ -38,3 +38,8 @@ scale = Vector2(0.8, 0.5)
 [node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("area2d")]
 script = ExtResource("3_8xipx")
 area2d = NodePath("..")
+
+[node name="OutOfScreenComponent" type="Node" parent="." node_paths=PackedStringArray("visibility_notifier", "root")]
+script = ExtResource("4_rdtjq")
+visibility_notifier = NodePath("../VisibleOnScreenNotifier2D")
+root = NodePath("..")

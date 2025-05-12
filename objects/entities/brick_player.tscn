@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bqi5s710xb1ju"]
+[gd_scene load_steps=32 format=3 uid="uid://bqi5s710xb1ju"]
 
 [ext_resource type="Script" uid="uid://ccuddyoakg04u" path="res://scripts/player.gd" id="1_8j4h4"]
 [ext_resource type="Texture2D" uid="uid://b7gp0gqvkv8j4" path="res://sprites/MrBrick_base.png" id="2_bc55y"]
@@ -26,6 +26,8 @@
 [ext_resource type="Script" uid="uid://bya240e627ti6" path="res://scripts/resources/skill_data.gd" id="21_d0oiv"]
 [ext_resource type="Resource" uid="uid://d3bjre2etov1n" path="res://resources/skills/magnetic.tres" id="22_vnsgd"]
 [ext_resource type="Script" uid="uid://bjsyeo1n7bsri" path="res://scripts/components/skill_unlocker_component.gd" id="23_qsv2c"]
+[ext_resource type="Script" uid="uid://c6fclevp3peuo" path="res://scripts/components/charge_throw_component.gd" id="27_h8c1m"]
+[ext_resource type="PackedScene" uid="uid://bg76mtpcmfm2j" path="res://objects/ui/charging_bar_layer.tscn" id="28_3f5nm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hdsg1"]
 size = Vector2(16, 31)
@@ -156,6 +158,17 @@ stream = ExtResource("19_7anly")
 
 [node name="sfx_heal" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("20_bptj5")
+
+[node name="ChargeThrowComponent" type="Node" parent="."]
+script = ExtResource("27_h8c1m")
+metadata/_custom_type_script = "uid://c6fclevp3peuo"
+
+[node name="ChargingBarLayer" parent="." node_paths=PackedStringArray("charge_throw_component") instance=ExtResource("28_3f5nm")]
+offset_left = -17.0
+offset_top = -30.0
+offset_right = 23.0
+offset_bottom = -20.0
+charge_throw_component = NodePath("../ChargeThrowComponent")
 
 [connection signal="on_death" from="HealthComponent" to="PlayerDeathComponent" method="_on_health_component_on_death"]
 [connection signal="on_health_change" from="HealthComponent" to="KnockbackComponent" method="_on_health_component_on_health_change"]

@@ -28,7 +28,6 @@ func add_skill(skill_data: SkillData) -> void:
 				elif skill_instance.has_node(value):
 					value = skill_instance.get_node(value)
 				else:
-					print("NodePath not found: ", value)
 					continue
 
 			skill_instance[key] = value

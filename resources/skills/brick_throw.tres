@@ -9,6 +9,7 @@ name = "Brick power"
 description = "Allows you to throw bricks at enemies"
 node = ExtResource("1_5gnea")
 config = {
+"charge_throw_component": NodePath("ChargeThrowComponent"),
 "player_controller": NodePath("."),
 "timer": NodePath("ThrowTimer")
 }

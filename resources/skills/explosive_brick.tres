@@ -11,6 +11,7 @@ description = "Allows you to throw explosive bricks at enemies"
 node = ExtResource("2_e0o8w")
 config = {
 "brick_scene": ExtResource("1_6pfoa"),
+"charge_throw_component": NodePath("./ChargeThrowComponent"),
 "player_controller": NodePath("."),
 "timer": NodePath("ThrowTimer")
 }

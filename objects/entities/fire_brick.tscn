@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://daau4j5hbklk0"]
+[gd_scene load_steps=8 format=3 uid="uid://daau4j5hbklk0"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_52l28"]
-[ext_resource type="Script" uid="uid://bh2vrkdbrtpin" path="res://scripts/components/bullet.gd" id="2_hjcob"]
+[ext_resource type="Script" uid="uid://cdnwrn8v05qhi" path="res://scripts/components/bullet_component.gd" id="2_hjcob"]
 [ext_resource type="Script" uid="uid://dkmxhjtmu5xlb" path="res://scripts/components/damage_component.gd" id="3_sog2h"]
 [ext_resource type="Resource" uid="uid://obodgnkhxuhe" path="res://resources/status_effect/fire.tres" id="4_xx5l4"]
 [ext_resource type="Script" uid="uid://d3brcje121krs" path="res://scripts/components/effect_inflictor_component.gd" id="5_ofrqk"]
+[ext_resource type="Script" uid="uid://1tnr46o1ib4u" path="res://scripts/components/out_of_screen_component.gd" id="6_64yur"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ar0xf"]
 size = Vector2(16, 10)
@@ -22,12 +23,11 @@ hframes = 12
 vframes = 12
 frame = 80
 
-[node name="BulletComponent" type="Node" parent="." node_paths=PackedStringArray("root", "area2d", "visibility_notifier", "timer")]
+[node name="BulletComponent" type="Node" parent="." node_paths=PackedStringArray("root", "area2d", "timer")]
 script = ExtResource("2_hjcob")
 root = NodePath("..")
 speed = 330.0
 area2d = NodePath("..")
-visibility_notifier = NodePath("../VisibleOnScreenNotifier2D")
 life_time = 2.0
 timer = NodePath("../Timer")
 
@@ -46,3 +46,8 @@ status_effect_data = ExtResource("4_xx5l4")
 [node name="EffectInflictorComponent" type="Node" parent="." node_paths=PackedStringArray("damage")]
 script = ExtResource("5_ofrqk")
 damage = NodePath("../DamageComponent")
+
+[node name="OutOfScreenComponent" type="Node" parent="." node_paths=PackedStringArray("visibility_notifier", "root")]
+script = ExtResource("6_64yur")
+visibility_notifier = NodePath("../VisibleOnScreenNotifier2D")
+root = NodePath("..")
