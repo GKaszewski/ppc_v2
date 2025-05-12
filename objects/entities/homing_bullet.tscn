@@ -1,0 +1,80 @@
+[gd_scene load_steps=10 format=3 uid="uid://jiv4e82ycwmq"]
+
+[ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_bmfqy"]
+[ext_resource type="Script" uid="uid://dkmxhjtmu5xlb" path="res://scripts/components/damage_component.gd" id="2_id4r8"]
+[ext_resource type="Script" uid="uid://1tnr46o1ib4u" path="res://scripts/components/out_of_screen_component.gd" id="3_2uduj"]
+[ext_resource type="Script" uid="uid://bvsgg8lu0a8m6" path="res://scripts/components/lifetime_component.gd" id="4_x32ji"]
+[ext_resource type="Script" uid="uid://873un8agkyja" path="res://scripts/components/launch_component.gd" id="5_r3id6"]
+[ext_resource type="Script" uid="uid://cdnwrn8v05qhi" path="res://scripts/components/bullet_component.gd" id="7_8gqaa"]
+[ext_resource type="Script" uid="uid://be8jhvb8t3kif" path="res://scripts/components/homing_missile_motion.gd" id="7_bmfqy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_txsw8"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bmfqy"]
+radius = 128.0
+
+[node name="Bullet" type="Area2D"]
+collision_layer = 8
+collision_mask = 21
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_txsw8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_bmfqy")
+hframes = 12
+vframes = 12
+frame = 79
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(2.38419e-07, 2.38419e-07)
+scale = Vector2(0.4, 0.4)
+
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("area2d")]
+script = ExtResource("2_id4r8")
+area2d = NodePath("..")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="OutOfScreenComponent" type="Node" parent="." node_paths=PackedStringArray("visibility_notifier", "root")]
+script = ExtResource("3_2uduj")
+visibility_notifier = NodePath("../VisibleOnScreenNotifier2D")
+root = NodePath("..")
+
+[node name="LifetimeComponent" type="Node" parent="." node_paths=PackedStringArray("root", "timer")]
+script = ExtResource("4_x32ji")
+root = NodePath("..")
+life_time = 10.0
+timer = NodePath("../Timer")
+
+[node name="LaunchComponent" type="Node2D" parent="." node_paths=PackedStringArray("root")]
+script = ExtResource("5_r3id6")
+root = NodePath("..")
+speed = 120.0
+metadata/_custom_type_script = "uid://873un8agkyja"
+
+[node name="BulletComponent" type="Node" parent="." node_paths=PackedStringArray("root", "area2d")]
+script = ExtResource("7_8gqaa")
+root = NodePath("..")
+area2d = NodePath("..")
+metadata/_custom_type_script = "uid://cdnwrn8v05qhi"
+
+[node name="HomingMissileMotion" type="Node" parent="." node_paths=PackedStringArray("launch_component", "root", "detection_area")]
+script = ExtResource("7_bmfqy")
+launch_component = NodePath("../LaunchComponent")
+root = NodePath("..")
+max_speed = 122.0
+acceleration = 4.0
+detection_area = NodePath("../DetectionArea")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_bmfqy")
+debug_color = Color(0.802086, 0.36581, 0.539812, 0.42)
