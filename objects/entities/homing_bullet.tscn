@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://jiv4e82ycwmq"]
+[gd_scene load_steps=13 format=3 uid="uid://jiv4e82ycwmq"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_bmfqy"]
 [ext_resource type="Script" uid="uid://dkmxhjtmu5xlb" path="res://scripts/components/damage_component.gd" id="2_id4r8"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://873un8agkyja" path="res://scripts/components/launch_component.gd" id="5_r3id6"]
 [ext_resource type="Script" uid="uid://cdnwrn8v05qhi" path="res://scripts/components/bullet_component.gd" id="7_8gqaa"]
 [ext_resource type="Script" uid="uid://be8jhvb8t3kif" path="res://scripts/components/homing_missile_motion.gd" id="7_bmfqy"]
+[ext_resource type="Script" uid="uid://c0bvan0swashx" path="res://scripts/components/trail_component.gd" id="8_id4r8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_txsw8"]
 radius = 4.0
@@ -14,7 +15,14 @@ radius = 4.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_bmfqy"]
 radius = 128.0
 
-[node name="Bullet" type="Area2D"]
+[sub_resource type="Curve" id="Curve_id4r8"]
+_data = [Vector2(0, 0.668146), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_id4r8"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="HomingBullet" type="Area2D"]
 collision_layer = 8
 collision_mask = 21
 
@@ -78,3 +86,11 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 shape = SubResource("CircleShape2D_bmfqy")
 debug_color = Color(0.802086, 0.36581, 0.539812, 0.42)
+
+[node name="Trail" type="Line2D" parent="."]
+top_level = true
+z_index = 199
+width = 4.0
+width_curve = SubResource("Curve_id4r8")
+gradient = SubResource("Gradient_id4r8")
+script = ExtResource("8_id4r8")

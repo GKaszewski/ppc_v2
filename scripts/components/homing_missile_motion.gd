@@ -47,7 +47,6 @@ func _physics_process(delta: float) -> void:
 
 
 func on_detection_area_body_entered(body: Node) -> void:
-	print("Body entered detection area: ", body.name)
 	if target != null:
 		return
 
