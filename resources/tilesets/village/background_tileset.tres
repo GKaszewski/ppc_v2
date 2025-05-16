@@ -1,9 +1,10 @@
-[gd_scene load_steps=4 format=4 uid="uid://bcw0oy0r2x0eq"]
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://dua4ns4tdknd1"]
 
-[ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_6a3fc"]
+[ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_hm4pu"]
+[ext_resource type="Texture2D" uid="uid://cw42lvnqxubq2" path="res://sprites/PS_Tileset_10_nes.png" id="2_dfydr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cagp7"]
-texture = ExtResource("1_6a3fc")
+texture = ExtResource("1_hm4pu")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -110,9 +111,28 @@ texture = ExtResource("1_6a3fc")
 10:8/0 = 0
 1:9/0 = 0
 
-[sub_resource type="TileSet" id="TileSet_7ri0q"]
-sources/0 = SubResource("TileSetAtlasSource_cagp7")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_75pfo"]
+texture = ExtResource("2_dfydr")
+0:11/0 = 0
+0:11/0/probability = 0.515
+1:11/0 = 0
+1:11/0/probability = 0.035
+2:11/0 = 0
+2:11/0/probability = 0.245
+3:11/0 = 0
+3:11/0/probability = 0.11
+5:11/0 = 0
+6:11/0 = 0
+7:11/0 = 0
+8:11/0 = 0
+9:11/0 = 0
+10:11/0 = 0
+11:11/0 = 0
+12:11/0 = 0
+13:11/0 = 0
+2:2/0 = 0
+2:2/0/probability = 0.0
 
-[node name="Background Layer" type="TileMapLayer"]
-tile_map_data = PackedByteArray("AAAKAP7/AAAAAAYAAAAKAP//AAAAAAcAAAALAP7/AAABAAYAAAALAP//AAABAAcAAAALAAAAAAABAAgAAAALAAEAAAABAAkAAAAMAP7/AAACAAYAAAAMAP//AAACAAcAAAAMAAAAAAACAAgAAAATAAAAAAAAAAYAAAATAAEAAAAAAAcAAAAUAAAAAAABAAYAAAAUAAEAAAABAAcAAAAUAAIAAAABAAgAAAAUAAMAAAABAAkAAAAVAAAAAAACAAYAAAAVAAEAAAACAAcAAAAVAAIAAAACAAgAAAAbAPb/AAAAAAYAAAAbAPf/AAAAAAcAAAAcAPb/AAABAAYAAAAcAPf/AAABAAcAAAAcAPj/AAABAAgAAAAcAPn/AAABAAkAAAAdAPb/AAACAAYAAAAdAPf/AAACAAcAAAAdAPj/AAACAAgAAAAPAPb/AAAAAAYAAAAPAPf/AAAAAAcAAAAQAPb/AAABAAYAAAAQAPf/AAABAAcAAAAQAPj/AAABAAgAAAAQAPn/AAABAAkAAAARAPb/AAACAAYAAAARAPf/AAACAAcAAAARAPj/AAACAAgAAAA=")
-tile_set = SubResource("TileSet_7ri0q")
+[resource]
+sources/0 = SubResource("TileSetAtlasSource_cagp7")
+sources/1 = SubResource("TileSetAtlasSource_75pfo")

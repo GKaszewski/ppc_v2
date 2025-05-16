@@ -1,11 +1,18 @@
-[gd_scene load_steps=7 format=4 uid="uid://dnufqkeiyi5ya"]
+[gd_resource type="TileSet" load_steps=13 format=3 uid="uid://bc5a20s6kuy8e"]
 
-[ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_51i2x"]
-[ext_resource type="PackedScene" uid="uid://54w4wisfj8v8" path="res://objects/entities/coin.tscn" id="2_2l4v1"]
-[ext_resource type="PackedScene" uid="uid://ct8fim6mduyl3" path="res://objects/entities/collapsing_bridge.tscn" id="3_ukc1k"]
+[ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_ej5iv"]
+[ext_resource type="PackedScene" uid="uid://54w4wisfj8v8" path="res://objects/entities/coin.tscn" id="2_31a0q"]
+[ext_resource type="PackedScene" uid="uid://ct8fim6mduyl3" path="res://objects/entities/collapsing_bridge.tscn" id="3_x63lh"]
+[ext_resource type="PackedScene" uid="uid://bargnp4twtmxg" path="res://objects/entities/big_coin.tscn" id="4_ov0dn"]
+[ext_resource type="PackedScene" uid="uid://d08dfqmirnd66" path="res://objects/entities/big_treasure.tscn" id="5_xxibl"]
+[ext_resource type="PackedScene" uid="uid://073ts5cxtwbl" path="res://objects/entities/treasure.tscn" id="6_fmgww"]
+[ext_resource type="PackedScene" uid="uid://cm3rixnnev1pg" path="res://objects/entities/jump_pad.tscn" id="7_0kjxj"]
+[ext_resource type="PackedScene" uid="uid://to2xnqev0pu1" path="res://objects/entities/cage.tscn" id="8_83o0w"]
+[ext_resource type="PackedScene" uid="uid://bd51frym6mm7v" path="res://objects/entities/lever.tscn" id="9_at40q"]
+[ext_resource type="PackedScene" uid="uid://12jnkdygpxwc" path="res://objects/entities/exit_level.tscn" id="10_ivcjr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8idcv"]
-texture = ExtResource("1_51i2x")
+texture = ExtResource("1_ej5iv")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -129,15 +136,18 @@ texture = ExtResource("1_51i2x")
 1:9/0 = 0
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_v3eon"]
-scenes/1/scene = ExtResource("2_2l4v1")
-scenes/2/scene = ExtResource("3_ukc1k")
+scenes/1/scene = ExtResource("2_31a0q")
+scenes/2/scene = ExtResource("3_x63lh")
+scenes/3/scene = ExtResource("4_ov0dn")
+scenes/4/scene = ExtResource("5_xxibl")
+scenes/5/scene = ExtResource("6_fmgww")
+scenes/6/scene = ExtResource("7_0kjxj")
+scenes/7/scene = ExtResource("8_83o0w")
+scenes/8/scene = ExtResource("9_at40q")
+scenes/9/scene = ExtResource("10_ivcjr")
 
-[sub_resource type="TileSet" id="TileSet_yf4x4"]
+[resource]
 physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 5
 sources/0 = SubResource("TileSetAtlasSource_8idcv")
 sources/1 = SubResource("TileSetScenesCollectionSource_v3eon")
-
-[node name="Entities layer" type="TileMapLayer"]
-tile_map_data = PackedByteArray("AAAJAPz/AAAHAAMAAAAJAP3/AAAHAAQAAAAKAPz/AAAIAAMAAAALAPz/AAAIAAMAAAAMAPz/AAAJAAMAAAANAPz/AAAKAAMAAAANAP3/AAAKAAQAAAAUAPz/AAAGAAMAADAVAPz/AAAGAAMAADAWAPz/AAAGAAMAADAcAAMAAAAGAAMAAGAPAPn/AAADAAYAAAAWAP3/AAALAAQAAAAWAP7/AAALAAQAAAAWAP//AAALAAQAAAAWAAAAAAALAAQAAAAWAAEAAAALAAQAAAAWAAIAAAALAAQAAAAWAAMAAAALAAQAAAAaAAMAAAAGAAQAAAAWAPn/AQAAAAAAAQAXAPn/AQAAAAAAAQAYAPn/AQAAAAAAAQAZAPn/AQAAAAAAAQAaAPn/AQAAAAAAAQAZAPj/AQAAAAAAAQAYAPj/AQAAAAAAAQAXAPj/AQAAAAAAAQAYAPf/AQAAAAAAAQAKAP3/AQAAAAAAAgALAP3/AQAAAAAAAgAMAP3/AQAAAAAAAgA=")
-tile_set = SubResource("TileSet_yf4x4")

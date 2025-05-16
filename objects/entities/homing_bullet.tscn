@@ -30,6 +30,7 @@ collision_mask = 21
 shape = SubResource("CircleShape2D_txsw8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(2, 1, 1, 1)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_bmfqy")
 hframes = 12
@@ -78,6 +79,9 @@ root = NodePath("..")
 max_speed = 122.0
 acceleration = 4.0
 detection_area = NodePath("../DetectionArea")
+wobble_strength = 10.0
+drag = 1.0
+steering_lerp = 0.01
 
 [node name="DetectionArea" type="Area2D" parent="."]
 collision_layer = 0
@@ -88,9 +92,11 @@ shape = SubResource("CircleShape2D_bmfqy")
 debug_color = Color(0.802086, 0.36581, 0.539812, 0.42)
 
 [node name="Trail" type="Line2D" parent="."]
+self_modulate = Color(2, 2, 2, 1)
 top_level = true
 z_index = 199
 width = 4.0
 width_curve = SubResource("Curve_id4r8")
+default_color = Color(2, 1.2, 1.2, 1)
 gradient = SubResource("Gradient_id4r8")
 script = ExtResource("8_id4r8")

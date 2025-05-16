@@ -1,0 +1,44 @@
+[gd_scene load_steps=10 format=3 uid="uid://6foggu31cu14"]
+
+[ext_resource type="PackedScene" uid="uid://byxf45ukq82pe" path="res://objects/ui/hud.tscn" id="1_tgtfe"]
+[ext_resource type="PackedScene" uid="uid://dulkm3ah4tm0u" path="res://objects/ui/death_screen.tscn" id="2_ln68j"]
+[ext_resource type="Script" uid="uid://cp68km8bykymb" path="res://scripts/resources/level_resource.gd" id="3_5kt5k"]
+[ext_resource type="PackedScene" uid="uid://wmw6gaisyrvx" path="res://objects/ui/game_over_screen.tscn" id="4_11xmk"]
+[ext_resource type="PackedScene" uid="uid://dlm2ri562fynd" path="res://objects/ui/marketplace.tscn" id="5_8e0cs"]
+[ext_resource type="PackedScene" uid="uid://i6mnjbjcoqe5" path="res://objects/ui/pause_menu.tscn" id="6_1q4vn"]
+[ext_resource type="PackedScene" uid="uid://y0ae6e7t70fj" path="res://objects/ui/settings_menu.tscn" id="7_hkjav"]
+[ext_resource type="PackedScene" uid="uid://cvfsbiy5ggrpg" path="res://objects/ui/input_settings.tscn" id="8_6pnu3"]
+
+[sub_resource type="Resource" id="Resource_75pfo"]
+script = ExtResource("3_5kt5k")
+level_name = "Village - 1"
+metadata/_custom_type_script = "uid://cp68km8bykymb"
+
+[node name="UI Layer" type="CanvasLayer"]
+
+[node name="HUD" parent="." instance=ExtResource("1_tgtfe")]
+
+[node name="DeathScreen" parent="." node_paths=PackedStringArray("nodes_to_disable") instance=ExtResource("2_ln68j")]
+visible = false
+offset_top = 32.0
+current_level = SubResource("Resource_75pfo")
+nodes_to_disable = [null]
+
+[node name="GameOverScreen" parent="." instance=ExtResource("4_11xmk")]
+visible = false
+
+[node name="Marketplace" parent="." node_paths=PackedStringArray("components_to_disable") instance=ExtResource("5_8e0cs")]
+visible = false
+offset_top = 32.0
+components_to_disable = [null]
+
+[node name="Pause menu" parent="." node_paths=PackedStringArray("settings_menu") instance=ExtResource("6_1q4vn")]
+visible = false
+settings_menu = NodePath("../Settings menu")
+
+[node name="Settings menu" parent="." node_paths=PackedStringArray("input_settings") instance=ExtResource("7_hkjav")]
+visible = false
+input_settings = NodePath("../Input Settings")
+
+[node name="Input Settings" parent="." instance=ExtResource("8_6pnu3")]
+visible = false

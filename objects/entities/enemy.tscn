@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bwdlmualj6xbw"]
+[gd_scene load_steps=26 format=3 uid="uid://bwdlmualj6xbw"]
 
 [ext_resource type="Shader" uid="uid://bs4xvm4qkurpr" path="res://shaders/hit_flash.tres" id="1_ep4yr"]
 [ext_resource type="Texture2D" uid="uid://cu72810eyk4dx" path="res://sprites/enemy-robot.png" id="2_hjtwe"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://dmqpif5qhvri3" path="res://scripts/components/side_to_side_movement.gd" id="4_gbsq8"]
 [ext_resource type="Script" uid="uid://b37gqnycj6rtk" path="res://scripts/components/periodic_shooting.gd" id="5_m03v0"]
 [ext_resource type="Script" uid="uid://dqm371fysuk7i" path="res://scripts/components/enemy_death.gd" id="6_6p3gr"]
-[ext_resource type="PackedScene" uid="uid://jiv4e82ycwmq" path="res://objects/entities/homing_bullet.tscn" id="7_lvsna"]
 [ext_resource type="Script" uid="uid://dqmbvuutd5c3c" path="res://scripts/components/flashing_component.gd" id="7_xsaiy"]
 [ext_resource type="Script" uid="uid://ceq8n7yw7qxpi" path="res://scripts/components/hit_component.gd" id="9_0qjr4"]
 [ext_resource type="Script" uid="uid://c07d50s20rl8s" path="res://scripts/components/status_effect_component.gd" id="10_5i27q"]
@@ -17,6 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://dyev46uqusimi" path="res://sfx/shoot.wav" id="14_tdjks"]
 [ext_resource type="PackedScene" uid="uid://dx80ivlvuuew4" path="res://objects/fxs/fire_fx.tscn" id="15_mc6rj"]
 [ext_resource type="PackedScene" uid="uid://ck6nml06tm6ue" path="res://objects/fxs/ice_fx.tscn" id="16_68hnm"]
+[ext_resource type="PackedScene" uid="uid://b12tppjkkqpt4" path="res://objects/fxs/hit_particles.tscn" id="18_pxaaa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pwwji"]
 size = Vector2(25, 31)
@@ -29,10 +29,41 @@ shader_parameter/tint = Color(1, 1, 1, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ejbqt"]
 size = Vector2(34, 31)
 
+[sub_resource type="Gradient" id="Gradient_qb72p"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_f1fvy"]
+gradient = SubResource("Gradient_qb72p")
+
+[sub_resource type="Curve" id="Curve_82d6e"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7b7mt"]
+curve = SubResource("Curve_82d6e")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pxaaa"]
+resource_local_to_scene = true
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 8.0
+direction = Vector3(0.1, -0.5, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 400.0
+gravity = Vector3(0, 80, 0)
+damping_min = 400.0
+damping_max = 800.0
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_7b7mt")
+color = Color(0.635294, 1, 0.952941, 1)
+color_ramp = SubResource("GradientTexture1D_f1fvy")
+
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-1.5, 0.5)
 shape = SubResource("RectangleShape2D_pwwji")
 
@@ -67,7 +98,6 @@ right_wall_ray = NodePath("../Right Wall Ray")
 
 [node name="PeriodicShootingComponent" type="Node" parent="." node_paths=PackedStringArray("side_to_side_movement", "root", "bullet_spawn_right", "bullet_spawn_left")]
 script = ExtResource("5_m03v0")
-bullet_scene = ExtResource("7_lvsna")
 side_to_side_movement = NodePath("../SideToSideMovement")
 root = NodePath("..")
 bullet_spawn_right = NodePath("../Sprite2D/right bullet spawn")
@@ -85,6 +115,7 @@ collision_layer = 8
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+visible = false
 position = Vector2(-2, 0.5)
 shape = SubResource("RectangleShape2D_ejbqt")
 debug_color = Color(0.913521, 0.265052, 0.323172, 0.42)
@@ -111,10 +142,11 @@ script = ExtResource("7_xsaiy")
 sprite = NodePath("../Sprite2D")
 health_component = NodePath("../HealthComponent")
 
-[node name="HitComponent" type="Node" parent="." node_paths=PackedStringArray("sprite", "health_component")]
+[node name="HitComponent" type="Node" parent="." node_paths=PackedStringArray("sprite", "health_component", "hit_fx")]
 script = ExtResource("9_0qjr4")
 sprite = NodePath("../Sprite2D")
 health_component = NodePath("../HealthComponent")
+hit_fx = NodePath("../HitParticles")
 
 [node name="StatusEffectComponent" type="Node" parent="."]
 script = ExtResource("10_5i27q")
@@ -145,3 +177,7 @@ amount = 2048
 
 [node name="Ice FX" parent="." instance=ExtResource("16_68hnm")]
 visible = false
+
+[node name="HitParticles" parent="." instance=ExtResource("18_pxaaa")]
+position = Vector2(0, 1)
+process_material = SubResource("ParticleProcessMaterial_pxaaa")

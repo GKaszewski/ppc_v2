@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cawlpch2lk3a2"]
+
+[sub_resource type="Environment" id="Environment_gv2t6"]
+background_mode = 3
+tonemap_mode = 3
+glow_enabled = true
+glow_bloom = 0.05
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource("Environment_gv2t6")

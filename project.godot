@@ -16,7 +16,7 @@ config/name_localized={
 "pl": "Przygody Pana Cegły"
 }
 config/version="in-dev"
-run/main_scene="res://scenes/test.tscn"
+run/main_scene="res://scenes/level_village_1.tscn"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 run/max_fps=144
 boot_splash/show_image=false
@@ -167,5 +167,6 @@ common/physics_interpolation=true
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+viewport/hdr_2d=true
 2d/snap/snap_2d_transforms_to_pixel=true
 2d/snap/snap_2d_vertices_to_pixel=true

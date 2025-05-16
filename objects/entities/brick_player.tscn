@@ -1,7 +1,8 @@
-[gd_scene load_steps=31 format=3 uid="uid://bqi5s710xb1ju"]
+[gd_scene load_steps=40 format=3 uid="uid://bqi5s710xb1ju"]
 
 [ext_resource type="Script" uid="uid://ccuddyoakg04u" path="res://scripts/player.gd" id="1_8j4h4"]
 [ext_resource type="Texture2D" uid="uid://b7gp0gqvkv8j4" path="res://sprites/MrBrick_base.png" id="2_bc55y"]
+[ext_resource type="Shader" uid="uid://bs4xvm4qkurpr" path="res://shaders/hit_flash.tres" id="2_lgb3u"]
 [ext_resource type="Texture2D" uid="uid://jl1gwqchhpdc" path="res://sprites/left_eye.png" id="3_2srrh"]
 [ext_resource type="Texture2D" uid="uid://iiawtnwmeny3" path="res://sprites/right_eye.png" id="4_ccn81"]
 [ext_resource type="Script" uid="uid://oxeqvxkgj87j" path="res://scripts/components/flip_player.gd" id="5_geu10"]
@@ -27,6 +28,13 @@
 [ext_resource type="Resource" uid="uid://d3bjre2etov1n" path="res://resources/skills/magnetic.tres" id="22_vnsgd"]
 [ext_resource type="Script" uid="uid://bjsyeo1n7bsri" path="res://scripts/components/skill_unlocker_component.gd" id="23_qsv2c"]
 [ext_resource type="PackedScene" uid="uid://bg76mtpcmfm2j" path="res://objects/ui/charging_bar_layer.tscn" id="28_3f5nm"]
+[ext_resource type="PackedScene" uid="uid://b12tppjkkqpt4" path="res://objects/fxs/hit_particles.tscn" id="28_jh5m0"]
+[ext_resource type="Script" uid="uid://ceq8n7yw7qxpi" path="res://scripts/components/hit_component.gd" id="29_jh5m0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xoue7"]
+shader = ExtResource("2_lgb3u")
+shader_parameter/enabled = false
+shader_parameter/tint = Color(1, 1, 1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hdsg1"]
 size = Vector2(16, 31)
@@ -37,15 +45,47 @@ size = Vector2(16, 32)
 [sub_resource type="CircleShape2D" id="CircleShape2D_ps31c"]
 radius = 48.0
 
-[node name="Brick Player" type="CharacterBody2D" node_paths=PackedStringArray("jump_sfx") groups=["player"]]
+[sub_resource type="Gradient" id="Gradient_qb72p"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_f1fvy"]
+gradient = SubResource("Gradient_qb72p")
+
+[sub_resource type="Curve" id="Curve_82d6e"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7b7mt"]
+curve = SubResource("Curve_82d6e")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lgb3u"]
+resource_local_to_scene = true
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 8.0
+direction = Vector3(0.1, -0.5, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 400.0
+gravity = Vector3(0, 80, 0)
+damping_min = 400.0
+damping_max = 800.0
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_7b7mt")
+color = Color(0.764706, 0.443137, 0, 1)
+color_ramp = SubResource("GradientTexture1D_f1fvy")
+
+[node name="Brick Player" type="CharacterBody2D" node_paths=PackedStringArray("jump_sfx", "rotation_target") groups=["player"]]
 collision_layer = 4
 collision_mask = 43
 script = ExtResource("1_8j4h4")
 jump_sfx = NodePath("sfx_jump")
+rotation_target = NodePath("Root/Base")
 
 [node name="Root" type="Node2D" parent="."]
 
 [node name="Base" type="Sprite2D" parent="Root"]
+material = SubResource("ShaderMaterial_xoue7")
 texture = ExtResource("2_bc55y")
 
 [node name="Left Eye" type="Sprite2D" parent="Root"]
@@ -59,6 +99,7 @@ texture = ExtResource("4_ccn81")
 hframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_hdsg1")
 
@@ -73,6 +114,7 @@ collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StompDamageArea"]
+visible = false
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_vad0t")
 
@@ -136,11 +178,19 @@ available_skills = Array[ExtResource("21_d0oiv")]([ExtResource("22_vnsgd"), ExtR
 script = ExtResource("23_qsv2c")
 skill_manager = NodePath("../SkillManager")
 
+[node name="HitComponent" type="Node" parent="." node_paths=PackedStringArray("sprite", "health_component", "hit_fx")]
+script = ExtResource("29_jh5m0")
+sprite = NodePath("../Root/Base")
+health_component = NodePath("../HealthComponent")
+hit_fx = NodePath("../HitParticles")
+metadata/_custom_type_script = "uid://ceq8n7yw7qxpi"
+
 [node name="MagneticArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MagneticArea"]
+visible = false
 shape = SubResource("CircleShape2D_ps31c")
 
 [node name="CanBeLaunchedComponent" type="Node" parent="."]
@@ -163,6 +213,9 @@ offset_left = -17.0
 offset_top = -30.0
 offset_right = 23.0
 offset_bottom = -20.0
+
+[node name="HitParticles" parent="." instance=ExtResource("28_jh5m0")]
+process_material = SubResource("ParticleProcessMaterial_lgb3u")
 
 [connection signal="on_death" from="HealthComponent" to="PlayerDeathComponent" method="_on_health_component_on_death"]
 [connection signal="on_health_change" from="HealthComponent" to="KnockbackComponent" method="_on_health_component_on_health_change"]
