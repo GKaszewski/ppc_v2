@@ -21,7 +21,7 @@ func _ready() -> void:
 	var skills_to_unlock: Array[SkillData] = []
 
 	for skill in skill_data:
-		if skill in game_manager.player_state['unlocked_skills']:
+		if skill.name in game_manager.player_state['unlocked_skills']:
 			continue
 		skills_to_unlock.append(skill)
 
@@ -43,9 +43,13 @@ func _input(event: InputEvent) -> void:
 				buttons[0].grab_focus()
 
 
+func get_button_text(skill: SkillData) -> String:
+	return skill.name + " " + str(skill.cost)
+
+
 func create_upgrade_button(skill: SkillData):
 	var button := marketplace_button.instantiate() as Button
-	button.text = skill.name + " " + str(skill.cost)
+	button.text = get_button_text(skill)
 	button.icon = skill.icon
 
 	button.pressed.connect(func () -> void: _on_button_pressed(skill))
@@ -57,7 +61,7 @@ func create_upgrade_button(skill: SkillData):
 
 func remove_button(skill: SkillData):
 	for child in grid.get_children():
-		if child.text == skill.name + str(skill.cost):
+		if child.text == get_button_text(skill):
 			child.queue_free()
 			break
 

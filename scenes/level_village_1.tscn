@@ -319,9 +319,19 @@ limit_target = NodePath("../Terrain Layer")
 metadata/_edit_lock_ = true
 
 [node name="Child" parent="." instance=ExtResource("15_vqevu")]
-position = Vector2(873, -577)
+position = Vector2(954, -577)
 
 [node name="UI Layer" parent="." instance=ExtResource("16_40fge")]
+
+[node name="HUD" parent="UI Layer" index="0" node_paths=PackedStringArray("player_health")]
+player_health = NodePath("../../Brick Player/HealthComponent")
+
+[node name="DeathScreen" parent="UI Layer" index="1" node_paths=PackedStringArray("nodes_to_disable")]
+nodes_to_disable = [NodePath("../../Brick Player")]
+
+[node name="Marketplace" parent="UI Layer" index="3" node_paths=PackedStringArray("skill_unlocker", "components_to_disable")]
+skill_unlocker = NodePath("../../Brick Player/SkillUnlockerComponent")
+components_to_disable = [NodePath("../../Brick Player")]
 
 [node name="Killzone" parent="." instance=ExtResource("17_qu4c0")]
 position = Vector2(2600, 802)
@@ -344,4 +354,9 @@ skill_manager = NodePath("../Brick Player/SkillManager")
 
 [node name="Global Light" parent="." instance=ExtResource("21_pifnu")]
 
+[connection signal="on_death" from="Brick Player/HealthComponent" to="UI Layer/DeathScreen" method="on_player_death"]
+[connection signal="on_death" from="Brick Player/HealthComponent" to="UI Layer/GameOverScreen" method="on_player_death"]
+
 [editable path="Brick Player"]
+[editable path="UI Layer"]
+[editable path="Killzone"]

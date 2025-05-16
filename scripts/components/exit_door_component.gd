@@ -31,4 +31,9 @@ func on_exit_area_body_entered(_body: Node2D) -> void:
 		return
 
 	exit_triggered.emit()
+	gm.unlock_level(gm.player_state["current_level"] + 1)
+	call_deferred("go_to_next_level")
+
+
+func go_to_next_level() -> void:
 	gm.try_to_go_to_next_level()

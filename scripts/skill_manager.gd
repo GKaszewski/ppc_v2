@@ -51,7 +51,7 @@ func apply_unlocked_skills() -> void:
 	for skill_data in available_skills:
 		if gm.is_skill_unlocked(skill_data.name):
 			print("Applying skill: ", skill_data.name)
-			add_skill(skill_data)
+			call_deferred("add_skill", skill_data)
 		else:
 			remove_skill(skill_data.name)
 

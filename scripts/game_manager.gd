@@ -126,8 +126,10 @@ func unlock_level(level_index: int) -> void:
 
 
 func try_to_go_to_next_level() -> void:
-	if player_state["current_level"] + 1 < level_scenes.size() and player_state["current_level"] + 1 in player_state["unlocked_levels"]:
+	var next_level = player_state["current_level"] + 1
+	if next_level < level_scenes.size() and next_level in player_state["unlocked_levels"]:
 		player_state["current_level"] += 1
+		get_tree().change_scene_to_packed(level_scenes[next_level])
 
 
 func quit_game() -> void:

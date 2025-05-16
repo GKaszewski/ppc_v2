@@ -1,26 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://ct8fim6mduyl3"]
+[gd_scene load_steps=5 format=3 uid="uid://c40r76qqacqie"]
 
-[ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_rka1x"]
-[ext_resource type="Script" uid="uid://r0a6xjicrh74" path="res://scripts/components/collapsable.gd" id="2_3vvum"]
+[ext_resource type="Texture2D" uid="uid://cw42lvnqxubq2" path="res://sprites/PS_Tileset_10_nes.png" id="1_jmsgb"]
+[ext_resource type="Script" uid="uid://r0a6xjicrh74" path="res://scripts/components/collapsable.gd" id="2_cs5vh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l44jt"]
-size = Vector2(16, 4)
+size = Vector2(16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sfbe2"]
 size = Vector2(16, 2)
 
-[node name="Collapsing Bridge" type="StaticBody2D"]
-
-[node name="StaticCollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -6)
-shape = SubResource("RectangleShape2D_l44jt")
-one_way_collision = true
+[node name="Collapsing Block" type="StaticBody2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_rka1x")
-hframes = 12
+texture = ExtResource("1_jmsgb")
+hframes = 16
 vframes = 12
-frame = 56
+frame = 182
+
+[node name="StaticCollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_l44jt")
 
 [node name="Collapsable detector" type="Area2D" parent="."]
 collision_mask = 4
@@ -35,7 +33,7 @@ wait_time = 0.5
 [node name="ResetTimer" type="Timer" parent="."]
 
 [node name="CollapsableComponent" type="Node" parent="." node_paths=PackedStringArray("to_collapse_timer", "reset_timer", "sprite2d", "collision_shape")]
-script = ExtResource("2_3vvum")
+script = ExtResource("2_cs5vh")
 to_collapse_timer = NodePath("../ToCollapseTimer")
 reset_timer = NodePath("../ResetTimer")
 sprite2d = NodePath("../Sprite2D")
