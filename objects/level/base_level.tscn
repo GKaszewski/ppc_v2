@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://fw5fbdy5gcmx"]
+[gd_scene load_steps=20 format=4 uid="uid://fw5fbdy5gcmx"]
 
 [ext_resource type="PackedScene" uid="uid://cawlpch2lk3a2" path="res://objects/level/world_environment.tscn" id="1_hb5r3"]
 [ext_resource type="PackedScene" uid="uid://bqi5s710xb1ju" path="res://objects/entities/brick_player.tscn" id="1_lbnsn"]
@@ -12,6 +12,7 @@
 [ext_resource type="TileSet" uid="uid://bc5a20s6kuy8e" path="res://resources/tilesets/village/entities.tres" id="10_8xrv5"]
 [ext_resource type="TileSet" uid="uid://bbppo0irxdmqy" path="res://resources/tilesets/village/foreground.tres" id="11_0vx27"]
 [ext_resource type="Script" uid="uid://8r1y8elyw7kt" path="res://scripts/console_management.gd" id="12_8xrv5"]
+[ext_resource type="PackedScene" uid="uid://bqom4cm7r18db" path="res://objects/entities/killzone.tscn" id="13_0vx27"]
 
 [sub_resource type="Gradient" id="Gradient_qb72p"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -60,6 +61,16 @@ process_material = SubResource("ParticleProcessMaterial_lgb3u")
 
 [node name="UI Layer" parent="." instance=ExtResource("2_lbnsn")]
 
+[node name="HUD" parent="UI Layer" index="0" node_paths=PackedStringArray("player_health")]
+player_health = NodePath("../../Brick Player/HealthComponent")
+
+[node name="DeathScreen" parent="UI Layer" index="1" node_paths=PackedStringArray("nodes_to_disable")]
+nodes_to_disable = [NodePath("../../Brick Player")]
+
+[node name="Marketplace" parent="UI Layer" index="3" node_paths=PackedStringArray("skill_unlocker", "components_to_disable")]
+skill_unlocker = NodePath("../../Brick Player/SkillUnlockerComponent")
+components_to_disable = [NodePath("../../Brick Player")]
+
 [node name="Global Light" parent="." instance=ExtResource("3_3732a")]
 
 [node name="Camera2D" parent="." instance=ExtResource("5_517ha")]
@@ -100,4 +111,8 @@ skill_unlocker = NodePath("../Brick Player/SkillUnlockerComponent")
 skill_manager = NodePath("../Brick Player/SkillManager")
 metadata/_custom_type_script = "uid://8r1y8elyw7kt"
 
+[node name="Killzone" parent="." instance=ExtResource("13_0vx27")]
+position = Vector2(215, 324)
+
 [editable path="Brick Player"]
+[editable path="UI Layer"]

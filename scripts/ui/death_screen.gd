@@ -58,5 +58,5 @@ func on_timeout() -> void:
 
 	if gm.get_lives() == 0:
 		return
-		
+
 	get_tree().reload_current_scene()

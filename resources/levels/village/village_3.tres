@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="LevelResource" load_steps=2 format=3 uid="uid://b63u5qfp8p7pv"]
+
+[ext_resource type="Script" uid="uid://cp68km8bykymb" path="res://scripts/resources/level_resource.gd" id="1_3v5yj"]
+
+[resource]
+script = ExtResource("1_3v5yj")
+level_name = "Village - 3"
+metadata/_custom_type_script = "uid://cp68km8bykymb"
