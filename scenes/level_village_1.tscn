@@ -319,7 +319,7 @@ limit_target = NodePath("../Terrain Layer")
 metadata/_edit_lock_ = true
 
 [node name="Child" parent="." instance=ExtResource("15_vqevu")]
-position = Vector2(954, -577)
+position = Vector2(880, -578)
 
 [node name="UI Layer" parent="." instance=ExtResource("16_40fge")]
 
