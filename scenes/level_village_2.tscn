@@ -47,7 +47,7 @@ color_ramp = SubResource("GradientTexture1D_f1fvy")
 
 [sub_resource type="Resource" id="Resource_bqjcg"]
 script = ExtResource("4_ufsbg")
-level_name = "Village -2 "
+level_name = "Village - 2 "
 scene_path = ""
 metadata/_custom_type_script = "uid://cp68km8bykymb"
 
@@ -121,6 +121,9 @@ metadata/_custom_type_script = "uid://8r1y8elyw7kt"
 
 [node name="Killzone" parent="." instance=ExtResource("13_sw2hn")]
 position = Vector2(170, 582)
+
+[connection signal="on_death" from="Brick Player/HealthComponent" to="UI Layer/DeathScreen" method="on_player_death"]
+[connection signal="on_death" from="Brick Player/HealthComponent" to="UI Layer/GameOverScreen" method="on_player_death"]
 
 [editable path="Brick Player"]
 [editable path="UI Layer"]
