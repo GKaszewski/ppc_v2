@@ -32,14 +32,14 @@ size = Vector2(34, 31)
 [sub_resource type="Gradient" id="Gradient_qb72p"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_f1fvy"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lvsna"]
 gradient = SubResource("Gradient_qb72p")
 
 [sub_resource type="Curve" id="Curve_82d6e"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_7b7mt"]
+[sub_resource type="CurveTexture" id="CurveTexture_pxaaa"]
 curve = SubResource("Curve_82d6e")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pxaaa"]
@@ -55,9 +55,9 @@ gravity = Vector3(0, 80, 0)
 damping_min = 400.0
 damping_max = 800.0
 scale_max = 3.0
-scale_curve = SubResource("CurveTexture_7b7mt")
+scale_curve = SubResource("CurveTexture_pxaaa")
 color = Color(0.635294, 1, 0.952941, 1)
-color_ramp = SubResource("GradientTexture1D_f1fvy")
+color_ramp = SubResource("GradientTexture1D_lvsna")
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 8

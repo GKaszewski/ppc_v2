@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://8wy1jxy1lihn"]
+
+[ext_resource type="Texture2D" uid="uid://dhkwyv6ayb5qb" path="res://sprites/flying_ship.png" id="1_umrfk"]
+
+[node name="Flying ship" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-0.5, 7)
+polygon = PackedVector2Array(-13.5, -8, -13.5, -10, -12.5, -11, -10.5, -11, -8.5, -8, -7.5, -7, 10.5, -7, 15.5, -3, 15.5, -1, 10.5, 3, 6.5, 4, 4.5, 5, 2.5, 7, -1.5, 7, -5.5, 4, -9.5, 3, -11.5, 2, -14.5, -1, -14.5, -3, -12.5, -5, -11.5, -5, -11.5, -7, -12.5, -7)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+texture = ExtResource("1_umrfk")

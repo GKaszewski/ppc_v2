@@ -1,0 +1,168 @@
+[gd_scene load_steps=25 format=3 uid="uid://xp4njljog0x2"]
+
+[ext_resource type="Texture2D" uid="uid://22k1u37j6k8y" path="res://sprites/flying_enemy.png" id="1_30hhw"]
+[ext_resource type="Script" uid="uid://btfsq0bvtrx3t" path="res://scripts/components/health.gd" id="2_ivniq"]
+[ext_resource type="AudioStream" uid="uid://b3tsqhr06pbrs" path="res://sfx/enemy_hurt.wav" id="3_fd2du"]
+[ext_resource type="AudioStream" uid="uid://dyev46uqusimi" path="res://sfx/shoot.wav" id="4_rhq76"]
+[ext_resource type="Script" uid="uid://dkmxhjtmu5xlb" path="res://scripts/components/damage_component.gd" id="5_cmp1h"]
+[ext_resource type="Script" uid="uid://b37gqnycj6rtk" path="res://scripts/components/periodic_shooting.gd" id="6_4ajjm"]
+[ext_resource type="Script" uid="uid://dqm371fysuk7i" path="res://scripts/components/enemy_death.gd" id="7_uyhuj"]
+[ext_resource type="Script" uid="uid://dqmbvuutd5c3c" path="res://scripts/components/flashing_component.gd" id="8_q78ru"]
+[ext_resource type="Script" uid="uid://ceq8n7yw7qxpi" path="res://scripts/components/hit_component.gd" id="9_weo6b"]
+[ext_resource type="Script" uid="uid://c07d50s20rl8s" path="res://scripts/components/status_effect_component.gd" id="10_6p4k7"]
+[ext_resource type="Script" uid="uid://qi2irprbqru2" path="res://scripts/components/fire_effect_component.gd" id="11_jmybk"]
+[ext_resource type="Script" uid="uid://dhj4qtwcqmqkj" path="res://scripts/components/ice_effect_component.gd" id="12_2yvae"]
+[ext_resource type="PackedScene" uid="uid://b12tppjkkqpt4" path="res://objects/fxs/hit_particles.tscn" id="13_xlup2"]
+[ext_resource type="PackedScene" uid="uid://dx80ivlvuuew4" path="res://objects/fxs/fire_fx.tscn" id="14_mrjm6"]
+[ext_resource type="PackedScene" uid="uid://ck6nml06tm6ue" path="res://objects/fxs/ice_fx.tscn" id="15_pkino"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hil2i"]
+radius = 6.0
+
+[sub_resource type="Curve" id="Curve_68xvh"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.870036, 0.767164), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ivniq"]
+curve = SubResource("Curve_68xvh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fd2du"]
+lifetime_randomness = 0.1
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 2.0
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, 98, 0)
+scale_min = 0.6
+scale_curve = SubResource("CurveTexture_ivniq")
+color = Color(0.635294, 1, 0.952941, 1)
+
+[sub_resource type="Gradient" id="Gradient_iybpd"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_f1fvy"]
+gradient = SubResource("Gradient_iybpd")
+
+[sub_resource type="Curve" id="Curve_f2w8b"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7b7mt"]
+curve = SubResource("Curve_f2w8b")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qxfb0"]
+resource_local_to_scene = true
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 8.0
+direction = Vector3(0.1, -0.5, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 400.0
+gravity = Vector3(0, 80, 0)
+damping_min = 400.0
+damping_max = 800.0
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_7b7mt")
+color = Color(0.47451, 0.47451, 0.47451, 1)
+color_ramp = SubResource("GradientTexture1D_f1fvy")
+
+[node name="Flying Enemy" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CapsuleShape2D_hil2i")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_30hhw")
+
+[node name="Jetpack Particles" type="GPUParticles2D" parent="."]
+position = Vector2(-4, 16)
+explosiveness = 0.5
+fixed_fps = 24
+process_material = SubResource("ParticleProcessMaterial_fd2du")
+
+[node name="Jetpack Particles2" type="GPUParticles2D" parent="."]
+position = Vector2(4, 16)
+explosiveness = 0.5
+fixed_fps = 24
+process_material = SubResource("ParticleProcessMaterial_fd2du")
+
+[node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("hurt_fx")]
+script = ExtResource("2_ivniq")
+hurt_fx = NodePath("../sfx_hurt")
+metadata/_custom_type_script = "uid://btfsq0bvtrx3t"
+
+[node name="sfx_hurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_fd2du")
+
+[node name="sfx_shoot" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_rhq76")
+
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("area2d")]
+script = ExtResource("5_cmp1h")
+area2d = NodePath("")
+
+[node name="PeriodicShootingComponent" type="Node" parent="." node_paths=PackedStringArray("side_to_side_movement", "root", "bullet_spawn_right", "bullet_spawn_left")]
+script = ExtResource("6_4ajjm")
+side_to_side_movement = NodePath("")
+root = NodePath("..")
+bullet_spawn_right = NodePath("../laser spawn point right")
+bullet_spawn_left = NodePath("../laser spawn point left")
+
+[node name="EnemyDeathComponent" type="Node" parent="." node_paths=PackedStringArray("root", "collision_shape_2d", "health_component")]
+script = ExtResource("7_uyhuj")
+root = NodePath("..")
+tween_duration = 0.1
+collision_shape_2d = NodePath("../CollisionShape2D")
+health_component = NodePath("../HealthComponent")
+
+[node name="FlashingComponent" type="Node" parent="." node_paths=PackedStringArray("sprite", "health_component")]
+process_mode = 3
+script = ExtResource("8_q78ru")
+sprite = NodePath("../Sprite2D")
+health_component = NodePath("../HealthComponent")
+
+[node name="HitComponent" type="Node" parent="." node_paths=PackedStringArray("sprite", "health_component", "hit_fx")]
+script = ExtResource("9_weo6b")
+sprite = NodePath("../Sprite2D")
+health_component = NodePath("../HealthComponent")
+hit_fx = NodePath("../HitParticles")
+
+[node name="StatusEffectComponent" type="Node" parent="."]
+script = ExtResource("10_6p4k7")
+
+[node name="FireEffectComponent" type="Node" parent="." node_paths=PackedStringArray("health_component", "status_effect_component", "root", "fire_fx")]
+script = ExtResource("11_jmybk")
+health_component = NodePath("../HealthComponent")
+status_effect_component = NodePath("../StatusEffectComponent")
+root = NodePath("..")
+fire_fx = NodePath("../FireFX")
+
+[node name="IceEffectComponent" type="Node" parent="." node_paths=PackedStringArray("status_effect_component", "ice_fx")]
+script = ExtResource("12_2yvae")
+components_to_disable = [NodePath("../PeriodicShootingComponent"), NodePath("../DamageComponent")]
+status_effect_component = NodePath("../StatusEffectComponent")
+ice_fx = NodePath("../Ice FX")
+
+[node name="HitParticles" parent="." instance=ExtResource("13_xlup2")]
+position = Vector2(0, 1)
+process_material = SubResource("ParticleProcessMaterial_qxfb0")
+
+[node name="FireFX" parent="." instance=ExtResource("14_mrjm6")]
+position = Vector2(0, 9)
+emitting = false
+amount = 2048
+
+[node name="Ice FX" parent="." instance=ExtResource("15_pkino")]
+visible = false
+position = Vector2(1, 0)
+scale = Vector2(0.684407, 0.929677)
+
+[node name="laser spawn point right" type="Node2D" parent="."]
+position = Vector2(8, -2)
+
+[node name="laser spawn point left" type="Node2D" parent="."]
+position = Vector2(-9, -2)
