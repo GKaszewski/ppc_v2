@@ -34,6 +34,7 @@ SteamControllerInput="*res://autoloads/steam_controller_input.gd"
 Console="*res://addons/console/console.gd"
 AchievementsManager="*res://objects/achievements.tscn"
 ConfigFileHandler="*res://autoloads/config_file_handler.gd"
+UiManager="*res://autoloads/ui_manager.gd"
 
 [debug]
 

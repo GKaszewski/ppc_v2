@@ -26,7 +26,6 @@ func _ready() -> void:
 		audio_settings.hide()
 
 	if display_settings:
-
 		display_settings_button.pressed.connect(_on_display_settings_button_pressed)
 		display_settings.hide()
 
@@ -35,61 +34,38 @@ func _ready() -> void:
 		gameplay_settings.hide()
 
 
-func _input(event: InputEvent) -> void:
+
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
-		if settings_menu_control.is_visible():
-			settings_menu_control.hide()
+		if UiManager.is_screen_on_top(settings_menu_control):
+			UiManager.pop_screen()
 
 
 func _on_input_settings_button_pressed() -> void:
 	if not input_settings:
 		return
 
-	if input_settings.is_visible():
-		input_settings.hide()
-	else:
-		input_settings.show()
-		audio_settings.hide()
-		display_settings.hide()
-		gameplay_settings.hide()
+	UiManager.push_screen(input_settings)
 
 
 func _on_audio_settings_button_pressed() -> void:
 	if not audio_settings:
 		return
 
-	if audio_settings.is_visible():
-		audio_settings.hide()
-	else:
-		audio_settings.show()
-		input_settings.hide()
-		display_settings.hide()
-		gameplay_settings.hide()
+	UiManager.push_screen(audio_settings)
 
 
 func _on_display_settings_button_pressed() -> void:
 	if not display_settings:
 		return
 
-	if display_settings.is_visible():
-		display_settings.hide()
-	else:
-		display_settings.show()
-		input_settings.hide()
-		audio_settings.hide()
-		gameplay_settings.hide()
+	UiManager.push_screen(display_settings)
 
 
 func _on_gameplay_settings_button_pressed() -> void:
 	if not gameplay_settings:
 		return
 
-	if gameplay_settings.is_visible():
-		gameplay_settings.hide()
-	else:
-		gameplay_settings.show()
-		input_settings.hide()
-		audio_settings.hide()
-		display_settings.hide()
+	UiManager.push_screen(gameplay_settings)
 	
 	

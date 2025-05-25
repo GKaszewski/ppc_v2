@@ -11,7 +11,6 @@ extends Node
 
 @onready var gm: GM = $"/root/GameManager"
 
-var is_paused: bool       = false
 var is_console_open: bool = false
 
 
@@ -46,23 +45,19 @@ func _ready() -> void:
 	Console.console_closed.connect(_on_console_close)
 
 
-func _input(event: InputEvent) -> void:
+
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause") and not is_console_open:
-		if is_paused:
+		if UiManager.is_visible_on_stack(pause_menu_control):
 			_on_resume_button_pressed()
 		else:
+			UiManager.push_screen(pause_menu_control)
 			gm.pause_game()
-			is_paused = true
-			pause_menu_control.show()
-			resume_button.grab_focus()
 
 
 func _on_resume_button_pressed() -> void:
-	pause_menu_control.hide()
-	if settings_menu:
-		settings_menu.hide()
+	UiManager.pop_screen()
 	gm.resume_game()
-	is_paused = false
 
 
 func _on_quit_button_pressed() -> void:
@@ -74,9 +69,8 @@ func _on_settings_button_pressed() -> void:
 		printerr("PauseMenu: Settings menu scene not set.")
 		return
 
-	settings_menu.show()
+	UiManager.push_screen(settings_menu)
 	gm.pause_game()
-	is_paused = true
 
 
 func _on_exit_to_menu_button_pressed() -> void:
