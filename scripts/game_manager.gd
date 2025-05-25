@@ -144,7 +144,6 @@ func resume_game() -> void:
 	Engine.time_scale = 1
 
 
-
 func start_new_game() -> void:
 	reset_player_state()
 	player_state["current_level"] = 0
