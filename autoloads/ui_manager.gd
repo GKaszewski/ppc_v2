@@ -26,6 +26,7 @@ func pop_screen() -> void:
 	top.hide()
 	top.set_process_input(false)
 	screen_popped.emit(top)
+	top.accept_event()
 
 	if not ui_stack.is_empty():
 		ui_stack.back().grab_focus()

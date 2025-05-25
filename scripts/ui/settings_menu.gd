@@ -34,7 +34,6 @@ func _ready() -> void:
 		gameplay_settings.hide()
 
 
-
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		if UiManager.is_screen_on_top(settings_menu_control):
