@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://6foggu31cu14"]
+[gd_scene load_steps=11 format=3 uid="uid://6foggu31cu14"]
 
 [ext_resource type="PackedScene" uid="uid://byxf45ukq82pe" path="res://objects/ui/hud.tscn" id="1_tgtfe"]
 [ext_resource type="PackedScene" uid="uid://dulkm3ah4tm0u" path="res://objects/ui/death_screen.tscn" id="2_ln68j"]
@@ -8,10 +8,12 @@
 [ext_resource type="PackedScene" uid="uid://i6mnjbjcoqe5" path="res://objects/ui/pause_menu.tscn" id="6_1q4vn"]
 [ext_resource type="PackedScene" uid="uid://y0ae6e7t70fj" path="res://objects/ui/settings_menu.tscn" id="7_hkjav"]
 [ext_resource type="PackedScene" uid="uid://cvfsbiy5ggrpg" path="res://objects/ui/input_settings.tscn" id="8_6pnu3"]
+[ext_resource type="PackedScene" uid="uid://b5fx1vdfky307" path="res://objects/ui/audio_settings.tscn" id="9_ln68j"]
 
 [sub_resource type="Resource" id="Resource_75pfo"]
 script = ExtResource("3_5kt5k")
 level_name = "Village - 1"
+scene_path = ""
 metadata/_custom_type_script = "uid://cp68km8bykymb"
 
 [node name="UI Layer" type="CanvasLayer"]
@@ -36,9 +38,13 @@ components_to_disable = [null]
 visible = false
 settings_menu = NodePath("../Settings menu")
 
-[node name="Settings menu" parent="." node_paths=PackedStringArray("input_settings") instance=ExtResource("7_hkjav")]
+[node name="Settings menu" parent="." node_paths=PackedStringArray("input_settings", "audio_settings") instance=ExtResource("7_hkjav")]
 visible = false
 input_settings = NodePath("../Input Settings")
+audio_settings = NodePath("../Audio settings")
 
 [node name="Input Settings" parent="." instance=ExtResource("8_6pnu3")]
+visible = false
+
+[node name="Audio settings" parent="." instance=ExtResource("9_ln68j")]
 visible = false

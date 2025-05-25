@@ -50,6 +50,14 @@ func _input(event: InputEvent) -> void:
 			accept_event()
 
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		if UiManager.is_screen_on_top(self):
+			UiManager.pop_screen()
+			save_settings()
+			load_settings()
+
+
 func create_action_list() -> void:
 	InputMap.load_from_project_settings()
 	for item in action_list.get_children():
@@ -92,8 +100,16 @@ func on_reset_button_pressed() -> void:
 
 func save_settings() -> void:
 	config_file_handler.settings_config.set_value("input_settings", "input_actions", input_actions)
-	config_file_handler.settings_config.save(config_file_handler.SETTINGS_FILE_PATH)
+	config_file_handler.settings_config.save(config_file_handler.SETTINGS_PATH)
 
 
 func load_settings() -> void:
-	pass
+	if not config_file_handler.settings_config.has_section("input_settings"):
+		return
+
+	var actions = config_file_handler.settings_config.get_value("input_settings", "input_actions", {})
+	if not actions:
+		return
+
+	input_actions = actions
+	create_action_list()
