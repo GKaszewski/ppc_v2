@@ -139,8 +139,6 @@ visible = false
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_vad0t")
 
-[node name="CoyoteTimer" type="Timer" parent="."]
-
 [node name="CanPickUpComponent" type="Node" parent="."]
 
 [node name="ScoreComponent" type="Node" parent="."]
