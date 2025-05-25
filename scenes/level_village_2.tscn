@@ -75,8 +75,9 @@ player_health = NodePath("../../Brick Player/HealthComponent")
 current_level = SubResource("Resource_bqjcg")
 nodes_to_disable = [NodePath("../../Brick Player")]
 
-[node name="Marketplace" parent="UI Layer" index="3" node_paths=PackedStringArray("skill_unlocker")]
+[node name="Marketplace" parent="UI Layer" index="3" node_paths=PackedStringArray("skill_unlocker", "components_to_disable")]
 skill_unlocker = NodePath("../../Brick Player/SkillUnlockerComponent")
+components_to_disable = [NodePath("../../Brick Player")]
 
 [node name="Global Light" parent="." instance=ExtResource("4_wykfl")]
 

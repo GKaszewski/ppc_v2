@@ -9,9 +9,16 @@ extends Node
 								"unlocked_skills": [],
 								"current_level": 0,
 								"unlocked_levels": [],
+								"completed_levels": [],
 							}
 
 var nodes_in_scene := []
+
+
+var current_session_state := {
+								 "coins_collected": 0,
+								 "skills_unlocked": [],
+							 }
 
 
 func _enter_tree() -> void:
@@ -64,6 +71,7 @@ func get_kid_nodes() -> Array[CollectableComponent]:
 
 func add_coins(amount: int) -> void:
 	player_state["coins"] += amount
+	player_state["coins"] = max(0, player_state["coins"])
 
 
 func set_coins(amount: int) -> void:
@@ -71,11 +79,20 @@ func set_coins(amount: int) -> void:
 
 
 func get_coins() -> int:
-	return player_state["coins"]
+	return player_state["coins"] + current_session_state["coins_collected"]
 
 
 func remove_coins(amount: int) -> void:
-	player_state["coins"] -= amount
+	var session_coins = current_session_state["coins_collected"]
+
+	if amount <= session_coins:
+		current_session_state["coins_collected"] -= amount
+	else:
+		var remaining_amount = amount - session_coins
+		current_session_state["coins_collected"] = 0
+		player_state["coins"] = max(0, player_state["coins"] - remaining_amount)
+
+	player_state["coins"] = max(0, player_state["coins"])
 
 
 func add_lives(amount: int) -> void:
@@ -95,7 +112,7 @@ func get_lives() -> int:
 
 
 func is_skill_unlocked(skill_name: String) -> bool:
-	return skill_name in player_state["unlocked_skills"]
+	return skill_name in player_state["unlocked_skills"] or skill_name in current_session_state["skills_unlocked"]
 
 
 func unlock_skill(skill_name: String) -> void:
@@ -118,6 +135,7 @@ func reset_player_state() -> void:
 		"coins": 0,
 		"lives": 3,
 		"unlocked_skills": [],
+		"completed_levels": [],
 	}
 
 
@@ -130,6 +148,19 @@ func try_to_go_to_next_level() -> void:
 	if next_level < level_scenes.size() and next_level in player_state["unlocked_levels"]:
 		player_state["current_level"] += 1
 		get_tree().change_scene_to_packed(level_scenes[next_level])
+
+
+
+func mark_level_complete(level_index: int) -> void:
+	unlock_level(level_index + 1)
+	if level_index not in player_state["completed_levels"]: player_state["completed_levels"].append(level_index)
+
+
+func reset_current_session_state() -> void:
+	current_session_state = {
+		"coins_collected": 0,
+		"skills_unlocked": [],
+	}
 
 
 func quit_game() -> void:
@@ -152,9 +183,24 @@ func start_new_game() -> void:
 
 
 func continue_game() -> void:
-	# todo: load player state from save file
+	if not SaveSystem.load_game():
+		printerr("Failed to load game. Starting a new game instead.")
+		start_new_game()
+		return
 
 	if player_state["current_level"] < level_scenes.size():
 		get_tree().change_scene_to_packed(level_scenes[player_state["current_level"]])
 	else:
 		printerr("No levels unlocked to continue.")
+
+
+func on_level_complete() -> void:
+	var level_index = player_state["current_level"]
+	mark_level_complete(level_index)
+	add_coins(current_session_state["coins_collected"])
+	for skill_name in current_session_state["skills_unlocked"]:
+		unlock_skill(skill_name)
+
+	reset_current_session_state()
+	try_to_go_to_next_level()
+	SaveSystem.save_game()

@@ -36,4 +36,4 @@ func on_exit_area_body_entered(_body: Node2D) -> void:
 
 
 func go_to_next_level() -> void:
-	gm.try_to_go_to_next_level()
+	gm.on_level_complete()

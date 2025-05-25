@@ -17,5 +17,5 @@ func _on_health_component_on_death() -> void:
 		effect.scale = Vector2(1.5, 1.5)
 
 	gm.remove_lives(1)
-	gm.set_coins(0)
+	gm.reset_current_session_state()
 		

@@ -6,10 +6,10 @@ extends Node
 
 func _ready():
 	await get_tree().process_frame
-	var coins = get_tree().get_nodes_in_group("coins")
+	var coins := get_tree().get_nodes_in_group("coins")
 
 	for coin in coins:
-		coin.connect("collected", on_collected)
+		coin.collected.connect(on_collected)
 
 
 func on_collected(amount: int, type: CollectableResource.CollectableType) -> void:
@@ -17,4 +17,4 @@ func on_collected(amount: int, type: CollectableResource.CollectableType) -> voi
 		return
 	if type != CollectableResource.CollectableType.COIN:
 		return
-	game_manager.add_coins(amount)
+	game_manager.current_session_state["coins_collected"] += amount

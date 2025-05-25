@@ -1,4 +1,3 @@
-class_name SaveSystem
 extends Node
 
 @export var save_path: String = "user://savegame.save"
@@ -15,18 +14,32 @@ func save_game():
 	var file      := FileAccess.open(save_path, FileAccess.WRITE)
 	file.store_var(save_data)
 	file.close()
+	print("Game saved to: ", save_path)
 
 
-func load_game():
+func load_game() -> bool:
 	if not FileAccess.file_exists(save_path):
-		return
+		return false
 	var file                  := FileAccess.open(save_path, FileAccess.READ)
 	var save_data: Dictionary =  file.get_var()
 	file.close()
 
 	if save_data.has("version") and save_data["version"] != version:
 		print("Save file version mismatch. Expected: ", version, ", Found: ", save_data["version"])
-		return
+		return false
 
+	print("save data: ", save_data)
 	gm.player_state = save_data["player_state"]
-	gm.unlock_skills(gm.player_state["unlocked_skills"])
+	print("Player state loaded: ", gm.player_state)
+	var skills: Array[String] = []
+	for skill_name in gm.player_state["unlocked_skills"]:
+		skills.append(skill_name)
+
+	print("Newly unlocked skills: ", skills)
+	gm.unlock_skills(skills)
+	print("Game loaded from: ", save_path)
+	return true
+
+
+func check_save_exists() -> bool:
+	return FileAccess.file_exists(save_path)

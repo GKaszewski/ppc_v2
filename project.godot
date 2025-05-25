@@ -36,6 +36,7 @@ Console="*res://addons/console/console.gd"
 AchievementsManager="*res://objects/achievements.tscn"
 ConfigFileHandler="*res://autoloads/config_file_handler.gd"
 UiManager="*res://autoloads/ui_manager.gd"
+SaveSystem="*res://autoloads/save_system.gd"
 
 [debug]
 

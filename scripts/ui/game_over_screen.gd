@@ -23,6 +23,7 @@ func on_restart_button_pressed() -> void:
 		return
 
 	gm.reset_player_state()
+	gm.reset_current_session_state()
 	get_tree().reload_current_scene()
 
 

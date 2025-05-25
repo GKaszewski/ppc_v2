@@ -6,6 +6,11 @@ extends Node
 @onready var game_manager: GM = $"/root/GameManager"
 
 
+
+func has_enough_coins(amount: int) -> bool:
+	return game_manager and game_manager.get_coins() >= amount
+
+
 func try_unlock_skill(skill_data: SkillData) -> bool:
 	if not game_manager:
 		return false
@@ -13,11 +18,11 @@ func try_unlock_skill(skill_data: SkillData) -> bool:
 	if game_manager.is_skill_unlocked(skill_data.name):
 		return false
 
-	if game_manager.get_coins() < skill_data.cost:
+	if not has_enough_coins(skill_data.cost):
 		return false
 
 	game_manager.remove_coins(skill_data.cost)
-	game_manager.unlock_skill(skill_data.name)
+	game_manager.current_session_state["unlocked_skills"].append(skill_data.name)
 	skill_manager.add_skill(skill_data)
 	return true
 
@@ -31,8 +36,3 @@ func unlock_all_skills() -> void:
 
 	game_manager.unlock_skills(skills)
 	skill_manager.apply_unlocked_skills()
-
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("unlock_skills"):
-		unlock_all_skills()

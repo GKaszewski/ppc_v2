@@ -27,6 +27,11 @@ func _ready() -> void:
 	if version_label:
 		version_label.text = "v. " + ProjectSettings.get_setting("application/config/version")
 
+	if not SaveSystem.check_save_exists() and continue_button:
+		continue_button.disabled = true
+	else:
+		continue_button.disabled = false
+
 
 func _on_new_game_button_pressed() -> void:
 	if gm:
