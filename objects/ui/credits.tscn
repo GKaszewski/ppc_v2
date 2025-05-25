@@ -38,7 +38,7 @@ theme_override_constants/separation = 32
 
 [node name="Pause" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "CREDITS"
+text = "CREDITS_TITLE"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
@@ -46,12 +46,5 @@ uppercase = true
 [node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Game was created by Gabriel Kaszewski.
-
-Main character was drawn by my girlfriend <3
-
-I would like to thank all of my friends that encouraged my during development of this game. 
-
-For now this is it, enjoy the game! 
-"
+text = "CREDITS"
 fit_content = true

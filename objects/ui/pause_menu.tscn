@@ -46,7 +46,7 @@ size_flags_vertical = 4
 
 [node name="Pause" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Pause"
+text = "PAUSE"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
@@ -58,20 +58,20 @@ size_flags_vertical = 3
 
 [node name="Resume Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "RESUME"
+text = "RESUME_BUTTON"
 flat = true
 
 [node name="Settings Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "SETTINGS"
+text = "SETTINGS_BUTTON"
 flat = true
 
 [node name="Exit to menu Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "EXIT TO MENU"
+text = "EXIT_TO_MENU_BUTTON"
 flat = true
 
 [node name="Quit game Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "QUIT GAME"
+text = "QUIT_BUTTON"
 flat = true

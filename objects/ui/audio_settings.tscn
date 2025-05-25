@@ -43,7 +43,7 @@ size_flags_vertical = 4
 
 [node name="Audio" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "audio"
+text = "AUDIO"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
@@ -59,7 +59,7 @@ theme_override_constants/separation = 4
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Master volume"]
 layout_mode = 2
-text = "Master volume"
+text = "MASTER_VOLUME"
 horizontal_alignment = 1
 
 [node name="HSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/Master volume"]
@@ -73,7 +73,7 @@ theme_override_constants/separation = 4
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Music volume"]
 layout_mode = 2
-text = "Music volume"
+text = "MUSIC_VOLUME"
 horizontal_alignment = 1
 
 [node name="HSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/Music volume"]
@@ -87,7 +87,7 @@ theme_override_constants/separation = 4
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/SFX volume"]
 layout_mode = 2
-text = "Sounds volume"
+text = "SOUNDS_VOLUME"
 horizontal_alignment = 1
 
 [node name="HSlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/SFX volume"]

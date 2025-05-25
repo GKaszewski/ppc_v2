@@ -1,0 +1,55 @@
+key,en,pl
+GAME_TITLE,Mr. Brick Adventures,Przygody Pana Cegły
+CONTINUE_BUTTON,CONTINUE,KONTYNUUJ
+NEW_GAME_BUTTON,NEW GAME,NOWA GRA
+SETTINGS_BUTTON,SETTINGS,USTAWIENIA
+CREDITS_BUTTON,CREDITS,AUTORZY
+QUIT_BUTTON,QUIT GAME,WYJDŹ Z GRY
+SETTINGS_TITLE,SETTINGS,USTAWIENIA
+INPUT_BUTTON,INPUT,KLAWISZE
+DISPLAY_BUTTON,DISPLAY,OBRAZ
+AUDIO_BUTTON,AUDIO,AUDIO
+GAMEPLAY_BUTTON,GAMEPLAY,GRA
+INPUT_TITLE,INPUT,KLAWISZE
+AUDIO_TITLE,AUDIO,AUDIO
+MASTER_VOLUME,MASTER VOLUME,OGÓLNA
+MUSIC VOLUME,MUSIC VOLUME,MUZYKA
+SOUNDS VOLUME,SOUNDS VOLUME,EFEKTY DŹWIĘKOWE
+CREDITS_TITLE,CREDITS,AUTORZY
+CREDITS,"Game was created by Gabriel Kaszewski.
+
+Main character was drawn by my girlfriend <3
+
+I would like to thank all of my friends that encouraged my during development of this game. 
+
+For now this is it, enjoy the game! 
+","Przygody Pana Cegły zostały zrobione przeze mnie, Gabriela Kaszewskiego.
+
+Główna postać, Pan Cegła został narysowany przez moją dziewczynę, która chciała pozostać anonimowa.
+
+Z tego miejsca chciałbym podziękować wszystkim moim znajomym I przyjaciołom, którzy wspierali mnie przy tworzeniu tej gry.
+
+Liczę, że będziesz dobrze się bawić! 
+
+Pozdrawiam."
+HEALTH_LABEL,HEALTH,ZDROWIE
+LIVES_LABEL,LIVES,ŻYCIA
+COINS_LABEL,COINS,MONETY
+LEVEL_1_NAME,VILLAGE – 1,WIOSKA – 1
+LEVEL_2_NAME,VILLAGE – 2,WIOSKA – 2
+LEVEL_3_NAME,VILLAGE – 3,WIOSKA – 3
+LEVEL_4_NAME,VILLAGE – 4,WIOSKA – 4
+LEVEL_5_NAME,VILLAGE – 5,WIOSKA – 5
+MARKETPLACE,MARKETPLACE,SKLEP
+GAME_OVER,GAME OVER,KONIEC GRY
+RESTART_LEVEL_BUTTON,RESTART LEVEL,POTWÓRZ POZIOM
+GO_TO_MENU_BUTTON,GO TO MENU,WRÓĆ DO MENU
+BRICK_POWER,Brick power,Ceglana siła
+EXPLOSIVE_BRICK,Explosive brick,Wybuchowa cegła
+FIRE_BRICK,Fire brick,Ognista cegła
+ICE_BRICK,Ice brick,Lodowa cegła
+MAGNETIC,Magnetic power,Moc magnesu
+PAUSE,PAUSE,PAUZA
+RESUME_BUTTON,RESUME,WZNÓW
+EXIT_TO_MENU_BUTTON,EXIT TO MENU,WYJDŹ DO MENU
+RESET_TO_DEFAULT_BUTTON,RESET TO DEFAULT BUTTON,PRZYWRÓĆ DOMYŚLNE USTAWIENIA

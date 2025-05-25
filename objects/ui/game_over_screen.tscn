@@ -41,7 +41,7 @@ theme_override_constants/separation = 16
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "game over"
+text = "GAME_OVER"
 horizontal_alignment = 1
 uppercase = true
 
@@ -51,10 +51,10 @@ layout_mode = 2
 
 [node name="RestartLevelButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "RESTART LEVEL"
+text = "RESTART_LEVEL_BUTTON"
 flat = true
 
 [node name="MenuButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "GO TO MENU"
+text = "GO_TO_MENU_BUTTON"
 flat = true

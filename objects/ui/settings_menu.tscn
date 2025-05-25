@@ -42,7 +42,7 @@ theme_override_constants/separation = 16
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
-text = "settings"
+text = "SETTINGS"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
@@ -53,22 +53,22 @@ size_flags_vertical = 3
 
 [node name="Input Settings Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "INPUT"
+text = "INPUT_BUTTON"
 flat = true
 
 [node name="Display Settings Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "DISPLAY"
+text = "DISPLAY_BUTTON"
 flat = true
 
 [node name="Audio Settings Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "AUDIO"
+text = "AUDIO_BUTTON"
 flat = true
 
 [node name="Gameplay Settings Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "GAMEPLAY"
+text = "GAMEPLAY_BUTTON"
 flat = true
 
 [node name="Spacer2" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer"]

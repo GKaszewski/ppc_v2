@@ -38,7 +38,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "input"
+text = "INPUT"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
@@ -72,5 +72,5 @@ layout_mode = 2
 
 [node name="Reset to default Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "RESET TO DEFAULT"
+text = "RESET_TO_DEFAULT_BUTTON"
 flat = true

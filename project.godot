@@ -155,6 +155,10 @@ switch_movement={
 ]
 }
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://translations.en.translation", "res://translations.pl.translation")
+
 [layer_names]
 
 2d_physics/layer_1="Terrain"
