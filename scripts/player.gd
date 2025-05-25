@@ -42,7 +42,6 @@ func switch_movement(movement_type: String) -> void:
 
 func get_next_movement_type() -> String:
 	var keys: Array = movement_types.keys()
-	print("Available movement types: ", keys)
 	var current_index: int = keys.find(current_movement.type)
 	if current_index == -1:
 		return default_movement_type
