@@ -8,12 +8,11 @@ extends Node
 								"lives": 3,
 								"unlocked_skills": [],
 								"current_level": 0,
-								"unlocked_levels": [],
+								"unlocked_levels": [0],
 								"completed_levels": [],
 							}
 
 var nodes_in_scene := []
-
 
 var current_session_state := {
 								 "coins_collected": 0,
@@ -135,6 +134,8 @@ func reset_player_state() -> void:
 		"coins": 0,
 		"lives": 3,
 		"unlocked_skills": [],
+		"current_level": 0,
+		"unlocked_levels": [0],
 		"completed_levels": [],
 	}
 
@@ -150,7 +151,6 @@ func try_to_go_to_next_level() -> void:
 		get_tree().change_scene_to_packed(level_scenes[next_level])
 
 
-
 func mark_level_complete(level_index: int) -> void:
 	unlock_level(level_index + 1)
 	if level_index not in player_state["completed_levels"]: player_state["completed_levels"].append(level_index)
@@ -161,6 +161,14 @@ func reset_current_session_state() -> void:
 		"coins_collected": 0,
 		"skills_unlocked": [],
 	}
+
+
+
+func restart_game() -> void:
+	reset_player_state()
+	reset_current_session_state()
+	get_tree().change_scene_to_packed(level_scenes[0])
+	SaveSystem.save_game()
 
 
 func quit_game() -> void:
@@ -177,9 +185,9 @@ func resume_game() -> void:
 
 func start_new_game() -> void:
 	reset_player_state()
-	player_state["current_level"] = 0
-	player_state["unlocked_levels"] = [0]  # Start with the first level unlocked
+	reset_current_session_state()
 	get_tree().change_scene_to_packed(level_scenes[0])
+	SaveSystem.save_game()
 
 
 func continue_game() -> void:

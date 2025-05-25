@@ -22,7 +22,7 @@ func try_unlock_skill(skill_data: SkillData) -> bool:
 		return false
 
 	game_manager.remove_coins(skill_data.cost)
-	game_manager.current_session_state["unlocked_skills"].append(skill_data.name)
+	game_manager.current_session_state["skills_unlocked"].append(skill_data.name)
 	skill_manager.add_skill(skill_data)
 	return true
 

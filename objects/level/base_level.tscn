@@ -114,5 +114,8 @@ metadata/_custom_type_script = "uid://8r1y8elyw7kt"
 [node name="Killzone" parent="." instance=ExtResource("13_0vx27")]
 position = Vector2(215, 324)
 
+[connection signal="on_death" from="Brick Player/HealthComponent" to="UI Layer/DeathScreen" method="on_player_death"]
+[connection signal="on_death" from="Brick Player/HealthComponent" to="UI Layer/GameOverScreen" method="on_player_death"]
+
 [editable path="Brick Player"]
 [editable path="UI Layer"]

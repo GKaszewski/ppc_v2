@@ -27,7 +27,8 @@ func load_game() -> bool:
 	if save_data.has("version") and save_data["version"] != version:
 		print("Save file version mismatch. Expected: ", version, ", Found: ", save_data["version"])
 		return false
-
+	print("Game state loaded from: ", save_path)
+	print("Player state: ", save_data["player_state"])
 	gm.player_state = save_data["player_state"]
 	var skills: Array[String] = []
 	for skill_name in gm.player_state["unlocked_skills"]:
