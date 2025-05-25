@@ -131,7 +131,7 @@ texture = ExtResource("2_dfydr")
 12:11/0 = 0
 13:11/0 = 0
 2:2/0 = 0
-2:2/0/probability = 0.0
+2:2/0/probability = 0.8
 
 [resource]
 sources/0 = SubResource("TileSetAtlasSource_cagp7")

@@ -8,6 +8,7 @@ extends Node
 @export var root: Node2D
 @export var bullet_spawn_right: Node2D
 @export var bullet_spawn_left: Node2D
+@export var shooting_interval_variation: float = 0.0
 
 var timer: Timer
 
@@ -43,9 +44,16 @@ func on_timer_timeout() -> void:
 	timer.start()
 
 
+
+func get_shoot_interval() -> float:
+	if shooting_interval_variation > 0.0:
+		return shoot_interval + randf_range(-shooting_interval_variation, shooting_interval_variation)
+	return shoot_interval
+
+
 func setup_timer() -> void:
 	timer = Timer.new()
-	timer.wait_time = shoot_interval
+	timer.wait_time = get_shoot_interval()
 	timer.one_shot = false
 	timer.autostart = true
 	timer.timeout.connect(on_timer_timeout)

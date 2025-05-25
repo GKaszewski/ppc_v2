@@ -126,9 +126,11 @@ area2d = NodePath("../Hitbox")
 [node name="PeriodicShootingComponent" type="Node" parent="." node_paths=PackedStringArray("root", "bullet_spawn_right", "bullet_spawn_left")]
 script = ExtResource("6_4ajjm")
 bullet_scene = ExtResource("7_4ajjm")
+shoot_interval = 2.0
 root = NodePath("..")
 bullet_spawn_right = NodePath("../laser spawn point right")
 bullet_spawn_left = NodePath("../laser spawn point left")
+shooting_interval_variation = 0.5
 
 [node name="EnemyDeathComponent" type="Node" parent="." node_paths=PackedStringArray("root", "collision_shape_2d", "health_component")]
 script = ExtResource("7_uyhuj")

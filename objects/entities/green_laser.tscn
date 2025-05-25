@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dtem8jgcyoqar"]
+[gd_scene load_steps=10 format=3 uid="uid://dtem8jgcyoqar"]
 
 [ext_resource type="Script" uid="uid://dkmxhjtmu5xlb" path="res://scripts/components/damage_component.gd" id="1_nuljg"]
 [ext_resource type="Script" uid="uid://cdnwrn8v05qhi" path="res://scripts/components/bullet_component.gd" id="2_1gu8o"]
@@ -7,16 +7,18 @@
 [ext_resource type="Script" uid="uid://873un8agkyja" path="res://scripts/components/launch_component.gd" id="5_772bd"]
 [ext_resource type="Script" uid="uid://bvsgg8lu0a8m6" path="res://scripts/components/lifetime_component.gd" id="6_vd16u"]
 [ext_resource type="Script" uid="uid://bgty7040ams6s" path="res://scripts/components/projectile_init_component.gd" id="7_1gu8o"]
+[ext_resource type="Script" uid="uid://bpy6xtfm8l3hy" path="res://scripts/components/trigger_lever_component.gd" id="8_2vcrp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n4uav"]
 size = Vector2(16, 2)
 
-[node name="Red Laser" type="Area2D"]
+[node name="Green Laser" type="Area2D"]
 collision_layer = 16
 collision_mask = 9
 
 [node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("area2d")]
 script = ExtResource("1_nuljg")
+damage = 1.0
 area2d = NodePath("..")
 metadata/_custom_type_script = "uid://dkmxhjtmu5xlb"
 
@@ -72,3 +74,7 @@ autostart = true
 script = ExtResource("7_1gu8o")
 launch_component = NodePath("../LaunchComponent")
 metadata/_custom_type_script = "uid://bgty7040ams6s"
+
+[node name="TriggerLeverComponent" type="Node" parent="."]
+script = ExtResource("8_2vcrp")
+metadata/_custom_type_script = "uid://bpy6xtfm8l3hy"
