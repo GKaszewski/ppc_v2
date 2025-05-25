@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://h60obxmju6mo"]
+[gd_scene load_steps=32 format=4 uid="uid://h60obxmju6mo"]
 
 [ext_resource type="PackedScene" uid="uid://dyp4i4ru2j2jh" path="res://objects/fxs/explosion_fx.tscn" id="1_p30ax"]
 [ext_resource type="PackedScene" uid="uid://dx80ivlvuuew4" path="res://objects/fxs/fire_fx.tscn" id="2_a7yjf"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://d0s2abysa86rq" path="res://objects/entities/child.tscn" id="15_dv6gh"]
 [ext_resource type="PackedScene" uid="uid://6foggu31cu14" path="res://objects/level/ui_layer.tscn" id="16_nr2eo"]
 [ext_resource type="PackedScene" uid="uid://bqom4cm7r18db" path="res://objects/entities/killzone.tscn" id="17_3xroh"]
+[ext_resource type="Resource" uid="uid://b63u5qfp8p7pv" path="res://resources/levels/village/village_3.tres" id="17_a7yjf"]
 [ext_resource type="PackedScene" uid="uid://b4pdt1gv2ymyi" path="res://objects/tooltip.tscn" id="18_l3a7y"]
 [ext_resource type="Script" uid="uid://8r1y8elyw7kt" path="res://scripts/console_management.gd" id="19_0pba3"]
 [ext_resource type="PackedScene" uid="uid://cawlpch2lk3a2" path="res://objects/level/world_environment.tscn" id="20_embdf"]
@@ -295,7 +296,7 @@ z_index = 5
 position = Vector2(903, -118)
 metadata/_edit_group_ = true
 
-[node name="HitParticles" parent="Brick Player" index="26"]
+[node name="HitParticles" parent="Brick Player" index="27"]
 process_material = SubResource("ParticleProcessMaterial_lgb3u")
 
 [node name="Camera2D" parent="." instance=ExtResource("12_qhkyq")]
@@ -327,6 +328,7 @@ position = Vector2(880, -578)
 player_health = NodePath("../../Brick Player/HealthComponent")
 
 [node name="DeathScreen" parent="UI Layer" index="1" node_paths=PackedStringArray("nodes_to_disable")]
+current_level = ExtResource("17_a7yjf")
 nodes_to_disable = [NodePath("../../Brick Player")]
 
 [node name="Marketplace" parent="UI Layer" index="3" node_paths=PackedStringArray("skill_unlocker", "components_to_disable")]

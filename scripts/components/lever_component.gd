@@ -19,10 +19,20 @@ func _ready() -> void:
 		return
 
 	area2d.body_entered.connect(_on_body_entered)
+	area2d.area_entered.connect(_on_area_entered)
 
 
 func _on_body_entered(body: Node2D) -> void:
 	var trigger_lever: TriggerLeverComponent = body.get_node_or_null("TriggerLeverComponent")
+	if not trigger_lever:
+		return
+
+	activate()
+
+
+
+func _on_area_entered(area: Area2D) -> void:
+	var trigger_lever: TriggerLeverComponent = area.get_node_or_null("TriggerLeverComponent")
 	if not trigger_lever:
 		return
 

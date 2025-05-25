@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://bqi5s710xb1ju"]
+[gd_scene load_steps=47 format=3 uid="uid://bqi5s710xb1ju"]
 
 [ext_resource type="Script" uid="uid://ccuddyoakg04u" path="res://scripts/player.gd" id="1_8j4h4"]
 [ext_resource type="Texture2D" uid="uid://b7gp0gqvkv8j4" path="res://sprites/MrBrick_base.png" id="2_bc55y"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://qeu80jy4vmuf" path="res://scripts/components/score.gd" id="6_fowa2"]
 [ext_resource type="Script" uid="uid://btfsq0bvtrx3t" path="res://scripts/components/health.gd" id="7_tqjk8"]
 [ext_resource type="Script" uid="uid://dkpu3121y88oo" path="res://scripts/components/player_death.gd" id="8_1v23d"]
+[ext_resource type="Texture2D" uid="uid://dhkwyv6ayb5qb" path="res://sprites/flying_ship.png" id="8_6lsog"]
 [ext_resource type="PackedScene" uid="uid://dyp4i4ru2j2jh" path="res://objects/fxs/explosion_fx.tscn" id="9_hwg11"]
 [ext_resource type="Script" uid="uid://nogmyshjrv57" path="res://scripts/components/knockback.gd" id="9_rjyu4"]
 [ext_resource type="Script" uid="uid://ulhswh4jjlc6" path="res://scripts/components/stomp_damage_component.gd" id="12_payr4"]
@@ -32,6 +33,10 @@
 [ext_resource type="PackedScene" uid="uid://b12tppjkkqpt4" path="res://objects/fxs/hit_particles.tscn" id="28_jh5m0"]
 [ext_resource type="Script" uid="uid://ceq8n7yw7qxpi" path="res://scripts/components/hit_component.gd" id="29_jh5m0"]
 [ext_resource type="Script" uid="uid://c1wtrgw0x77xo" path="res://scripts/components/platform_movement.gd" id="31_xoue7"]
+[ext_resource type="AudioStream" uid="uid://dyev46uqusimi" path="res://sfx/shoot.wav" id="32_x2b7c"]
+[ext_resource type="Script" uid="uid://d1ctdx52gskv1" path="res://scripts/components/ship_shooter.gd" id="34_gwc8i"]
+[ext_resource type="PackedScene" uid="uid://dtem8jgcyoqar" path="res://objects/entities/green_laser.tscn" id="36_oxudy"]
+[ext_resource type="Script" uid="uid://cfeoalic0mu2j" path="res://scripts/components/kill_player_out_of_screen.gd" id="37_oxudy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xoue7"]
 shader = ExtResource("2_lgb3u")
@@ -77,7 +82,7 @@ scale_curve = SubResource("CurveTexture_xoue7")
 color = Color(0.764706, 0.443137, 0, 1)
 color_ramp = SubResource("GradientTexture1D_lgb3u")
 
-[node name="Brick Player" type="CharacterBody2D" groups=["player"]]
+[node name="Brick Player" type="CharacterBody2D" node_paths=PackedStringArray("ship_sprite") groups=["player"]]
 collision_layer = 4
 collision_mask = 43
 script = ExtResource("1_8j4h4")
@@ -85,39 +90,48 @@ movement_types = {
 "platform": NodePath("Movements/PlatformMovement"),
 "ship": NodePath("Movements/ShipMovement")
 }
+ship_sprite = NodePath("Graphics/Ship")
 
 [node name="Movements" type="Node" parent="."]
 
 [node name="PlatformMovement" type="Node" parent="Movements" node_paths=PackedStringArray("jump_sfx", "rotation_target", "body")]
 script = ExtResource("31_xoue7")
 jump_sfx = NodePath("../../sfx_jump")
-rotation_target = NodePath("../../Root/Base")
+rotation_target = NodePath("../../Graphics/Root/Base")
 body = NodePath("../..")
 type = "platform"
 
 [node name="ShipMovement" type="Node" parent="Movements" node_paths=PackedStringArray("body")]
 script = ExtResource("3_p4n66")
-acceleration = 800.0
-friction = 600.0
+max_speed = 360.0
+acceleration = 1200.0
+friction = 800.0
 body = NodePath("../..")
 type = "ship"
 metadata/_custom_type_script = "uid://b3mrdvre1y567"
 
-[node name="Root" type="Node2D" parent="."]
+[node name="Graphics" type="Node2D" parent="."]
 
-[node name="Base" type="Sprite2D" parent="Root"]
+[node name="Root" type="Node2D" parent="Graphics"]
+
+[node name="Base" type="Sprite2D" parent="Graphics/Root"]
 material = SubResource("ShaderMaterial_xoue7")
 texture = ExtResource("2_bc55y")
 
-[node name="Left Eye" type="Sprite2D" parent="Root"]
+[node name="Left Eye" type="Sprite2D" parent="Graphics/Root"]
 position = Vector2(-7, -6)
 texture = ExtResource("3_2srrh")
 hframes = 2
 
-[node name="Right Eye" type="Sprite2D" parent="Root"]
+[node name="Right Eye" type="Sprite2D" parent="Graphics/Root"]
 position = Vector2(6, -5)
 texture = ExtResource("4_ccn81")
 hframes = 2
+
+[node name="Ship" type="Sprite2D" parent="Graphics"]
+visible = false
+position = Vector2(1, 7)
+texture = ExtResource("8_6lsog")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -126,8 +140,8 @@ shape = SubResource("RectangleShape2D_hdsg1")
 
 [node name="FlipPlayerComponent" type="Node2D" parent="." node_paths=PackedStringArray("eye_left", "eye_right", "platform_movement")]
 script = ExtResource("5_geu10")
-eye_left = NodePath("../Root/Left Eye")
-eye_right = NodePath("../Root/Right Eye")
+eye_left = NodePath("../Graphics/Root/Left Eye")
+eye_right = NodePath("../Graphics/Root/Right Eye")
 platform_movement = NodePath("../Movements/PlatformMovement")
 
 [node name="StompDamageArea" type="Area2D" parent="."]
@@ -167,19 +181,19 @@ flashing_component = NodePath("../FlashingComponent Base")
 
 [node name="FlashingComponent Base" type="Node" parent="." node_paths=PackedStringArray("sprite", "health_component")]
 script = ExtResource("13_hrtyn")
-sprite = NodePath("../Root/Base")
+sprite = NodePath("../Graphics/Root/Base")
 flash_duration = 1.0
 health_component = NodePath("../HealthComponent")
 
 [node name="FlashingComponent LEye" type="Node" parent="." node_paths=PackedStringArray("sprite", "health_component")]
 script = ExtResource("13_hrtyn")
-sprite = NodePath("../Root/Left Eye")
+sprite = NodePath("../Graphics/Root/Left Eye")
 flash_duration = 1.0
 health_component = NodePath("../HealthComponent")
 
 [node name="FlashingComponent REye" type="Node" parent="." node_paths=PackedStringArray("sprite", "health_component")]
 script = ExtResource("13_hrtyn")
-sprite = NodePath("../Root/Right Eye")
+sprite = NodePath("../Graphics/Root/Right Eye")
 flash_duration = 1.0
 health_component = NodePath("../HealthComponent")
 
@@ -199,7 +213,7 @@ skill_manager = NodePath("../SkillManager")
 
 [node name="HitComponent" type="Node" parent="." node_paths=PackedStringArray("sprite", "health_component", "hit_fx")]
 script = ExtResource("29_jh5m0")
-sprite = NodePath("../Root/Base")
+sprite = NodePath("../Graphics/Root/Base")
 health_component = NodePath("../HealthComponent")
 hit_fx = NodePath("../HitParticles")
 metadata/_custom_type_script = "uid://ceq8n7yw7qxpi"
@@ -230,6 +244,10 @@ bus = &"sfx"
 stream = ExtResource("20_bptj5")
 bus = &"sfx"
 
+[node name="sfx_shoot" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("32_x2b7c")
+bus = &"sfx"
+
 [node name="ChargingBarLayer" parent="." instance=ExtResource("28_3f5nm")]
 offset_left = -17.0
 offset_top = -30.0
@@ -238,6 +256,26 @@ offset_bottom = -20.0
 
 [node name="HitParticles" parent="." instance=ExtResource("28_jh5m0")]
 process_material = SubResource("ParticleProcessMaterial_lgb3u")
+
+[node name="ShipShooter" type="Node" parent="." node_paths=PackedStringArray("bullet_spawn", "shoot_sfx")]
+script = ExtResource("34_gwc8i")
+bullet_scene = ExtResource("36_oxudy")
+bullet_spawn = NodePath("../Ship shoot spawn")
+shoot_sfx = NodePath("../sfx_shoot")
+metadata/_custom_type_script = "uid://d1ctdx52gskv1"
+
+[node name="Ship shoot spawn" type="Marker2D" parent="."]
+position = Vector2(17, 5)
+gizmo_extents = 1.0
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, 3)
+scale = Vector2(0.8, 1.9)
+
+[node name="KillPlayerOutOfScreen" type="Node" parent="." node_paths=PackedStringArray("screen_notifier", "health_component")]
+script = ExtResource("37_oxudy")
+screen_notifier = NodePath("../VisibleOnScreenNotifier2D")
+health_component = NodePath("../HealthComponent")
 
 [connection signal="on_death" from="HealthComponent" to="PlayerDeathComponent" method="_on_health_component_on_death"]
 [connection signal="on_health_change" from="HealthComponent" to="KnockbackComponent" method="_on_health_component_on_health_change"]

@@ -104,3 +104,8 @@ func handle_direction(input_dir: float) -> Vector2:
 	elif input_dir < 0:
 		return Vector2.LEFT
 	return last_direction
+
+
+
+func on_ship_entered() -> void:
+	rotation_target.rotation = 0

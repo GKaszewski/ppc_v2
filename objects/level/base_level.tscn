@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=4 uid="uid://fw5fbdy5gcmx"]
+[gd_scene load_steps=21 format=4 uid="uid://fw5fbdy5gcmx"]
 
 [ext_resource type="PackedScene" uid="uid://cawlpch2lk3a2" path="res://objects/level/world_environment.tscn" id="1_hb5r3"]
 [ext_resource type="PackedScene" uid="uid://bqi5s710xb1ju" path="res://objects/entities/brick_player.tscn" id="1_lbnsn"]
 [ext_resource type="PackedScene" uid="uid://6foggu31cu14" path="res://objects/level/ui_layer.tscn" id="2_lbnsn"]
 [ext_resource type="PackedScene" uid="uid://cywsu7yrtjdog" path="res://objects/level/global_light.tscn" id="3_3732a"]
+[ext_resource type="Resource" uid="uid://cqtalsov2bkpo" path="res://resources/levels/village/village_1.tres" id="4_c2yv5"]
 [ext_resource type="PackedScene" uid="uid://cb0mnye1ki5a6" path="res://objects/level/camera_2d.tscn" id="5_517ha"]
 [ext_resource type="Script" uid="uid://d23haq52m7ulv" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="6_6imqp"]
 [ext_resource type="Script" uid="uid://ccfft4b8rwgbo" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="7_kl81p"]
@@ -54,7 +55,7 @@ ease = 2
 
 [node name="Brick Player" parent="." instance=ExtResource("1_lbnsn")]
 
-[node name="HitParticles" parent="Brick Player" index="26"]
+[node name="HitParticles" parent="Brick Player" index="27"]
 process_material = SubResource("ParticleProcessMaterial_lgb3u")
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("1_hb5r3")]
@@ -65,6 +66,7 @@ process_material = SubResource("ParticleProcessMaterial_lgb3u")
 player_health = NodePath("../../Brick Player/HealthComponent")
 
 [node name="DeathScreen" parent="UI Layer" index="1" node_paths=PackedStringArray("nodes_to_disable")]
+current_level = ExtResource("4_c2yv5")
 nodes_to_disable = [NodePath("../../Brick Player")]
 
 [node name="Marketplace" parent="UI Layer" index="3" node_paths=PackedStringArray("skill_unlocker", "components_to_disable")]

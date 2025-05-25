@@ -1,9 +1,9 @@
-[gd_scene load_steps=28 format=4 uid="uid://chqb11pfoqmeb"]
+[gd_scene load_steps=27 format=4 uid="uid://chqb11pfoqmeb"]
 
 [ext_resource type="PackedScene" uid="uid://bqi5s710xb1ju" path="res://objects/entities/brick_player.tscn" id="1_wcma7"]
 [ext_resource type="PackedScene" uid="uid://cawlpch2lk3a2" path="res://objects/level/world_environment.tscn" id="2_ot3dy"]
 [ext_resource type="PackedScene" uid="uid://6foggu31cu14" path="res://objects/level/ui_layer.tscn" id="3_cjqhe"]
-[ext_resource type="Script" uid="uid://cp68km8bykymb" path="res://scripts/resources/level_resource.gd" id="4_ufsbg"]
+[ext_resource type="Resource" uid="uid://dlwkbjw1l33uq" path="res://resources/levels/village/village_2.tres" id="4_h4uvs"]
 [ext_resource type="PackedScene" uid="uid://cywsu7yrtjdog" path="res://objects/level/global_light.tscn" id="4_wykfl"]
 [ext_resource type="PackedScene" uid="uid://cb0mnye1ki5a6" path="res://objects/level/camera_2d.tscn" id="5_8nvkd"]
 [ext_resource type="Script" uid="uid://d23haq52m7ulv" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="6_ono4h"]
@@ -51,12 +51,6 @@ scale_curve = SubResource("CurveTexture_7b7mt")
 color = Color(0.764706, 0.443137, 0, 1)
 color_ramp = SubResource("GradientTexture1D_f1fvy")
 
-[sub_resource type="Resource" id="Resource_bqjcg"]
-script = ExtResource("4_ufsbg")
-level_name = "Village - 2 "
-scene_path = ""
-metadata/_custom_type_script = "uid://cp68km8bykymb"
-
 [sub_resource type="Resource" id="Resource_0nwt7"]
 script = ExtResource("7_y1tp2")
 duration = 1.0
@@ -68,7 +62,7 @@ ease = 2
 [node name="Brick Player" parent="." instance=ExtResource("1_wcma7")]
 z_index = 1
 
-[node name="HitParticles" parent="Brick Player" index="26"]
+[node name="HitParticles" parent="Brick Player" index="27"]
 process_material = SubResource("ParticleProcessMaterial_lgb3u")
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("2_ot3dy")]
@@ -79,7 +73,7 @@ process_material = SubResource("ParticleProcessMaterial_lgb3u")
 player_health = NodePath("../../Brick Player/HealthComponent")
 
 [node name="DeathScreen" parent="UI Layer" index="1" node_paths=PackedStringArray("nodes_to_disable")]
-current_level = SubResource("Resource_bqjcg")
+current_level = ExtResource("4_h4uvs")
 nodes_to_disable = [NodePath("../../Brick Player")]
 
 [node name="Marketplace" parent="UI Layer" index="3" node_paths=PackedStringArray("skill_unlocker", "components_to_disable")]

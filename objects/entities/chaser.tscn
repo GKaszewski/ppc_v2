@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bon6raeddf3tu"]
+
+[ext_resource type="Script" uid="uid://cf4li7whw5old" path="res://scripts/components/chase_level_component.gd" id="1_ico16"]
+
+[node name="Chaser" type="Node2D"]
+
+[node name="ChaseLevelComponent" type="Node" parent="."]
+script = ExtResource("1_ico16")

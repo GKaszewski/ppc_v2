@@ -6,7 +6,12 @@ extends Node
 @export var bullet_spawn: Marker2D
 @export var shoot_sfx: AudioStreamPlayer2D
 
-var can_shoot: bool = true
+
+var can_shoot: bool = false
+
+
+func _ready() -> void:
+	set_process(false)
 
 
 func _process(_delta: float) -> void:
@@ -31,3 +36,15 @@ func shoot() -> void:
 	can_shoot = false
 	await get_tree().create_timer(fire_rate).timeout
 	can_shoot = true
+
+
+func on_ship_entered():
+	can_shoot = true
+	set_process(true)
+
+
+func on_ship_exited():
+	can_shoot = false
+	set_process(false)
+	if shoot_sfx:
+		shoot_sfx.stop()

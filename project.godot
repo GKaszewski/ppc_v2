@@ -160,6 +160,7 @@ switch_movement={
 [internationalization]
 
 locale/translations=PackedStringArray("res://translations.en.translation", "res://translations.pl.translation")
+locale/test="pl"
 
 [layer_names]
 

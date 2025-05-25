@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 @export var default_movement_type: String = "platform"
 @export var movement_types: Dictionary = {}
+@export var ship_sprite: Sprite2D
 
 var current_movement: PlayerMovement = null
 signal movement_switched(movement_type: String)
@@ -50,3 +51,14 @@ func get_next_movement_type() -> String:
 
 	current_index = (current_index + 1) % keys.size()
 	return keys[current_index]
+
+
+
+func on_spaceship_entered() -> void:
+	switch_movement("ship")
+	ship_sprite.visible = true
+
+
+func on_spaceship_exited() -> void:
+	switch_movement(default_movement_type)
+	ship_sprite.visible = false
