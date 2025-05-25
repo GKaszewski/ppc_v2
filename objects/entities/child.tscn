@@ -54,3 +54,4 @@ sfx = NodePath("../sfx_pickup")
 
 [node name="sfx_pickup" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_j8eyh")
+bus = &"sfx"

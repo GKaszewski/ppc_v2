@@ -142,3 +142,20 @@ func pause_game() -> void:
 
 func resume_game() -> void:
 	Engine.time_scale = 1
+
+
+
+func start_new_game() -> void:
+	reset_player_state()
+	player_state["current_level"] = 0
+	player_state["unlocked_levels"] = [0]  # Start with the first level unlocked
+	get_tree().change_scene_to_packed(level_scenes[0])
+
+
+func continue_game() -> void:
+	# todo: load player state from save file
+
+	if player_state["current_level"] < level_scenes.size():
+		get_tree().change_scene_to_packed(level_scenes[player_state["current_level"]])
+	else:
+		printerr("No levels unlocked to continue.")

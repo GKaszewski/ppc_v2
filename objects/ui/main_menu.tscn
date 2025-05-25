@@ -1,0 +1,84 @@
+[gd_scene load_steps=3 format=3 uid="uid://8b6ol5sssbgo"]
+
+[ext_resource type="Script" uid="uid://hyfvthdbgjbc" path="res://scripts/ui/main_menu.gd" id="1_epxpl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qv2q0"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu_control", "new_game_button", "continue_button", "settings_button", "credits_button", "exit_button", "version_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_epxpl")
+main_menu_control = NodePath(".")
+new_game_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/NewGameButton")
+continue_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/ContinueButton")
+settings_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/SettingsButton")
+credits_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/CreditsButton")
+exit_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/QuitButton")
+version_label = NodePath("PanelContainer/MarginContainer/VBoxContainer/version")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qv2q0")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "MR. BRICK ADVENTURES"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Spacer" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ContinueButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "CONTINUE"
+flat = true
+
+[node name="NewGameButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "NEW GAME"
+flat = true
+
+[node name="SettingsButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "SETTINGS"
+flat = true
+
+[node name="CreditsButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "CREDITS"
+flat = true
+
+[node name="QuitButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "QUIT GAME"
+flat = true
+
+[node name="version" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "v. in-dev"

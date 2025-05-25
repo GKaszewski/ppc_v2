@@ -166,9 +166,11 @@ ice_fx = NodePath("../Ice FX")
 
 [node name="sfx_hurt" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("13_u4k3d")
+bus = &"sfx"
 
 [node name="sfx_shoot" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("14_tdjks")
+bus = &"sfx"
 
 [node name="FireFX" parent="." instance=ExtResource("15_mc6rj")]
 position = Vector2(0, 9)

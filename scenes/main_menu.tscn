@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cl00e2ocomk3m"]
+
+[ext_resource type="PackedScene" uid="uid://8b6ol5sssbgo" path="res://objects/ui/main_menu.tscn" id="1_ekxnf"]
+[ext_resource type="PackedScene" uid="uid://y0ae6e7t70fj" path="res://objects/ui/settings_menu.tscn" id="2_bqqt6"]
+[ext_resource type="PackedScene" uid="uid://bwgmrcyj4mvu" path="res://objects/ui/credits.tscn" id="3_bqqt6"]
+
+[node name="Main menu" type="CanvasLayer"]
+
+[node name="MainMenu" parent="." node_paths=PackedStringArray("settings_control", "credits_control") instance=ExtResource("1_ekxnf")]
+settings_control = NodePath("../Settings menu")
+credits_control = NodePath("../Credits")
+
+[node name="Settings menu" parent="." instance=ExtResource("2_bqqt6")]
+visible = false
+
+[node name="Credits" parent="." instance=ExtResource("3_bqqt6")]
+visible = false

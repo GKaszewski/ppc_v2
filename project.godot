@@ -16,9 +16,10 @@ config/name_localized={
 "pl": "Przygody Pana Cegły"
 }
 config/version="in-dev"
-run/main_scene="uid://bol7g83v2accs"
+run/main_scene="uid://cl00e2ocomk3m"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 run/max_fps=180
+boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
 boot_splash/fullsize=false
 boot_splash/use_filter=false

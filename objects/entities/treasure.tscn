@@ -39,3 +39,4 @@ area2d = NodePath("..")
 [node name="sfx" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_xt2rk")
 volume_db = -5.0
+bus = &"sfx"

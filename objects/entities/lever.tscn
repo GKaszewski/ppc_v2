@@ -30,3 +30,4 @@ sfx = NodePath("../sfx")
 
 [node name="sfx" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_gipby")
+bus = &"sfx"

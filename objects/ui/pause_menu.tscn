@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://i6mnjbjcoqe5"]
+[gd_scene load_steps=4 format=3 uid="uid://i6mnjbjcoqe5"]
 
 [ext_resource type="Script" uid="uid://cugifchx6jhuk" path="res://scripts/ui/pause_menu.gd" id="1_aktha"]
+[ext_resource type="PackedScene" uid="uid://cl00e2ocomk3m" path="res://scenes/main_menu.tscn" id="2_h4pd5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4ivv"]
 bg_color = Color(0, 0, 0, 1)
@@ -20,6 +21,7 @@ resume_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/Resume Bu
 quit_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/Quit game Button")
 settings_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/Settings Button")
 exit_to_menu_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/Exit to menu Button")
+exit_to_menu_scene = ExtResource("2_h4pd5")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1

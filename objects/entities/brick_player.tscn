@@ -220,12 +220,15 @@ script = ExtResource("17_hglfj")
 
 [node name="sfx_jump" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("18_pysae")
+bus = &"sfx"
 
 [node name="sfx_hurt" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("19_7anly")
+bus = &"sfx"
 
 [node name="sfx_heal" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("20_bptj5")
+bus = &"sfx"
 
 [node name="ChargingBarLayer" parent="." instance=ExtResource("28_3f5nm")]
 offset_left = -17.0

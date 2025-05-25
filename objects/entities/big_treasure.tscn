@@ -38,3 +38,4 @@ area2d = NodePath("..")
 
 [node name="sfx" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_fxf8v")
+bus = &"sfx"

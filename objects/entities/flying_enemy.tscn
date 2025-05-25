@@ -113,9 +113,11 @@ metadata/_custom_type_script = "uid://btfsq0bvtrx3t"
 
 [node name="sfx_hurt" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_fd2du")
+bus = &"sfx"
 
 [node name="sfx_shoot" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_rhq76")
+bus = &"sfx"
 
 [node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("area2d")]
 script = ExtResource("5_cmp1h")
