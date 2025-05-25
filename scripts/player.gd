@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var movement_types: Dictionary = {}
 
 var current_movement: PlayerMovement = null
+signal movement_switched(movement_type: String)
 
 
 func _ready() -> void:
@@ -33,6 +34,7 @@ func switch_movement(movement_type: String) -> void:
 			push_error("Movement type '%s' not found in movement_types." % movement_type)
 			return
 		current_movement.enabled = true
+		movement_switched.emit(current_movement.type)
 	else:
 		push_error("Movement type '%s' not found in movement_types." % movement_type)
 
