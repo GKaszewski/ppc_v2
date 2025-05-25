@@ -92,7 +92,6 @@ top_level = true
 script = ExtResource("6_18aqg")
 follow_mode = 2
 follow_target = NodePath("../Brick Player")
-snap_to_pixel = true
 tween_resource = SubResource("Resource_0nwt7")
 draw_limits = true
 limit_target = NodePath("../Terrain Layer")

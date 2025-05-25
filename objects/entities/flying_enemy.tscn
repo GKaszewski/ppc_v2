@@ -1,11 +1,13 @@
-[gd_scene load_steps=25 format=3 uid="uid://xp4njljog0x2"]
+[gd_scene load_steps=29 format=3 uid="uid://xp4njljog0x2"]
 
 [ext_resource type="Texture2D" uid="uid://22k1u37j6k8y" path="res://sprites/flying_enemy.png" id="1_30hhw"]
+[ext_resource type="Shader" uid="uid://bs4xvm4qkurpr" path="res://shaders/hit_flash.tres" id="1_uyhuj"]
 [ext_resource type="Script" uid="uid://btfsq0bvtrx3t" path="res://scripts/components/health.gd" id="2_ivniq"]
 [ext_resource type="AudioStream" uid="uid://b3tsqhr06pbrs" path="res://sfx/enemy_hurt.wav" id="3_fd2du"]
 [ext_resource type="AudioStream" uid="uid://dyev46uqusimi" path="res://sfx/shoot.wav" id="4_rhq76"]
 [ext_resource type="Script" uid="uid://dkmxhjtmu5xlb" path="res://scripts/components/damage_component.gd" id="5_cmp1h"]
 [ext_resource type="Script" uid="uid://b37gqnycj6rtk" path="res://scripts/components/periodic_shooting.gd" id="6_4ajjm"]
+[ext_resource type="PackedScene" uid="uid://t422jkov2t1b" path="res://objects/entities/red_laser.tscn" id="7_4ajjm"]
 [ext_resource type="Script" uid="uid://dqm371fysuk7i" path="res://scripts/components/enemy_death.gd" id="7_uyhuj"]
 [ext_resource type="Script" uid="uid://dqmbvuutd5c3c" path="res://scripts/components/flashing_component.gd" id="8_q78ru"]
 [ext_resource type="Script" uid="uid://ceq8n7yw7qxpi" path="res://scripts/components/hit_component.gd" id="9_weo6b"]
@@ -18,6 +20,11 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hil2i"]
 radius = 6.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q78ru"]
+shader = ExtResource("1_uyhuj")
+shader_parameter/enabled = false
+shader_parameter/tint = Color(1, 1, 1, 1)
 
 [sub_resource type="Curve" id="Curve_68xvh"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.870036, 0.767164), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -69,22 +76,31 @@ scale_curve = SubResource("CurveTexture_7b7mt")
 color = Color(0.47451, 0.47451, 0.47451, 1)
 color_ramp = SubResource("GradientTexture1D_f1fvy")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cmp1h"]
+size = Vector2(16, 26)
+
 [node name="Flying Enemy" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 21
+motion_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("CapsuleShape2D_hil2i")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_q78ru")
 texture = ExtResource("1_30hhw")
 
 [node name="Jetpack Particles" type="GPUParticles2D" parent="."]
+z_index = -1
 position = Vector2(-4, 16)
 explosiveness = 0.5
 fixed_fps = 24
 process_material = SubResource("ParticleProcessMaterial_fd2du")
 
 [node name="Jetpack Particles2" type="GPUParticles2D" parent="."]
+z_index = -1
 position = Vector2(4, 16)
 explosiveness = 0.5
 fixed_fps = 24
@@ -103,11 +119,11 @@ stream = ExtResource("4_rhq76")
 
 [node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("area2d")]
 script = ExtResource("5_cmp1h")
-area2d = NodePath("")
+area2d = NodePath("../Hitbox")
 
-[node name="PeriodicShootingComponent" type="Node" parent="." node_paths=PackedStringArray("side_to_side_movement", "root", "bullet_spawn_right", "bullet_spawn_left")]
+[node name="PeriodicShootingComponent" type="Node" parent="." node_paths=PackedStringArray("root", "bullet_spawn_right", "bullet_spawn_left")]
 script = ExtResource("6_4ajjm")
-side_to_side_movement = NodePath("")
+bullet_scene = ExtResource("7_4ajjm")
 root = NodePath("..")
 bullet_spawn_right = NodePath("../laser spawn point right")
 bullet_spawn_left = NodePath("../laser spawn point left")
@@ -166,3 +182,11 @@ position = Vector2(8, -2)
 
 [node name="laser spawn point left" type="Node2D" parent="."]
 position = Vector2(-9, -2)
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 20
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_cmp1h")
