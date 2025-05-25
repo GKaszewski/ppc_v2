@@ -129,15 +129,15 @@ position = Vector2(1485, 25)
 
 [node name="Tooltip" parent="." instance=ExtResource("18_4bhfj")]
 position = Vector2(712, -343)
-text = "Some blocks might collapse"
+text = "LEVEL_1_TOOLTIP_1"
 
 [node name="Tooltip2" parent="." instance=ExtResource("18_4bhfj")]
 position = Vector2(552, 25)
-text = "Jump to the other side!"
+text = "LEVEL_1_TOOLTIP_2"
 
 [node name="Tooltip3" parent="." instance=ExtResource("18_4bhfj")]
 position = Vector2(-59, -247)
-text = "To rescue your child, you need to find the lever."
+text = "LEVEL_1_TOOLTIP_3"
 
 [connection signal="on_death" from="Brick Player/HealthComponent" to="UI Layer/DeathScreen" method="on_player_death"]
 [connection signal="on_death" from="Brick Player/HealthComponent" to="UI Layer/GameOverScreen" method="on_player_death"]

@@ -13,8 +13,8 @@ GAMEPLAY_BUTTON,GAMEPLAY,GRA
 INPUT_TITLE,INPUT,KLAWISZE
 AUDIO_TITLE,AUDIO,AUDIO
 MASTER_VOLUME,MASTER VOLUME,OGÓLNA
-MUSIC VOLUME,MUSIC VOLUME,MUZYKA
-SOUNDS VOLUME,SOUNDS VOLUME,EFEKTY DŹWIĘKOWE
+MUSIC_VOLUME,MUSIC VOLUME,MUZYKA
+SOUNDS_VOLUME,SOUNDS VOLUME,EFEKTY DŹWIĘKOWE
 CREDITS_TITLE,CREDITS,AUTORZY
 CREDITS,"Game was created by Gabriel Kaszewski.
 
@@ -53,3 +53,11 @@ PAUSE,PAUSE,PAUZA
 RESUME_BUTTON,RESUME,WZNÓW
 EXIT_TO_MENU_BUTTON,EXIT TO MENU,WYJDŹ DO MENU
 RESET_TO_DEFAULT_BUTTON,RESET TO DEFAULT BUTTON,PRZYWRÓĆ DOMYŚLNE USTAWIENIA
+BRICK_POWER_DESCRIPTION,Allows you to throw bricks at enemies,Pozwala Panu Cegle rzucać cegłami w przeciwników
+EXPLOSIVE_BRICK_DESCRIPTION,Allows you to throw explosive bricks at enemies,Pozwala Panu Cegle rzucać wybuchającymi cegłami w przeciwników
+FIRE_BIRCK_DESCRIPTION,Allows you to throw fire bricks at enemies,Pozwala Panu Cegle rzucać ognistymi cegłami w przeciwników
+ICE_BRICK_DESCRIPTION,Allows you to throw ice bricks at enemies,Pozwala Panu Cegle rzucać lodowymi cegłami w przeciwników
+MAGNETIC_DESCRIPTION,Attract coins,Przyciąga monety w pobliżu
+LEVEL_1_TOOLTIP_1,Some blocks might collapse,Niektóre bloki mogą się zapaść.
+LEVEL_1_TOOLTIP_2,Jump to the other side!,Przeskocz na drugą stronę!
+LEVEL_1_TOOLTIP_3,"To rescue your child, you need to find the lever.",Uratuj dziecko poprzez aktywację dźwigni.

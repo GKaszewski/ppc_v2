@@ -8,8 +8,8 @@
 
 [resource]
 script = ExtResource("1_2j5ko")
-name = "Fire brick"
-description = "Allows you to throw fire bricks at enemies"
+name = "FIRE_BRICK"
+description = "FIRE_BIRCK_DESCRIPTION"
 node = ExtResource("1_g53fp")
 config = {
 "brick_scene": ExtResource("1_2g43l"),

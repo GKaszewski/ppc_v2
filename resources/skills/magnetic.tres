@@ -6,8 +6,8 @@
 
 [resource]
 script = ExtResource("1_r01oq")
-name = "Magnetic"
-description = "Attract coins"
+name = "MAGNETIC"
+description = "MAGNETIC_DESCRIPTION"
 node = ExtResource("1_er41s")
 config = {
 "magnetic_area": NodePath("MagneticArea"),

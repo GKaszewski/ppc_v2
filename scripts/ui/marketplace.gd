@@ -44,7 +44,7 @@ func _input(event: InputEvent) -> void:
 
 
 func get_button_text(skill: SkillData) -> String:
-	return skill.name + " " + str(skill.cost)
+	return tr(skill.name) + " " + str(skill.cost)
 
 
 func create_upgrade_button(skill: SkillData):

@@ -8,8 +8,8 @@
 
 [resource]
 script = ExtResource("2_pspkt")
-name = "Ice brick"
-description = "Allows you to throw ice bricks at enemies"
+name = "ICE_BRICK"
+description = "ICE_BRICK_DESCRIPTION"
 node = ExtResource("1_rflri")
 config = {
 "brick_scene": ExtResource("1_ci3d1"),

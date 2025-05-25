@@ -5,7 +5,10 @@
 [node name="MarketplaceButton" type="Button"]
 offset_right = 8.0
 offset_bottom = 8.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_font_sizes/font_size = 8
 text = "Fire brick 100"
 icon = ExtResource("1_5kqfg")
 flat = true
+autowrap_mode = 2

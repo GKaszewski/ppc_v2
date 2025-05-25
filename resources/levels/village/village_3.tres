@@ -4,5 +4,6 @@
 
 [resource]
 script = ExtResource("1_3v5yj")
-level_name = "Village - 3"
+level_name = "LEVEL_3_NAME"
+scene_path = ""
 metadata/_custom_type_script = "uid://cp68km8bykymb"

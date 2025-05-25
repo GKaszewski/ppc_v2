@@ -7,8 +7,8 @@
 
 [resource]
 script = ExtResource("1_etxe2")
-name = "Brick power"
-description = "Allows you to throw bricks at enemies"
+name = "BRICK_POWER"
+description = "BRICK_POWER_DESCRIPTION"
 node = ExtResource("1_5gnea")
 config = {
 "player_controller": NodePath("."),
