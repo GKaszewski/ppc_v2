@@ -42,11 +42,11 @@ func on_timer_timeout() -> void:
 func throw_brick(power_multiplier: float = 1.0) -> void:
 	var instance: Node2D =  brick_scene.instantiate()
 	var init             := instance.get_node_or_null("ProjectileInitComponent") as ProjectileInitComponent
-	if init:
+	if init and player_controller.current_movement is PlatformMovement:
 		init.initialize({
 			"position": player_controller.global_position,
 			"rotation": player_controller.rotation,
-			"direction": player_controller.last_direction,
+			"direction": player_controller.current_movement.last_direction,
 			"power_multiplier": power_multiplier
 		})
 

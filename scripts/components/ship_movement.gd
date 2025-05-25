@@ -1,5 +1,5 @@
 class_name ShipMovement
-extends Node
+extends PlayerMovement
 
 @export var max_speed: float = 200.0
 @export var acceleration: float = 100.0
@@ -10,6 +10,9 @@ var velocity: Vector2 = Vector2.ZERO
 
 
 func _physics_process(delta: float) -> void:
+	if not body or not enabled:
+		return
+
 	var input_vector := Vector2(
 							Input.get_action_strength("right") - Input.get_action_strength("left"),
 							Input.get_action_strength("down") - Input.get_action_strength("up")
@@ -22,5 +25,6 @@ func _physics_process(delta: float) -> void:
 
 	velocity = velocity.limit_length(max_speed)
 	body.velocity = velocity
+	previous_velocity = body.velocity
 	body.move_and_slide()
 	

@@ -1,94 +1,51 @@
 class_name PlayerController
 extends CharacterBody2D
 
-@export var speed: float = 300.0
+@export var default_movement_type: String = "platform"
+@export var movement_types: Dictionary = {}
 
-var gravity                    = ProjectSettings.get_setting("physics/2d/default_gravity")
-var last_direction: Vector2    = Vector2.RIGHT
-var previous_velocity: Vector2 = Vector2.ZERO
-
-@onready var root = $Root
-@onready var coyote_timer: Timer = $CoyoteTimer
-
-@export var jump_height: float = 100
-@export var jump_time_to_peak: float = 0.5
-@export var jump_time_to_descent: float = 0.4
-@export var coyote_frames: int = 6
-@export var coyote_mode: bool = false
-@export var was_last_floor: bool = false
-@export var jump_sfx: AudioStreamPlayer2D
-@export var rotation_target: Node2D
-
-@onready var jump_velocity: float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
-@onready var jump_gravity: float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
-@onready var fall_gravity: float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
+var current_movement: PlayerMovement = null
 
 
 func _ready() -> void:
-	coyote_timer.timeout.connect(on_coyote_timer_timeout)
-	coyote_timer.wait_time = coyote_frames / 60.0
+	for movement_type in movement_types:
+		var movement_node: Node = get_node_or_null(movement_types[movement_type])
+		if movement_node and movement_node is PlayerMovement:
+			movement_node.enabled = false
+
+	switch_movement(default_movement_type)
 
 
-func _process(_delta):
-	if velocity.x > 0.0:
-		rotation_target.rotation = deg_to_rad(-10)
-	elif velocity.x < 0.0:
-		rotation_target.rotation = deg_to_rad(10)
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey:
+		if event.is_action_pressed("switch_movement"):
+			var next_movement_type: String = get_next_movement_type()
+			switch_movement(next_movement_type)
+
+
+func switch_movement(movement_type: String) -> void:
+	if current_movement:
+		current_movement.enabled = false
+
+	if movement_type in movement_types:
+		current_movement = get_node_or_null(movement_types[movement_type])
+		if not current_movement:
+			push_error("Movement type '%s' not found in movement_types." % movement_type)
+			return
+		current_movement.enabled = true
 	else:
-		rotation_target.rotation = 0
+		push_error("Movement type '%s' not found in movement_types." % movement_type)
+
+	if not current_movement:
+		push_error("No current movement set after switching.")
 
 
-func _physics_process(delta):
-	if is_on_floor():
-		was_last_floor = true
-		coyote_mode = false  # Reset coyote mode when back on the floor
-		coyote_timer.stop()  # Stop timer when grounded
-	else:
-		if was_last_floor: # Start coyote timer only once
-			coyote_mode = true
-			coyote_timer.start()
-		was_last_floor = false
+func get_next_movement_type() -> String:
+	var keys: Array = movement_types.keys()
+	print("Available movement types: ", keys)
+	var current_index: int = keys.find(current_movement.type)
+	if current_index == -1:
+		return default_movement_type
 
-	if not is_on_floor():
-		velocity.y += calculate_gravity() * delta
-
-	if Input.is_action_pressed("jump") and (is_on_floor() or coyote_mode):
-		jump()
-
-	if Input.is_action_just_pressed("down"):
-		position.y += 1
-
-	var direction := Input.get_axis("left", "right")
-	if direction != 0:
-		last_direction = handle_direction(direction)
-
-	if direction:
-		velocity.x = direction * speed
-	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
-
-	previous_velocity = velocity
-	move_and_slide()
-
-
-func jump():
-	velocity.y = jump_velocity
-	coyote_mode = false
-	if jump_sfx:
-		jump_sfx.play()
-
-
-func calculate_gravity() -> float:
-	return jump_gravity if velocity.y < 0.0 else fall_gravity
-
-
-func on_coyote_timer_timeout():
-	coyote_mode = false
-
-
-func handle_direction(input_dir: float) -> Vector2:
-	if input_dir > 0:
-		return Vector2.RIGHT
-	elif input_dir < 0:
-		return Vector2.LEFT
-	return last_direction
+	current_index = (current_index + 1) % keys.size()
+	return keys[current_index]

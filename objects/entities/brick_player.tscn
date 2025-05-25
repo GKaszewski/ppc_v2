@@ -1,9 +1,10 @@
-[gd_scene load_steps=40 format=3 uid="uid://bqi5s710xb1ju"]
+[gd_scene load_steps=42 format=3 uid="uid://bqi5s710xb1ju"]
 
 [ext_resource type="Script" uid="uid://ccuddyoakg04u" path="res://scripts/player.gd" id="1_8j4h4"]
 [ext_resource type="Texture2D" uid="uid://b7gp0gqvkv8j4" path="res://sprites/MrBrick_base.png" id="2_bc55y"]
 [ext_resource type="Shader" uid="uid://bs4xvm4qkurpr" path="res://shaders/hit_flash.tres" id="2_lgb3u"]
 [ext_resource type="Texture2D" uid="uid://jl1gwqchhpdc" path="res://sprites/left_eye.png" id="3_2srrh"]
+[ext_resource type="Script" uid="uid://b3mrdvre1y567" path="res://scripts/components/ship_movement.gd" id="3_p4n66"]
 [ext_resource type="Texture2D" uid="uid://iiawtnwmeny3" path="res://sprites/right_eye.png" id="4_ccn81"]
 [ext_resource type="Script" uid="uid://oxeqvxkgj87j" path="res://scripts/components/flip_player.gd" id="5_geu10"]
 [ext_resource type="Script" uid="uid://qeu80jy4vmuf" path="res://scripts/components/score.gd" id="6_fowa2"]
@@ -30,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://bg76mtpcmfm2j" path="res://objects/ui/charging_bar_layer.tscn" id="28_3f5nm"]
 [ext_resource type="PackedScene" uid="uid://b12tppjkkqpt4" path="res://objects/fxs/hit_particles.tscn" id="28_jh5m0"]
 [ext_resource type="Script" uid="uid://ceq8n7yw7qxpi" path="res://scripts/components/hit_component.gd" id="29_jh5m0"]
+[ext_resource type="Script" uid="uid://c1wtrgw0x77xo" path="res://scripts/components/platform_movement.gd" id="31_xoue7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xoue7"]
 shader = ExtResource("2_lgb3u")
@@ -75,12 +77,31 @@ scale_curve = SubResource("CurveTexture_xoue7")
 color = Color(0.764706, 0.443137, 0, 1)
 color_ramp = SubResource("GradientTexture1D_lgb3u")
 
-[node name="Brick Player" type="CharacterBody2D" node_paths=PackedStringArray("jump_sfx", "rotation_target") groups=["player"]]
+[node name="Brick Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 4
 collision_mask = 43
 script = ExtResource("1_8j4h4")
-jump_sfx = NodePath("sfx_jump")
-rotation_target = NodePath("Root/Base")
+movement_types = {
+"platform": NodePath("Movements/PlatformMovement"),
+"ship": NodePath("Movements/ShipMovement")
+}
+
+[node name="Movements" type="Node" parent="."]
+
+[node name="PlatformMovement" type="Node" parent="Movements" node_paths=PackedStringArray("jump_sfx", "rotation_target", "body")]
+script = ExtResource("31_xoue7")
+jump_sfx = NodePath("../../sfx_jump")
+rotation_target = NodePath("../../Root/Base")
+body = NodePath("../..")
+type = "platform"
+
+[node name="ShipMovement" type="Node" parent="Movements" node_paths=PackedStringArray("body")]
+script = ExtResource("3_p4n66")
+acceleration = 800.0
+friction = 600.0
+body = NodePath("../..")
+type = "ship"
+metadata/_custom_type_script = "uid://b3mrdvre1y567"
 
 [node name="Root" type="Node2D" parent="."]
 
@@ -103,11 +124,11 @@ visible = false
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_hdsg1")
 
-[node name="FlipPlayerComponent" type="Node2D" parent="." node_paths=PackedStringArray("eye_left", "eye_right", "player_controller")]
+[node name="FlipPlayerComponent" type="Node2D" parent="." node_paths=PackedStringArray("eye_left", "eye_right", "platform_movement")]
 script = ExtResource("5_geu10")
 eye_left = NodePath("../Root/Left Eye")
 eye_right = NodePath("../Root/Right Eye")
-player_controller = NodePath("..")
+platform_movement = NodePath("../Movements/PlatformMovement")
 
 [node name="StompDamageArea" type="Area2D" parent="."]
 collision_layer = 0

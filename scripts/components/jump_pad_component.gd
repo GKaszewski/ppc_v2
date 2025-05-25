@@ -25,11 +25,11 @@ func _on_body_entered(body: Node2D) -> void:
 	if not can_be_launched:
 		return
 
-	if body is PlayerController:
+	if body is PlayerController and body.current_movement is PlatformMovement:
 		handle_launchpad_animation()
 		body.velocity.y = -jump_force
-		if body.jump_sfx:
-			body.jump_sfx.play()
+		if body.current_movement.jump_sfx:
+			body.current_movement.jump_sfx.play()
 
 
 func handle_launchpad_animation() -> void:

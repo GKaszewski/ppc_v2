@@ -3,7 +3,7 @@ extends Node
 
 @export var damage: float = 0.25
 @export var area2d: Area2D
-@export var root: Node2D
+@export var root: PlayerController
 
 
 func _ready() -> void:
@@ -34,7 +34,7 @@ func on_area2d_body_entered(body: Node2D) -> void:
 
 		if root.global_position.y < body.global_position.y:
 			if root is PlayerController:
-				var velocity: Vector2 = root.previous_velocity
+				var velocity: Vector2 = root.current_movement.previous_velocity
 				if velocity.y > 0.0:
 					deal_damage(health_component)
 
