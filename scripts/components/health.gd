@@ -9,63 +9,40 @@ signal on_health_change(delta: float, total_health: float)
 signal on_death
 
 
-func _get_delta(value: float) -> float:
-	var old_value = health
-	return value - old_value
+
+func _get_delta(new_value: float) -> float:
+	return new_value - health
 
 
 func set_health(new_value: float):
-	var delta = _get_delta(new_value)
-
-	if sign(delta) > 0:
-		if heal_fx:
-			heal_fx.play()
-	elif sign(delta) < 0:
-		if hurt_fx:
-			hurt_fx.play()
-
-	await hurt_fx.finished
-
-	if new_value >= max_health:
-		health = max_health
-		on_health_change.emit(delta, health)
-		return
-
-	health = new_value
-
-	if health <= 0:
-		on_death.emit()
-		return
-
-	on_health_change.emit(delta, health)
+	_apply_health_change(new_value)
 
 
 func decrease_health(value: float):
-	var delta = _get_delta(value)
-
-	health -= value
-	if hurt_fx:
-		hurt_fx.play()
-		await hurt_fx.finished
-
-	if health <= 0:
-		on_death.emit()
-		return
-
-	on_health_change.emit(delta, health)
+	_apply_health_change(health - value)
 
 
 func increase_health(value: float):
-	var delta := _get_delta(value)
+	_apply_health_change(health + value)
 
-	health += value
 
-	if health >= max_health:
-		health = max_health
+func _apply_health_change(new_health: float, play_fx: bool = true) -> void:
+	new_health = clamp(new_health, 0.0, max_health)
+	var delta := new_health - health
+
+	if delta == 0.0:
+		return # No change
+
+	if play_fx:
+		if delta > 0 and heal_fx:
+			heal_fx.play()
+		elif delta < 0 and hurt_fx:
+			hurt_fx.play()
+			await hurt_fx.finished
+
+	health = new_health
+
+	if health <= 0:
+		on_death.emit()
+	else:
 		on_health_change.emit(delta, health)
-		return
-
-	if heal_fx:
-		heal_fx.play()
-	on_health_change.emit(delta, health)
-	

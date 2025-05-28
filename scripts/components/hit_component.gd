@@ -39,7 +39,7 @@ func on_health_change(delta: float, total_health: float) -> void:
 		await get_tree().create_timer(hit_duration).timeout
 		deactivate()
 
-		if total_health > 0:
+		if total_health > 0 and delta < 0:
 			handle_hit_fx()
 
 

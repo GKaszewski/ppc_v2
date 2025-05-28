@@ -30,8 +30,9 @@ func _on_area2d_body_entered(body: Node2D) -> void:
 			collision_shape.call_deferred("set_disabled", true)
 		if sfx:
 			sfx.play()
-		if not has_fade_away:
-		if sfx:
+		if not has_fade_away and sfx:
 			await sfx.finished
-				
-	root.queue_free()
+			root.queue_free()
+		elif not has_fade_away:
+			root.queue_free()
+

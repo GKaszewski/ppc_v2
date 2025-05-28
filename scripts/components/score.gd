@@ -12,7 +12,8 @@ func _ready():
 		coin.collected.connect(on_collected)
 
 
-func on_collected(amount: int, type: CollectableResource.CollectableType) -> void:
+
+func on_collected(amount: int, type: CollectableResource.CollectableType, _body: Node2D) -> void:
 	if not game_manager:
 		return
 	if type != CollectableResource.CollectableType.COIN:
