@@ -33,4 +33,5 @@ func _on_area2d_body_entered(body: Node2D) -> void:
 		if not has_fade_away:
 		if sfx:
 			await sfx.finished
-			root.queue_free()
+				
+	root.queue_free()
