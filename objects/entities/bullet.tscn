@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bhc7y4xugu4q7"]
+[gd_scene load_steps=10 format=3 uid="uid://bhc7y4xugu4q7"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_w543f"]
 [ext_resource type="Script" uid="uid://dkmxhjtmu5xlb" path="res://scripts/components/damage_component.gd" id="2_ll0xw"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bvsgg8lu0a8m6" path="res://scripts/components/lifetime_component.gd" id="5_qsc5m"]
 [ext_resource type="Script" uid="uid://873un8agkyja" path="res://scripts/components/launch_component.gd" id="6_6th6w"]
 [ext_resource type="Script" uid="uid://cvcnfrr1udco5" path="res://scripts/components/straight_motion_component.gd" id="7_e0mqp"]
+[ext_resource type="PackedScene" uid="uid://c1iorglk708g0" path="res://objects/fxs/terrain_hit_fx.tscn" id="8_6th6w"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_txsw8"]
 radius = 4.0
@@ -59,8 +60,13 @@ script = ExtResource("7_e0mqp")
 root = NodePath("..")
 launch_component = NodePath("../LaunchComponent")
 
-[node name="BulletComponent" type="Node" parent="." node_paths=PackedStringArray("root", "area2d")]
+[node name="BulletComponent" type="Node" parent="." node_paths=PackedStringArray("root", "area2d", "hit_terrain_fx", "bullet_sprite")]
 script = ExtResource("3_keogl")
 root = NodePath("..")
 area2d = NodePath("..")
+hit_terrain_fx = NodePath("../TerrainHitFX")
+bullet_sprite = NodePath("../Sprite2D")
 metadata/_custom_type_script = "uid://cdnwrn8v05qhi"
+
+[node name="TerrainHitFX" parent="." instance=ExtResource("8_6th6w")]
+z_index = 3

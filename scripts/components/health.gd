@@ -56,7 +56,7 @@ func decrease_health(value: float):
 
 
 func increase_health(value: float):
-	var delta = _get_delta(value)
+	var delta := _get_delta(value)
 
 	health += value
 
@@ -65,7 +65,6 @@ func increase_health(value: float):
 		on_health_change.emit(delta, health)
 		return
 
-	health += value
 	if heal_fx:
 		heal_fx.play()
 	on_health_change.emit(delta, health)

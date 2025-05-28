@@ -43,6 +43,8 @@ func _process(_delta: float) -> void:
 	else:
 		rotation_target.rotation = 0
 
+	calculate_jump_vars()
+
 
 func _physics_process(delta) -> void:
 	if not body or not enabled:
@@ -106,6 +108,11 @@ func handle_direction(input_dir: float) -> Vector2:
 	return last_direction
 
 
-
 func on_ship_entered() -> void:
 	rotation_target.rotation = 0
+
+
+func calculate_jump_vars() -> void:
+	jump_velocity = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
+	jump_gravity = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
+	fall_gravity = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0

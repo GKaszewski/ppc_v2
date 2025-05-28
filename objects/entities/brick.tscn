@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bymro4t7angv5"]
+[gd_scene load_steps=10 format=3 uid="uid://bymro4t7angv5"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_1c3jb"]
 [ext_resource type="Script" uid="uid://cdnwrn8v05qhi" path="res://scripts/components/bullet_component.gd" id="2_i6t5k"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bgty7040ams6s" path="res://scripts/components/projectile_init_component.gd" id="5_2vqt8"]
 [ext_resource type="Script" uid="uid://873un8agkyja" path="res://scripts/components/launch_component.gd" id="6_d0tcd"]
 [ext_resource type="Script" uid="uid://cvcnfrr1udco5" path="res://scripts/components/straight_motion_component.gd" id="7_r41xl"]
+[ext_resource type="PackedScene" uid="uid://c1iorglk708g0" path="res://objects/fxs/terrain_hit_fx.tscn" id="8_d0tcd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ar0xf"]
 size = Vector2(16, 10)
@@ -24,10 +25,12 @@ hframes = 12
 vframes = 12
 frame = 80
 
-[node name="BulletComponent" type="Node" parent="." node_paths=PackedStringArray("root", "area2d")]
+[node name="BulletComponent" type="Node" parent="." node_paths=PackedStringArray("root", "area2d", "hit_terrain_fx", "bullet_sprite")]
 script = ExtResource("2_i6t5k")
 root = NodePath("..")
 area2d = NodePath("..")
+hit_terrain_fx = NodePath("../TerrainHitFX")
+bullet_sprite = NodePath("../Sprite2D")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(0, 2.38419e-07)
@@ -60,3 +63,5 @@ script = ExtResource("7_r41xl")
 root = NodePath("..")
 launch_component = NodePath("../LaunchComponent")
 metadata/_custom_type_script = "uid://cvcnfrr1udco5"
+
+[node name="TerrainHitFX" parent="." instance=ExtResource("8_d0tcd")]

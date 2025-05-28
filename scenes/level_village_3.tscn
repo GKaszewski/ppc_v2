@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://h60obxmju6mo"]
+[gd_scene load_steps=33 format=4 uid="uid://h60obxmju6mo"]
 
 [ext_resource type="PackedScene" uid="uid://dyp4i4ru2j2jh" path="res://objects/fxs/explosion_fx.tscn" id="1_p30ax"]
 [ext_resource type="PackedScene" uid="uid://dx80ivlvuuew4" path="res://objects/fxs/fire_fx.tscn" id="2_a7yjf"]
@@ -22,6 +22,7 @@
 [ext_resource type="Script" uid="uid://8r1y8elyw7kt" path="res://scripts/console_management.gd" id="19_0pba3"]
 [ext_resource type="PackedScene" uid="uid://cawlpch2lk3a2" path="res://objects/level/world_environment.tscn" id="20_embdf"]
 [ext_resource type="PackedScene" uid="uid://cywsu7yrtjdog" path="res://objects/level/global_light.tscn" id="21_fytod"]
+[ext_resource type="PackedScene" uid="uid://t6h2ra7kjyq" path="res://objects/entities/small_heal_potion.tscn" id="23_m6h4x"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j7bvy"]
 texture = ExtResource("7_uvxky")
@@ -355,6 +356,15 @@ skill_manager = NodePath("../Brick Player/SkillManager")
 [node name="WorldEnvironment" parent="." instance=ExtResource("20_embdf")]
 
 [node name="Global Light" parent="." instance=ExtResource("21_fytod")]
+
+[node name="SmallHealPotion" parent="." instance=ExtResource("23_m6h4x")]
+position = Vector2(1074, -105)
+
+[node name="SmallHealPotion2" parent="." instance=ExtResource("23_m6h4x")]
+position = Vector2(1244, -41)
+
+[node name="SmallHealPotion3" parent="." instance=ExtResource("23_m6h4x")]
+position = Vector2(1359, -42)
 
 [connection signal="on_death" from="Brick Player/HealthComponent" to="UI Layer/DeathScreen" method="on_player_death"]
 [connection signal="on_death" from="Brick Player/HealthComponent" to="UI Layer/GameOverScreen" method="on_player_death"]

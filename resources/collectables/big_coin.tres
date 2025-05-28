@@ -4,4 +4,5 @@
 
 [resource]
 script = ExtResource("1_fudbo")
-amount = 5
+amount = 5.0
+type = 0

@@ -19,7 +19,8 @@ func _ready() -> void:
 		collectable.collected.connect(on_collected)
 
 
-func on_collected(amount: int, type: CollectableResource.CollectableType) -> void:
+
+func on_collected(amount: int, type: CollectableResource.CollectableType, _body: Node2D) -> void:
 	if type != requirement_type:
 		return
 	add_progress(amount)

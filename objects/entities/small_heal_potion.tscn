@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://t6h2ra7kjyq"]
+
+[ext_resource type="Texture2D" uid="uid://1x4iq56rhc18" path="res://sprites/health_potions.png" id="1_p0sdo"]
+[ext_resource type="Script" uid="uid://cegdd1sravi5m" path="res://scripts/components/heal_component.gd" id="2_piwlp"]
+[ext_resource type="Script" uid="uid://pa1bwc4no08q" path="res://scripts/components/collectable.gd" id="3_k2tv6"]
+[ext_resource type="Resource" uid="uid://2tl3yoh202no" path="res://resources/collectables/small_health_potion.tres" id="4_p0sdo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uj2v5"]
+radius = 7.0
+
+[node name="SmallHealPotion" type="Area2D"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_uj2v5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_p0sdo")
+hframes = 4
+frame = 1
+
+[node name="HealComponent" type="Node" parent="." node_paths=PackedStringArray("collectable")]
+script = ExtResource("2_piwlp")
+collectable = NodePath("../CollectableComponent")
+
+[node name="CollectableComponent" type="Node" parent="." node_paths=PackedStringArray("area2d", "collision_shape")]
+script = ExtResource("3_k2tv6")
+area2d = NodePath("..")
+collision_shape = NodePath("../CollisionShape2D")
+collectable_data = ExtResource("4_p0sdo")
+metadata/_custom_type_script = "uid://pa1bwc4no08q"

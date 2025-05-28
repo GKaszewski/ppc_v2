@@ -6,5 +6,5 @@ enum CollectableType {
 	KID,
 	HEALTH,
 }
-@export var amount: int = 0
+@export var amount: Variant = 0.0
 @export var type: CollectableType = CollectableType.COIN

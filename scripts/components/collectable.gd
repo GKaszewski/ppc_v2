@@ -8,7 +8,7 @@ var has_fade_away: bool = false
 @export var collision_shape: CollisionShape2D
 @export var collectable_data: CollectableResource
 @export var sfx: AudioStreamPlayer2D
-signal collected(amount: int, type: CollectableResource.CollectableType)
+signal collected(amount: Variant, type: CollectableResource.CollectableType, body: Node2D)
 
 
 func _ready() -> void:
@@ -25,11 +25,12 @@ func _ready() -> void:
 
 func _on_area2d_body_entered(body: Node2D) -> void:
 	if body.has_node("CanPickUpComponent"):
-		collected.emit(collectable_data.amount, collectable_data.type)
+		collected.emit(collectable_data.amount, collectable_data.type, body)
 		if collision_shape:
 			collision_shape.call_deferred("set_disabled", true)
 		if sfx:
 			sfx.play()
 		if not has_fade_away:
+		if sfx:
 			await sfx.finished
 			root.queue_free()
