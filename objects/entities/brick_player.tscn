@@ -284,6 +284,7 @@ script = ExtResource("38_o1ihh")
 health_component = NodePath("../HealthComponent")
 sprite = NodePath("../Graphics/Root/Base")
 platform_movement = NodePath("../Movements/PlatformMovement")
+min_jump_height = 100.0
 jump_reduction_percentage = 0.15
 
 [connection signal="on_death" from="HealthComponent" to="PlayerDeathComponent" method="_on_health_component_on_death"]

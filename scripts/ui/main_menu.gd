@@ -32,6 +32,8 @@ func _ready() -> void:
 	else:
 		continue_button.disabled = false
 
+	continue_button.grab_focus()
+
 
 func _on_new_game_button_pressed() -> void:
 	if gm:

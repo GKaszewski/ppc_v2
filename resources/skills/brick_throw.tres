@@ -11,6 +11,7 @@ name = "BRICK_POWER"
 description = "BRICK_POWER_DESCRIPTION"
 node = ExtResource("1_5gnea")
 config = {
+"fire_rate": 0.6,
 "player_controller": NodePath("."),
 "throw_input_behavior": ExtResource("1_xwijh"),
 "timer": NodePath("ThrowTimer")
