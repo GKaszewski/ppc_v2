@@ -18,3 +18,4 @@ config = {
 }
 cost = 50
 icon = ExtResource("2_yimbq")
+type = 1

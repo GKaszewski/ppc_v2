@@ -163,7 +163,6 @@ func reset_current_session_state() -> void:
 	}
 
 
-
 func restart_game() -> void:
 	reset_player_state()
 	reset_current_session_state()
@@ -212,3 +211,15 @@ func on_level_complete() -> void:
 	reset_current_session_state()
 	try_to_go_to_next_level()
 	SaveSystem.save_game()
+
+
+
+func get_unlocked_skills() -> Array:
+	var skills_unlocked        = player_state.get("unlocked_skills", [])
+	var skills_current_session = current_session_state.get("skills_unlocked", [])
+	if not skills_current_session:
+		return skills_unlocked
+	if not skills_unlocked:
+		return skills_current_session
+
+	return skills_unlocked + skills_current_session

@@ -16,6 +16,18 @@ func add_skill(skill_data: SkillData) -> void:
 	if active_components.has(skill_data.name):
 		return
 
+	if skill_data.type == SkillData.SkillType.THROW:
+		var unlocked_skills: Array = gm.get_unlocked_skills()
+		for skill in unlocked_skills:
+			var data = null
+			for s in available_skills:
+				if s.name == skill:
+					data = s
+					break
+			if data and data.type == SkillData.SkillType.THROW:
+				print("Removing previous throw skill: ", data.name)
+				remove_skill(data.name)
+
 	var skill_instance := skill_data.node.instantiate()
 	for key in skill_data.config.keys():
 		if key in skill_instance:

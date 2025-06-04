@@ -19,3 +19,4 @@ config = {
 }
 cost = 150
 icon = ExtResource("3_6btth")
+type = 1

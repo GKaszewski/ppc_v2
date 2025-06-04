@@ -39,8 +39,6 @@ func _input(event: InputEvent) -> void:
 			root.show()
 			for component in components_to_disable:
 				component.process_mode = PROCESS_MODE_DISABLED
-			if buttons:
-				buttons[0].grab_focus()
 
 
 func get_button_text(skill: SkillData) -> String:
