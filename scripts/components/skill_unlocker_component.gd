@@ -4,7 +4,7 @@ extends Node
 @export var skill_manager: SkillManager
 
 @onready var game_manager: GM = $"/root/GameManager"
-
+signal skill_unlocked(skill_data: SkillData)
 
 
 func has_enough_coins(amount: int) -> bool:
@@ -24,6 +24,7 @@ func try_unlock_skill(skill_data: SkillData) -> bool:
 	game_manager.remove_coins(skill_data.cost)
 	game_manager.current_session_state["skills_unlocked"].append(skill_data.name)
 	skill_manager.add_skill(skill_data)
+	skill_unlocked.emit(skill_data)
 	return true
 
 
@@ -33,6 +34,7 @@ func unlock_all_skills() -> void:
 
 	for skill in available_skills:
 		skills.append(skill.name)
+		skill_unlocked.emit(skill)
 
 	game_manager.unlock_skills(skills)
 	skill_manager.apply_unlocked_skills()

@@ -45,7 +45,6 @@ func _ready() -> void:
 	Console.console_closed.connect(_on_console_close)
 
 
-
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause") and not is_console_open:
 		if UiManager.is_visible_on_stack(pause_menu_control):
@@ -78,6 +77,8 @@ func _on_exit_to_menu_button_pressed() -> void:
 		printerr("PauseMenu: Exit to menu scene not set.")
 		return
 
+	gm.resume_game()
+	gm.reset_current_session_state()
 	get_tree().change_scene_to_packed(exit_to_menu_scene)
 
 

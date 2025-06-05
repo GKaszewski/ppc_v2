@@ -68,6 +68,14 @@ func get_kid_nodes() -> Array[CollectableComponent]:
 	return kid_nodes
 
 
+
+func get_player_node() -> Node:
+	for node in nodes_in_scene:
+		if node is PlayerController:
+			return node
+	return null
+
+
 func add_coins(amount: int) -> void:
 	player_state["coins"] += amount
 	player_state["coins"] = max(0, player_state["coins"])
@@ -211,7 +219,6 @@ func on_level_complete() -> void:
 	reset_current_session_state()
 	try_to_go_to_next_level()
 	SaveSystem.save_game()
-
 
 
 func get_unlocked_skills() -> Array:

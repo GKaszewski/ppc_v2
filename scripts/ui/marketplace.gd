@@ -46,9 +46,10 @@ func get_button_text(skill: SkillData) -> String:
 
 
 func create_upgrade_button(skill: SkillData):
-	var button := marketplace_button.instantiate() as Button
+	var button := marketplace_button.instantiate() as MarketplaceButton
 	button.text = get_button_text(skill)
 	button.icon = skill.icon
+	button.skill_data = skill
 
 	button.pressed.connect(func () -> void: _on_button_pressed(skill))
 

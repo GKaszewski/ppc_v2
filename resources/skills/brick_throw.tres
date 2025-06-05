@@ -19,3 +19,6 @@ config = {
 cost = 50
 icon = ExtResource("2_yimbq")
 type = 1
+is_active = false
+level = 0
+max_level = 3

@@ -20,3 +20,6 @@ config = {
 cost = 150
 icon = ExtResource("3_6btth")
 type = 1
+is_active = false
+level = 0
+max_level = 3
