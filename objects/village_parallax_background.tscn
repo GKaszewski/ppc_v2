@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://bva54p1fxomu2"]
 
-[ext_resource type="Texture2D" uid="uid://d2f4ooucvrjcc" path="res://sprites/backgrounds/plains/1.png" id="1_rfutu"]
-[ext_resource type="Texture2D" uid="uid://cdgk3fi8owc6o" path="res://sprites/backgrounds/plains/2.png" id="2_uysv2"]
-[ext_resource type="Texture2D" uid="uid://p0bt2k2lihlx" path="res://sprites/backgrounds/plains/3.png" id="3_l6n33"]
-[ext_resource type="Texture2D" uid="uid://bcahm7wqdbn6n" path="res://sprites/backgrounds/plains/4.png" id="4_jkhju"]
+[ext_resource type="Texture2D" uid="uid://d2f4ooucvrjcc" path="res://sprites/backgrounds/plains/1.png" id="1_kdcp8"]
+[ext_resource type="Texture2D" uid="uid://cdgk3fi8owc6o" path="res://sprites/backgrounds/plains/2.png" id="2_ev808"]
+[ext_resource type="Texture2D" uid="uid://p0bt2k2lihlx" path="res://sprites/backgrounds/plains/3.png" id="3_sfana"]
+[ext_resource type="Texture2D" uid="uid://bcahm7wqdbn6n" path="res://sprites/backgrounds/plains/4.png" id="4_8eim1"]
 
 [node name="ParallaxBackground" type="ParallaxBackground"]
 
@@ -12,7 +12,7 @@ motion_scale = Vector2(0, 0)
 motion_mirroring = Vector2(480, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Sky"]
-texture = ExtResource("1_rfutu")
+texture = ExtResource("1_kdcp8")
 centered = false
 
 [node name="Clouds" type="ParallaxLayer" parent="."]
@@ -20,7 +20,7 @@ motion_scale = Vector2(0.1, 0.1)
 motion_mirroring = Vector2(480, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Clouds"]
-texture = ExtResource("2_uysv2")
+texture = ExtResource("2_ev808")
 centered = false
 
 [node name="Hills" type="ParallaxLayer" parent="."]
@@ -28,7 +28,7 @@ motion_scale = Vector2(0.2, 0.2)
 motion_mirroring = Vector2(480, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Hills"]
-texture = ExtResource("3_l6n33")
+texture = ExtResource("3_sfana")
 centered = false
 
 [node name="Ground" type="ParallaxLayer" parent="."]
@@ -37,5 +37,5 @@ motion_mirroring = Vector2(480, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Ground"]
 scale = Vector2(1, 1.14074)
-texture = ExtResource("4_jkhju")
+texture = ExtResource("4_8eim1")
 centered = false

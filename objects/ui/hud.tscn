@@ -48,14 +48,17 @@ theme_override_constants/margin_bottom = 8
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
+alignment = 1
 
 [node name="Health Label" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 text = "HEALTH_LABEL"
 label_settings = ExtResource("1_4dsh5")
 uppercase = true
 
 [node name="ProgressBar" type="ProgressBar" parent="PanelContainer/MarginContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -68,12 +71,16 @@ show_percentage = false
 
 [node name="Lives" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "LIVES_LABEL"
 label_settings = ExtResource("1_4dsh5")
+horizontal_alignment = 1
 uppercase = true
 
 [node name="Coins label" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "COINS_LABEL"
 label_settings = ExtResource("1_4dsh5")
+horizontal_alignment = 1
 uppercase = true

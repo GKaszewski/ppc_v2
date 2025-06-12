@@ -56,10 +56,10 @@ func console_set_lives(amount: Variant) -> void:
 func console_set_health(amount: Variant) -> void:
 	if not player_health:
 		return
-	if not amount.is_valid_int():
+	if not amount.is_valid_float():
 		Console.print_error("Invalid amount: " + str(amount))
 		return
-	player_health.set_health(int(amount))
+	player_health.set_health(float(amount))
 	Console.print_info("Set health to " + str(amount))
 
 

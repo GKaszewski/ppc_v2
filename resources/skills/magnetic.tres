@@ -17,3 +17,6 @@ config = {
 cost = 70
 icon = ExtResource("1_16qcg")
 type = 2
+is_active = false
+level = 1
+max_level = 1
