@@ -30,9 +30,9 @@ func load_game() -> bool:
 	print("Game state loaded from: ", save_path)
 	print("Player state: ", save_data["player_state"])
 	gm.player_state = save_data["player_state"]
-	var skills: Array[String] = []
-	for skill_name in gm.player_state["unlocked_skills"]:
-		skills.append(skill_name)
+	var skills: Array[SkillData] = []
+	for skill in gm.player_state["unlocked_skills"]:
+		skills.append(skill)
 
 	gm.unlock_skills(skills)
 	return true

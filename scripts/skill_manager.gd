@@ -21,11 +21,10 @@ func add_skill(skill_data: SkillData) -> void:
 		for skill in unlocked_skills:
 			var data = null
 			for s in available_skills:
-				if s.name == skill:
+				if s == skill:
 					data = s
 					break
 			if data and data.type == SkillData.SkillType.THROW:
-				print("Removing previous throw skill: ", data.name)
 				remove_skill(data.name)
 
 	var skill_instance := skill_data.node.instantiate()
@@ -46,7 +45,7 @@ func add_skill(skill_data: SkillData) -> void:
 
 	owner.add_child(skill_instance)
 	active_components[skill_data.name] = skill_instance
-
+	
 
 func remove_skill(skill_name: String) -> void:
 	if not active_components.has(skill_name):
@@ -56,12 +55,17 @@ func remove_skill(skill_name: String) -> void:
 	if is_instance_valid(skill_instance):
 		skill_instance.queue_free()
 
+	var skills: Array = gm.get_unlocked_skills()
+	for s in skills:
+		if s.name == skill_name:
+			s.is_active = false
+			break
 	active_components.erase(skill_name)
 
 
 func apply_unlocked_skills() -> void:
 	for skill_data in available_skills:
-		if gm.is_skill_unlocked(skill_data.name):
+		if gm.is_skill_unlocked(skill_data):
 			print("Applying skill: ", skill_data.name)
 			call_deferred("add_skill", skill_data)
 		else:
@@ -73,3 +77,27 @@ func get_skill_by_name(skill_name: String) -> SkillData:
 		if skill_data.name == skill_name:
 			return skill_data
 	return null
+
+
+func activate_skill(skill: SkillData) -> void:
+	if not active_components.has(skill.name):
+		if skill:
+			add_skill(skill)
+			skill.is_active = true
+
+
+func deactivate_skill(skill: SkillData) -> void:
+	if active_components.has(skill.name):
+		remove_skill(skill.name)
+		if skill:
+			skill.is_active = false
+
+
+func toggle_skill_activation(skill: SkillData) -> void:
+	if not skill:
+		return
+
+	if active_components.has(skill.name):
+		deactivate_skill(skill)
+	else:
+		activate_skill(skill)

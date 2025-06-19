@@ -70,12 +70,16 @@ func console_unlock_skill(skill_name: Variant) -> void:
 		Console.print_error("Invalid skill name: " + str(skill_name))
 		return
 
-	game_manager.unlock_skill(skill_name)
 	var skill_data: SkillData = skill_manager.get_skill_by_name(skill_name)
+	skill_data.level = 1
+
 	if not skill_data:
 		Console.print_error("Skill not found: " + str(skill_name))
 		return
-	skill_manager.add_skill(skill_data)
+
+	game_manager.unlock_skill(skill_data)
+	skill_manager.activate_skill(skill_data)
+	skill_unlocker.skill_unlocked.emit(skill_data)
 	Console.print_info("Unlocked skill: " + str(skill_name))
 
 

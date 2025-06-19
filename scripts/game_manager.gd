@@ -68,7 +68,6 @@ func get_kid_nodes() -> Array[CollectableComponent]:
 	return kid_nodes
 
 
-
 func get_player_node() -> Node:
 	for node in nodes_in_scene:
 		if node is PlayerController:
@@ -118,23 +117,24 @@ func get_lives() -> int:
 	return player_state["lives"]
 
 
-func is_skill_unlocked(skill_name: String) -> bool:
-	return skill_name in player_state["unlocked_skills"] or skill_name in current_session_state["skills_unlocked"]
+
+func is_skill_unlocked(skill: SkillData) -> bool:
+	return skill in player_state["unlocked_skills"] or skill in current_session_state["skills_unlocked"]
 
 
-func unlock_skill(skill_name: String) -> void:
-	if not is_skill_unlocked(skill_name):
-		player_state["unlocked_skills"].append(skill_name)
+func unlock_skill(skill: SkillData) -> void:
+	if not is_skill_unlocked(skill):
+		player_state["unlocked_skills"].append(skill)
 
 
-func remove_skill(skill_name: String) -> void:
-	if is_skill_unlocked(skill_name):
-		player_state["unlocked_skills"].erase(skill_name)
+func remove_skill(skill: SkillData) -> void:
+	if is_skill_unlocked(skill):
+		player_state["unlocked_skills"].erase(skill)
 
 
-func unlock_skills(skill_names: Array[String]) -> void:
-	for skill_name in skill_names:
-		unlock_skill(skill_name)
+func unlock_skills(skills: Array[SkillData]) -> void:
+	for skill in skills:
+		unlock_skill(skill)
 
 
 func reset_player_state() -> void:
@@ -213,8 +213,8 @@ func on_level_complete() -> void:
 	var level_index = player_state["current_level"]
 	mark_level_complete(level_index)
 	add_coins(current_session_state["coins_collected"])
-	for skill_name in current_session_state["skills_unlocked"]:
-		unlock_skill(skill_name)
+	for skill in current_session_state["skills_unlocked"]:
+		unlock_skill(skill)
 
 	reset_current_session_state()
 	try_to_go_to_next_level()
@@ -228,5 +228,4 @@ func get_unlocked_skills() -> Array:
 		return skills_unlocked
 	if not skills_unlocked:
 		return skills_current_session
-
 	return skills_unlocked + skills_current_session

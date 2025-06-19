@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dlm2ri562fynd"]
+[gd_scene load_steps=12 format=3 uid="uid://dlm2ri562fynd"]
 
 [ext_resource type="Script" uid="uid://duifmqjarjpuv" path="res://scripts/ui/marketplace.gd" id="1_ncpyg"]
 [ext_resource type="FontFile" uid="uid://xm0vbusjr7b7" path="res://fonts/PressStart2P-Regular.ttf" id="2_ho1tm"]
@@ -9,11 +9,12 @@
 [ext_resource type="Resource" uid="uid://cx5fsbexblp60" path="res://resources/skills/ice_brick.tres" id="6_6665y"]
 [ext_resource type="Resource" uid="uid://d3bjre2etov1n" path="res://resources/skills/magnetic.tres" id="7_ukny6"]
 [ext_resource type="PackedScene" uid="uid://dtl03rod7l2t0" path="res://objects/ui/marketplace_button.tscn" id="9_ode10"]
+[ext_resource type="PackedScene" uid="uid://ceqjwmihj70lt" path="res://objects/ui/skill_button.tscn" id="10_c7w2b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ode10"]
 bg_color = Color(0, 0, 0, 1)
 
-[node name="Marketplace" type="Control" node_paths=PackedStringArray("root", "grid")]
+[node name="Marketplace" type="Control" node_paths=PackedStringArray("root", "to_unlock_grid", "unlocked_grid")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,9 +24,11 @@ grow_vertical = 2
 script = ExtResource("1_ncpyg")
 root = NodePath(".")
 skill_data = Array[ExtResource("2_pg4mc")]([ExtResource("3_bk5yi"), ExtResource("4_tx0n3"), ExtResource("5_fqx8e"), ExtResource("6_6665y"), ExtResource("7_ukny6")])
-grid = NodePath("PanelContainer/MarginContainer/VBoxContainer/GridContainer")
+to_unlock_grid = NodePath("PanelContainer/MarginContainer/VBoxContainer/ToUnlockGridContainer")
+unlocked_grid = NodePath("PanelContainer/MarginContainer/VBoxContainer/UnlockedGridContainer")
 font = ExtResource("2_ho1tm")
 marketplace_button = ExtResource("9_ode10")
+skill_button = ExtResource("10_c7w2b")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -55,7 +58,14 @@ vertical_alignment = 1
 justification_flags = 162
 uppercase = true
 
-[node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="ToUnlockGridContainer" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 16
+columns = 3
+
+[node name="UnlockedGridContainer" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 2
 theme_override_constants/h_separation = 4

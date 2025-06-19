@@ -15,16 +15,20 @@ func try_unlock_skill(skill_data: SkillData) -> bool:
 	if not game_manager:
 		return false
 
-	if game_manager.is_skill_unlocked(skill_data.name):
+	if game_manager.is_skill_unlocked(skill_data):
 		return false
 
 	if not has_enough_coins(skill_data.cost):
 		return false
 
-	game_manager.remove_coins(skill_data.cost)
-	game_manager.current_session_state["skills_unlocked"].append(skill_data.name)
-	skill_manager.add_skill(skill_data)
-	skill_unlocked.emit(skill_data)
+	var skill: SkillData = skill_data
+	skill.level = 1
+	skill.is_active = true
+
+	game_manager.remove_coins(skill.cost)
+	game_manager.current_session_state["skills_unlocked"].append(skill)
+	skill_manager.add_skill(skill)
+	skill_unlocked.emit(skill)
 	return true
 
 
@@ -36,5 +40,25 @@ func unlock_all_skills() -> void:
 		skills.append(skill.name)
 		skill_unlocked.emit(skill)
 
-	game_manager.unlock_skills(skills)
+	game_manager.unlock_skills(available_skills)
 	skill_manager.apply_unlocked_skills()
+
+
+
+func try_upgrade_skill(skill_data: SkillData) -> bool:
+	if not game_manager:
+		return false
+
+	if not game_manager.is_skill_unlocked(skill_data):
+		return false
+
+	if skill_data.level >= skill_data.max_level:
+		return false
+
+	if not has_enough_coins(skill_data.cost):
+		return false
+
+	game_manager.remove_coins(skill_data.cost)
+	skill_data.level += 1
+	skill_unlocked.emit(skill_data)
+	return true
