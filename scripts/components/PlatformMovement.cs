@@ -39,6 +39,8 @@ public partial class PlatformMovement : Node2D, IMovement
     private float _jumpGravity;
     private float _fallGravity;
     
+    public Vector2 LastDirection => _lastDirection;
+    
     public override void _Ready()
     {
         base._Ready();
