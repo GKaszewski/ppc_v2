@@ -3,7 +3,7 @@ using Godot;
 
 namespace Mr.BrickAdventures.scripts.components;
 
-public partial class HealthComponent : Node
+public partial class HealthComponent : Node2D
 {
     [Export] public float Health { get; set; } = 1.0f;
     [Export] public float MaxHealth { get; set; } = 1.0f;
