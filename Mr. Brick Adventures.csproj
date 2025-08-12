@@ -5,6 +5,7 @@
     <RootNamespace>Mr.BrickAdventures</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="README.md" />
     <Content Include="scripts\components\.idea\.gitignore" />
     <Content Include="scripts\components\.idea\encodings.xml" />
     <Content Include="scripts\components\.idea\indexLayout.xml" />
