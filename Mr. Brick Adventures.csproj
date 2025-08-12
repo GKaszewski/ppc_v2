@@ -92,6 +92,7 @@
     <Content Include="scripts\components\periodic_shooting.gd" />
     <Content Include="scripts\components\periodic_shooting.gd.uid" />
     <Content Include="scripts\components\PlatformMovementComponent.cs.uid" />
+    <Content Include="scripts\components\platform_movement.gd" />
     <Content Include="scripts\components\PlayerController.cs.uid" />
     <Content Include="scripts\components\player_death.gd" />
     <Content Include="scripts\components\player_death.gd.uid" />

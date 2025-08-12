@@ -5,7 +5,9 @@ namespace Mr.BrickAdventures.Autoloads;
 public partial class ConfigFileHandler : Node
 {
     private ConfigFile _settingsConfig = new();
-    private const string SettingsPath = "user://settings.ini";
+    public const string SettingsPath = "user://settings.ini";
+    
+    public ConfigFile SettingsConfig => _settingsConfig;
 
     public override void _Ready()
     {
