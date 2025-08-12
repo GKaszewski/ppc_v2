@@ -1,3 +1,13 @@
+# 🧱 Przygody Pana Cegły  
+
+[![Steam Wishlist](https://img.shields.io/badge/🎮%20PLAY%20NOW%20on%20Steam-FF4C4C?style=for-the-badge&logo=steam&logoColor=white)](https://store.steampowered.com/app/3575090/Mr_Brick_Adventures/)  
+
+![Made With Godot](https://img.shields.io/badge/Made%20With-Godot-478CBF?style=for-the-badge&logo=godot-engine&logoColor=white)  
+![License](https://img.shields.io/github/license/GKaszewski/ppc_v2?style=for-the-badge)  
+![Lines of Code](https://tokei.rs/b1/github/GKaszewski/ppc_v2?style=for-the-badge&category=code)  
+![Last Commit](https://img.shields.io/github/last-commit/GKaszewski/ppc_v2?style=for-the-badge)  
+![Stars](https://img.shields.io/github/stars/GKaszewski/ppc_v2?style=for-the-badge)  
+
 # Przygody Pana Cegły
 
 *"The world’s only brick-throwing dad simulator (probably)."*
@@ -38,6 +48,15 @@ Run, jump, and hurl bricks with pinpoint accuracy as you navigate dangerous worl
 ## Play It Here
 
 [**Wishlist on Steam**](https://store.steampowered.com/app/3575090/Mr_Brick_Adventures/) so you’re ready for launch day.
+
+---
+
+## 📊 Project Stats  
+📦 **Lines of Code:**  
+![Lines of code](https://tokei.rs/b1/github/GKaszewski/ppc_v2)  
+
+📈 **Repo Activity:**  
+![Commit activity](https://img.shields.io/github/commit-activity/m/GKaszewski/ppc_v2)  
 
 ---
 
