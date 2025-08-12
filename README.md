@@ -3,7 +3,6 @@
 [![Steam Wishlist](https://img.shields.io/badge/🎮%20PLAY%20NOW%20on%20Steam-FF4C4C?style=for-the-badge&logo=steam&logoColor=white)](https://store.steampowered.com/app/3575090/Mr_Brick_Adventures/)  
 
 ![Made With Godot](https://img.shields.io/badge/Made%20With-Godot-478CBF?style=for-the-badge&logo=godot-engine&logoColor=white)  
-![License](https://img.shields.io/github/license/GKaszewski/ppc_v2?style=for-the-badge)  
 ![Lines of Code](https://tokei.rs/b1/github/GKaszewski/ppc_v2?style=for-the-badge&category=code)  
 ![Last Commit](https://img.shields.io/github/last-commit/GKaszewski/ppc_v2?style=for-the-badge)  
 ![Stars](https://img.shields.io/github/stars/GKaszewski/ppc_v2?style=for-the-badge)  
