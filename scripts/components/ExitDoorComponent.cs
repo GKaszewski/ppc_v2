@@ -1,9 +1,10 @@
 using Godot;
 using Mr.BrickAdventures.Autoloads;
+using Mr.BrickAdventures.scripts.interfaces;
 
 namespace Mr.BrickAdventures.scripts.components;
 
-public partial class ExitDoorComponent : Node
+public partial class ExitDoorComponent : Node, IUnlockable
 {
     [Export] public bool Locked { get; set; } = true;
     [Export] public Area2D ExitArea { get; set; }
@@ -33,7 +34,7 @@ public partial class ExitDoorComponent : Node
         throw new System.NotImplementedException();
     }
 
-    private void Unlock()
+    public void Unlock()
     {
         Locked = false;
         if (DoorSprite != null)
