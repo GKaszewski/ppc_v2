@@ -7,6 +7,7 @@ public interface IMovement
     string MovementType { get; }
     bool Enabled { get; set; }
     Vector2 PreviousVelocity { get; set; }
+    Vector2 LastDirection { get; }
     
     void _Process(double delta);
     void _PhysicsProcess(double delta);

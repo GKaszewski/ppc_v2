@@ -17,6 +17,7 @@ public partial class ShipMovementComponent : Node, IMovement
     private Vector2 _velocity = Vector2.Zero;
     
     public Vector2 Velocity => _velocity;
+    public Vector2 LastDirection => _velocity.Normalized();
 
     public override void _PhysicsProcess(double delta)
     {
