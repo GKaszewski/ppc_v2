@@ -3,7 +3,7 @@ using Mr.BrickAdventures.scripts.interfaces;
 
 namespace Mr.BrickAdventures.scripts.components;
 
-public partial class PlatformMovement : Node2D, IMovement
+public partial class PlatformMovementComponent : Node2D, IMovement
 {
     [Export]
     public float Speed { get; set; } = 300.0f;

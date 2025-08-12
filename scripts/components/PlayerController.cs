@@ -15,7 +15,7 @@ public partial class PlayerController : Node2D
     [Export]
     public Sprite2D ShipSprite { get; set; }
 
-    private IMovement _currentMovement = null;
+    public IMovement CurrentMovement = null;
     [Signal]
     public delegate void MovementSwitchedEventHandler(string movementType);
 
@@ -48,20 +48,20 @@ public partial class PlayerController : Node2D
 
     private void SwitchMovement(string movementType)
     {
-        if (_currentMovement != null)
+        if (CurrentMovement != null)
         {
-            _currentMovement.Enabled = false;
+            CurrentMovement.Enabled = false;
         }
 
         if (MovementTypes.TryGetValue(movementType, out var movement))
         {
-            _currentMovement = GetNodeOrNull<IMovement>(movement);
-            if (_currentMovement == null)
+            CurrentMovement = GetNodeOrNull<IMovement>(movement);
+            if (CurrentMovement == null)
             {
                 GD.PushError($"Movement type '{movementType}' not found in MovementTypes.");
                 return;
             }
-            _currentMovement.Enabled = true;
+            CurrentMovement.Enabled = true;
             EmitSignalMovementSwitched(movementType);
         }
         else
@@ -69,7 +69,7 @@ public partial class PlayerController : Node2D
             GD.PushError($"Movement type '{movementType}' not found in MovementTypes.");
         }
 
-        if (_currentMovement == null)
+        if (CurrentMovement == null)
         {
             GD.PushError("No current movement set after switching.");
         }
@@ -78,7 +78,7 @@ public partial class PlayerController : Node2D
     private string GetNextMovementType()
     {
         var keys = new List<string>(MovementTypes.Keys);
-        var currentIndex = keys.IndexOf(_currentMovement?.MovementType);
+        var currentIndex = keys.IndexOf(CurrentMovement?.MovementType);
 
         if (currentIndex == -1)
         {

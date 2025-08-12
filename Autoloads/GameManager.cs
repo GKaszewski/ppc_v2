@@ -18,7 +18,7 @@ public partial class GameManager : Node
         { "unlocked_skills", new Array<SkillData>() }
     };
 
-    private Dictionary _currentSessionState = new()
+    public Dictionary CurrentSessionState { get; private set; } = new()
     {
         { "coins_collected", 0 },
         { "skills_unlocked", new Array<SkillData>() }
@@ -31,19 +31,19 @@ public partial class GameManager : Node
     
     public void SetCoins(int amount) => PlayerState["coins"] = Mathf.Max(0, amount);
     
-    public int GetCoins() => (int)PlayerState["coins"] + (int)_currentSessionState["coins_collected"];
+    public int GetCoins() => (int)PlayerState["coins"] + (int)CurrentSessionState["coins_collected"];
     
     public void RemoveCoins(int amount)
     {
-        var sessionCoins = (int)_currentSessionState["coins_collected"];
+        var sessionCoins = (int)CurrentSessionState["coins_collected"];
         if (amount <= sessionCoins)
         {
-            _currentSessionState["coins_collected"] = sessionCoins - amount;
+            CurrentSessionState["coins_collected"] = sessionCoins - amount;
         }
         else
         {
             var remaining = amount - sessionCoins;
-            _currentSessionState["coins_collected"] = 0;
+            CurrentSessionState["coins_collected"] = 0;
             PlayerState["coins"] = Mathf.Max(0, (int)PlayerState["coins"] - remaining);
         }
         PlayerState["coins"] = Mathf.Max(0, (int)PlayerState["coins"]);
@@ -57,7 +57,7 @@ public partial class GameManager : Node
     public bool IsSkillUnlocked(SkillData skill)
     {
         return ((Array)PlayerState["unlocked_skills"]).Contains(skill)
-               || ((Array)_currentSessionState["skills_unlocked"]).Contains(skill);
+               || ((Array)CurrentSessionState["skills_unlocked"]).Contains(skill);
     }
 
     public void UnlockSkill(SkillData skill)
@@ -123,7 +123,7 @@ public partial class GameManager : Node
 
     public void ResetCurrentSessionState()
     {
-        _currentSessionState = new Dictionary
+        CurrentSessionState = new Dictionary
         {
             { "coins_collected", 0 },
             { "skills_unlocked", new Array<SkillData>() }
@@ -172,8 +172,8 @@ public partial class GameManager : Node
     {
         var levelIndex = (int)PlayerState["current_level"];
         MarkLevelComplete(levelIndex);
-        AddCoins((int)_currentSessionState["coins_collected"]);
-        foreach (var s in (Array)_currentSessionState["skills_unlocked"])
+        AddCoins((int)CurrentSessionState["coins_collected"]);
+        foreach (var s in (Array)CurrentSessionState["skills_unlocked"])
             UnlockSkill((SkillData)s);
 
         ResetCurrentSessionState();
@@ -184,7 +184,7 @@ public partial class GameManager : Node
     public Array GetUnlockedSkills()
     {
         var unlocked = (Array<SkillData>)PlayerState["unlocked_skills"];
-        var session = (Array<SkillData>)_currentSessionState["skills_unlocked"];
+        var session = (Array<SkillData>)CurrentSessionState["skills_unlocked"];
         if ((((Array)session)!).Count == 0) return (Array)unlocked;
         if ((((Array)unlocked)!).Count == 0) return (Array)session;
         var joined = new Array();

@@ -6,9 +6,9 @@ namespace Mr.BrickAdventures.scripts.Resources;
 
 public partial class SkillData : Resource
 {
-    [Export] public String Name { get; set; } = "New Skill";
-    [Export] public String Description { get; set; } = "New Skill";
-    [Export] public Dictionary<String, Variant> Config { get; set; } = new();
+    [Export] public string Name { get; set; } = "New Skill";
+    [Export] public string Description { get; set; } = "New Skill";
+    [Export] public Dictionary<string, Variant> Config { get; set; } = new();
     [Export] public int Cost { get; set; } = 0;
     [Export] public Texture2D Icon { get; set; }
     [Export] public bool IsActive { get; set; } = false;

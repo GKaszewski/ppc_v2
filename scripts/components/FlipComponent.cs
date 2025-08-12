@@ -6,7 +6,7 @@ public partial class FlipComponent : Node2D
 {
     [Export] public Sprite2D LeftEye { get; set; }
     [Export] public Sprite2D RightEye { get; set; }
-    [Export] public PlatformMovement PlatformMovement { get; set; }
+    [Export] public PlatformMovementComponent PlatformMovement { get; set; }
 
     public override void _Process(double delta)
     {
