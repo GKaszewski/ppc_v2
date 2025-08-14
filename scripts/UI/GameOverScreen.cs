@@ -16,7 +16,7 @@ public partial class GameOverScreen : Node
     {
         _gameManager = GetNode<GameManager>("/root/GameManager");
         RestartButton.Pressed += OnRestartClicked;
-        MainMenuButton.Pressed += OnMainMenuClicked;
+        MainMenuButton.Pressed += OnMainMenuClicked; 
     }
 
     private void OnMainMenuClicked()

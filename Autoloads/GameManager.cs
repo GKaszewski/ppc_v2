@@ -1,5 +1,8 @@
+using System.Collections.Generic;
+using System.Linq;
 using Godot;
 using Godot.Collections;
+using Mr.BrickAdventures.scripts.components;
 using Mr.BrickAdventures.scripts.Resources;
 
 namespace Mr.BrickAdventures.Autoloads;
@@ -7,6 +10,10 @@ namespace Mr.BrickAdventures.Autoloads;
 public partial class GameManager : Node
 {
     [Export] public Array<PackedScene> LevelScenes { get; set; } = new();
+    
+    public PlayerController Player { get; set; }
+    
+    private List<Node> _sceneNodes = new();
 
     public Dictionary PlayerState { get; set; } = new()
     {
@@ -23,6 +30,29 @@ public partial class GameManager : Node
         { "coins_collected", 0 },
         { "skills_unlocked", new Array<SkillData>() }
     };
+
+    public override void _EnterTree()
+    {
+        GetTree().NodeAdded += OnNodeAdded;
+        GetTree().NodeRemoved += OnNodeRemoved;
+    }
+
+    public override void _ExitTree()
+    {
+        GetTree().NodeAdded -= OnNodeAdded;
+        GetTree().NodeRemoved -= OnNodeRemoved;
+        _sceneNodes.Clear();
+    }
+
+    private void OnNodeAdded(Node node)
+    {
+        _sceneNodes.Add(node);
+    }
+    
+    private void OnNodeRemoved(Node node)
+    {
+        _sceneNodes.Remove(node);
+    }
 
     public void AddCoins(int amount)
     {
@@ -191,5 +221,21 @@ public partial class GameManager : Node
         joined.AddRange((Array)unlocked ?? new Array());
         joined.AddRange((Array)session ?? new Array());
         return joined;
+    }
+
+    public PlayerController GetPlayer()
+    {
+        if (Player != null) return Player;
+
+        foreach (var node in _sceneNodes)
+        {
+            if (node is not PlayerController player) continue;
+            
+            Player = player;
+            return Player;
+        }
+        
+        GD.PrintErr("PlayerController not found in the scene tree.");
+        return null;
     }
 }
