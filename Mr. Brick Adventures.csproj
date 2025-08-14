@@ -140,4 +140,10 @@
     <Content Include="scripts\components\unlock_on_requirement_component.gd" />
     <Content Include="scripts\components\unlock_on_requirement_component.gd.uid" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Chickensoft.AutoInject" Version="2.8.21" />
+    <PackageReference Include="Chickensoft.GodotNodeInterfaces" Version="2.4.31" />
+    <PackageReference Include="Chickensoft.Introspection" Version="3.0.2" />
+    <PackageReference Include="Chickensoft.Introspection.Generator" Version="3.0.2" />
+  </ItemGroup>
 </Project>
