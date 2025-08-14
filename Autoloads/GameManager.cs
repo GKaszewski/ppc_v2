@@ -211,15 +211,15 @@ public partial class GameManager : Node
         GetNode<SaveSystem>("/root/SaveSystem").SaveGame();
     }
 
-    public Array GetUnlockedSkills()
+    public Array<SkillData> GetUnlockedSkills()
     {
         var unlocked = (Array<SkillData>)PlayerState["unlocked_skills"];
         var session = (Array<SkillData>)CurrentSessionState["skills_unlocked"];
-        if ((((Array)session)!).Count == 0) return (Array)unlocked;
-        if ((((Array)unlocked)!).Count == 0) return (Array)session;
-        var joined = new Array();
-        joined.AddRange((Array)unlocked ?? new Array());
-        joined.AddRange((Array)session ?? new Array());
+        if (session!.Count == 0) return unlocked;
+        if (unlocked!.Count == 0) return session;
+        var joined = new Array<SkillData>();
+        joined.AddRange(unlocked);
+        joined.AddRange(session);
         return joined;
     }
 
