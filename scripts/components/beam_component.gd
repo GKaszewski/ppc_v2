@@ -1,4 +1,4 @@
-class_name BeamComponent
+# class_name BeamComponent
 extends Node2D
 
 @export var expansion_speed: float = 16.0

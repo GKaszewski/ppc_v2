@@ -13,7 +13,6 @@ extends Node
 
 @onready var game_manager: GM = $"/root/GameManager"
 
-
 var unlock_buttons: Array[Button]     = []
 var skill_buttons: Array[SkillButton] = []
 
@@ -36,6 +35,14 @@ func _ready() -> void:
 
 	skill_unlocker.skill_unlocked.connect(on_skill_unlocked)
 
+func _process(_delta: float) -> void:
+	for btn in skill_buttons:
+		if not btn.skill_data:
+			continue
+		if btn.skill_data.is_active:
+			btn.activate()
+		else:
+			btn.deactivate()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("show_marketplace"):
@@ -51,7 +58,6 @@ func _input(event: InputEvent) -> void:
 
 func get_button_text(skill: SkillData) -> String:
 	return tr(skill.name) + " " + str(skill.cost)
-
 
 
 func create_upgrade_button(skill: SkillData) -> void:
@@ -102,26 +108,19 @@ func _on_button_pressed(skill: SkillData) -> void:
 
 
 func on_skill_unlocked(skill: SkillData) -> void:
-	# need to fix this method
 	if not skill:
 		return
-	if skill_buttons.size() == 0:
-		create_skill_button(skill)
 
-	for button in skill_buttons:
-		if button.skill_data.is_active:
-			button.activate()
-		else:
-			button.deactivate()
+	for btn in skill_buttons:
+		if btn.skill_data and btn.skill_data.name == skill.name:
+			return
 
+	create_skill_button(skill)
+	
 
 func on_skill_button_pressed(button: SkillButton) -> void:
 	if not skill_unlocker or not button.skill_data:
 		return
 
 	skill_unlocker.skill_manager.toggle_skill_activation(button.skill_data)
-	button.activate()
-	for other_button in skill_buttons:
-		if other_button != button:
-			other_button.deactivate()
 		
