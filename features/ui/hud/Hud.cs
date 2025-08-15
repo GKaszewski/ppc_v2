@@ -12,9 +12,9 @@ public partial class Hud : Node
     public override void _Notification(int what) => this.Notify(what);
     
     [Export] public HealthComponent Health { get; set; } = null!;
-    [Export] public Label CoinsLabel { get; set; } = null!;
-    [Export] public ProgressBar HealthBar { get; set; } = null!;
-    [Export] public Label LivesLabel { get; set; } = null!;
+    [Node] public Label CoinsLabel { get; set; } = null!;
+    [Node] public ProgressBar HealthBar { get; set; } = null!;
+    [Node] public Label LivesLabel { get; set; } = null!;
 
     [Dependency] public PlayerRepository Player => this.DependOn<PlayerRepository>();
 

@@ -66,9 +66,6 @@ process_material = SubResource("ParticleProcessMaterial_lgb3u")
 
 [node name="UI Layer" parent="." instance=ExtResource("3_4fsls")]
 
-[node name="HUD" parent="UI Layer" index="0" node_paths=PackedStringArray("player_health")]
-player_health = NodePath("../../Brick Player/HealthComponent")
-
 [node name="DeathScreen" parent="UI Layer" index="1" node_paths=PackedStringArray("nodes_to_disable")]
 current_level = ExtResource("4_onnch")
 nodes_to_disable = [NodePath("../../Brick Player")]
@@ -76,10 +73,6 @@ nodes_to_disable = [NodePath("../../Brick Player")]
 [node name="Marketplace" parent="UI Layer" index="3" node_paths=PackedStringArray("skill_unlocker", "components_to_disable")]
 skill_unlocker = NodePath("../../Brick Player/SkillUnlockerComponent")
 components_to_disable = [NodePath("../../Brick Player")]
-
-[node name="Pause menu" parent="UI Layer" index="4" node_paths=PackedStringArray("PauseMenuControl", "SettingsControl")]
-PauseMenuControl = NodePath(".")
-SettingsControl = NodePath("../Settings menu")
 
 [node name="Global Light" parent="." instance=ExtResource("4_mc58c")]
 

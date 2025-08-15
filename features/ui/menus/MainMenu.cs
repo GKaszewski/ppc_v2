@@ -12,13 +12,12 @@ public partial class MainMenu : Control
 {
     public override void _Notification(int what) => this.Notify(what);
     
-    [Export] public Control MainMenuControl { get; set; } = null!;
-    [Export] public Button NewGameButton { get; set; } = null!;
-    [Export] public Button ContinueButton { get; set; } = null!;
-    [Export] public Button SettingsButton { get; set; } = null!;
-    [Export] public Button CreditsButton { get; set; } = null!;
-    [Export] public Button ExitButton { get; set; } = null!;
-    [Export] public Label VersionLabel { get; set; } = null!;
+    [Node] public Button NewGameButton { get; set; } = null!;
+    [Node] public Button ContinueButton { get; set; } = null!;
+    [Node] public Button SettingsButton { get; set; } = null!;
+    [Node] public Button CreditsButton { get; set; } = null!;
+    [Node] public Button ExitButton { get; set; } = null!;
+    [Node] public Label VersionLabel { get; set; } = null!;
     [Export] public Control SettingsControl { get; set; } = null!;
     [Export] public Control CreditsControl { get; set; } = null!;
 

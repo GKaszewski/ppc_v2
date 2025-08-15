@@ -5,7 +5,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qv2q0"]
 bg_color = Color(0, 0, 0, 1)
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("MainMenuControl", "NewGameButton", "ContinueButton", "SettingsButton", "CreditsButton", "ExitButton", "VersionLabel")]
+[node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,13 +13,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_q8hru")
-MainMenuControl = NodePath(".")
-NewGameButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/NewGameButton")
-ContinueButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/ContinueButton")
-SettingsButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/SettingsButton")
-CreditsButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/CreditsButton")
-ExitButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/QuitButton")
-VersionLabel = NodePath("PanelContainer/MarginContainer/VBoxContainer/version")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -53,31 +46,37 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="ContinueButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "CONTINUE_BUTTON"
 flat = true
 
 [node name="NewGameButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "NEW_GAME_BUTTON"
 flat = true
 
 [node name="SettingsButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "SETTINGS_BUTTON"
 flat = true
 
 [node name="CreditsButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "CREDITS_BUTTON"
 flat = true
 
-[node name="QuitButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="ExitButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "QUIT_BUTTON"
 flat = true
 
-[node name="version" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="VersionLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8

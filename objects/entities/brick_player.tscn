@@ -32,7 +32,7 @@
 [ext_resource type="PackedScene" uid="uid://bg76mtpcmfm2j" path="res://objects/ui/charging_bar_layer.tscn" id="28_3f5nm"]
 [ext_resource type="PackedScene" uid="uid://b12tppjkkqpt4" path="res://objects/fxs/hit_particles.tscn" id="28_jh5m0"]
 [ext_resource type="Script" uid="uid://ceq8n7yw7qxpi" path="res://scripts/components/hit_component.gd" id="29_jh5m0"]
-[ext_resource type="Script" uid="uid://c1wtrgw0x77xo" path="res://scripts/components/platform_movement.gd" id="31_xoue7"]
+[ext_resource type="Script" uid="uid://cflncpa377l8l" path="res://scripts/components/platform_movement.gd" id="31_xoue7"]
 [ext_resource type="AudioStream" uid="uid://dyev46uqusimi" path="res://sfx/shoot.wav" id="32_x2b7c"]
 [ext_resource type="Script" uid="uid://d1ctdx52gskv1" path="res://scripts/components/ship_shooter.gd" id="34_gwc8i"]
 [ext_resource type="PackedScene" uid="uid://dtem8jgcyoqar" path="res://objects/entities/green_laser.tscn" id="36_oxudy"]

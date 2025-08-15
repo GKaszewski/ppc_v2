@@ -62,9 +62,6 @@ process_material = SubResource("ParticleProcessMaterial_lgb3u")
 
 [node name="UI Layer" parent="." instance=ExtResource("2_lbnsn")]
 
-[node name="HUD" parent="UI Layer" index="0" node_paths=PackedStringArray("player_health")]
-player_health = NodePath("../../Brick Player/HealthComponent")
-
 [node name="DeathScreen" parent="UI Layer" index="1" node_paths=PackedStringArray("nodes_to_disable")]
 current_level = ExtResource("4_c2yv5")
 nodes_to_disable = [NodePath("../../Brick Player")]
