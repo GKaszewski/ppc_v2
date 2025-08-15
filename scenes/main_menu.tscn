@@ -1,22 +1,27 @@
-[gd_scene load_steps=8 format=3 uid="uid://cl00e2ocomk3m"]
+[gd_scene load_steps=12 format=3 uid="uid://cl00e2ocomk3m"]
 
 [ext_resource type="PackedScene" uid="uid://8b6ol5sssbgo" path="res://features/ui/menus/main_menu.tscn" id="1_ekxnf"]
 [ext_resource type="Script" uid="uid://dg2l7cw6da4vb" path="res://common/AppRoot.cs" id="1_rtw2f"]
 [ext_resource type="PackedScene" uid="uid://y0ae6e7t70fj" path="res://objects/ui/settings_menu.tscn" id="2_bqqt6"]
 [ext_resource type="PackedScene" uid="uid://bwgmrcyj4mvu" path="res://objects/ui/credits.tscn" id="3_bqqt6"]
+[ext_resource type="PackedScene" uid="uid://chqb11pfoqmeb" path="res://scenes/level_village_2.tscn" id="3_lgwnu"]
 [ext_resource type="PackedScene" uid="uid://bol7g83v2accs" path="res://scenes/level_village_1.tscn" id="3_oa1go"]
 [ext_resource type="PackedScene" uid="uid://b5fx1vdfky307" path="res://objects/ui/audio_settings.tscn" id="4_8ln24"]
+[ext_resource type="PackedScene" uid="uid://h60obxmju6mo" path="res://scenes/level_village_3.tscn" id="4_flqon"]
+[ext_resource type="PackedScene" uid="uid://bhad760x3vvco" path="res://scenes/level_village_4.tscn" id="5_rcqid"]
 [ext_resource type="PackedScene" uid="uid://cvfsbiy5ggrpg" path="res://objects/ui/input_settings.tscn" id="5_rtw2f"]
+[ext_resource type="PackedScene" uid="uid://dagpmlgvr262d" path="res://scenes/level_forest_5.tscn" id="6_1ajci"]
 
 [node name="AppRoot" type="Node2D"]
 script = ExtResource("1_rtw2f")
+_levels = Array[PackedScene]([ExtResource("3_oa1go"), ExtResource("3_lgwnu"), ExtResource("4_flqon"), ExtResource("5_rcqid"), ExtResource("6_1ajci")])
+_mainMenu = null
 
 [node name="Main menu" type="CanvasLayer" parent="."]
 
 [node name="MainMenu" parent="Main menu" node_paths=PackedStringArray("SettingsControl", "CreditsControl") instance=ExtResource("1_ekxnf")]
 SettingsControl = NodePath("../Settings menu")
 CreditsControl = NodePath("../Credits")
-FirstLevelScene = ExtResource("3_oa1go")
 
 [node name="Settings menu" parent="Main menu" node_paths=PackedStringArray("input_settings", "audio_settings") instance=ExtResource("2_bqqt6")]
 visible = false

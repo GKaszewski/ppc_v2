@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://i6mnjbjcoqe5"]
 
-[ext_resource type="Script" uid="uid://cakgxndurgfa3" path="res://scripts/UI/PauseMenu.cs" id="1_aktha"]
+[ext_resource type="Script" uid="uid://bwgs02wcfnm8u" path="res://features/ui/menus/PauseMenu.cs" id="1_ljtns"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4ivv"]
 bg_color = Color(0, 0, 0, 1)
 
-[node name="Pause menu" type="Control" node_paths=PackedStringArray("ResumeButton", "MainMenuButton", "QuitButton", "SettingsButton")]
+[node name="Pause menu" type="Control" node_paths=PackedStringArray("ResumeButton", "RestartButton", "MainMenuButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,11 +14,10 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
-script = ExtResource("1_aktha")
+script = ExtResource("1_ljtns")
 ResumeButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/Resume Button")
+RestartButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/Settings Button")
 MainMenuButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/Exit to menu Button")
-QuitButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/Quit game Button")
-SettingsButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/Settings Button")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
