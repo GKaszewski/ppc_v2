@@ -77,6 +77,10 @@ nodes_to_disable = [NodePath("../../Brick Player")]
 skill_unlocker = NodePath("../../Brick Player/SkillUnlockerComponent")
 components_to_disable = [NodePath("../../Brick Player")]
 
+[node name="Pause menu" parent="UI Layer" index="4" node_paths=PackedStringArray("PauseMenuControl", "SettingsControl")]
+PauseMenuControl = NodePath(".")
+SettingsControl = NodePath("../Settings menu")
+
 [node name="Global Light" parent="." instance=ExtResource("4_mc58c")]
 
 [node name="Camera2D" parent="." instance=ExtResource("5_sskgn")]

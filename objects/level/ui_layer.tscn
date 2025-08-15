@@ -34,9 +34,8 @@ visible = false
 offset_top = 32.0
 components_to_disable = [null]
 
-[node name="Pause menu" parent="." node_paths=PackedStringArray("settings_menu") instance=ExtResource("6_1q4vn")]
+[node name="Pause menu" parent="." instance=ExtResource("6_1q4vn")]
 visible = false
-settings_menu = NodePath("../Settings menu")
 
 [node name="Settings menu" parent="." node_paths=PackedStringArray("input_settings", "audio_settings") instance=ExtResource("7_hkjav")]
 visible = false

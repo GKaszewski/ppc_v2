@@ -1,27 +1,33 @@
-[gd_scene load_steps=6 format=3 uid="uid://cl00e2ocomk3m"]
+[gd_scene load_steps=8 format=3 uid="uid://cl00e2ocomk3m"]
 
-[ext_resource type="PackedScene" uid="uid://8b6ol5sssbgo" path="res://objects/ui/main_menu.tscn" id="1_ekxnf"]
+[ext_resource type="PackedScene" uid="uid://8b6ol5sssbgo" path="res://features/ui/menus/main_menu.tscn" id="1_ekxnf"]
+[ext_resource type="Script" uid="uid://dg2l7cw6da4vb" path="res://common/AppRoot.cs" id="1_rtw2f"]
 [ext_resource type="PackedScene" uid="uid://y0ae6e7t70fj" path="res://objects/ui/settings_menu.tscn" id="2_bqqt6"]
 [ext_resource type="PackedScene" uid="uid://bwgmrcyj4mvu" path="res://objects/ui/credits.tscn" id="3_bqqt6"]
+[ext_resource type="PackedScene" uid="uid://bol7g83v2accs" path="res://scenes/level_village_1.tscn" id="3_oa1go"]
 [ext_resource type="PackedScene" uid="uid://b5fx1vdfky307" path="res://objects/ui/audio_settings.tscn" id="4_8ln24"]
 [ext_resource type="PackedScene" uid="uid://cvfsbiy5ggrpg" path="res://objects/ui/input_settings.tscn" id="5_rtw2f"]
 
-[node name="Main menu" type="CanvasLayer"]
+[node name="AppRoot" type="Node2D"]
+script = ExtResource("1_rtw2f")
 
-[node name="MainMenu" parent="." node_paths=PackedStringArray("settings_control", "credits_control") instance=ExtResource("1_ekxnf")]
-settings_control = NodePath("../Settings menu")
-credits_control = NodePath("../Credits")
+[node name="Main menu" type="CanvasLayer" parent="."]
 
-[node name="Settings menu" parent="." node_paths=PackedStringArray("input_settings", "audio_settings") instance=ExtResource("2_bqqt6")]
+[node name="MainMenu" parent="Main menu" node_paths=PackedStringArray("SettingsControl", "CreditsControl") instance=ExtResource("1_ekxnf")]
+SettingsControl = NodePath("../Settings menu")
+CreditsControl = NodePath("../Credits")
+FirstLevelScene = ExtResource("3_oa1go")
+
+[node name="Settings menu" parent="Main menu" node_paths=PackedStringArray("input_settings", "audio_settings") instance=ExtResource("2_bqqt6")]
 visible = false
 input_settings = NodePath("../Input Settings")
 audio_settings = NodePath("../Audio settings")
 
-[node name="Credits" parent="." instance=ExtResource("3_bqqt6")]
+[node name="Credits" parent="Main menu" instance=ExtResource("3_bqqt6")]
 visible = false
 
-[node name="Audio settings" parent="." instance=ExtResource("4_8ln24")]
+[node name="Audio settings" parent="Main menu" instance=ExtResource("4_8ln24")]
 visible = false
 
-[node name="Input Settings" parent="." instance=ExtResource("5_rtw2f")]
+[node name="Input Settings" parent="Main menu" instance=ExtResource("5_rtw2f")]
 visible = false
