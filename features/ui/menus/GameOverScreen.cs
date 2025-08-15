@@ -10,16 +10,16 @@ public partial class GameOverScreen : Control
 {
     public override void _Notification(int what) => this.Notify(what);
 
-    [Export] public Button RestartButton { get; set; } = null!;
-    [Export] public Button MainMenuButton { get; set; } = null!;
-    [Export] public PackedScene MainMenuScene { get; set; } = null!;
-
-    [Dependency] public IGameScenes Scenes => this.DependOn<IGameScenes>();
-
+    [Node] private Button RestartButton { get; set; } = null!;
+    [Node] private Button MainMenuButton { get; set; } = null!;
+    
+    [Dependency] private IGameScenes Scenes => this.DependOn<IGameScenes>();
+    [Dependency] private ILevelCatalog Catalog => this.DependOn<ILevelCatalog>();
+    
     public void OnReady() {
         Visible = false;
         RestartButton.Pressed += () => Scenes.Restart();
-        MainMenuButton.Pressed += () => Scenes.ReturnToMain(MainMenuScene);
+        MainMenuButton.Pressed += () => Scenes.ReturnToMain(Catalog.MainMenu);
     }
 
     public void ShowGameOver() => Show();

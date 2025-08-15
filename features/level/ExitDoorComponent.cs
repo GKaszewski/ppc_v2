@@ -11,12 +11,12 @@ public partial class ExitDoorComponent : Area2D
 {
     public override void _Notification(int what) => this.Notify(what);
 
-    [Export] public CollisionShape2D UnlockIndicator { get; set; } = null!;
+    [Node] private CollisionShape2D UnlockIndicator { get; set; } = null!;
     [Export] public bool Unlocked { get; set; } = false;
 
-    [Dependency] public LevelService Levels => this.DependOn<LevelService>();
-    [Dependency] public ILevelCatalog Catalog => this.DependOn<ILevelCatalog>();
-    [Dependency] public IGameScenes Scenes => this.DependOn<IGameScenes>();
+    [Dependency] private LevelService Levels => this.DependOn<LevelService>();
+    [Dependency] private ILevelCatalog Catalog => this.DependOn<ILevelCatalog>();
+    [Dependency] private IGameScenes Scenes => this.DependOn<IGameScenes>();
 
     public void OnReady() {
         BodyEntered += OnBodyEntered;

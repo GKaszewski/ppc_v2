@@ -15,9 +15,9 @@ public partial class PauseMenu : Control
     [Export] public Button RestartButton { get; set; } = null!;
     [Export] public Button MainMenuButton { get; set; } = null!;
 
-    [Dependency] public IGameScenes Scenes => this.DependOn<IGameScenes>();
-    [Dependency] public ILevelCatalog Catalog => this.DependOn<ILevelCatalog>();
-    [Dependency] public LevelService Levels => this.DependOn<LevelService>();
+    [Dependency] private IGameScenes Scenes => this.DependOn<IGameScenes>();
+    [Dependency] private ILevelCatalog Catalog => this.DependOn<ILevelCatalog>();
+    [Dependency] private LevelService Levels => this.DependOn<LevelService>();
     
     public void OnReady() {
         Visible = false;

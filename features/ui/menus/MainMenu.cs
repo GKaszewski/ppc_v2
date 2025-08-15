@@ -12,19 +12,19 @@ public partial class MainMenu : Control
 {
     public override void _Notification(int what) => this.Notify(what);
     
-    [Node] public Button NewGameButton { get; set; } = null!;
-    [Node] public Button ContinueButton { get; set; } = null!;
-    [Node] public Button SettingsButton { get; set; } = null!;
-    [Node] public Button CreditsButton { get; set; } = null!;
-    [Node] public Button ExitButton { get; set; } = null!;
-    [Node] public Label VersionLabel { get; set; } = null!;
+    [Node] private Button NewGameButton { get; set; } = null!;
+    [Node] private Button ContinueButton { get; set; } = null!;
+    [Node] private Button SettingsButton { get; set; } = null!;
+    [Node] private Button CreditsButton { get; set; } = null!;
+    [Node] private Button ExitButton { get; set; } = null!;
+    [Node] private Label VersionLabel { get; set; } = null!;
     [Export] public Control SettingsControl { get; set; } = null!;
     [Export] public Control CreditsControl { get; set; } = null!;
 
-    [Dependency] public SaveService Save => this.DependOn<SaveService>();
-    [Dependency] public LevelRepository Levels => this.DependOn<LevelRepository>();
-    [Dependency] public IGameScenes Scenes => this.DependOn<IGameScenes>();
-    [Dependency] public ILevelCatalog Catalog => this.DependOn<ILevelCatalog>();
+    [Dependency] private SaveService Save => this.DependOn<SaveService>();
+    [Dependency] private LevelRepository Levels => this.DependOn<LevelRepository>();
+    [Dependency] private IGameScenes Scenes => this.DependOn<IGameScenes>();
+    [Dependency] private ILevelCatalog Catalog => this.DependOn<ILevelCatalog>();
 
     public void OnReady() {
         VersionLabel.Text = $"v. {ProjectSettings.GetSetting("application/config/version")}";

@@ -12,11 +12,11 @@ public partial class Hud : Node
     public override void _Notification(int what) => this.Notify(what);
     
     [Export] public HealthComponent Health { get; set; } = null!;
-    [Node] public Label CoinsLabel { get; set; } = null!;
-    [Node] public ProgressBar HealthBar { get; set; } = null!;
-    [Node] public Label LivesLabel { get; set; } = null!;
+    [Node] private Label CoinsLabel { get; set; } = null!;
+    [Node] private ProgressBar HealthBar { get; set; } = null!;
+    [Node] private Label LivesLabel { get; set; } = null!;
 
-    [Dependency] public PlayerRepository Player => this.DependOn<PlayerRepository>();
+    [Dependency] private PlayerRepository Player => this.DependOn<PlayerRepository>();
 
     public void OnResolved() {
         CoinsLabel.Text = $"{Tr("COINS_LABEL")}: {Player.Coins}";
