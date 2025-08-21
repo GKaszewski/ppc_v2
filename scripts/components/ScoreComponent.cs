@@ -31,11 +31,11 @@ public partial class ScoreComponent : Node
         }
     }
 
-    private void OnCollected(Variant amount, CollectableType type, Node2D body)
+    private void OnCollected(float amount, CollectableType type, Node2D body)
     {
         if (type != CollectableType.Coin) return;
         
-        var coinAmount = amount.As<int>();
+        var coinAmount = (int)amount;
         var currentCoins = (int)_gameManager.CurrentSessionState["coins_collected"];
         _gameManager.CurrentSessionState["coins_collected"] = currentCoins + coinAmount;
     }

@@ -1,25 +1,24 @@
 [gd_scene load_steps=48 format=3 uid="uid://bqi5s710xb1ju"]
 
-[ext_resource type="Script" uid="uid://ccuddyoakg04u" path="res://scripts/player.gd" id="1_8j4h4"]
+[ext_resource type="Script" uid="uid://csel4s0e4g5uf" path="res://scripts/components/PlayerController.cs" id="1_yysbb"]
 [ext_resource type="Shader" uid="uid://bs4xvm4qkurpr" path="res://shaders/hit_flash.tres" id="2_lgb3u"]
+[ext_resource type="Script" uid="uid://btlm1f3l70il" path="res://scripts/components/PlatformMovementComponent.cs" id="2_o1ihh"]
 [ext_resource type="Texture2D" uid="uid://jl1gwqchhpdc" path="res://sprites/left_eye.png" id="3_2srrh"]
-[ext_resource type="Script" uid="uid://b3mrdvre1y567" path="res://scripts/components/ship_movement.gd" id="3_p4n66"]
+[ext_resource type="Script" uid="uid://cty54itmnudfm" path="res://scripts/components/ShipMovementComponent.cs" id="3_ur2y5"]
 [ext_resource type="Texture2D" uid="uid://iiawtnwmeny3" path="res://sprites/right_eye.png" id="4_ccn81"]
-[ext_resource type="Script" uid="uid://oxeqvxkgj87j" path="res://scripts/components/flip_player.gd" id="5_geu10"]
 [ext_resource type="Texture2D" uid="uid://0l454rfplmqg" path="res://sprites/MrBrick_base-sheet.png" id="5_yysbb"]
-[ext_resource type="Script" uid="uid://qeu80jy4vmuf" path="res://scripts/components/score.gd" id="6_fowa2"]
-[ext_resource type="Script" uid="uid://btfsq0bvtrx3t" path="res://scripts/components/health.gd" id="7_tqjk8"]
-[ext_resource type="Script" uid="uid://dkpu3121y88oo" path="res://scripts/components/player_death.gd" id="8_1v23d"]
 [ext_resource type="Texture2D" uid="uid://dhkwyv6ayb5qb" path="res://sprites/flying_ship.png" id="8_6lsog"]
-[ext_resource type="PackedScene" uid="uid://dyp4i4ru2j2jh" path="res://objects/fxs/explosion_fx.tscn" id="9_hwg11"]
-[ext_resource type="Script" uid="uid://nogmyshjrv57" path="res://scripts/components/knockback.gd" id="9_rjyu4"]
-[ext_resource type="Script" uid="uid://ulhswh4jjlc6" path="res://scripts/components/stomp_damage_component.gd" id="12_payr4"]
-[ext_resource type="Script" uid="uid://dqmbvuutd5c3c" path="res://scripts/components/flashing_component.gd" id="13_hrtyn"]
-[ext_resource type="Script" uid="uid://ijrli0x8ij8v" path="res://scripts/components/invulnerability_component.gd" id="14_jopig"]
-[ext_resource type="Script" uid="uid://6ffxsx3gknhr" path="res://scripts/components/can_be_launched_component.gd" id="16_kemlv"]
+[ext_resource type="Script" uid="uid://dy78ak8eykw6e" path="res://scripts/components/FlipComponent.cs" id="9_yysbb"]
+[ext_resource type="Script" uid="uid://mnjg3p0aw1ow" path="res://scripts/components/CanPickUpComponent.cs" id="10_yysbb"]
+[ext_resource type="Script" uid="uid://ccqb8kd5m0eh7" path="res://scripts/components/ScoreComponent.cs" id="11_o1ihh"]
+[ext_resource type="Script" uid="uid://dgb8bqcri7nsj" path="res://scripts/components/HealthComponent.cs" id="12_ur2y5"]
+[ext_resource type="Script" uid="uid://byw1legrv1ep2" path="res://scripts/components/PlayerDeathComponent.cs" id="13_7til7"]
+[ext_resource type="Script" uid="uid://cgfynrn68lp12" path="res://scripts/components/KnockbackComponent.cs" id="14_e5pae"]
+[ext_resource type="Script" uid="uid://cecelixl41t3j" path="res://scripts/components/InvulnerabilityComponent.cs" id="15_xuhvf"]
 [ext_resource type="Resource" uid="uid://dw5ee2lpeypnb" path="res://resources/skills/brick_throw.tres" id="16_smbir"]
+[ext_resource type="Script" uid="uid://dvyd26ricriql" path="res://scripts/components/FlashingComponent.cs" id="16_uno3u"]
 [ext_resource type="Resource" uid="uid://2glvryih82t1" path="res://resources/skills/fire_brick.tres" id="17_6y5qu"]
-[ext_resource type="Script" uid="uid://bpy6xtfm8l3hy" path="res://scripts/components/trigger_lever_component.gd" id="17_hglfj"]
+[ext_resource type="Script" uid="uid://dtg6115je7b5s" path="res://scripts/components/StompDamageComponent.cs" id="17_bl1gx"]
 [ext_resource type="AudioStream" uid="uid://duj2q0rqytaxg" path="res://sfx/jump.wav" id="18_pysae"]
 [ext_resource type="Resource" uid="uid://cx5fsbexblp60" path="res://resources/skills/ice_brick.tres" id="18_umfbf"]
 [ext_resource type="Resource" uid="uid://cdp8sex36vdq2" path="res://resources/skills/explosive_brick.tres" id="19_5wjb7"]
@@ -29,15 +28,16 @@
 [ext_resource type="Script" uid="uid://bya240e627ti6" path="res://scripts/resources/skill_data.gd" id="21_d0oiv"]
 [ext_resource type="Resource" uid="uid://d3bjre2etov1n" path="res://resources/skills/magnetic.tres" id="22_vnsgd"]
 [ext_resource type="Script" uid="uid://bjsyeo1n7bsri" path="res://scripts/components/skill_unlocker_component.gd" id="23_qsv2c"]
+[ext_resource type="Script" uid="uid://bo506l4x0808e" path="res://scripts/components/HitComponent.cs" id="26_6n1ss"]
+[ext_resource type="Script" uid="uid://cjcc7fia15wu3" path="res://scripts/components/CanBeLaunchedComponent.cs" id="27_oefns"]
 [ext_resource type="PackedScene" uid="uid://bg76mtpcmfm2j" path="res://objects/ui/charging_bar_layer.tscn" id="28_3f5nm"]
+[ext_resource type="Script" uid="uid://cqau0810tjk4d" path="res://scripts/components/TriggerLeverComponent.cs" id="28_bnap0"]
 [ext_resource type="PackedScene" uid="uid://b12tppjkkqpt4" path="res://objects/fxs/hit_particles.tscn" id="28_jh5m0"]
-[ext_resource type="Script" uid="uid://ceq8n7yw7qxpi" path="res://scripts/components/hit_component.gd" id="29_jh5m0"]
-[ext_resource type="Script" uid="uid://c1wtrgw0x77xo" path="res://scripts/components/platform_movement.gd" id="31_xoue7"]
 [ext_resource type="AudioStream" uid="uid://dyev46uqusimi" path="res://sfx/shoot.wav" id="32_x2b7c"]
 [ext_resource type="Script" uid="uid://d1ctdx52gskv1" path="res://scripts/components/ship_shooter.gd" id="34_gwc8i"]
 [ext_resource type="PackedScene" uid="uid://dtem8jgcyoqar" path="res://objects/entities/green_laser.tscn" id="36_oxudy"]
-[ext_resource type="Script" uid="uid://cfeoalic0mu2j" path="res://scripts/components/kill_player_out_of_screen.gd" id="37_oxudy"]
-[ext_resource type="Script" uid="uid://d32kd83lf86iy" path="res://scripts/components/progressive_damage_component.gd" id="38_o1ihh"]
+[ext_resource type="Script" uid="uid://diw6opv6yutgi" path="res://scripts/components/KillPlayerOutOfScreenComponent.cs" id="37_qec3q"]
+[ext_resource type="Script" uid="uid://3qy7rm28q66a" path="res://scripts/components/ProgressiveDamageComponent.cs" id="38_dhjci"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xoue7"]
 shader = ExtResource("2_lgb3u")
@@ -83,33 +83,29 @@ scale_curve = SubResource("CurveTexture_xoue7")
 color = Color(0.764706, 0.443137, 0, 1)
 color_ramp = SubResource("GradientTexture1D_lgb3u")
 
-[node name="Brick Player" type="CharacterBody2D" node_paths=PackedStringArray("ship_sprite") groups=["player"]]
+[node name="Brick Player" type="CharacterBody2D" node_paths=PackedStringArray("ShipSprite") groups=["player"]]
 collision_layer = 4
 collision_mask = 43
-script = ExtResource("1_8j4h4")
-movement_types = {
-"platform": NodePath("Movements/PlatformMovement"),
-"ship": NodePath("Movements/ShipMovement")
-}
-ship_sprite = NodePath("Graphics/Ship")
+script = ExtResource("1_yysbb")
+MovementTypes = Dictionary[String, NodePath]({
+"platform": NodePath("Movements/PlatformMovement")
+})
+ShipSprite = NodePath("Graphics/Ship")
 
 [node name="Movements" type="Node" parent="."]
 
-[node name="PlatformMovement" type="Node" parent="Movements" node_paths=PackedStringArray("jump_sfx", "rotation_target", "body")]
-script = ExtResource("31_xoue7")
-jump_sfx = NodePath("../../sfx_jump")
-rotation_target = NodePath("../../Graphics/Root/Base")
-body = NodePath("../..")
-type = "platform"
+[node name="PlatformMovement" type="Node2D" parent="Movements" node_paths=PackedStringArray("JumpSfx", "RotationTarget", "Body")]
+script = ExtResource("2_o1ihh")
+JumpSfx = NodePath("../../sfx_jump")
+RotationTarget = NodePath("../../Graphics/Root/Base")
+Body = NodePath("../..")
 
-[node name="ShipMovement" type="Node" parent="Movements" node_paths=PackedStringArray("body")]
-script = ExtResource("3_p4n66")
-max_speed = 360.0
-acceleration = 1200.0
-friction = 800.0
-body = NodePath("../..")
-type = "ship"
-metadata/_custom_type_script = "uid://b3mrdvre1y567"
+[node name="ShipMovement" type="Node2D" parent="Movements" node_paths=PackedStringArray("Body")]
+script = ExtResource("3_ur2y5")
+MaxSpeed = 360.0
+Acceleration = 1200.0
+Friction = 800.0
+Body = NodePath("../..")
 
 [node name="Graphics" type="Node2D" parent="."]
 
@@ -140,11 +136,11 @@ visible = false
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_hdsg1")
 
-[node name="FlipPlayerComponent" type="Node2D" parent="." node_paths=PackedStringArray("eye_left", "eye_right", "platform_movement")]
-script = ExtResource("5_geu10")
-eye_left = NodePath("../Graphics/Root/Left Eye")
-eye_right = NodePath("../Graphics/Root/Right Eye")
-platform_movement = NodePath("../Movements/PlatformMovement")
+[node name="FlipPlayerComponent" type="Node2D" parent="." node_paths=PackedStringArray("LeftEye", "RightEye", "PlatformMovement")]
+script = ExtResource("9_yysbb")
+LeftEye = NodePath("../Graphics/Root/Left Eye")
+RightEye = NodePath("../Graphics/Root/Right Eye")
+PlatformMovement = NodePath("../Movements/PlatformMovement")
 
 [node name="StompDamageArea" type="Area2D" parent="."]
 collision_layer = 0
@@ -156,54 +152,57 @@ position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_vad0t")
 
 [node name="CanPickUpComponent" type="Node" parent="."]
+script = ExtResource("10_yysbb")
 
 [node name="ScoreComponent" type="Node" parent="."]
-script = ExtResource("6_fowa2")
+script = ExtResource("11_o1ihh")
 
-[node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("hurt_fx", "heal_fx")]
-script = ExtResource("7_tqjk8")
-hurt_fx = NodePath("../sfx_hurt")
-heal_fx = NodePath("../sfx_heal")
+[node name="HealthComponent" type="Node2D" parent="." node_paths=PackedStringArray("HurtSfx", "HealSfx")]
+script = ExtResource("12_ur2y5")
+HurtSfx = NodePath("../sfx_hurt")
+HealSfx = NodePath("../sfx_heal")
 
-[node name="PlayerDeathComponent" type="Node2D" parent="."]
+[node name="PlayerDeathComponent" type="Node2D" parent="." node_paths=PackedStringArray("DeathSfx", "HealthComponent")]
 process_mode = 3
-script = ExtResource("8_1v23d")
-death_effect = ExtResource("9_hwg11")
+script = ExtResource("13_7til7")
+DeathSfx = NodePath("../sfx_hurt")
+HealthComponent = NodePath("../HealthComponent")
 
-[node name="KnockbackComponent" type="Node" parent="." node_paths=PackedStringArray("character_body")]
-script = ExtResource("9_rjyu4")
-character_body = NodePath("..")
-knockback_force = 1500.0
+[node name="KnockbackComponent" type="Node" parent="." node_paths=PackedStringArray("Body", "HealthComponent")]
+script = ExtResource("14_e5pae")
+Body = NodePath("..")
+KnockbackForce = 1250.0
+HealthComponent = NodePath("../HealthComponent")
 
 [node name="ThrowTimer" type="Timer" parent="."]
 
-[node name="InvulnerabilityComponent" type="Node" parent="." node_paths=PackedStringArray("flashing_component")]
-script = ExtResource("14_jopig")
-flashing_component = NodePath("../FlashingComponent Base")
+[node name="InvulnerabilityComponent" type="Node" parent="." node_paths=PackedStringArray("FlashingComponent")]
+script = ExtResource("15_xuhvf")
+FlashingComponent = NodePath("../FlashingComponent Base")
 
-[node name="FlashingComponent Base" type="Node" parent="." node_paths=PackedStringArray("sprite", "health_component")]
-script = ExtResource("13_hrtyn")
-sprite = NodePath("../Graphics/Root/Base")
-flash_duration = 1.0
-health_component = NodePath("../HealthComponent")
+[node name="FlashingComponent Base" type="Node" parent="." node_paths=PackedStringArray("Sprite", "HealthComponent")]
+script = ExtResource("16_uno3u")
+Sprite = NodePath("../Graphics/Root/Base")
+FlashDuration = 1.0
+HealthComponent = NodePath("../HealthComponent")
 
-[node name="FlashingComponent LEye" type="Node" parent="." node_paths=PackedStringArray("sprite", "health_component")]
-script = ExtResource("13_hrtyn")
-sprite = NodePath("../Graphics/Root/Left Eye")
-flash_duration = 1.0
-health_component = NodePath("../HealthComponent")
+[node name="FlashingComponent LEye" type="Node" parent="." node_paths=PackedStringArray("Sprite", "HealthComponent")]
+script = ExtResource("16_uno3u")
+Sprite = NodePath("../Graphics/Root/Left Eye")
+FlashDuration = 1.0
+HealthComponent = NodePath("../HealthComponent")
 
-[node name="FlashingComponent REye" type="Node" parent="." node_paths=PackedStringArray("sprite", "health_component")]
-script = ExtResource("13_hrtyn")
-sprite = NodePath("../Graphics/Root/Right Eye")
-flash_duration = 1.0
-health_component = NodePath("../HealthComponent")
+[node name="FlashingComponent REye" type="Node" parent="." node_paths=PackedStringArray("Sprite", "HealthComponent")]
+script = ExtResource("16_uno3u")
+Sprite = NodePath("../Graphics/Root/Right Eye")
+FlashDuration = 1.0
+HealthComponent = NodePath("../HealthComponent")
 
-[node name="StompDamageComponent" type="Node" parent="." node_paths=PackedStringArray("area2d", "root")]
-script = ExtResource("12_payr4")
-damage = 4.0
-area2d = NodePath("../StompDamageArea")
-root = NodePath("..")
+[node name="StompDamageComponent" type="Node" parent="." node_paths=PackedStringArray("Area", "Root")]
+script = ExtResource("17_bl1gx")
+Damage = 4.0
+Area = NodePath("../StompDamageArea")
+Root = NodePath("..")
 
 [node name="SkillManager" type="Node" parent="."]
 script = ExtResource("20_ppfy7")
@@ -213,11 +212,11 @@ available_skills = Array[ExtResource("21_d0oiv")]([ExtResource("22_vnsgd"), ExtR
 script = ExtResource("23_qsv2c")
 skill_manager = NodePath("../SkillManager")
 
-[node name="HitComponent" type="Node" parent="." node_paths=PackedStringArray("sprite", "health_component", "hit_fx")]
-script = ExtResource("29_jh5m0")
-sprite = NodePath("../Graphics/Root/Base")
-health_component = NodePath("../HealthComponent")
-hit_fx = NodePath("../HitParticles")
+[node name="HitComponent" type="Node" parent="." node_paths=PackedStringArray("Sprite", "Health", "HitFx")]
+script = ExtResource("26_6n1ss")
+Sprite = NodePath("../Graphics/Root/Base")
+Health = NodePath("../HealthComponent")
+HitFx = NodePath("../HitParticles")
 metadata/_custom_type_script = "uid://ceq8n7yw7qxpi"
 
 [node name="MagneticArea" type="Area2D" parent="."]
@@ -229,10 +228,10 @@ visible = false
 shape = SubResource("CircleShape2D_ps31c")
 
 [node name="CanBeLaunchedComponent" type="Node" parent="."]
-script = ExtResource("16_kemlv")
+script = ExtResource("27_oefns")
 
 [node name="TriggerLeverComponent" type="Node" parent="."]
-script = ExtResource("17_hglfj")
+script = ExtResource("28_bnap0")
 
 [node name="sfx_jump" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("18_pysae")
@@ -274,18 +273,13 @@ gizmo_extents = 1.0
 position = Vector2(0, 3)
 scale = Vector2(0.8, 1.9)
 
-[node name="KillPlayerOutOfScreen" type="Node" parent="." node_paths=PackedStringArray("screen_notifier", "health_component")]
-script = ExtResource("37_oxudy")
-screen_notifier = NodePath("../VisibleOnScreenNotifier2D")
-health_component = NodePath("../HealthComponent")
+[node name="KillPlayerOutOfScreen" type="Node" parent="." node_paths=PackedStringArray("ScreenNotifier", "HealthComponent")]
+script = ExtResource("37_qec3q")
+ScreenNotifier = NodePath("../VisibleOnScreenNotifier2D")
+HealthComponent = NodePath("../HealthComponent")
 
-[node name="ProgressiveDamageComponent" type="Node" parent="." node_paths=PackedStringArray("health_component", "sprite", "platform_movement")]
-script = ExtResource("38_o1ihh")
-health_component = NodePath("../HealthComponent")
-sprite = NodePath("../Graphics/Root/Base")
-platform_movement = NodePath("../Movements/PlatformMovement")
-min_jump_height = 100.0
-jump_reduction_percentage = 0.15
-
-[connection signal="on_death" from="HealthComponent" to="PlayerDeathComponent" method="_on_health_component_on_death"]
-[connection signal="on_health_change" from="HealthComponent" to="KnockbackComponent" method="_on_health_component_on_health_change"]
+[node name="ProgressiveDamageComponent" type="Node" parent="." node_paths=PackedStringArray("HealthComponent", "Sprite", "PlatformMovement")]
+script = ExtResource("38_dhjci")
+HealthComponent = NodePath("../HealthComponent")
+Sprite = NodePath("../Graphics/Root/Base")
+PlatformMovement = NodePath("../Movements/PlatformMovement")

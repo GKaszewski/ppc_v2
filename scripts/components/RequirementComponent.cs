@@ -28,9 +28,9 @@ public partial class RequirementComponent : Node
         }
     }
 
-    private void OnCollected(Variant amount, CollectableType type, Node2D body)
+    private void OnCollected(float amount, CollectableType type, Node2D body)
     {
-        AddProgress(amount.As<int>());
+        AddProgress((int)amount);
     }
 
     private void AddProgress(int amount = 1)
