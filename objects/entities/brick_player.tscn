@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://bqi5s710xb1ju"]
+[gd_scene load_steps=49 format=3 uid="uid://bqi5s710xb1ju"]
 
 [ext_resource type="Script" uid="uid://csel4s0e4g5uf" path="res://scripts/components/PlayerController.cs" id="1_yysbb"]
 [ext_resource type="Shader" uid="uid://bs4xvm4qkurpr" path="res://shaders/hit_flash.tres" id="2_lgb3u"]
@@ -35,6 +35,7 @@
 [ext_resource type="PackedScene" uid="uid://b12tppjkkqpt4" path="res://objects/fxs/hit_particles.tscn" id="28_jh5m0"]
 [ext_resource type="AudioStream" uid="uid://dyev46uqusimi" path="res://sfx/shoot.wav" id="32_x2b7c"]
 [ext_resource type="Script" uid="uid://d1ctdx52gskv1" path="res://scripts/components/ship_shooter.gd" id="34_gwc8i"]
+[ext_resource type="Script" uid="uid://dev2q1228otm2" path="res://scripts/UI/ChargeProgressBar.cs" id="34_o1ihh"]
 [ext_resource type="PackedScene" uid="uid://dtem8jgcyoqar" path="res://objects/entities/green_laser.tscn" id="36_oxudy"]
 [ext_resource type="Script" uid="uid://diw6opv6yutgi" path="res://scripts/components/KillPlayerOutOfScreenComponent.cs" id="37_qec3q"]
 [ext_resource type="Script" uid="uid://3qy7rm28q66a" path="res://scripts/components/ProgressiveDamageComponent.cs" id="38_dhjci"]
@@ -249,11 +250,13 @@ bus = &"sfx"
 stream = ExtResource("32_x2b7c")
 bus = &"sfx"
 
-[node name="ChargingBarLayer" parent="." instance=ExtResource("28_3f5nm")]
+[node name="ChargingBarLayer" parent="." node_paths=PackedStringArray("ProgressBar") instance=ExtResource("28_3f5nm")]
 offset_left = -17.0
 offset_top = -30.0
 offset_right = 23.0
 offset_bottom = -20.0
+script = ExtResource("34_o1ihh")
+ProgressBar = NodePath(".")
 
 [node name="HitParticles" parent="." instance=ExtResource("28_jh5m0")]
 process_material = SubResource("ParticleProcessMaterial_lgb3u")
