@@ -1,21 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvfsbiy5ggrpg"]
+[gd_scene load_steps=3 format=3 uid="uid://cvfsbiy5ggrpg"]
 
 [ext_resource type="PackedScene" uid="uid://bxpr4m7lq7clh" path="res://objects/ui/input_button.tscn" id="1_h8s4o"]
-[ext_resource type="Script" uid="uid://dppwl7xie2mh" path="res://scripts/ui/input_settings.gd" id="1_v2gus"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_se25o"]
 bg_color = Color(0, 0, 0, 1)
 
-[node name="Input Settings" type="Control" node_paths=PackedStringArray("action_list", "reset_to_default_button")]
+[node name="Input Settings" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_v2gus")
-action_list = NodePath("PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/Actions")
-reset_to_default_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/Reset to default Button")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1

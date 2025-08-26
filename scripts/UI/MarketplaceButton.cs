@@ -13,50 +13,78 @@ public partial class MarketplaceButton : Button
     [Export] public Container SkillLevelContainer { get; set; }
     
     private GameManager _gameManager;
-    private SkillUnlockedComponent _skillUnlockedComponent;
+    private SkillUnlockerComponent _skillUnlockerComponent;
 
     public override void _Ready()
     {
         _gameManager = GetNode<GameManager>("/root/GameManager");
-        
-        Setup();
         var player = _gameManager.Player;
-
-        var skillUnlockerComponent = player?.GetNodeOrNull<SkillUnlockedComponent>("SkillUnlockerComponent");
-        if (skillUnlockerComponent == null) return;
+        if (player == null) return;
         
-        skillUnlockerComponent.SkillUnlocked += OnSkillUnlock;
+        _skillUnlockerComponent = player.GetNodeOrNull<SkillUnlockerComponent>("SkillUnlockerComponent");
+        if (_skillUnlockerComponent != null)
+        {
+            _skillUnlockerComponent.SkillUnlocked += OnSkillStateChanged;
+        }
+        
+        UpdateButtonState();
     }
 
     public override void _ExitTree()
     {
-        _skillUnlockedComponent.SkillUnlocked -= OnSkillUnlock;
+        if (_skillUnlockerComponent != null)
+        {
+            _skillUnlockerComponent.SkillUnlocked -= OnSkillStateChanged;
+        }
+    }
+    
+    private void OnSkillStateChanged(SkillData skill)
+    {
+        if (skill.Name == Data.Name)
+        {
+            UpdateButtonState();
+        }
     }
 
-    private void Setup()
+    private void UpdateButtonState()
     {
-        if (Data == null) return;
+        if (Data == null || Data.Upgrades.Count == 0)
+        {
+            Visible = false;
+            return;
+        }
+
+        var isUnlocked = _gameManager.IsSkillUnlocked(Data);
         
+        for (var i = 0; i < SkillLevelContainer.GetChildCount(); i++)
+        {
+            SkillLevelContainer.GetChild(i).QueueFree();
+        }
+
         for (var i = 0; i < Data.MaxLevel; i++)
         {
             var icon = new TextureRect()
             {
-                Texture = i < Data.Level ? UnlockedSkillIcon : LockedSkillIcon,
+                Texture = (isUnlocked && i < Data.Level) ? UnlockedSkillIcon : LockedSkillIcon,
+                ExpandMode = TextureRect.ExpandModeEnum.FitWidthProportional
             };
             SkillLevelContainer.AddChild(icon);
         }
-    }
 
-    private void OnSkillUnlock(SkillData skill)
-    {
-        if (skill.Name != Data.Name) return;
-
-        for (var i = 0; i < Data.MaxLevel; i++)
+        if (!isUnlocked)
         {
-            var icon = SkillLevelContainer.GetChildOrNull<TextureRect>(i);
-            if (icon == null) continue;
-            icon.Texture = i < Data.Level ? UnlockedSkillIcon : LockedSkillIcon;
-            Disabled = i >= Data.Level;
+            Text = $"{Tr(Data.Name)} ({Data.Upgrades[0].Cost})";
+            Disabled = false;
+        }
+        else if (Data.Level < Data.MaxLevel)
+        {
+            Text = $"{Tr(Data.Name)} ({Data.Upgrades[Data.Level].Cost})";
+            Disabled = false;
+        }
+        else
+        {
+            Text = $"{Tr(Data.Name)} (MAX)";
+            Disabled = true;
         }
     }
 }

@@ -1,33 +1,64 @@
 using Godot;
+using Mr.BrickAdventures.Autoloads;
 using Mr.BrickAdventures.scripts.components;
 using Mr.BrickAdventures.scripts.Resources;
 
 namespace Mr.BrickAdventures.scripts.UI;
 
-public partial class ChargeProgressBar : Node
+public partial class ChargeProgressBar : ProgressBar
 {
     [Export] public ProgressBar ProgressBar { get; set; }
-    [Export] public BrickThrowComponent ThrowComponent { get; set; }
-    
+    [Export] private SkillManager _skillManager;
+
+    private BrickThrowComponent _throwComponent;
     private ChargeThrowInputResource _throwInput;
 
     public override void _Ready()
     {
-        Owner.ChildEnteredTree += OnNodeEntered;   
         ProgressBar.Hide();
+
+        if (_skillManager == null)
+        {
+            return;
+        }
+        
+        _skillManager.ActiveThrowSkillChanged += OnActiveThrowSkillChanged;
+        
+        SetupDependencies();
+    }
+    
+    private void OnActiveThrowSkillChanged(BrickThrowComponent throwComponent)
+    {
+        OnOwnerExiting();
+
+        if (throwComponent == null) return;
+        
+        _throwComponent = throwComponent;
+        _throwComponent.TreeExiting += OnOwnerExiting;
         SetupDependencies();
     }
 
-    private void OnNodeEntered(Node node)
+    private void OnOwnerExiting()
     {
-        if (node is not BrickThrowComponent throwComponent || ThrowComponent != null) return;
-        ThrowComponent = throwComponent;
-        SetupDependencies();
+        if (_throwInput != null)
+        {
+            _throwInput.ChargeStarted -= OnChargeStarted;
+            _throwInput.ChargeStopped -= OnChargeStopped;
+            _throwInput.ChargeUpdated -= OnChargeUpdated;
+            _throwInput = null;
+        }
+        _throwComponent = null;
     }
+    
 
     private void SetupDependencies()
     {
-        if (ThrowComponent.ThrowInputBehavior is ChargeThrowInputResource throwInput)
+        if (_throwComponent == null || ProgressBar == null)
+        {
+            return;
+        }
+        
+        if (_throwComponent.ThrowInputBehavior is ChargeThrowInputResource throwInput)
         {
             _throwInput = throwInput;
         }

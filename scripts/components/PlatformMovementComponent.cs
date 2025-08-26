@@ -123,7 +123,8 @@ public partial class PlatformMovementComponent : Node2D, IMovement
             Body.Velocity = new Vector2(direction * Speed, Body.Velocity.Y);
         else
             Body.Velocity = new Vector2(Mathf.MoveToward(Body.Velocity.X, 0, Speed), Body.Velocity.Y);
-
+        
+        PreviousVelocity = Body.Velocity;
         Body.MoveAndSlide();
     }
 

@@ -1,14 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://dkqa3q6j2gof4"]
 
-[ext_resource type="Script" uid="uid://ybmwls7hv8j3" path="res://scripts/components/spaceship_exit_component.gd" id="1_1cmfv"]
+[ext_resource type="Script" uid="uid://d3gfg05ll8uw3" path="res://scripts/components/SpaceshipExitComponent.cs" id="1_1cmfv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_njt46"]
 
-[node name="Spaceship exit" type="Area2D" node_paths=PackedStringArray("area2d")]
+[node name="Spaceship exit" type="Area2D" node_paths=PackedStringArray("Area")]
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("1_1cmfv")
-area2d = NodePath(".")
+Area = NodePath(".")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_njt46")

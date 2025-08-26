@@ -18,6 +18,8 @@ public partial class ExitDoorComponent : Node, IUnlockable
 
     public override void _Ready()
     {
+        _gameManager = GetNode<GameManager>("/root/GameManager");
+        
         if (ExitArea == null)
         {
             GD.PushError("ExitDoorComponent: ExitArea is not set.");
@@ -26,12 +28,15 @@ public partial class ExitDoorComponent : Node, IUnlockable
         
         ExitArea.BodyEntered += OnExitAreaBodyEntered;
         
-        _gameManager = GetNode<GameManager>("/root/gameManager");
     }
 
     private void OnExitAreaBodyEntered(Node2D body)
     {
-        throw new System.NotImplementedException();
+        if (Locked) return;
+        
+        EmitSignalExitTriggered();
+        _gameManager.UnlockLevel((int)_gameManager.PlayerState["current_level"] + 1);
+        CallDeferred(nameof(GoToNextLevel));
     }
 
     public void Unlock()

@@ -1,6 +1,8 @@
 using Godot;
 using Godot.Collections;
 using Mr.BrickAdventures.Autoloads;
+using Mr.BrickAdventures.scripts.components;
+using Mr.BrickAdventures.scripts.interfaces;
 using Mr.BrickAdventures.scripts.Resources;
 
 namespace Mr.BrickAdventures.scripts;
@@ -9,9 +11,12 @@ public partial class SkillManager : Node
 {
     private GameManager _gameManager;
     [Export] public Array<SkillData> AvailableSkills { get; set; } = [];
-
+    
     public Dictionary ActiveComponents { get; private set; } = new();
 
+    [Signal]
+    public delegate void ActiveThrowSkillChangedEventHandler(BrickThrowComponent throwComponent);
+    
     public override void _Ready()
     {
         _gameManager = GetNode<GameManager>("/root/GameManager");
@@ -26,56 +31,60 @@ public partial class SkillManager : Node
         if (skillData.Type == SkillType.Throw)
         {
             var unlocked = _gameManager.GetUnlockedSkills();
-            foreach (var skill in unlocked)
+            foreach (var sd in unlocked)
             {
                 SkillData data = null;
                 foreach (var s in AvailableSkills)
                 {
-                    if (s == (SkillData)skill)
+                    if (s == sd)
                     {
                         data = s;
                         break;
                     }
                 }
-                if (data != null && data.Type == SkillType.Throw)
+                if (data is { Type: SkillType.Throw })
                     RemoveSkill(data.Name);
             }
         }
 
         var instance = skillData.Node.Instantiate();
-        foreach (var key in skillData.Config.Keys)
+        if (instance is ISkill skill)
         {
-            if (instance.HasMethod("get")) // rough presence check
-            {
-                var value = skillData.Config[key];
-                var parent = GetParent();
-
-                if (value.VariantType == Variant.Type.NodePath)
-                {
-                    var np = (NodePath)value;
-                    if (parent.HasNode(np))
-                        value = parent.GetNode(np);
-                    else if (instance.HasNode(np))
-                        value = instance.GetNode(np);
-                    else
-                        continue;
-                }
-
-                // Set via property if exists
-                instance.Set(key, value);
-            }
+            skill.Initialize(Owner, skillData); 
+            skill.Activate();
+        } 
+        else
+        {
+            GD.PrintErr($"Skill scene for '{skillData.Name}' does not implement ISkill!");
+            instance.QueueFree();
+            return;
         }
 
         Owner.AddChild(instance);
         ActiveComponents[skillData.Name] = instance;
+        
+        if (instance is BrickThrowComponent btc)
+        {
+            EmitSignalActiveThrowSkillChanged(btc);
+        }
     }
     
     public void RemoveSkill(string skillName)
     {
         if (!ActiveComponents.TryGetValue(skillName, out var component))
             return;
+        
+        if (component.AsGodotObject() is BrickThrowComponent)
+        {
+            EmitSignalActiveThrowSkillChanged(null);
+        }
 
         var inst = (Node)component;
+        if (inst is ISkill skill)
+        {
+            skill.Deactivate();
+        }
+        
         if (IsInstanceValid(inst))
             inst.QueueFree();
 
@@ -97,7 +106,6 @@ public partial class SkillManager : Node
         {
             if (_gameManager.IsSkillUnlocked(sd))
             {
-                GD.Print("Applying skill: ", sd.Name);
                 CallDeferred(MethodName.AddSkill, sd);
             }
             else

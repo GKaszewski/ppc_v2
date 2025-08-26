@@ -9,12 +9,17 @@ namespace Mr.BrickAdventures.Autoloads;
 
 public partial class GameManager : Node
 {
-    [Export] public Array<PackedScene> LevelScenes { get; set; } = new();
+    [Export] public Array<PackedScene> LevelScenes { get; set; } = [];
     
-    public PlayerController Player { get; set; }
+    public PlayerController Player {
+        get => GetPlayer();
+        private set => _player = value;
+    }
     
-    private List<Node> _sceneNodes = new();
-
+    private List<Node> _sceneNodes = [];
+    private PlayerController _player;
+    
+    [Export] 
     public Dictionary PlayerState { get; set; } = new()
     {
         { "coins", 0 },
@@ -24,7 +29,8 @@ public partial class GameManager : Node
         { "unlocked_levels", new Array<int>() {0}},
         { "unlocked_skills", new Array<SkillData>() }
     };
-
+    
+    [Export]
     public Dictionary CurrentSessionState { get; private set; } = new()
     {
         { "coins_collected", 0 },
@@ -225,14 +231,14 @@ public partial class GameManager : Node
 
     public PlayerController GetPlayer()
     {
-        if (Player != null) return Player;
+        if (_player != null) return _player;
 
         foreach (var node in _sceneNodes)
         {
             if (node is not PlayerController player) continue;
             
-            Player = player;
-            return Player;
+            _player = player;
+            return _player;
         }
         
         GD.PrintErr("PlayerController not found in the scene tree.");

@@ -1,12 +1,12 @@
 [gd_scene load_steps=4 format=3 uid="uid://i6mnjbjcoqe5"]
 
-[ext_resource type="Script" uid="uid://cugifchx6jhuk" path="res://scripts/ui/pause_menu.gd" id="1_aktha"]
+[ext_resource type="Script" uid="uid://cakgxndurgfa3" path="res://scripts/UI/PauseMenu.cs" id="1_h4pd5"]
 [ext_resource type="PackedScene" uid="uid://cl00e2ocomk3m" path="res://scenes/main_menu.tscn" id="2_h4pd5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4ivv"]
 bg_color = Color(0, 0, 0, 1)
 
-[node name="Pause menu" type="Control" node_paths=PackedStringArray("pause_menu_control", "resume_button", "quit_button", "settings_button", "exit_to_menu_button")]
+[node name="Pause menu" type="Control" node_paths=PackedStringArray("PauseMenuControl", "ResumeButton", "MainMenuButton", "QuitButton", "SettingsButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,13 +15,13 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
-script = ExtResource("1_aktha")
-pause_menu_control = NodePath(".")
-resume_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/Resume Button")
-quit_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/Quit game Button")
-settings_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/Settings Button")
-exit_to_menu_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/Exit to menu Button")
-exit_to_menu_scene = ExtResource("2_h4pd5")
+script = ExtResource("1_h4pd5")
+PauseMenuControl = NodePath(".")
+ResumeButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/Resume Button")
+MainMenuButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/Exit to menu Button")
+QuitButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/Quit game Button")
+SettingsButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/Settings Button")
+MainMenuScene = ExtResource("2_h4pd5")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1

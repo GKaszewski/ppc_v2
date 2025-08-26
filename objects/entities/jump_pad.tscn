@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cm3rixnnev1pg"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_ctugi"]
-[ext_resource type="Script" uid="uid://dwok2qx4wpkey" path="res://scripts/components/jump_pad_component.gd" id="2_2ypfs"]
+[ext_resource type="Script" uid="uid://bgbnof7aeydmq" path="res://scripts/components/JumpPadComponent.cs" id="2_huktk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ci3ij"]
 size = Vector2(16, 6)
@@ -20,9 +20,9 @@ hframes = 12
 vframes = 12
 frame = 120
 
-[node name="JumpPadComponent" type="Node" parent="." node_paths=PackedStringArray("area2d", "sprite2d")]
-script = ExtResource("2_2ypfs")
-jump_force = 1110.0
-area2d = NodePath("..")
-sprite2d = NodePath("../Sprite2D")
-start_animation_index = 120
+[node name="JumpPadComponent" type="Node" parent="." node_paths=PackedStringArray("Area", "Sprite")]
+script = ExtResource("2_huktk")
+JumpForce = 1110.0
+Area = NodePath("..")
+Sprite = NodePath("../Sprite2D")
+StartAnimationIndex = 120

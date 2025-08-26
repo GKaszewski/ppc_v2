@@ -1,13 +1,13 @@
 [gd_scene load_steps=13 format=3 uid="uid://jiv4e82ycwmq"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_bmfqy"]
-[ext_resource type="Script" uid="uid://dkmxhjtmu5xlb" path="res://scripts/components/damage_component.gd" id="2_id4r8"]
-[ext_resource type="Script" uid="uid://1tnr46o1ib4u" path="res://scripts/components/out_of_screen_component.gd" id="3_2uduj"]
-[ext_resource type="Script" uid="uid://bvsgg8lu0a8m6" path="res://scripts/components/lifetime_component.gd" id="4_x32ji"]
-[ext_resource type="Script" uid="uid://873un8agkyja" path="res://scripts/components/launch_component.gd" id="5_r3id6"]
-[ext_resource type="Script" uid="uid://cdnwrn8v05qhi" path="res://scripts/components/bullet_component.gd" id="7_8gqaa"]
-[ext_resource type="Script" uid="uid://be8jhvb8t3kif" path="res://scripts/components/homing_missile_motion.gd" id="7_bmfqy"]
-[ext_resource type="Script" uid="uid://c0bvan0swashx" path="res://scripts/components/trail_component.gd" id="8_id4r8"]
+[ext_resource type="Script" uid="uid://2i7p7v135u7c" path="res://scripts/components/DamageComponent.cs" id="2_id4r8"]
+[ext_resource type="Script" uid="uid://cs6u3sh68f43j" path="res://scripts/components/OutOfScreenComponent.cs" id="3_2uduj"]
+[ext_resource type="Script" uid="uid://oyf25mpc5etr" path="res://scripts/components/LifetimeComponent.cs" id="4_x32ji"]
+[ext_resource type="Script" uid="uid://cbexrnnj47f87" path="res://scripts/components/LaunchComponent.cs" id="5_id4r8"]
+[ext_resource type="Script" uid="uid://cfw8nbrarex0i" path="res://scripts/components/BulletComponent.cs" id="6_2uduj"]
+[ext_resource type="Script" uid="uid://c2hplha6af74q" path="res://scripts/components/HomingMissileMotionComponent.cs" id="7_x32ji"]
+[ext_resource type="Script" uid="uid://cqkh5e36p5fj0" path="res://scripts/components/TrailComponent.cs" id="8_id4r8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_txsw8"]
 radius = 4.0
@@ -41,47 +41,42 @@ frame = 79
 position = Vector2(2.38419e-07, 2.38419e-07)
 scale = Vector2(0.4, 0.4)
 
-[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("area2d")]
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("Area")]
 script = ExtResource("2_id4r8")
-area2d = NodePath("..")
+Area = NodePath("..")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
 
-[node name="OutOfScreenComponent" type="Node" parent="." node_paths=PackedStringArray("visibility_notifier", "root")]
+[node name="OutOfScreenComponent" type="Node" parent="." node_paths=PackedStringArray("VisibilityNotifier")]
 script = ExtResource("3_2uduj")
-visibility_notifier = NodePath("../VisibleOnScreenNotifier2D")
-root = NodePath("..")
+VisibilityNotifier = NodePath("../VisibleOnScreenNotifier2D")
 
-[node name="LifetimeComponent" type="Node" parent="." node_paths=PackedStringArray("root", "timer")]
+[node name="LifetimeComponent" type="Node" parent="."]
 script = ExtResource("4_x32ji")
-root = NodePath("..")
-life_time = 10.0
-timer = NodePath("../Timer")
+LifeTime = 10.0
 
-[node name="LaunchComponent" type="Node2D" parent="." node_paths=PackedStringArray("root")]
-script = ExtResource("5_r3id6")
-root = NodePath("..")
-speed = 120.0
+[node name="LaunchComponent" type="Node2D" parent="."]
+script = ExtResource("5_id4r8")
+Speed = 120.0
 metadata/_custom_type_script = "uid://873un8agkyja"
 
-[node name="BulletComponent" type="Node" parent="." node_paths=PackedStringArray("root", "area2d")]
-script = ExtResource("7_8gqaa")
-root = NodePath("..")
-area2d = NodePath("..")
+[node name="BulletComponent" type="Node" parent="." node_paths=PackedStringArray("Area", "BulletSprite")]
+script = ExtResource("6_2uduj")
+Area = NodePath("..")
+BulletSprite = NodePath("../Sprite2D")
 metadata/_custom_type_script = "uid://cdnwrn8v05qhi"
 
-[node name="HomingMissileMotion" type="Node" parent="." node_paths=PackedStringArray("launch_component", "root", "detection_area")]
-script = ExtResource("7_bmfqy")
-launch_component = NodePath("../LaunchComponent")
-root = NodePath("..")
-max_speed = 122.0
-acceleration = 4.0
-detection_area = NodePath("../DetectionArea")
-wobble_strength = 10.0
-drag = 1.0
-steering_lerp = 0.01
+[node name="HomingMissileMotion" type="Node" parent="." node_paths=PackedStringArray("Launch", "DetectionArea")]
+script = ExtResource("7_x32ji")
+Launch = NodePath("../LaunchComponent")
+MaxSpeed = 122.0
+Acceleration = 4.0
+WobbleStrength = 10.0
+Drag = 1.0
+SteeringLerp = 0.01
+DetectionArea = NodePath("../DetectionArea")
 
 [node name="DetectionArea" type="Area2D" parent="."]
 collision_layer = 0

@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://c1iorglk708g0"]
 
-[ext_resource type="Script" uid="uid://djfejwp6e402k" path="res://scripts/components/terrain_hit_fx.gd" id="1_22p6x"]
+[ext_resource type="Script" uid="uid://cypxrqoeiihbf" path="res://scripts/components/TerrainHitFx.cs" id="1_22p6x"]
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_6dbny"]
 

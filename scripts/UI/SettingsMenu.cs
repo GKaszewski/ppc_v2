@@ -3,7 +3,7 @@ using Mr.BrickAdventures.Autoloads;
 
 namespace Mr.BrickAdventures.scripts.UI;
 
-public partial class SettingsMenu : Node
+public partial class SettingsMenu : Control
 {
     [Export] public Control InputSettingsControl { get; set; }
     [Export] public Control AudioSettingsControl { get; set; }
@@ -26,10 +26,10 @@ public partial class SettingsMenu : Node
         DisplaySettingsButton.Pressed += OnDisplaySettingsPressed;
         GameplaySettingsButton.Pressed += OnGameplaySettingsPressed;
         
-        InputSettingsControl.Hide();
-        AudioSettingsControl.Hide();
-        DisplaySettingsControl.Hide();
-        GameplaySettingsControl.Hide();
+        InputSettingsControl?.Hide();
+        AudioSettingsControl?.Hide();
+        DisplaySettingsControl?.Hide();
+        GameplaySettingsControl?.Hide();
     }
 
     public override void _UnhandledInput(InputEvent @event)

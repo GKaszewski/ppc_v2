@@ -1,15 +1,15 @@
 [gd_scene load_steps=7 format=3 uid="uid://54w4wisfj8v8"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_epuj5"]
-[ext_resource type="Script" uid="uid://pa1bwc4no08q" path="res://scripts/components/collectable.gd" id="2_y0k47"]
+[ext_resource type="Script" uid="uid://r4jybneigfcn" path="res://scripts/components/CollectableComponent.cs" id="2_gxix7"]
 [ext_resource type="Resource" uid="uid://vql535ckoeqm" path="res://resources/collectables/coin.tres" id="3_fm2fq"]
-[ext_resource type="Script" uid="uid://bg75hnr3q6grk" path="res://scripts/components/fade_away.gd" id="4_fx1h2"]
+[ext_resource type="Script" uid="uid://bjln6jb1sigx2" path="res://scripts/components/FadeAwayComponent.cs" id="4_gxix7"]
 [ext_resource type="AudioStream" uid="uid://dpyr80hk4kebc" path="res://sfx/pickup_coin_1.wav" id="5_4jc2c"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3ask2"]
 radius = 9.0
 
-[node name="Coin" type="Area2D"]
+[node name="Coin" type="Area2D" groups=["coins"]]
 collision_layer = 2
 collision_mask = 4
 
@@ -22,19 +22,18 @@ hframes = 12
 vframes = 12
 frame = 51
 
-[node name="Collectable" type="Node" parent="." node_paths=PackedStringArray("area2d", "collision_shape", "sfx") groups=["coins"]]
-script = ExtResource("2_y0k47")
-area2d = NodePath("..")
-collision_shape = NodePath("../CollisionShape2D")
-collectable_data = ExtResource("3_fm2fq")
-sfx = NodePath("../sfx")
+[node name="CollectableComponent" type="Node" parent="." node_paths=PackedStringArray("Area2D", "CollisionShape", "Sfx")]
+script = ExtResource("2_gxix7")
+Area2D = NodePath("..")
+CollisionShape = NodePath("../CollisionShape2D")
+Data = ExtResource("3_fm2fq")
+Sfx = NodePath("../sfx")
 
-[node name="FadeAwayComponent" type="Node" parent="." node_paths=PackedStringArray("sprite2d", "root", "area2d")]
-script = ExtResource("4_fx1h2")
-sprite2d = NodePath("../Sprite2D")
-fade_duration = 0.4
-root = NodePath("..")
-area2d = NodePath("..")
+[node name="FadeAwayComponent" type="Node" parent="." node_paths=PackedStringArray("Sprite", "Area")]
+script = ExtResource("4_gxix7")
+Sprite = NodePath("../Sprite2D")
+FadeDuration = 0.4
+Area = NodePath("..")
 
 [node name="sfx" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_4jc2c")

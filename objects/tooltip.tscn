@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b4pdt1gv2ymyi"]
 
-[ext_resource type="Script" uid="uid://bsq5pplxqbssh" path="res://scripts/components/tooltip_component.gd" id="1_kkpqq"]
+[ext_resource type="Script" uid="uid://cvaa6aqyijcp1" path="res://scripts/components/TooltipComponent.cs" id="1_aw8h8"]
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_yy7uq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hkd8b"]
@@ -9,13 +9,13 @@ size = Vector2(38, 22)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lqw6h"]
 bg_color = Color(0, 0, 0, 1)
 
-[node name="Tooltip" type="Area2D" node_paths=PackedStringArray("area2d", "ui_root", "tooltip_label")]
+[node name="Tooltip" type="Area2D" node_paths=PackedStringArray("Area", "UiRoot", "TooltipLabel")]
 collision_layer = 0
 collision_mask = 4
-script = ExtResource("1_kkpqq")
-area2d = NodePath(".")
-ui_root = NodePath("Panel")
-tooltip_label = NodePath("Panel/PanelContainer/Label")
+script = ExtResource("1_aw8h8")
+Area = NodePath(".")
+UiRoot = NodePath("Panel")
+TooltipLabel = NodePath("Panel/PanelContainer/Label")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, -3)

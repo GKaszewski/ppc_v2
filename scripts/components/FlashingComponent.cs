@@ -30,11 +30,10 @@ public partial class FlashingComponent : Node
     public void StartFlashing()
     {
         if (Sprite == null) return;
-
-        _tween?.Kill();
-
+        if (_tween != null && _tween.IsRunning()) return;
+        
         _tween = CreateTween();
-        _tween.SetParallel(true);
+        _tween.SetParallel(false);
 
         var flashes = (int)(FlashDuration / FlashTime);
         for (var i = 0; i < flashes; i++)

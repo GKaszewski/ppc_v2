@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c40r76qqacqie"]
 
 [ext_resource type="Texture2D" uid="uid://cw42lvnqxubq2" path="res://sprites/PS_Tileset_10_nes.png" id="1_jmsgb"]
-[ext_resource type="Script" uid="uid://r0a6xjicrh74" path="res://scripts/components/collapsable.gd" id="2_cs5vh"]
+[ext_resource type="Script" uid="uid://xqhrb1c7f6y4" path="res://scripts/components/CollapsableComponent.cs" id="2_jmsgb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l44jt"]
 size = Vector2(16, 16)
@@ -32,16 +32,15 @@ wait_time = 0.5
 
 [node name="ResetTimer" type="Timer" parent="."]
 
-[node name="CollapsableComponent" type="Node" parent="." node_paths=PackedStringArray("to_collapse_timer", "reset_timer", "sprite2d", "collision_shape")]
-script = ExtResource("2_cs5vh")
-to_collapse_timer = NodePath("../ToCollapseTimer")
-reset_timer = NodePath("../ResetTimer")
-sprite2d = NodePath("../Sprite2D")
-collision_shape = NodePath("../StaticCollisionShape2D")
-collapse_time = 0.75
-reset_time = 3.0
+[node name="CollapsableComponent" type="Node" parent="." node_paths=PackedStringArray("ToCollapseTimer", "ResetTimer", "Sprite2D", "CollisionShape")]
+script = ExtResource("2_jmsgb")
+ToCollapseTimer = NodePath("../ToCollapseTimer")
+ResetTimer = NodePath("../ResetTimer")
+Sprite2D = NodePath("../Sprite2D")
+CollisionShape = NodePath("../StaticCollisionShape2D")
+ResetTime = 1.0
 
-[connection signal="body_entered" from="Collapsable detector" to="CollapsableComponent" method="_on_collapsable_detector_body_entered"]
-[connection signal="body_exited" from="Collapsable detector" to="CollapsableComponent" method="_on_collapsable_detector_body_exited"]
+[connection signal="body_entered" from="Collapsable detector" to="CollapsableComponent" method="OnCollapsableDetectorBodyEntered"]
+[connection signal="body_exited" from="Collapsable detector" to="CollapsableComponent" method="OnCollapsableDetectorBodyExited"]
 [connection signal="timeout" from="ToCollapseTimer" to="CollapsableComponent" method="_on_to_collapse_timer_timeout"]
 [connection signal="timeout" from="ResetTimer" to="CollapsableComponent" method="_on_reset_timer_timeout"]

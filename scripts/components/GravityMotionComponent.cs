@@ -15,9 +15,9 @@ public partial class GravityMotionComponent : Node2D
     {
         if (LaunchComponent == null) return;
         
-        var direction = LaunchComponent.InitialDirection.X > 0f ? TargetDirection : new  Vector2(-TargetDirection.X, TargetDirection.Y);
-        direction = direction.Normalized();
-        _velocity = direction * LaunchComponent.Speed;
+        var horizontalDirection = LaunchComponent.InitialDirection.Normalized();
+        var combinedDirection = (horizontalDirection + TargetDirection).Normalized();
+        _velocity = combinedDirection * LaunchComponent.Speed;
     }
 
     public override void _PhysicsProcess(double delta)

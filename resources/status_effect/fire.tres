@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="StatusEffectDataResource" load_steps=2 format=3 uid="uid://obodgnkhxuhe"]
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://obodgnkhxuhe"]
 
-[ext_resource type="Script" uid="uid://cqq2stnfs1doo" path="res://scripts/resources/status_effect_data_resource.gd" id="1_r8ycx"]
+[ext_resource type="Script" uid="uid://pw0pu6gb21y2" path="res://scripts/Resources/StatusEffectDataResource.cs" id="1_8qqd7"]
 
 [resource]
-script = ExtResource("1_r8ycx")
-effect_type = 1
-duration = 5.0
-damage_per_second = 0.25
+script = ExtResource("1_8qqd7")
+Duration = 5.0
+DamagePerSecond = 0.25
+Type = 1

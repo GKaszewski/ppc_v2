@@ -7,7 +7,7 @@ namespace Mr.BrickAdventures.scripts.components;
 public partial class ScoreComponent : Node
 {
     private GameManager _gameManager;
-    private const string CoinsGroupName = "Coins";
+    private const string CoinsGroupName = "coins";
     
     public override async void _Ready()
     {
@@ -20,7 +20,7 @@ public partial class ScoreComponent : Node
             return;
         }
 
-        var coins = GetTree().GetNodesInGroup("Coins");
+        var coins = GetTree().GetNodesInGroup(CoinsGroupName);
         foreach (var coin in coins)
         {
             var c = coin.GetNodeOrNull<CollectableComponent>("CollectableComponent");
@@ -30,12 +30,12 @@ public partial class ScoreComponent : Node
             }
         }
     }
-
-    private void OnCollected(Variant amount, CollectableType type, Node2D body)
+    
+    private void OnCollected(float amount, CollectableType type, Node2D body)
     {
         if (type != CollectableType.Coin) return;
         
-        var coinAmount = amount.As<int>();
+        var coinAmount = (int)amount;
         var currentCoins = (int)_gameManager.CurrentSessionState["coins_collected"];
         _gameManager.CurrentSessionState["coins_collected"] = currentCoins + coinAmount;
     }

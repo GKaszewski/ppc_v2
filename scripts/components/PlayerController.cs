@@ -4,7 +4,7 @@ using Mr.BrickAdventures.scripts.interfaces;
 
 namespace Mr.BrickAdventures.scripts.components;
 
-public partial class PlayerController : Node2D
+public partial class PlayerController : CharacterBody2D
 {
     [Export]
     public string DefaultMovementType { get; set; } = "platform";

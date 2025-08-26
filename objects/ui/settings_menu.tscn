@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://y0ae6e7t70fj"]
 
-[ext_resource type="Script" uid="uid://c506rigcjlm6x" path="res://scripts/ui/settings_menu.gd" id="1_lt6q2"]
+[ext_resource type="Script" uid="uid://i8j47qnrytuo" path="res://scripts/UI/SettingsMenu.cs" id="1_lt6q2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wgbcl"]
 bg_color = Color(0, 0, 0, 1)
 
-[node name="Settings menu" type="Control" node_paths=PackedStringArray("settings_menu_control", "input_settings_button", "audio_settings_button", "display_settings_button", "gameplay_settings_button")]
+[node name="Settings menu" type="Control" node_paths=PackedStringArray("SettingsMenuControl", "InputSettingsButton", "AudioSettingsButton", "DisplaySettingsButton", "GameplaySettingsButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,11 +13,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_lt6q2")
-settings_menu_control = NodePath(".")
-input_settings_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/Input Settings Button")
-audio_settings_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/Audio Settings Button")
-display_settings_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/Display Settings Button")
-gameplay_settings_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/Gameplay Settings Button")
+SettingsMenuControl = NodePath(".")
+InputSettingsButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/Input Settings Button")
+AudioSettingsButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/Audio Settings Button")
+DisplaySettingsButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/Display Settings Button")
+GameplaySettingsButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/Gameplay Settings Button")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -39,7 +39,7 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "SETTINGS"

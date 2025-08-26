@@ -1,2 +1,0 @@
-class_name TriggerLeverComponent
-extends Node

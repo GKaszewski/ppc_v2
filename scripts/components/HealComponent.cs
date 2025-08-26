@@ -19,7 +19,7 @@ public partial class HealComponent : Node
         Collectable.Collected += OnCollected;
     }
 
-    private void OnCollected(Variant amount, CollectableType type, Node2D body)
+    private void OnCollected(float amount, CollectableType type, Node2D body)
     {
         if (type != CollectableType.Health) return;
 
@@ -28,8 +28,7 @@ public partial class HealComponent : Node
         var healthComponent = body.GetNodeOrNull<HealthComponent>("HealthComponent");
         if (healthComponent == null) return;
 
-        var value = amount.AsSingle();
-        healthComponent.IncreaseHealth(value);
+        healthComponent.IncreaseHealth(amount);
         if (HealFx != null)
         {
             PlayHealFx();

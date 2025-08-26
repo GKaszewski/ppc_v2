@@ -13,7 +13,7 @@ public partial class CollectableComponent : Node
     [Export] public CollectableResource Data { get; set; }
     [Export] public AudioStreamPlayer2D Sfx {get; set; }
     
-    [Signal] public delegate void CollectedEventHandler(Variant amount, CollectableType type, Node2D body);
+    [Signal] public delegate void CollectedEventHandler(float amount, CollectableType type, Node2D body);
 
     public override void _Ready()
     {

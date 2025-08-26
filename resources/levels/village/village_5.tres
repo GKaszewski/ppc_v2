@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="LevelResource" load_steps=2 format=3 uid="uid://bhs2j7k0ety3a"]
-
-[ext_resource type="Script" uid="uid://cp68km8bykymb" path="res://scripts/resources/level_resource.gd" id="1_owe0p"]
-
-[resource]
-script = ExtResource("1_owe0p")
-level_name = "LEVEL_5_NAME"
-scene_path = ""
-metadata/_custom_type_script = "uid://cp68km8bykymb"

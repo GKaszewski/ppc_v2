@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SkillUpgrade" load_steps=2 format=3 uid="uid://dte14sxesjm3y"]
+
+[ext_resource type="Script" uid="uid://dwb0e05pewcsn" path="res://scripts/Resources/SkillUpgrade.cs" id="1_dkk4n"]
+
+[resource]
+script = ExtResource("1_dkk4n")
+Cost = 70
+Description = "Upgrade Description"
+Properties = Dictionary[String, Variant]({
+"FireRate": 0.6
+})
+metadata/_custom_type_script = "uid://dwb0e05pewcsn"

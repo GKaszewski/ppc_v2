@@ -16,13 +16,13 @@ public partial class ExplosiveComponent : Node2D
 
     public override void _Ready()
     {
-        if (Damage != null)
+        if (Damage == null)
         {
             GD.PushError("ExplosiveComponent: DamageComponent is not set.");
             return;
         }
 
-        if (ExplodeArea != null)
+        if (ExplodeArea == null)
         {
             GD.PushError("ExplosiveComponent: ExplodeArea is not set.");
             return;
@@ -30,6 +30,8 @@ public partial class ExplosiveComponent : Node2D
         
         Area.BodyEntered += OnAreaBodyEntered;
         Area.AreaEntered += OnAreaAreaEntered;
+        
+        PrepareTimer();
     }
 
     private void OnAreaAreaEntered(Area2D area)

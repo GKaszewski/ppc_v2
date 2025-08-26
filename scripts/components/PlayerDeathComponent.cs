@@ -14,7 +14,7 @@ public partial class PlayerDeathComponent : Node2D
 
     public override void _Ready()
     {
-        _gameManager = GetNode<GameManager>("/root/gameManager");
+        _gameManager = GetNode<GameManager>("/root/GameManager");
         HealthComponent.Death += OnDeath;
     }
 

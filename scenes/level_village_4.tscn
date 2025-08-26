@@ -1,11 +1,10 @@
-[gd_scene load_steps=37 format=4 uid="uid://bhad760x3vvco"]
+[gd_scene load_steps=34 format=4 uid="uid://bhad760x3vvco"]
 
 [ext_resource type="PackedScene" uid="uid://bqi5s710xb1ju" path="res://objects/entities/brick_player.tscn" id="1_k3uyd"]
 [ext_resource type="PackedScene" uid="uid://bon6raeddf3tu" path="res://objects/entities/chaser.tscn" id="1_xraal"]
 [ext_resource type="PackedScene" uid="uid://cawlpch2lk3a2" path="res://objects/level/world_environment.tscn" id="2_a7hm7"]
 [ext_resource type="PackedScene" uid="uid://6foggu31cu14" path="res://objects/level/ui_layer.tscn" id="3_p8wo6"]
 [ext_resource type="PackedScene" uid="uid://cywsu7yrtjdog" path="res://objects/level/global_light.tscn" id="4_0lkg8"]
-[ext_resource type="Resource" uid="uid://cxfei28yu3buh" path="res://resources/levels/village/village_4.tres" id="5_iqtv2"]
 [ext_resource type="PackedScene" uid="uid://cb0mnye1ki5a6" path="res://objects/level/camera_2d.tscn" id="5_yqj3b"]
 [ext_resource type="Script" uid="uid://d23haq52m7ulv" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="6_i5rlu"]
 [ext_resource type="PackedScene" uid="uid://bd51frym6mm7v" path="res://objects/entities/lever.tscn" id="7_1bwe8"]
@@ -14,8 +13,6 @@
 [ext_resource type="TileSet" uid="uid://cu2sx7qigrqnv" path="res://resources/tilesets/village/terain.tres" id="9_bjo44"]
 [ext_resource type="TileSet" uid="uid://bc5a20s6kuy8e" path="res://resources/tilesets/village/entities.tres" id="10_gg8rp"]
 [ext_resource type="TileSet" uid="uid://bbppo0irxdmqy" path="res://resources/tilesets/village/foreground.tres" id="11_23awj"]
-[ext_resource type="Script" uid="uid://8r1y8elyw7kt" path="res://scripts/console_management.gd" id="12_4o5b1"]
-[ext_resource type="PackedScene" uid="uid://bqom4cm7r18db" path="res://objects/entities/killzone.tscn" id="13_1heob"]
 [ext_resource type="PackedScene" uid="uid://lpovacvt3yyj" path="res://objects/entities/spaceship_enter.tscn" id="14_bajwe"]
 [ext_resource type="PackedScene" uid="uid://d0s2abysa86rq" path="res://objects/entities/child.tscn" id="15_3iocp"]
 [ext_resource type="PackedScene" uid="uid://xp4njljog0x2" path="res://objects/entities/flying_enemy.tscn" id="18_162yw"]
@@ -115,25 +112,19 @@ texture = SubResource("CanvasTexture_o1yb3")
 [node name="Chaser" parent="." instance=ExtResource("1_xraal")]
 position = Vector2(578.405, 15.8615)
 
-[node name="ChaseLevelComponent" parent="Chaser" index="0" node_paths=PackedStringArray("chase_target", "phantom_camera")]
-chase_speed = 170.0
-chase_target = NodePath("../../Chase Target")
-phantom_camera = NodePath("../../PhantomCamera2D")
+[node name="ChaseLevelComponent" parent="Chaser" index="0" node_paths=PackedStringArray("ChaseTarget")]
+ChaseTarget = NodePath("../../Chase Target")
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("2_a7hm7")]
 
 [node name="UI Layer" parent="." instance=ExtResource("3_p8wo6")]
 
-[node name="HUD" parent="UI Layer" index="0" node_paths=PackedStringArray("player_health")]
-player_health = NodePath("../../Brick Player/HealthComponent")
+[node name="HUD" parent="UI Layer" index="0" node_paths=PackedStringArray("Health")]
+Health = NodePath("../../Brick Player/HealthComponent")
 
-[node name="DeathScreen" parent="UI Layer" index="1" node_paths=PackedStringArray("nodes_to_disable")]
-current_level = ExtResource("5_iqtv2")
-nodes_to_disable = [NodePath("../../Brick Player")]
-
-[node name="Marketplace" parent="UI Layer" index="3" node_paths=PackedStringArray("skill_unlocker", "components_to_disable")]
-skill_unlocker = NodePath("../../Brick Player/SkillUnlockerComponent")
-components_to_disable = [NodePath("../../Brick Player")]
+[node name="Marketplace" parent="UI Layer" index="3" node_paths=PackedStringArray("SkillUnlockerComponent", "ComponentsToDisable")]
+SkillUnlockerComponent = NodePath("../../Brick Player/SkillUnlockerComponent")
+ComponentsToDisable = [NodePath("../../Brick Player")]
 
 [node name="Global Light" parent="." instance=ExtResource("4_0lkg8")]
 
@@ -148,7 +139,8 @@ limit_top = -10000000
 limit_right = 10000000
 limit_bottom = 10000000
 
-[node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
+[node name="PhantomCamera" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
+unique_name_in_owner = true
 top_level = true
 script = ExtResource("6_i5rlu")
 follow_mode = 2
@@ -174,25 +166,12 @@ tile_set = ExtResource("10_gg8rp")
 [node name="Foreground layer" type="TileMapLayer" parent="."]
 tile_set = ExtResource("11_23awj")
 
-[node name="ConsoleManagement" type="Node" parent="." node_paths=PackedStringArray("player_health", "skill_unlocker", "skill_manager")]
-script = ExtResource("12_4o5b1")
-player_health = NodePath("../Brick Player/HealthComponent")
-skill_unlocker = NodePath("../Brick Player/SkillUnlockerComponent")
-skill_manager = NodePath("../Brick Player/SkillManager")
-metadata/_custom_type_script = "uid://8r1y8elyw7kt"
-
-[node name="Killzone" parent="." instance=ExtResource("13_1heob")]
-position = Vector2(215, 324)
-
-[node name="Spaceship Enter" parent="." instance=ExtResource("14_bajwe")]
-position = Vector2(559, 15)
-
 [node name="Chase Target" type="Marker2D" parent="."]
 position = Vector2(7146.51, 21.1388)
 
 [node name="Brick Player" parent="." instance=ExtResource("1_k3uyd")]
 
-[node name="HitParticles" parent="Brick Player" index="27"]
+[node name="HitParticles" parent="Brick Player" index="26"]
 process_material = SubResource("ParticleProcessMaterial_lgb3u")
 
 [node name="Enemies" type="Node2D" parent="."]
@@ -203,9 +182,6 @@ metadata/_edit_group_ = true
 
 [node name="Sprite2D" parent="Enemies/Flying Enemy" index="1"]
 flip_h = true
-
-[node name="PeriodicShootingComponent" parent="Enemies/Flying Enemy" index="8"]
-shoot_direction = Vector2(-1, 0)
 
 [node name="HitParticles" parent="Enemies/Flying Enemy" index="15"]
 process_material = SubResource("ParticleProcessMaterial_qxfb0")
@@ -220,9 +196,6 @@ metadata/_edit_group_ = true
 [node name="Sprite2D" parent="Enemies/Flying Enemy2" index="1"]
 flip_h = true
 
-[node name="PeriodicShootingComponent" parent="Enemies/Flying Enemy2" index="8"]
-shoot_direction = Vector2(-1, 0)
-
 [node name="HitParticles" parent="Enemies/Flying Enemy2" index="15"]
 process_material = SubResource("ParticleProcessMaterial_qxfb0")
 
@@ -236,9 +209,6 @@ metadata/_edit_group_ = true
 [node name="Sprite2D" parent="Enemies/Flying Enemy3" index="1"]
 flip_h = true
 
-[node name="PeriodicShootingComponent" parent="Enemies/Flying Enemy3" index="8"]
-shoot_direction = Vector2(-1, 0)
-
 [node name="HitParticles" parent="Enemies/Flying Enemy3" index="15"]
 process_material = SubResource("ParticleProcessMaterial_qxfb0")
 
@@ -251,9 +221,6 @@ metadata/_edit_group_ = true
 
 [node name="Sprite2D" parent="Enemies/Flying Enemy4" index="1"]
 flip_h = true
-
-[node name="PeriodicShootingComponent" parent="Enemies/Flying Enemy4" index="8"]
-shoot_direction = Vector2(-1, 0)
 
 [node name="HitParticles" parent="Enemies/Flying Enemy4" index="15"]
 process_material = SubResource("ParticleProcessMaterial_qxfb0")
@@ -281,14 +248,14 @@ metadata/_edit_group_ = true
 [node name="Sprite2D" parent="Enemies mid section path/PathFollow2D/Flying Enemy" index="1"]
 flip_h = true
 
-[node name="PeriodicShootingComponent" parent="Enemies mid section path/PathFollow2D/Flying Enemy" index="8"]
-shoot_direction = Vector2(-1, 0)
-
 [node name="HitParticles" parent="Enemies mid section path/PathFollow2D/Flying Enemy" index="15"]
 process_material = SubResource("ParticleProcessMaterial_qxfb0")
 
 [node name="laser spawn point left" parent="Enemies mid section path/PathFollow2D/Flying Enemy" index="19"]
 position = Vector2(-12, -2)
+
+[node name="Spaceship Enter" parent="." instance=ExtResource("14_bajwe")]
+position = Vector2(559, 15)
 
 [node name="Spaceship exit" parent="." instance=ExtResource("21_e6jir")]
 position = Vector2(7148, 22)
@@ -296,23 +263,23 @@ position = Vector2(7148, 22)
 [node name="CollisionShape2D" parent="Spaceship exit" index="0"]
 position = Vector2(16.5, -10)
 
-[connection signal="spaceship_entered" from="Spaceship Enter/SpaceshipEnterComponent" to="Chaser/ChaseLevelComponent" method="on_ship_entered"]
-[connection signal="spaceship_entered" from="Spaceship Enter/SpaceshipEnterComponent" to="Brick Player" method="on_spaceship_entered"]
-[connection signal="spaceship_entered" from="Spaceship Enter/SpaceshipEnterComponent" to="Brick Player/Movements/PlatformMovement" method="on_ship_entered"]
-[connection signal="spaceship_entered" from="Spaceship Enter/SpaceshipEnterComponent" to="Brick Player/ShipShooter" method="on_ship_entered"]
-[connection signal="on_death" from="Brick Player/HealthComponent" to="UI Layer/DeathScreen" method="on_player_death"]
-[connection signal="on_death" from="Brick Player/HealthComponent" to="UI Layer/GameOverScreen" method="on_player_death"]
-[connection signal="spaceship_exited" from="Spaceship exit" to="Chaser/ChaseLevelComponent" method="on_ship_exited"]
-[connection signal="spaceship_exited" from="Spaceship exit" to="Brick Player" method="on_spaceship_exited"]
-[connection signal="spaceship_exited" from="Spaceship exit" to="Brick Player/ShipShooter" method="on_ship_exited"]
+[connection signal="Death" from="Brick Player/HealthComponent" to="UI Layer/DeathScreen" method="OnPlayerDeath"]
+[connection signal="Death" from="Brick Player/HealthComponent" to="UI Layer/GameOverScreen" method="OnPlayerDeath"]
+[connection signal="SpaceshipEntered" from="Spaceship Enter" to="Chaser/ChaseLevelComponent" method="OnShipEntered"]
+[connection signal="SpaceshipEntered" from="Spaceship Enter" to="Brick Player" method="OnSpaceshipEntered"]
+[connection signal="SpaceshipEntered" from="Spaceship Enter" to="Brick Player/Movements/PlatformMovement" method="OnShipEntered"]
+[connection signal="SpaceshipEntered" from="Spaceship Enter" to="Brick Player/ShipShooter" method="OnShipEntered"]
+[connection signal="SpaceshipExit" from="Spaceship exit" to="Chaser/ChaseLevelComponent" method="OnShipExited"]
+[connection signal="SpaceshipExit" from="Spaceship exit" to="Brick Player" method="OnSpaceshipExited"]
+[connection signal="SpaceshipExit" from="Spaceship exit" to="Brick Player/ShipShooter" method="OnShipExited"]
 
 [editable path="Chaser"]
 [editable path="UI Layer"]
-[editable path="Spaceship Enter"]
 [editable path="Brick Player"]
 [editable path="Enemies/Flying Enemy"]
 [editable path="Enemies/Flying Enemy2"]
 [editable path="Enemies/Flying Enemy3"]
 [editable path="Enemies/Flying Enemy4"]
 [editable path="Enemies mid section path/PathFollow2D/Flying Enemy"]
+[editable path="Spaceship Enter"]
 [editable path="Spaceship exit"]

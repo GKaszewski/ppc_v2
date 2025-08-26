@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfses3kn3y8qw"]
+
+[ext_resource type="Script" uid="uid://b0bv8kw5w5037" path="res://scripts/components/BrickThrowComponent.cs" id="1_xj8hl"]
+[ext_resource type="PackedScene" uid="uid://5surx230gfw3" path="res://objects/entities/exploding_brick.tscn" id="2_xj8hl"]
+[ext_resource type="Resource" uid="uid://diuv6pr6a0dup" path="res://resources/throw_behaviors/charge_throw_input.tres" id="3_xj8hl"]
+
+[node name="BrickThrowComponent" type="Node"]
+script = ExtResource("1_xj8hl")
+BrickScene = ExtResource("2_xj8hl")
+FireRate = 0.6
+ThrowInputBehavior = ExtResource("3_xj8hl")

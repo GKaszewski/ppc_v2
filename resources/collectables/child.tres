@@ -1,8 +1,8 @@
-[gd_resource type="Resource" script_class="CollectableResource" load_steps=2 format=3 uid="uid://b6apusc0jmi3x"]
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://b6apusc0jmi3x"]
 
-[ext_resource type="Script" uid="uid://cb5f0mx0hrt3b" path="res://scripts/resources/collectable_resource.gd" id="1_2d5tb"]
+[ext_resource type="Script" uid="uid://gptsgaw3agkf" path="res://scripts/Resources/CollectableResource.cs" id="1_d8txc"]
 
 [resource]
-script = ExtResource("1_2d5tb")
-amount = 1.0
-type = 1
+script = ExtResource("1_d8txc")
+Amount = 1.0
+Type = 1

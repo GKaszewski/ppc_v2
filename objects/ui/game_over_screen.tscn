@@ -1,21 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://wmw6gaisyrvx"]
+[gd_scene load_steps=4 format=3 uid="uid://wmw6gaisyrvx"]
 
-[ext_resource type="Script" uid="uid://bkd7o2u4psu4p" path="res://scripts/ui/game_over_screen.gd" id="1_v1o0m"]
+[ext_resource type="Script" uid="uid://u4qfsx4w72dv" path="res://scripts/UI/GameOverScreen.cs" id="1_w4aho"]
+[ext_resource type="PackedScene" uid="uid://cl00e2ocomk3m" path="res://scenes/main_menu.tscn" id="2_brh6h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mtg1b"]
 bg_color = Color(0, 0, 0, 1)
 
-[node name="GameOverScreen" type="Control" node_paths=PackedStringArray("game_over_screen", "restart_button", "main_menu_button")]
+[node name="GameOverScreen" type="Control" node_paths=PackedStringArray("GameOverPanel", "RestartButton", "MainMenuButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_v1o0m")
-game_over_screen = NodePath(".")
-restart_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/RestartLevelButton")
-main_menu_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/MenuButton")
+script = ExtResource("1_w4aho")
+GameOverPanel = NodePath(".")
+RestartButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/RestartLevelButton")
+MainMenuButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/MenuButton")
+MainMenuScene = ExtResource("2_brh6h")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1

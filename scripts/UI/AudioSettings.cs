@@ -3,7 +3,7 @@ using Mr.BrickAdventures.Autoloads;
 
 namespace Mr.BrickAdventures.scripts.UI;
 
-public partial class AudioSettings : Node
+public partial class AudioSettings : Control
 {
     [Export] public Slider MasterVolumeSlider { get; set; }
     [Export] public Slider MusicVolumeSlider { get; set; }
@@ -22,8 +22,15 @@ public partial class AudioSettings : Node
         MasterVolumeSlider.ValueChanged += OnMasterVolumeChanged;
         MusicVolumeSlider.ValueChanged += OnMusicVolumeChanged;
         SfxVolumeSlider.ValueChanged += OnSfxVolumeChanged;
+        
+        LoadSettings();
     }
-    
+
+    public override void _ExitTree()
+    {
+        SaveSettings();
+    }
+
     public override void _UnhandledInput(InputEvent @event)
     {
         if (!@event.IsActionReleased("ui_cancel")) return;

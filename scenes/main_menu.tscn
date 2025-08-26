@@ -8,14 +8,16 @@
 
 [node name="Main menu" type="CanvasLayer"]
 
-[node name="MainMenu" parent="." node_paths=PackedStringArray("settings_control", "credits_control") instance=ExtResource("1_ekxnf")]
-settings_control = NodePath("../Settings menu")
-credits_control = NodePath("../Credits")
+[node name="MainMenu" parent="." node_paths=PackedStringArray("SettingsControl", "CreditsControl") instance=ExtResource("1_ekxnf")]
+SettingsControl = NodePath("../Settings menu")
+CreditsControl = NodePath("../Credits")
 
-[node name="Settings menu" parent="." node_paths=PackedStringArray("input_settings", "audio_settings") instance=ExtResource("2_bqqt6")]
+[node name="Settings menu" parent="." node_paths=PackedStringArray("InputSettingsControl", "AudioSettingsControl", "DisplaySettingsControl", "GameplaySettingsControl") instance=ExtResource("2_bqqt6")]
 visible = false
-input_settings = NodePath("../Input Settings")
-audio_settings = NodePath("../Audio settings")
+InputSettingsControl = NodePath("../Input Settings")
+AudioSettingsControl = NodePath("../Audio settings")
+DisplaySettingsControl = NodePath("../Display Settings")
+GameplaySettingsControl = NodePath("../Gameplay Settings")
 
 [node name="Credits" parent="." instance=ExtResource("3_bqqt6")]
 visible = false
@@ -25,3 +27,15 @@ visible = false
 
 [node name="Input Settings" parent="." instance=ExtResource("5_rtw2f")]
 visible = false
+
+[node name="Gameplay Settings" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Display Settings" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

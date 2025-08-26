@@ -2,9 +2,8 @@ using Godot;
 
 namespace Mr.BrickAdventures.scripts.components;
 
-public partial class TooltipComponent : Node
+public partial class TooltipComponent : Area2D
 {
-    [Export] public Area2D Area { get; set; }
     [Export] public Control UiRoot { get; set; }
     [Export] public string Text { get; set; } = string.Empty;
     [Export] public Label TooltipLabel { get; set; }
@@ -13,8 +12,8 @@ public partial class TooltipComponent : Node
     {
         TooltipLabel.Text = Text;
         UiRoot.Visible = false;
-        Area.BodyEntered += OnBodyEntered;
-        Area.BodyExited += OnBodyExited;
+        BodyEntered += OnBodyEntered;
+        BodyExited += OnBodyExited;
     }
 
     private void OnBodyEntered(Node2D body)

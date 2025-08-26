@@ -9,16 +9,14 @@ public abstract partial class ThrowInputResource : Resource, IThrowInput
 
     public virtual void ProcessInput(InputEvent @event)
     {
-        throw new System.NotImplementedException();
     }
 
     public virtual void Update(double delta)
     {
-        throw new System.NotImplementedException();
     }
 
     public virtual bool SupportsCharging()
     {
-        throw new System.NotImplementedException();
+        return false;
     }
 }

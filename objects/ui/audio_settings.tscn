@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://b5fx1vdfky307"]
 
-[ext_resource type="Script" uid="uid://dujk6pnftm7ra" path="res://scripts/ui/audio_settings.gd" id="1_g522b"]
+[ext_resource type="Script" uid="uid://g61qqsymqfxd" path="res://scripts/UI/AudioSettings.cs" id="1_g522b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4ivv"]
 bg_color = Color(0, 0, 0, 1)
 
-[node name="Audio settings" type="Control" node_paths=PackedStringArray("master_volume_slider", "music_volume_slider", "sfx_volume_slider", "audio_settings_control")]
+[node name="Audio settings" type="Control" node_paths=PackedStringArray("MasterVolumeSlider", "MusicVolumeSlider", "SfxVolumeSlider", "AudioSettingsControl")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,10 +15,10 @@ grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 script = ExtResource("1_g522b")
-master_volume_slider = NodePath("PanelContainer/MarginContainer/VBoxContainer/Master volume/HSlider")
-music_volume_slider = NodePath("PanelContainer/MarginContainer/VBoxContainer/Music volume/HSlider")
-sfx_volume_slider = NodePath("PanelContainer/MarginContainer/VBoxContainer/SFX volume/HSlider")
-audio_settings_control = NodePath(".")
+MasterVolumeSlider = NodePath("PanelContainer/MarginContainer/VBoxContainer/Master volume/HSlider")
+MusicVolumeSlider = NodePath("PanelContainer/MarginContainer/VBoxContainer/Music volume/HSlider")
+SfxVolumeSlider = NodePath("PanelContainer/MarginContainer/VBoxContainer/SFX volume/HSlider")
+AudioSettingsControl = NodePath(".")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1

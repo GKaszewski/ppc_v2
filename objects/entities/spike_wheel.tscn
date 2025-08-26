@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://buff711j0f2ph"]
 
 [ext_resource type="Texture2D" uid="uid://ddlwjg81ro1kl" path="res://sprites/spike_trap.png" id="1_xg6e1"]
-[ext_resource type="Script" uid="uid://cq26pfxn17s7s" path="res://scripts/components/spin_component.gd" id="2_3d4lc"]
-[ext_resource type="Script" uid="uid://dkmxhjtmu5xlb" path="res://scripts/components/damage_component.gd" id="3_ytlu4"]
+[ext_resource type="Script" uid="uid://cqw134ewht3hc" path="res://scripts/components/SpinComponent.cs" id="2_ytlu4"]
+[ext_resource type="Script" uid="uid://2i7p7v135u7c" path="res://scripts/components/DamageComponent.cs" id="3_ytlu4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xg6e1"]
 radius = 8.0
@@ -17,14 +17,13 @@ texture = ExtResource("1_xg6e1")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_xg6e1")
 
-[node name="SpinComponent" type="Node2D" parent="." node_paths=PackedStringArray("root")]
-script = ExtResource("2_3d4lc")
-root = NodePath("../Sprite2D")
-speed = 1.0
+[node name="SpinComponent" type="Node2D" parent="."]
+script = ExtResource("2_ytlu4")
+SpinSpeed = 1.0
 metadata/_custom_type_script = "uid://cq26pfxn17s7s"
 
-[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("area2d")]
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("Area")]
 script = ExtResource("3_ytlu4")
-damage = 1.0
-area2d = NodePath("..")
+Damage = 1.0
+Area = NodePath("..")
 metadata/_custom_type_script = "uid://dkmxhjtmu5xlb"

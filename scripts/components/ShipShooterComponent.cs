@@ -10,7 +10,7 @@ public partial class ShipShooterComponent : Node
     [Export] public Marker2D BulletSpawn { get; set; }
     [Export] public AudioStreamPlayer2D ShootSfx { get; set; }
 
-    private bool _canShoot = false;
+    private bool _canShoot = true;
 
     public override void _Ready()
     {

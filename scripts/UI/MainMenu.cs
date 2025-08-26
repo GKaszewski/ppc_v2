@@ -3,7 +3,7 @@ using Mr.BrickAdventures.Autoloads;
 
 namespace Mr.BrickAdventures.scripts.UI;
 
-public partial class MainMenu : Node
+public partial class MainMenu : Control
 {
     [Export] public Control MainMenuControl { get; set; }
     [Export] public Button NewGameButton { get; set; }
