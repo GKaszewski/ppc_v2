@@ -1,13 +1,13 @@
 using Godot;
-using Mr.BrickAdventures.scripts.interfaces;
 
 namespace Mr.BrickAdventures.scripts.Resources;
 
 public partial class TapThrowInputResource : ThrowInputResource
 {
-    public override void Update(double delta)
+    
+    public override void ProcessInput(InputEvent @event)
     {
-        if (Input.IsActionPressed("attack"))
+        if (@event.IsActionPressed("attack"))
         {
             EmitSignalThrowRequested(1f);
         }

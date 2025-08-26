@@ -294,7 +294,7 @@ z_index = 5
 position = Vector2(903, -118)
 metadata/_edit_group_ = true
 
-[node name="HitParticles" parent="Brick Player" index="27"]
+[node name="HitParticles" parent="Brick Player" index="26"]
 process_material = SubResource("ParticleProcessMaterial_lgb3u")
 
 [node name="Camera2D" parent="." instance=ExtResource("12_qhkyq")]
@@ -325,8 +325,9 @@ position = Vector2(880, -578)
 [node name="HUD" parent="UI Layer" index="0" node_paths=PackedStringArray("Health")]
 Health = NodePath("../../Brick Player/HealthComponent")
 
-[node name="Marketplace" parent="UI Layer" index="3" node_paths=PackedStringArray("SkillUnlockedComponent")]
-SkillUnlockedComponent = NodePath("../../Brick Player/SkillUnlockerComponent")
+[node name="Marketplace" parent="UI Layer" index="3" node_paths=PackedStringArray("SkillUnlockerComponent", "ComponentsToDisable")]
+SkillUnlockerComponent = NodePath("../../Brick Player/SkillUnlockerComponent")
+ComponentsToDisable = [NodePath("../../Brick Player")]
 
 [node name="Tooltip" parent="." instance=ExtResource("18_l3a7y")]
 position = Vector2(1016, -104)

@@ -13,7 +13,7 @@ public partial class MarketplaceButton : Button
     [Export] public Container SkillLevelContainer { get; set; }
     
     private GameManager _gameManager;
-    private SkillUnlockedComponent _skillUnlockedComponent;
+    private SkillUnlockerComponent _skillUnlockerComponent;
 
     public override void _Ready()
     {
@@ -22,7 +22,7 @@ public partial class MarketplaceButton : Button
         Setup();
         var player = _gameManager.Player;
 
-        var skillUnlockerComponent = player?.GetNodeOrNull<SkillUnlockedComponent>("SkillUnlockerComponent");
+        var skillUnlockerComponent = player?.GetNodeOrNull<SkillUnlockerComponent>("SkillUnlockerComponent");
         if (skillUnlockerComponent == null) return;
         
         skillUnlockerComponent.SkillUnlocked += OnSkillUnlock;
@@ -30,7 +30,7 @@ public partial class MarketplaceButton : Button
 
     public override void _ExitTree()
     {
-        _skillUnlockedComponent.SkillUnlocked -= OnSkillUnlock;
+        _skillUnlockerComponent.SkillUnlocked -= OnSkillUnlock;
     }
 
     private void Setup()

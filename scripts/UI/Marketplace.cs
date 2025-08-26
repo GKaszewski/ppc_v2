@@ -13,7 +13,7 @@ public partial class Marketplace : Control
     [Export] public GridContainer ToUnlockGrid { get; set; }
     [Export] public GridContainer UnlockedGrid { get; set; }
     [Export] public Font Font { get; set; }
-    [Export] public SkillUnlockedComponent SkillUnlockedComponent { get; set; }
+    [Export] public SkillUnlockerComponent SkillUnlockerComponent { get; set; }
     [Export] public Array<Node> ComponentsToDisable { get; set; } = [];
     [Export] public PackedScene MarketplaceButtonScene { get; set; }
     [Export] public PackedScene SkillButtonScene { get; set; }
@@ -35,12 +35,12 @@ public partial class Marketplace : Control
         var unlockedSkills = _gameManager.GetUnlockedSkills();
         foreach (var skill in unlockedSkills) CreateSkillButton(skill);
         
-        SkillUnlockedComponent.SkillUnlocked += OnSkillUnlocked;
+        SkillUnlockerComponent.SkillUnlocked += OnSkillUnlocker;
     }
 
     public override void _ExitTree()
     {
-        SkillUnlockedComponent.SkillUnlocked -= OnSkillUnlocked;
+        SkillUnlockerComponent.SkillUnlocked -= OnSkillUnlocker;
     }
 
     public override void _Input(InputEvent @event)
@@ -64,7 +64,7 @@ public partial class Marketplace : Control
         return $"{Tr(skill.Name)} {skill.Cost}";
     }
 
-    private void OnSkillUnlocked(SkillData skill)
+    private void OnSkillUnlocker(SkillData skill)
     {
         if (_skillButtons.Count == 0) CreateSkillButton(skill);
 
@@ -109,17 +109,17 @@ public partial class Marketplace : Control
         {
             if (skill.Level < skill.MaxLevel)
             {
-                SkillUnlockedComponent.TryUpgradeSkill(skill);
-                if (!skill.IsActive) SkillUnlockedComponent.SkillManager.ToggleSkillActivation(skill);
+                SkillUnlockerComponent.TryUpgradeSkill(skill);
+                if (!skill.IsActive) SkillUnlockerComponent.SkillManager.ToggleSkillActivation(skill);
             }
             else
             {
-                SkillUnlockedComponent.SkillManager.ToggleSkillActivation(skill);
+                SkillUnlockerComponent.SkillManager.ToggleSkillActivation(skill);
             }
         }
         else
         {
-            SkillUnlockedComponent.TryUnlockSkill(skill);
+            SkillUnlockerComponent.TryUnlockSkill(skill);
         }
     }
 
@@ -137,6 +137,6 @@ public partial class Marketplace : Control
 
     private void OnSkillButtonPressed(SkillButton button)
     {
-        SkillUnlockedComponent.SkillManager.ToggleSkillActivation(button.Data);
+        SkillUnlockerComponent.SkillManager.ToggleSkillActivation(button.Data);
     }
 }

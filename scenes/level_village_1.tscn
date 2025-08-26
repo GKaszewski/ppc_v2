@@ -57,7 +57,7 @@ ease = 2
 [node name="Brick Player" parent="." instance=ExtResource("1_dnj2y")]
 z_index = 10
 
-[node name="HitParticles" parent="Brick Player" index="27"]
+[node name="HitParticles" parent="Brick Player" index="26"]
 process_material = SubResource("ParticleProcessMaterial_lgb3u")
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("2_1vw1j")]
@@ -71,8 +71,9 @@ Health = NodePath("../../Brick Player/HealthComponent")
 CurrentLevel = ExtResource("4_onnch")
 NodesToDisable = [NodePath("../../Brick Player")]
 
-[node name="Marketplace" parent="UI Layer" index="3" node_paths=PackedStringArray("SkillUnlockedComponent")]
-SkillUnlockedComponent = NodePath("../../Brick Player/SkillUnlockerComponent")
+[node name="Marketplace" parent="UI Layer" index="3" node_paths=PackedStringArray("SkillUnlockerComponent", "ComponentsToDisable")]
+SkillUnlockerComponent = NodePath("../../Brick Player/SkillUnlockerComponent")
+ComponentsToDisable = [NodePath("../../Brick Player")]
 
 [node name="Pause menu" parent="UI Layer" index="4" node_paths=PackedStringArray("SettingsControl")]
 SettingsControl = NodePath("../Settings menu")

@@ -1,8 +1,6 @@
-[gd_resource type="Resource" load_steps=6 format=3 uid="uid://ceakv6oqob6m7"]
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://ceakv6oqob6m7"]
 
-[ext_resource type="PackedScene" uid="uid://bcmx07k12gcsc" path="res://objects/entities/ice_brick.tscn" id="1_ci3d1"]
-[ext_resource type="PackedScene" uid="uid://coayig4dxelo2" path="res://objects/player_skills/brick_throw_skill.tscn" id="1_rflri"]
-[ext_resource type="Resource" uid="uid://br84dsfa3ti04" path="res://resources/throw_behaviors/tap_throw_input.tres" id="2_hsgyv"]
+[ext_resource type="PackedScene" uid="uid://dpmmacva7qf8j" path="res://objects/player_skills/ice_brick_throw_skill.tscn" id="2_gm1ka"]
 [ext_resource type="Texture2D" uid="uid://c1qaxspv8aemf" path="res://sprites/ice_brick_skill_icon.png" id="3_6btth"]
 [ext_resource type="Script" uid="uid://d4crrfmbgxnqf" path="res://scripts/Resources/SkillData.cs" id="5_57pl3"]
 
@@ -10,16 +8,10 @@
 script = ExtResource("5_57pl3")
 Name = "ICE_BRICK"
 Description = "ICE_BRICK_DESCRIPTION"
-Config = Dictionary[String, Variant]({
-"brick_scene": ExtResource("1_ci3d1"),
-"player_controller": NodePath("."),
-"throw_input_behavior": ExtResource("2_hsgyv"),
-"timer": NodePath("ThrowTimer")
-})
 Cost = 180
 Icon = ExtResource("3_6btth")
 IsActive = false
 Level = 0
 MaxLevel = 3
 Type = 1
-Node = ExtResource("1_rflri")
+Node = ExtResource("2_gm1ka")

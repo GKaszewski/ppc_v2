@@ -1,7 +1,6 @@
-[gd_resource type="Resource" load_steps=5 format=3 uid="uid://dw5ee2lpeypnb"]
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://dw5ee2lpeypnb"]
 
 [ext_resource type="PackedScene" uid="uid://coayig4dxelo2" path="res://objects/player_skills/brick_throw_skill.tscn" id="1_5gnea"]
-[ext_resource type="Resource" uid="uid://br84dsfa3ti04" path="res://resources/throw_behaviors/tap_throw_input.tres" id="1_yimbq"]
 [ext_resource type="Texture2D" uid="uid://dxtdwgg3po0eg" path="res://sprites/brick_power_Skill_icon.png" id="2_yimbq"]
 [ext_resource type="Script" uid="uid://d4crrfmbgxnqf" path="res://scripts/Resources/SkillData.cs" id="3_yimbq"]
 
@@ -9,16 +8,10 @@
 script = ExtResource("3_yimbq")
 Name = "BRICK_POWER"
 Description = "BRICK_POWER_DESCRIPTION"
-Config = Dictionary[String, Variant]({
-"fire_rate": 0.6,
-"player_controller": NodePath("."),
-"throw_input_behavior": ExtResource("1_yimbq"),
-"timer": NodePath("ThrowTimer")
-})
 Cost = 50
 Icon = ExtResource("2_yimbq")
 IsActive = false
 Level = 1
 MaxLevel = 3
-Type = 0
+Type = 1
 Node = ExtResource("1_5gnea")

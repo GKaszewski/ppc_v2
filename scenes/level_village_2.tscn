@@ -59,7 +59,7 @@ ease = 2
 [node name="Brick Player" parent="." instance=ExtResource("1_wcma7")]
 z_index = 1
 
-[node name="HitParticles" parent="Brick Player" index="27"]
+[node name="HitParticles" parent="Brick Player" index="26"]
 process_material = SubResource("ParticleProcessMaterial_lgb3u")
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("2_ot3dy")]
@@ -69,8 +69,9 @@ process_material = SubResource("ParticleProcessMaterial_lgb3u")
 [node name="HUD" parent="UI Layer" index="0" node_paths=PackedStringArray("Health")]
 Health = NodePath("../../Brick Player/HealthComponent")
 
-[node name="Marketplace" parent="UI Layer" index="3" node_paths=PackedStringArray("SkillUnlockedComponent")]
-SkillUnlockedComponent = NodePath("../../Brick Player/SkillUnlockerComponent")
+[node name="Marketplace" parent="UI Layer" index="3" node_paths=PackedStringArray("SkillUnlockerComponent", "ComponentsToDisable")]
+SkillUnlockerComponent = NodePath("../../Brick Player/SkillUnlockerComponent")
+ComponentsToDisable = [NodePath("../../Brick Player")]
 
 [node name="Global Light" parent="." instance=ExtResource("4_wykfl")]
 

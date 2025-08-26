@@ -20,7 +20,6 @@
 [ext_resource type="Script" uid="uid://di572axt0c3s8" path="res://scripts/SkillManager.cs" id="18_6lsog"]
 [ext_resource type="AudioStream" uid="uid://duj2q0rqytaxg" path="res://sfx/jump.wav" id="18_pysae"]
 [ext_resource type="AudioStream" uid="uid://bmfn6p88gy575" path="res://sfx/player_hurt.wav" id="19_7anly"]
-[ext_resource type="Script" uid="uid://dlh5xcv2sy82s" path="res://scripts/components/SkillUnlockedComponent.cs" id="19_gwc8i"]
 [ext_resource type="Script" uid="uid://d4crrfmbgxnqf" path="res://scripts/Resources/SkillData.cs" id="19_yysbb"]
 [ext_resource type="AudioStream" uid="uid://ycgtf6wj7mto" path="res://sfx/heal.wav" id="20_bptj5"]
 [ext_resource type="Resource" uid="uid://dw5ee2lpeypnb" path="res://resources/skills/brick_throw.tres" id="20_o1ihh"]
@@ -28,6 +27,7 @@
 [ext_resource type="Resource" uid="uid://cr5lo4h8wm0jc" path="res://resources/skills/fire_brick.tres" id="22_7til7"]
 [ext_resource type="Resource" uid="uid://ceakv6oqob6m7" path="res://resources/skills/ice_brick.tres" id="23_e5pae"]
 [ext_resource type="Resource" uid="uid://d3bjre2etov1n" path="res://resources/skills/magnetic.tres" id="24_xuhvf"]
+[ext_resource type="Script" uid="uid://dlh5xcv2sy82s" path="res://scripts/components/SkillUnlockerComponent.cs" id="25_yysbb"]
 [ext_resource type="Script" uid="uid://bo506l4x0808e" path="res://scripts/components/HitComponent.cs" id="26_6n1ss"]
 [ext_resource type="Script" uid="uid://cjcc7fia15wu3" path="res://scripts/components/CanBeLaunchedComponent.cs" id="27_oefns"]
 [ext_resource type="PackedScene" uid="uid://bg76mtpcmfm2j" path="res://objects/ui/charging_bar_layer.tscn" id="28_3f5nm"]
@@ -175,8 +175,6 @@ Body = NodePath("..")
 KnockbackForce = 1250.0
 HealthComponent = NodePath("../HealthComponent")
 
-[node name="ThrowTimer" type="Timer" parent="."]
-
 [node name="InvulnerabilityComponent" type="Node" parent="." node_paths=PackedStringArray("FlashingComponent")]
 script = ExtResource("15_xuhvf")
 FlashingComponent = NodePath("../FlashingComponent Base")
@@ -210,7 +208,7 @@ script = ExtResource("18_6lsog")
 AvailableSkills = Array[ExtResource("19_yysbb")]([ExtResource("20_o1ihh"), ExtResource("21_ur2y5"), ExtResource("22_7til7"), ExtResource("23_e5pae"), ExtResource("24_xuhvf")])
 
 [node name="SkillUnlockerComponent" type="Node" parent="." node_paths=PackedStringArray("SkillManager")]
-script = ExtResource("19_gwc8i")
+script = ExtResource("25_yysbb")
 SkillManager = NodePath("../SkillManager")
 
 [node name="HitComponent" type="Node" parent="." node_paths=PackedStringArray("Sprite", "Health", "HitFx")]
@@ -218,7 +216,6 @@ script = ExtResource("26_6n1ss")
 Sprite = NodePath("../Graphics/Root/Base")
 Health = NodePath("../HealthComponent")
 HitFx = NodePath("../HitParticles")
-metadata/_custom_type_script = "uid://ceq8n7yw7qxpi"
 
 [node name="MagneticArea" type="Area2D" parent="."]
 collision_layer = 0
@@ -264,7 +261,6 @@ script = ExtResource("30_usc1p")
 BulletScene = ExtResource("36_oxudy")
 BulletSpawn = NodePath("../Ship shoot spawn")
 ShootSfx = NodePath("../sfx_shoot")
-metadata/_custom_type_script = "uid://d1ctdx52gskv1"
 
 [node name="Ship shoot spawn" type="Marker2D" parent="."]
 position = Vector2(17, 5)

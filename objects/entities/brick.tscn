@@ -49,15 +49,13 @@ VisibilityNotifier = NodePath("../VisibleOnScreenNotifier2D")
 [node name="ProjectileInitComponent" type="Node" parent="." node_paths=PackedStringArray("LaunchComponent")]
 script = ExtResource("5_aiue8")
 LaunchComponent = NodePath("../LaunchComponent")
-metadata/_custom_type_script = "uid://bgty7040ams6s"
 
 [node name="LaunchComponent" type="Node2D" parent="."]
 script = ExtResource("6_t4c40")
-metadata/_custom_type_script = "uid://873un8agkyja"
+Speed = 64.0
 
 [node name="StraightMotionComponent" type="Node" parent="." node_paths=PackedStringArray("LaunchComponent")]
 script = ExtResource("7_y10b5")
 LaunchComponent = NodePath("../LaunchComponent")
-metadata/_custom_type_script = "uid://cvcnfrr1udco5"
 
 [node name="TerrainHitFX" parent="." instance=ExtResource("8_d0tcd")]

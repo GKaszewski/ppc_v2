@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dyp4i4ru2j2jh"]
 
-[ext_resource type="Script" uid="uid://f74xpfg7624d" path="res://scripts/components/cleanup_component.gd" id="1_8uvxg"]
+[ext_resource type="Script" uid="uid://v7tt4w6bejux" path="res://scripts/components/CleanupComponent.cs" id="1_5wuia"]
 
 [sub_resource type="Curve" id="Curve_8umf8"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.4), 0.0, 0.0, 0, 0]
@@ -45,8 +45,7 @@ explosiveness = 1.0
 fixed_fps = 24
 process_material = SubResource("ParticleProcessMaterial_1ujje")
 
-[node name="CleanUpComponent" type="Node" parent="." node_paths=PackedStringArray("root")]
-script = ExtResource("1_8uvxg")
-root = NodePath("..")
+[node name="CleanUpComponent" type="Node" parent="."]
+script = ExtResource("1_5wuia")
 
 [connection signal="finished" from="." to="CleanUpComponent" method="clean_up"]

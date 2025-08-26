@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_1co1x"]
 [ext_resource type="Script" uid="uid://r4jybneigfcn" path="res://scripts/components/CollectableComponent.cs" id="2_lthbn"]
 [ext_resource type="Resource" uid="uid://b6xqotmke54x" path="res://resources/collectables/big_treasure.tres" id="3_k64cr"]
-[ext_resource type="Script" uid="uid://bg75hnr3q6grk" path="res://scripts/components/fade_away.gd" id="4_nw7tw"]
+[ext_resource type="Script" uid="uid://bjln6jb1sigx2" path="res://scripts/components/FadeAwayComponent.cs" id="4_qwwsj"]
 [ext_resource type="AudioStream" uid="uid://wr7n5ivv06ux" path="res://sfx/pickup_coin_4.wav" id="5_fxf8v"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3ask2"]
@@ -29,12 +29,11 @@ CollisionShape = NodePath("../CollisionShape2D")
 Data = ExtResource("3_k64cr")
 Sfx = NodePath("../sfx")
 
-[node name="FadeAwayComponent" type="Node" parent="." node_paths=PackedStringArray("sprite2d", "root", "area2d")]
-script = ExtResource("4_nw7tw")
-sprite2d = NodePath("../Sprite2D")
-fade_duration = 0.4
-root = NodePath("..")
-area2d = NodePath("..")
+[node name="FadeAwayComponent" type="Node" parent="." node_paths=PackedStringArray("Sprite", "Area")]
+script = ExtResource("4_qwwsj")
+Sprite = NodePath("../Sprite2D")
+FadeDuration = 0.4
+Area = NodePath("..")
 
 [node name="sfx" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_fxf8v")

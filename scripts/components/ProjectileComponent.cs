@@ -2,6 +2,7 @@ using Godot;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class ProjectileComponent : Node2D
 {
     [Export] public float Speed { get; set; } = 16f;

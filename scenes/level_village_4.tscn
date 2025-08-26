@@ -122,8 +122,9 @@ ChaseTarget = NodePath("../../Chase Target")
 [node name="HUD" parent="UI Layer" index="0" node_paths=PackedStringArray("Health")]
 Health = NodePath("../../Brick Player/HealthComponent")
 
-[node name="Marketplace" parent="UI Layer" index="3" node_paths=PackedStringArray("SkillUnlockedComponent")]
-SkillUnlockedComponent = NodePath("../../Brick Player/SkillUnlockerComponent")
+[node name="Marketplace" parent="UI Layer" index="3" node_paths=PackedStringArray("SkillUnlockerComponent", "ComponentsToDisable")]
+SkillUnlockerComponent = NodePath("../../Brick Player/SkillUnlockerComponent")
+ComponentsToDisable = [NodePath("../../Brick Player")]
 
 [node name="Global Light" parent="." instance=ExtResource("4_0lkg8")]
 
@@ -173,10 +174,7 @@ position = Vector2(7146.51, 21.1388)
 
 [node name="Brick Player" parent="." instance=ExtResource("1_k3uyd")]
 
-[node name="SkillUnlockerComponent" parent="Brick Player" index="17" node_paths=PackedStringArray("SkillManager")]
-SkillManager = NodePath("../SkillManager")
-
-[node name="HitParticles" parent="Brick Player" index="27"]
+[node name="HitParticles" parent="Brick Player" index="26"]
 process_material = SubResource("ParticleProcessMaterial_lgb3u")
 
 [node name="Enemies" type="Node2D" parent="."]

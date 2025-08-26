@@ -2,7 +2,7 @@ using Godot;
 
 namespace Mr.BrickAdventures.scripts.components;
 
-public partial class ProjectileInitParams
+public class ProjectileInitParams
 {
     public Vector2 Position { get; set; } = Vector2.Zero;
     public Vector2 Direction { get; set; } = Vector2.Right;
@@ -20,7 +20,7 @@ public partial class ProjectileInitComponent : Node
         var direction = p.Direction;
         var rotation = p.Rotation;
         var power = p.PowerMultiplier;
-
+        
         if (Owner is Node2D root)
         {
             root.GlobalPosition = position;

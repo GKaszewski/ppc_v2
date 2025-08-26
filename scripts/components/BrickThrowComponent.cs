@@ -4,7 +4,7 @@ using Mr.BrickAdventures.scripts.Resources;
 
 namespace Mr.BrickAdventures.scripts.components;
 
-public partial class BrickThrowComponent : Node
+public partial class BrickThrowComponent : Node, ISkill
 {
     [Export] public PackedScene BrickScene { get; set; }
     [Export] public float FireRate { get; set; } = 1.0f;
@@ -18,8 +18,16 @@ public partial class BrickThrowComponent : Node
     {
         SetupTimer();
         _canThrow = true;
+    }
 
-        if (ThrowInputBehavior != null) ThrowInputBehavior.ThrowRequested += ThrowBrick;
+    public override void _ExitTree()
+    {
+        if (ThrowInputBehavior != null) ThrowInputBehavior.ThrowRequested -= ThrowBrick;
+        if (_timer != null)
+        {
+            _timer.Timeout -= OnTimerTimeout;
+            _timer.QueueFree();
+        }
     }
 
     public override void _Input(InputEvent @event)
@@ -34,10 +42,12 @@ public partial class BrickThrowComponent : Node
 
     private void SetupTimer()
     {
+        _timer = new Timer();
         _timer.WaitTime = FireRate;
         _timer.OneShot = false;
         _timer.Autostart = false;
         _timer.Timeout += OnTimerTimeout;
+        AddChild(_timer);
     }
 
     private void OnTimerTimeout()
@@ -52,19 +62,41 @@ public partial class BrickThrowComponent : Node
 
         var instance = BrickScene.Instantiate<Node2D>();
         var init = instance.GetNodeOrNull<ProjectileInitComponent>("ProjectileInitComponent");
+        
         if (init != null && PlayerController.CurrentMovement is PlatformMovementComponent)
         {
-            init.Initialize(new ProjectileInitParams()
+            var @params = new ProjectileInitParams()
             {
                 Position = PlayerController.GlobalPosition,
                 Rotation = PlayerController.Rotation,
                 Direction = PlayerController.CurrentMovement.LastDirection,
                 PowerMultiplier = powerMultiplier,
-            });
+            };
+            
+            init.Initialize(@params);
         }
         
         GetTree().CurrentScene.AddChild(instance);
         _canThrow = false;
         _timer.Start();
+    }
+
+    public void Initialize(Node owner)
+    {
+        PlayerController = owner as PlayerController;
+        if (PlayerController == null)
+        {
+            GD.PushError("BrickThrowComponent: Owner is not a PlayerController.");
+        }
+    }
+
+    public void Activate()
+    {
+        if (ThrowInputBehavior != null) ThrowInputBehavior.ThrowRequested += ThrowBrick;
+    }
+
+    public void Deactivate()
+    {
+        if (ThrowInputBehavior != null) ThrowInputBehavior.ThrowRequested -= ThrowBrick;
     }
 }

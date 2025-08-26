@@ -1,21 +1,17 @@
 using System;
 using Godot;
 using Godot.Collections;
+using Mr.BrickAdventures.scripts.interfaces;
 
 namespace Mr.BrickAdventures.scripts.components;
 
-public partial class MagneticSkillComponent : Node
+public partial class MagneticSkillComponent : Node, ISkill
 {
     [Export] public Area2D MagneticArea { get; set; }
     [Export] public float MagneticMoveDuration { get; set; } = 1.25f;
 
     private Array<Node2D> _collectablesToPickUp = [];
-
-    public override void _Ready()
-    {
-        MagneticArea.AreaEntered += OnAreaEntered;
-        MagneticArea.BodyEntered += OnBodyEntered;
-    }
+    private Node2D _owner;
 
     public override void _Process(double delta)
     {
@@ -66,13 +62,32 @@ public partial class MagneticSkillComponent : Node
 
     private void MoveCollectableToOwner(Node2D collectable)
     {
-        if (!IsInstanceValid(collectable)) return;
-
-        if (Owner is not Node2D root) return;
+        if (!IsInstanceValid(collectable) || !IsInstanceValid(_owner)) return;
         
-        var direction = (root.GlobalPosition - collectable.GlobalPosition).Normalized();
+        var direction = (_owner.GlobalPosition - collectable.GlobalPosition).Normalized();
         var speed = direction.Length() / MagneticMoveDuration;
 
         collectable.GlobalPosition += direction.Normalized() * speed;
+    }
+
+    public void Initialize(Node owner)
+    {
+        _owner = owner as Node2D;
+        if (_owner == null)
+        {
+            GD.PushWarning("MagneticSkillComponent: Owner is not a Node2D.");
+        }
+    }
+
+    public void Activate()
+    {
+        MagneticArea.BodyEntered += OnBodyEntered;
+        MagneticArea.AreaEntered += OnAreaEntered;
+    }
+
+    public void Deactivate()
+    {
+        MagneticArea.BodyEntered -= OnBodyEntered;
+        MagneticArea.AreaEntered -= OnAreaEntered;
     }
 }

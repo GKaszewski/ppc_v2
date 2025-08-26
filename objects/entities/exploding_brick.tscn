@@ -42,7 +42,7 @@ script = ExtResource("2_nqeob")
 Damage = 5.0
 DamageTimer = NodePath("../Timer")
 
-[node name="ExplosiveComponent" type="Node" parent="." node_paths=PackedStringArray("Damage", "Area", "ExplodeArea")]
+[node name="ExplosiveComponent" type="Node2D" parent="." node_paths=PackedStringArray("Damage", "Area", "ExplodeArea")]
 script = ExtResource("3_a2b5x")
 Damage = NodePath("../DamageComponent")
 Area = NodePath("../BulletArea")
@@ -67,7 +67,6 @@ LifeTime = 30.0
 [node name="LaunchComponent" type="Node2D" parent="."]
 script = ExtResource("6_a2b5x")
 Speed = 240.0
-metadata/_custom_type_script = "uid://873un8agkyja"
 
 [node name="GravityMotionComponent" type="Node2D" parent="." node_paths=PackedStringArray("Body", "LaunchComponent")]
 script = ExtResource("7_4ly8b")
@@ -84,4 +83,3 @@ shape = SubResource("RectangleShape2D_nqeob")
 [node name="ProjectileInitComponent" type="Node" parent="." node_paths=PackedStringArray("LaunchComponent")]
 script = ExtResource("8_nqeob")
 LaunchComponent = NodePath("../LaunchComponent")
-metadata/_custom_type_script = "uid://bgty7040ams6s"

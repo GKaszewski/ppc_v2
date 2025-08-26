@@ -1,8 +1,6 @@
-[gd_resource type="Resource" load_steps=6 format=3 uid="uid://cdp8sex36vdq2"]
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://cdp8sex36vdq2"]
 
-[ext_resource type="PackedScene" uid="uid://5surx230gfw3" path="res://objects/entities/exploding_brick.tscn" id="1_6pfoa"]
-[ext_resource type="Resource" uid="uid://diuv6pr6a0dup" path="res://resources/throw_behaviors/charge_throw_input.tres" id="2_87gkt"]
-[ext_resource type="PackedScene" uid="uid://coayig4dxelo2" path="res://objects/player_skills/brick_throw_skill.tscn" id="2_e0o8w"]
+[ext_resource type="PackedScene" uid="uid://cfses3kn3y8qw" path="res://objects/player_skills/exploding_brick_throw_skill.tscn" id="2_gt8f6"]
 [ext_resource type="Texture2D" uid="uid://c0xtjfpmkfolk" path="res://sprites/explosive_brick_skill_icon.png" id="3_wkqmb"]
 [ext_resource type="Script" uid="uid://d4crrfmbgxnqf" path="res://scripts/Resources/SkillData.cs" id="5_wkqmb"]
 
@@ -10,16 +8,10 @@
 script = ExtResource("5_wkqmb")
 Name = "EXPLOSIVE_BRICK"
 Description = "EXPLOSIVE_BRICK_DESCRIPTION"
-Config = Dictionary[String, Variant]({
-"brick_scene": ExtResource("1_6pfoa"),
-"player_controller": NodePath("."),
-"throw_input_behavior": ExtResource("2_87gkt"),
-"timer": NodePath("ThrowTimer")
-})
 Cost = 180
 Icon = ExtResource("3_wkqmb")
 IsActive = false
 Level = 0
 MaxLevel = 1
 Type = 1
-Node = ExtResource("2_e0o8w")
+Node = ExtResource("2_gt8f6")

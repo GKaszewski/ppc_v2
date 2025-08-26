@@ -7,5 +7,5 @@
 [node name="BrickThrowComponent" type="Node"]
 script = ExtResource("1_ogpnm")
 BrickScene = ExtResource("2_4txoq")
-FireRate = 0.3
+FireRate = 0.6
 ThrowInputBehavior = ExtResource("3_gxahf")
