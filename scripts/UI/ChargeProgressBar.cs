@@ -13,7 +13,9 @@ public partial class ChargeProgressBar : ProgressBar
 
     public override void _Ready()
     {
-        Owner.ChildEnteredTree += OnNodeEntered;   
+        Owner.ChildEnteredTree += OnNodeEntered;
+        Owner.TreeExiting += OnOwnerExiting;
+        
         ProgressBar.Hide();
         SetupDependencies();
     }
@@ -24,6 +26,18 @@ public partial class ChargeProgressBar : ProgressBar
         ThrowComponent = throwComponent;
         SetupDependencies();
     }
+    private void OnOwnerExiting()
+    {
+        if (_throwInput != null)
+        {
+            _throwInput.ChargeStarted -= OnChargeStarted;
+            _throwInput.ChargeStopped -= OnChargeStopped;
+            _throwInput.ChargeUpdated -= OnChargeUpdated;
+            _throwInput = null;
+        }
+        ThrowComponent = null;
+    }
+    
 
     private void SetupDependencies()
     {

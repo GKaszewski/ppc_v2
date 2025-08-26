@@ -128,5 +128,13 @@ public partial class Marketplace : Control
     private void OnSkillButtonPressed(SkillButton button)
     {
         SkillUnlockerComponent.SkillManager.ToggleSkillActivation(button.Data);
+        
+        foreach (var btn in _skillButtons)
+        {
+            if (btn.Data.IsActive)
+                btn.Activate();
+            else
+                btn.Deactivate();
+        }
     }
 }
