@@ -1,17 +1,18 @@
-[gd_resource type="Resource" load_steps=4 format=3 uid="uid://ceakv6oqob6m7"]
+[gd_resource type="Resource" load_steps=6 format=3 uid="uid://ceakv6oqob6m7"]
 
 [ext_resource type="PackedScene" uid="uid://dpmmacva7qf8j" path="res://objects/player_skills/ice_brick_throw_skill.tscn" id="2_gm1ka"]
 [ext_resource type="Texture2D" uid="uid://c1qaxspv8aemf" path="res://sprites/ice_brick_skill_icon.png" id="3_6btth"]
+[ext_resource type="Script" uid="uid://dwb0e05pewcsn" path="res://scripts/Resources/SkillUpgrade.cs" id="3_e3cb0"]
+[ext_resource type="Resource" uid="uid://myr57ylobqkn" path="res://resources/skills/upgrades/ice_brick/upgrade_1.tres" id="4_3pbub"]
 [ext_resource type="Script" uid="uid://d4crrfmbgxnqf" path="res://scripts/Resources/SkillData.cs" id="5_57pl3"]
 
 [resource]
 script = ExtResource("5_57pl3")
 Name = "ICE_BRICK"
 Description = "ICE_BRICK_DESCRIPTION"
-Cost = 180
 Icon = ExtResource("3_6btth")
 IsActive = false
 Level = 0
-MaxLevel = 3
 Type = 1
 Node = ExtResource("2_gm1ka")
+Upgrades = Array[ExtResource("3_e3cb0")]([ExtResource("4_3pbub")])

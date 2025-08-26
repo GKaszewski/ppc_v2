@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 using Mr.BrickAdventures.Autoloads;
+using Mr.BrickAdventures.scripts.interfaces;
 using Mr.BrickAdventures.scripts.Resources;
 
 namespace Mr.BrickAdventures.scripts.components;
@@ -28,11 +29,11 @@ public partial class SkillUnlockerComponent : Node
     {
         if (_gameManager == null) return false;
         if (_gameManager.IsSkillUnlocked(skill)) return false;
-        if (!HasEnoughCoins(skill.Cost)) return false;
+        if (!HasEnoughCoins(skill.Upgrades[0].Cost)) return false;
 
         skill.Level = 1;
         skill.IsActive = true;
-        _gameManager.RemoveCoins(skill.Cost);
+        _gameManager.RemoveCoins(skill.Upgrades[0].Cost);
 
         var skillsUnlocked = (Array<SkillData>)_gameManager.CurrentSessionState["skills_unlocked"];
         skillsUnlocked.Add(skill);
@@ -59,11 +60,19 @@ public partial class SkillUnlockerComponent : Node
     {
         if (_gameManager == null) return false;
         if (!_gameManager.IsSkillUnlocked(skill)) return false;
-        if (!HasEnoughCoins(skill.Cost)) return false;
         if (skill.Level >= skill.MaxLevel) return false;
+        if (!HasEnoughCoins(skill.Upgrades[skill.Level].Cost)) return false;
 
-        _gameManager.RemoveCoins(skill.Cost);
+        _gameManager.RemoveCoins(skill.Upgrades[skill.Level].Cost);
         skill.Level++;
+        if (SkillManager.ActiveComponents.TryGetValue(skill.Name, out Variant componentVariant))
+        {
+            var component = componentVariant.AsGodotObject();
+            if (component is ISkill skillInstance)
+            {
+                skillInstance.ApplyUpgrade(skill.Upgrades[skill.Level - 1]);
+            }
+        }
         EmitSignalSkillUnlocked(skill);
         return true;
     }

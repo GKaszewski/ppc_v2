@@ -35,12 +35,12 @@ public partial class Marketplace : Control
         var unlockedSkills = _gameManager.GetUnlockedSkills();
         foreach (var skill in unlockedSkills) CreateSkillButton(skill);
         
-        SkillUnlockerComponent.SkillUnlocked += OnSkillUnlocker;
+        SkillUnlockerComponent.SkillUnlocked += OnSkillUnlocked;
     }
 
     public override void _ExitTree()
     {
-        SkillUnlockerComponent.SkillUnlocked -= OnSkillUnlocker;
+        SkillUnlockerComponent.SkillUnlocked -= OnSkillUnlocked;
     }
 
     public override void _Input(InputEvent @event)
@@ -59,21 +59,24 @@ public partial class Marketplace : Control
         }
     }
 
-    private string GetButtonText(SkillData skill)
+    private void OnSkillUnlocked(SkillData skill)
     {
-        return $"{Tr(skill.Name)} {skill.Cost}";
-    }
-
-    private void OnSkillUnlocker(SkillData skill)
-    {
-        if (_skillButtons.Count == 0) CreateSkillButton(skill);
+        var buttonExists = false;
+        foreach (var existingButton in _skillButtons)
+        {
+            if (existingButton.Name == skill.Name)
+            {
+                buttonExists = true;
+                break;
+            }
+        }
+        
+        if (!buttonExists) CreateSkillButton(skill);
 
         foreach (var btn in _skillButtons)
         {
-            if (btn.Data.IsActive)
-                btn.Activate();
-            else
-                btn.Deactivate();
+            if (btn.Data.IsActive) btn.Activate();
+            else btn.Deactivate();
         }
     }
 
@@ -93,7 +96,6 @@ public partial class Marketplace : Control
     private void CreateUpgradeButton(SkillData skill)
     {
         var button = MarketplaceButtonScene.Instantiate<MarketplaceButton>();
-        button.Text = GetButtonText(skill);
         button.Data = skill;
         button.Icon = skill.Icon;
         button.Pressed += () => OnUpgradeButtonPressed(skill);
@@ -120,18 +122,6 @@ public partial class Marketplace : Control
         else
         {
             SkillUnlockerComponent.TryUnlockSkill(skill);
-        }
-    }
-
-    private void RemoveButton(SkillData skill)
-    {
-        foreach (var node in ToUnlockGrid.GetChildren())
-        {
-            var child = (Button)node;
-            if (child.Text != GetButtonText(skill)) continue;
-            
-            child.QueueFree();
-            break;
         }
     }
 

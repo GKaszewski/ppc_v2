@@ -46,7 +46,7 @@ public partial class SkillManager : Node
         var instance = skillData.Node.Instantiate();
         if (instance is ISkill skill)
         {
-            skill.Initialize(Owner); 
+            skill.Initialize(Owner, skillData); 
             skill.Activate();
         } 
         else

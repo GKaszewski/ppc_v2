@@ -1,22 +1,18 @@
-[gd_resource type="Resource" load_steps=4 format=3 uid="uid://d3bjre2etov1n"]
+[gd_resource type="Resource" load_steps=6 format=3 uid="uid://d3bjre2etov1n"]
 
 [ext_resource type="Texture2D" uid="uid://cvhoq7aubxlmq" path="res://sprites/ui/magnetic_skill_icon.png" id="1_16qcg"]
 [ext_resource type="PackedScene" uid="uid://cunyndudjh2he" path="res://objects/player_skills/magnetic_skill.tscn" id="1_er41s"]
+[ext_resource type="Script" uid="uid://dwb0e05pewcsn" path="res://scripts/Resources/SkillUpgrade.cs" id="3_0j4wg"]
 [ext_resource type="Script" uid="uid://d4crrfmbgxnqf" path="res://scripts/Resources/SkillData.cs" id="3_htb6q"]
+[ext_resource type="Resource" uid="uid://dte14sxesjm3y" path="res://resources/skills/upgrades/magnetic/upgrade_1.tres" id="4_0hjrs"]
 
 [resource]
 script = ExtResource("3_htb6q")
 Name = "MAGNETIC"
 Description = "MAGNETIC_DESCRIPTION"
-Config = Dictionary[String, Variant]({
-"magnetic_area": NodePath("MagneticArea"),
-"magnetic_move_duration": 1.25,
-"root": NodePath(".")
-})
-Cost = 70
 Icon = ExtResource("1_16qcg")
 IsActive = false
 Level = 1
-MaxLevel = 1
 Type = 2
 Node = ExtResource("1_er41s")
+Upgrades = Array[ExtResource("3_0j4wg")]([ExtResource("4_0hjrs")])

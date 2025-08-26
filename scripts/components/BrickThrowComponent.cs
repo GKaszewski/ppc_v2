@@ -13,6 +13,7 @@ public partial class BrickThrowComponent : Node, ISkill
     
     private bool _canThrow = true;
     private Timer _timer;
+    private SkillData _skillData;
 
     public override void _Ready()
     {
@@ -81,12 +82,19 @@ public partial class BrickThrowComponent : Node, ISkill
         _timer.Start();
     }
 
-    public void Initialize(Node owner)
+    public void Initialize(Node owner, SkillData data)
     {
         PlayerController = owner as PlayerController;
+        _skillData = data;
+        
         if (PlayerController == null)
         {
             GD.PushError("BrickThrowComponent: Owner is not a PlayerController.");
+        }
+        
+        if (_skillData.Level > 0 && _skillData.Upgrades.Count >= _skillData.Level)
+        {
+            ApplyUpgrade(_skillData.Upgrades[_skillData.Level - 1]);
         }
     }
 
@@ -98,5 +106,13 @@ public partial class BrickThrowComponent : Node, ISkill
     public void Deactivate()
     {
         if (ThrowInputBehavior != null) ThrowInputBehavior.ThrowRequested -= ThrowBrick;
+    }
+
+    public void ApplyUpgrade(SkillUpgrade upgrade)
+    {
+        foreach (var property in upgrade.Properties)
+        {
+            Set(property.Key, property.Value);
+        }
     }
 }

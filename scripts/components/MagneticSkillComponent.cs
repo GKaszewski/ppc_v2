@@ -2,6 +2,7 @@ using System;
 using Godot;
 using Godot.Collections;
 using Mr.BrickAdventures.scripts.interfaces;
+using Mr.BrickAdventures.scripts.Resources;
 
 namespace Mr.BrickAdventures.scripts.components;
 
@@ -12,6 +13,7 @@ public partial class MagneticSkillComponent : Node, ISkill
 
     private Array<Node2D> _collectablesToPickUp = [];
     private Node2D _owner;
+    private SkillData _skillData;
 
     public override void _Process(double delta)
     {
@@ -70,9 +72,11 @@ public partial class MagneticSkillComponent : Node, ISkill
         collectable.GlobalPosition += direction.Normalized() * speed;
     }
 
-    public void Initialize(Node owner)
+    public void Initialize(Node owner, SkillData data)
     {
         _owner = owner as Node2D;
+        _skillData = data;
+        
         if (_owner == null)
         {
             GD.PushWarning("MagneticSkillComponent: Owner is not a Node2D.");
@@ -90,6 +94,11 @@ public partial class MagneticSkillComponent : Node, ISkill
                     return;
                 }
             }
+        }
+        
+        if (_skillData.Level > 0 && _skillData.Upgrades.Count >= _skillData.Level)
+        {
+            ApplyUpgrade(_skillData.Upgrades[_skillData.Level - 1]);
         }
     }
 
@@ -111,5 +120,13 @@ public partial class MagneticSkillComponent : Node, ISkill
         
         MagneticArea.BodyEntered -= OnBodyEntered;
         MagneticArea.AreaEntered -= OnAreaEntered;
+    }
+
+    public void ApplyUpgrade(SkillUpgrade upgrade)
+    {
+        foreach (var property in upgrade.Properties)
+        {
+            Set(property.Key, property.Value);
+        }
     }
 }
