@@ -137,11 +137,10 @@ visible = false
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_hdsg1")
 
-[node name="FlipPlayerComponent" type="Node2D" parent="." node_paths=PackedStringArray("LeftEye", "RightEye", "PlatformMovement")]
+[node name="FlipPlayerComponent" type="Node2D" parent="." node_paths=PackedStringArray("LeftEye", "RightEye")]
 script = ExtResource("9_yysbb")
 LeftEye = NodePath("../Graphics/Root/Left Eye")
 RightEye = NodePath("../Graphics/Root/Right Eye")
-PlatformMovement = NodePath("../Movements/PlatformMovement")
 
 [node name="StompDamageArea" type="Area2D" parent="."]
 collision_layer = 0
