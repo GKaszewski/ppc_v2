@@ -45,18 +45,16 @@ public partial class Marketplace : Control
 
     public override void _Input(InputEvent @event)
     {
-        var root = Owner as Control;
-
         if (!@event.IsActionPressed("show_marketplace")) return;
         
-        if (root != null && root.IsVisible())
+        if (IsVisible())
         {
-            root.Hide();
+            Hide();
             foreach (var c in ComponentsToDisable) c.ProcessMode = ProcessModeEnum.Inherit;
         }
         else
         {
-            root?.Show();
+            Show();
             foreach (var c in ComponentsToDisable) c.ProcessMode = ProcessModeEnum.Disabled;
         }
     }

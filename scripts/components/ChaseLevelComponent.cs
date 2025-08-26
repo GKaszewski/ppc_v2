@@ -1,4 +1,5 @@
 using Godot;
+using PhantomCamera;
 
 namespace Mr.BrickAdventures.scripts.components;
 
@@ -6,7 +7,6 @@ public partial class ChaseLevelComponent : Node
 {
     [Export] public float ChaseSpeed { get; set; } = 200.0f;
     [Export] public Marker2D ChaseTarget { get; set; }
-    [Export] public GodotObject PhantomCamera { get; set; }
     [Export] public float MinimumDistance { get; set; } = 10f;
 
     [Signal]
@@ -17,8 +17,17 @@ public partial class ChaseLevelComponent : Node
 
     private bool _isChasing = false;
     private Node2D _previousCameraFollowTarget = null;
+    private PhantomCamera2D _phantomCamera = null;
+    private Node2D _root = null;
+    
 
-    public override void _Process(double delta)
+    public override void _Ready()
+    {
+        _phantomCamera = GetNode<Node2D>("../../%PhantomCamera").AsPhantomCamera2D();
+        _root = Owner as Node2D;
+    }
+
+    public override void _PhysicsProcess(double delta)
     {
         if (!_isChasing) return;
         if (ChaseTarget == null) return;
@@ -31,21 +40,22 @@ public partial class ChaseLevelComponent : Node
         
         var targetPosition = ChaseTarget.GlobalPosition;
         
-        if (Owner is not Node2D root) return;
+        if (_root == null) return;
         
-        var direction = (targetPosition - root.GlobalPosition).Normalized();
-        root.GlobalPosition += direction * ChaseSpeed * (float)delta;
+        var direction = (targetPosition - _root.GlobalPosition).Normalized();
+        var speed = direction * ChaseSpeed * (float)delta;
+        _root.GlobalPosition += speed;
     }
 
     public void OnShipEntered()
     {
-        if (ChaseTarget == null || PhantomCamera == null)
+        if (ChaseTarget == null || _phantomCamera == null)
             return;
 
         if (_isChasing) return;
 
-        _previousCameraFollowTarget = (Node2D)PhantomCamera.Call("get_follow_target");
-        PhantomCamera.Call("set_follow_target", Owner as Node2D);
+        _previousCameraFollowTarget = _phantomCamera.FollowTarget;
+        _phantomCamera.FollowTarget = _root;
         EmitSignalChaseStarted();
         _isChasing = true;
     }
@@ -70,9 +80,9 @@ public partial class ChaseLevelComponent : Node
 
     private void StopChasing()
     {
-        if (PhantomCamera == null) return;
+        if (_phantomCamera == null) return;
 
-        PhantomCamera.Call("set_follow_target", _previousCameraFollowTarget);
+        _phantomCamera.FollowTarget = _previousCameraFollowTarget;
         EmitSignalChaseStopped();
         _isChasing = false;
     }

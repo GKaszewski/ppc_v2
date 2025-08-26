@@ -2,14 +2,13 @@ using Godot;
 
 namespace Mr.BrickAdventures.scripts.components;
 
-public partial class SpaceshipExitComponent : Node
+public partial class SpaceshipExitComponent : Area2D
 {
-    [Export] public Area2D Area { get; set; }
     [Signal] public delegate void SpaceshipExitEventHandler();
     
     public override void _Ready()
     {
-        Area.BodyEntered += OnBodyEntered;
+        BodyEntered += OnBodyEntered;
     }
 
     private void OnBodyEntered(Node2D body)

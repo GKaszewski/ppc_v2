@@ -28,7 +28,7 @@ public partial class EnemyDeathComponent : Node
 
     private void OnDeath()
     {
-        CallDeferred(nameof(Die));
+        _ = Die();
     }
 
     private async Task Die()

@@ -22,13 +22,14 @@ Area = NodePath("..")
 metadata/_custom_type_script = "uid://dkmxhjtmu5xlb"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(8, -0.5)
 shape = SubResource("RectangleShape2D_n4uav")
 
 [node name="Line2D" type="Line2D" parent="."]
 points = PackedVector2Array(0, 0, 16, 0)
 width = 2.0
-default_color = Color(0, 94.012, 1, 1)
+default_color = Color(0, 90, 0, 1)
 
 [node name="BulletComponent" type="Node" parent="." node_paths=PackedStringArray("Area")]
 script = ExtResource("2_2bmqm")

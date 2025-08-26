@@ -31,7 +31,6 @@ public partial class PlayerDeathComponent : Node2D
         }
         
         _gameManager.RemoveLives(1);
-        GD.Print("Player death, lives left: " + _gameManager.GetLives());
         _gameManager.ResetCurrentSessionState();
     }
 }

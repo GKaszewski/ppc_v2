@@ -70,7 +70,8 @@ limit_top = -10000000
 limit_right = 10000000
 limit_bottom = 10000000
 
-[node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
+[node name="PhantomCamera" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
+unique_name_in_owner = true
 top_level = true
 script = ExtResource("6_6imqp")
 follow_mode = 2

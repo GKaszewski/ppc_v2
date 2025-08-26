@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://h60obxmju6mo"]
+[gd_scene load_steps=30 format=4 uid="uid://h60obxmju6mo"]
 
 [ext_resource type="PackedScene" uid="uid://dyp4i4ru2j2jh" path="res://objects/fxs/explosion_fx.tscn" id="1_p30ax"]
 [ext_resource type="PackedScene" uid="uid://dx80ivlvuuew4" path="res://objects/fxs/fire_fx.tscn" id="2_a7yjf"]
@@ -16,7 +16,6 @@
 [ext_resource type="Script" uid="uid://ccfft4b8rwgbo" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="14_k7w2w"]
 [ext_resource type="PackedScene" uid="uid://d0s2abysa86rq" path="res://objects/entities/child.tscn" id="15_dv6gh"]
 [ext_resource type="PackedScene" uid="uid://6foggu31cu14" path="res://objects/level/ui_layer.tscn" id="16_nr2eo"]
-[ext_resource type="PackedScene" uid="uid://bqom4cm7r18db" path="res://objects/entities/killzone.tscn" id="17_3xroh"]
 [ext_resource type="PackedScene" uid="uid://b4pdt1gv2ymyi" path="res://objects/tooltip.tscn" id="18_l3a7y"]
 [ext_resource type="PackedScene" uid="uid://cawlpch2lk3a2" path="res://objects/level/world_environment.tscn" id="20_embdf"]
 [ext_resource type="PackedScene" uid="uid://cywsu7yrtjdog" path="res://objects/level/global_light.tscn" id="21_fytod"]
@@ -323,8 +322,11 @@ position = Vector2(880, -578)
 
 [node name="UI Layer" parent="." instance=ExtResource("16_nr2eo")]
 
-[node name="Killzone" parent="." instance=ExtResource("17_3xroh")]
-position = Vector2(2600, 802)
+[node name="HUD" parent="UI Layer" index="0" node_paths=PackedStringArray("Health")]
+Health = NodePath("../../Brick Player/HealthComponent")
+
+[node name="Marketplace" parent="UI Layer" index="3" node_paths=PackedStringArray("SkillUnlockedComponent")]
+SkillUnlockedComponent = NodePath("../../Brick Player/SkillUnlockerComponent")
 
 [node name="Tooltip" parent="." instance=ExtResource("18_l3a7y")]
 position = Vector2(1016, -104)
@@ -345,6 +347,8 @@ position = Vector2(1244, -41)
 [node name="SmallHealPotion3" parent="." instance=ExtResource("23_m6h4x")]
 position = Vector2(1359, -42)
 
+[connection signal="Death" from="Brick Player/HealthComponent" to="UI Layer/DeathScreen" method="OnPlayerDeath"]
+[connection signal="Death" from="Brick Player/HealthComponent" to="UI Layer/GameOverScreen" method="OnPlayerDeath"]
+
 [editable path="Brick Player"]
 [editable path="UI Layer"]
-[editable path="Killzone"]

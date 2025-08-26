@@ -97,7 +97,6 @@ public partial class SkillManager : Node
         {
             if (_gameManager.IsSkillUnlocked(sd))
             {
-                GD.Print("Applying skill: ", sd.Name);
                 CallDeferred(MethodName.AddSkill, sd);
             }
             else

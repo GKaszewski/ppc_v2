@@ -16,7 +16,7 @@ config/name_localized={
 "pl": "Przygody Pana Cegły"
 }
 config/version="in-dev"
-run/main_scene="uid://cl00e2ocomk3m"
+run/main_scene="uid://bhad760x3vvco"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="MrBrickAdventures"
 config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
@@ -38,6 +38,7 @@ AchievementsManager="*res://objects/achievements.tscn"
 UIManager="*res://Autoloads/UIManager.cs"
 ConfigFileHandler="*res://Autoloads/ConfigFileHandler.cs"
 SaveSystem="*res://Autoloads/SaveSystem.cs"
+Console="*res://addons/console/console.gd"
 
 [debug]
 

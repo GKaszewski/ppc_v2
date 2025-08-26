@@ -9,13 +9,10 @@ radius = 16.1245
 [node name="Spaceship Enter" type="Area2D"]
 collision_layer = 0
 collision_mask = 4
+script = ExtResource("2_wanmd")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_r82pf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_wanmd")
-
-[node name="SpaceshipEnterComponent" type="Node" parent="." node_paths=PackedStringArray("Area")]
-script = ExtResource("2_wanmd")
-Area = NodePath("..")
