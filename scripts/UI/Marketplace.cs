@@ -99,8 +99,8 @@ public partial class Marketplace : Control
         button.Pressed += () => OnUpgradeButtonPressed(skill);
         
         _unlockButtons.Add(button);
-        UnlockedGrid.AddChild(button);
-        UnlockedGrid.QueueSort();
+        ToUnlockGrid.AddChild(button);
+        ToUnlockGrid.QueueSort();
     }
 
     private void OnUpgradeButtonPressed(SkillData skill)

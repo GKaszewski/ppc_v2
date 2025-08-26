@@ -1,7 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://dlm2ri562fynd"]
+[gd_scene load_steps=12 format=3 uid="uid://dlm2ri562fynd"]
 
 [ext_resource type="Script" uid="uid://bnc16gndpl87i" path="res://scripts/UI/Marketplace.cs" id="1_li4x3"]
+[ext_resource type="Script" uid="uid://d4crrfmbgxnqf" path="res://scripts/Resources/SkillData.cs" id="2_c7w2b"]
 [ext_resource type="FontFile" uid="uid://xm0vbusjr7b7" path="res://fonts/PressStart2P-Regular.ttf" id="2_ho1tm"]
+[ext_resource type="Resource" uid="uid://dw5ee2lpeypnb" path="res://resources/skills/brick_throw.tres" id="3_1dl8j"]
+[ext_resource type="Resource" uid="uid://cdp8sex36vdq2" path="res://resources/skills/explosive_brick.tres" id="4_qdv1c"]
+[ext_resource type="Resource" uid="uid://cr5lo4h8wm0jc" path="res://resources/skills/fire_brick.tres" id="5_4m43l"]
+[ext_resource type="Resource" uid="uid://ceakv6oqob6m7" path="res://resources/skills/ice_brick.tres" id="6_ialmx"]
+[ext_resource type="Resource" uid="uid://d3bjre2etov1n" path="res://resources/skills/magnetic.tres" id="7_cycc1"]
 [ext_resource type="PackedScene" uid="uid://dtl03rod7l2t0" path="res://objects/ui/marketplace_button.tscn" id="9_ode10"]
 [ext_resource type="PackedScene" uid="uid://ceqjwmihj70lt" path="res://objects/ui/skill_button.tscn" id="10_c7w2b"]
 
@@ -16,6 +22,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_li4x3")
+Skills = Array[ExtResource("2_c7w2b")]([ExtResource("3_1dl8j"), ExtResource("4_qdv1c"), ExtResource("5_4m43l"), ExtResource("6_ialmx"), ExtResource("7_cycc1")])
 ToUnlockGrid = NodePath("PanelContainer/MarginContainer/VBoxContainer/ToUnlockGridContainer")
 UnlockedGrid = NodePath("PanelContainer/MarginContainer/VBoxContainer/UnlockedGridContainer")
 Font = ExtResource("2_ho1tm")

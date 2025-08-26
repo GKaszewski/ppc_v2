@@ -1,22 +1,22 @@
-[gd_resource type="Resource" script_class="SkillData" load_steps=4 format=3 uid="uid://d3bjre2etov1n"]
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://d3bjre2etov1n"]
 
 [ext_resource type="Texture2D" uid="uid://cvhoq7aubxlmq" path="res://sprites/ui/magnetic_skill_icon.png" id="1_16qcg"]
 [ext_resource type="PackedScene" uid="uid://cunyndudjh2he" path="res://objects/player_skills/magnetic_skill.tscn" id="1_er41s"]
-[ext_resource type="Script" uid="uid://bya240e627ti6" path="res://scripts/resources/skill_data.gd" id="1_r01oq"]
+[ext_resource type="Script" uid="uid://d4crrfmbgxnqf" path="res://scripts/Resources/SkillData.cs" id="3_htb6q"]
 
 [resource]
-script = ExtResource("1_r01oq")
-name = "MAGNETIC"
-description = "MAGNETIC_DESCRIPTION"
-node = ExtResource("1_er41s")
-config = {
+script = ExtResource("3_htb6q")
+Name = "MAGNETIC"
+Description = "MAGNETIC_DESCRIPTION"
+Config = Dictionary[String, Variant]({
 "magnetic_area": NodePath("MagneticArea"),
 "magnetic_move_duration": 1.25,
 "root": NodePath(".")
-}
-cost = 70
-icon = ExtResource("1_16qcg")
-type = 2
-is_active = false
-level = 1
-max_level = 1
+})
+Cost = 70
+Icon = ExtResource("1_16qcg")
+IsActive = false
+Level = 1
+MaxLevel = 1
+Type = 2
+Node = ExtResource("1_er41s")

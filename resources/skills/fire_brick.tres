@@ -1,25 +1,25 @@
-[gd_resource type="Resource" script_class="SkillData" load_steps=6 format=3 uid="uid://2glvryih82t1"]
+[gd_resource type="Resource" load_steps=6 format=3 uid="uid://cr5lo4h8wm0jc"]
 
 [ext_resource type="PackedScene" uid="uid://daau4j5hbklk0" path="res://objects/entities/fire_brick.tscn" id="1_2g43l"]
-[ext_resource type="Script" uid="uid://bya240e627ti6" path="res://scripts/resources/skill_data.gd" id="1_2j5ko"]
 [ext_resource type="PackedScene" uid="uid://coayig4dxelo2" path="res://objects/player_skills/brick_throw_skill.tscn" id="1_g53fp"]
 [ext_resource type="Resource" uid="uid://br84dsfa3ti04" path="res://resources/throw_behaviors/tap_throw_input.tres" id="2_dm5pj"]
 [ext_resource type="Texture2D" uid="uid://cocbnr38qsikt" path="res://sprites/fire_brick_skill_icon.png" id="3_w87qb"]
+[ext_resource type="Script" uid="uid://d4crrfmbgxnqf" path="res://scripts/Resources/SkillData.cs" id="5_us7vb"]
 
 [resource]
-script = ExtResource("1_2j5ko")
-name = "FIRE_BRICK"
-description = "FIRE_BIRCK_DESCRIPTION"
-node = ExtResource("1_g53fp")
-config = {
+script = ExtResource("5_us7vb")
+Name = "FIRE_BRICK"
+Description = "FIRE_BIRCK_DESCRIPTION"
+Config = Dictionary[String, Variant]({
 "brick_scene": ExtResource("1_2g43l"),
 "player_controller": NodePath("."),
 "throw_input_behavior": ExtResource("2_dm5pj"),
 "timer": NodePath("ThrowTimer")
-}
-cost = 150
-icon = ExtResource("3_w87qb")
-type = 1
-is_active = false
-level = 0
-max_level = 3
+})
+Cost = 150
+Icon = ExtResource("3_w87qb")
+IsActive = false
+Level = 0
+MaxLevel = 3
+Type = 1
+Node = ExtResource("1_g53fp")

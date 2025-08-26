@@ -32,13 +32,9 @@ config/icon="uid://jix7wdn0isr3"
 GameManager="*res://objects/game_manager.tscn"
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 AudioController="*res://objects/audio_controller.tscn"
-SteamIntegrationNode="*res://objects/steam_integration.tscn"
-SteamControllerInput="*res://autoloads/steam_controller_input.gd"
-AchievementsManager="*res://objects/achievements.tscn"
 UIManager="*res://Autoloads/UIManager.cs"
 ConfigFileHandler="*res://Autoloads/ConfigFileHandler.cs"
 SaveSystem="*res://Autoloads/SaveSystem.cs"
-Console="*res://addons/console/console.gd"
 
 [debug]
 

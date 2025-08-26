@@ -173,6 +173,9 @@ position = Vector2(7146.51, 21.1388)
 
 [node name="Brick Player" parent="." instance=ExtResource("1_k3uyd")]
 
+[node name="SkillUnlockerComponent" parent="Brick Player" index="17" node_paths=PackedStringArray("SkillManager")]
+SkillManager = NodePath("../SkillManager")
+
 [node name="HitParticles" parent="Brick Player" index="27"]
 process_material = SubResource("ParticleProcessMaterial_lgb3u")
 
