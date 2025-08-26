@@ -7,7 +7,7 @@ using Mr.BrickAdventures.scripts.Resources;
 
 namespace Mr.BrickAdventures.scripts.UI;
 
-public partial class Marketplace : Node
+public partial class Marketplace : Control
 {
     [Export] public Array<SkillData> Skills { get; set; } = [];
     [Export] public GridContainer ToUnlockGrid { get; set; }
@@ -24,6 +24,8 @@ public partial class Marketplace : Node
 
     public override void _Ready()
     {
+        _gameManager = GetNode<GameManager>("/root/GameManager");
+        
         var skillsToUnlock = new List<SkillData>();
         
         foreach (var skill in Skills) skillsToUnlock.Add(skill);

@@ -4,7 +4,7 @@ using Mr.BrickAdventures.scripts.Resources;
 
 namespace Mr.BrickAdventures.scripts.UI;
 
-public partial class ChargeProgressBar : Node
+public partial class ChargeProgressBar : ProgressBar
 {
     [Export] public ProgressBar ProgressBar { get; set; }
     [Export] public BrickThrowComponent ThrowComponent { get; set; }
@@ -27,6 +27,11 @@ public partial class ChargeProgressBar : Node
 
     private void SetupDependencies()
     {
+        if (ThrowComponent == null || ProgressBar == null)
+        {
+            return;
+        }
+        
         if (ThrowComponent.ThrowInputBehavior is ChargeThrowInputResource throwInput)
         {
             _throwInput = throwInput;

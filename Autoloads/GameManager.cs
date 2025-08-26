@@ -14,7 +14,8 @@ public partial class GameManager : Node
     public PlayerController Player { get; set; }
     
     private List<Node> _sceneNodes = new();
-
+    
+    [Export] 
     public Dictionary PlayerState { get; set; } = new()
     {
         { "coins", 0 },
@@ -24,7 +25,8 @@ public partial class GameManager : Node
         { "unlocked_levels", new Array<int>() {0}},
         { "unlocked_skills", new Array<SkillData>() }
     };
-
+    
+    [Export]
     public Dictionary CurrentSessionState { get; private set; } = new()
     {
         { "coins_collected", 0 },

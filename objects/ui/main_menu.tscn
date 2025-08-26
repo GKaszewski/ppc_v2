@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://8b6ol5sssbgo"]
 
-[ext_resource type="Script" uid="uid://hyfvthdbgjbc" path="res://scripts/ui/main_menu.gd" id="1_epxpl"]
+[ext_resource type="Script" uid="uid://bna3ggr6n7ycr" path="res://scripts/UI/MainMenu.cs" id="1_epxpl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qv2q0"]
 bg_color = Color(0, 0, 0, 1)
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("main_menu_control", "new_game_button", "continue_button", "settings_button", "credits_button", "exit_button", "version_label")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("MainMenuControl", "NewGameButton", "ContinueButton", "SettingsButton", "CreditsButton", "ExitButton", "VersionLabel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,13 +13,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_epxpl")
-main_menu_control = NodePath(".")
-new_game_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/NewGameButton")
-continue_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/ContinueButton")
-settings_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/SettingsButton")
-credits_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/CreditsButton")
-exit_button = NodePath("PanelContainer/MarginContainer/VBoxContainer/QuitButton")
-version_label = NodePath("PanelContainer/MarginContainer/VBoxContainer/version")
+MainMenuControl = NodePath(".")
+NewGameButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/NewGameButton")
+ContinueButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/ContinueButton")
+SettingsButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/SettingsButton")
+CreditsButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/CreditsButton")
+ExitButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/QuitButton")
+VersionLabel = NodePath("PanelContainer/MarginContainer/VBoxContainer/VersionLabel")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -41,7 +41,7 @@ theme_override_constants/margin_bottom = 32
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "GAME_TITLE"
 horizontal_alignment = 1
@@ -77,7 +77,7 @@ layout_mode = 2
 text = "QUIT_BUTTON"
 flat = true
 
-[node name="version" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="VersionLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8

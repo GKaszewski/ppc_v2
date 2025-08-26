@@ -1,13 +1,13 @@
 [gd_scene load_steps=12 format=3 uid="uid://5surx230gfw3"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_rcgxf"]
-[ext_resource type="Script" uid="uid://dkmxhjtmu5xlb" path="res://scripts/components/damage_component.gd" id="3_y0uai"]
-[ext_resource type="Script" uid="uid://beg4dk7d5pvhp" path="res://scripts/components/explosive_component.gd" id="4_8lw0n"]
+[ext_resource type="Script" uid="uid://2i7p7v135u7c" path="res://scripts/components/DamageComponent.cs" id="2_nqeob"]
+[ext_resource type="Script" uid="uid://7uttgdr6cr5y" path="res://scripts/components/ExplosiveComponent.cs" id="3_a2b5x"]
 [ext_resource type="PackedScene" uid="uid://dyp4i4ru2j2jh" path="res://objects/fxs/explosion_fx.tscn" id="5_6oopj"]
-[ext_resource type="Script" uid="uid://873un8agkyja" path="res://scripts/components/launch_component.gd" id="7_a2b5x"]
-[ext_resource type="Script" uid="uid://bvsgg8lu0a8m6" path="res://scripts/components/lifetime_component.gd" id="7_nqeob"]
-[ext_resource type="Script" uid="uid://c2gbumw4x4t1v" path="res://scripts/components/gravity_motion_component.gd" id="8_4ly8b"]
-[ext_resource type="Script" uid="uid://bgty7040ams6s" path="res://scripts/components/projectile_init_component.gd" id="8_nqeob"]
+[ext_resource type="Script" uid="uid://oyf25mpc5etr" path="res://scripts/components/LifetimeComponent.cs" id="5_nqeob"]
+[ext_resource type="Script" uid="uid://cbexrnnj47f87" path="res://scripts/components/LaunchComponent.cs" id="6_a2b5x"]
+[ext_resource type="Script" uid="uid://cwi5qashdag1g" path="res://scripts/components/GravityMotionComponent.cs" id="7_4ly8b"]
+[ext_resource type="Script" uid="uid://c7n6ecsobohjn" path="res://scripts/components/ProjectileInitComponent.cs" id="8_nqeob"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ar0xf"]
 size = Vector2(16, 10)
@@ -37,19 +37,17 @@ scale = Vector2(0.8, 0.5)
 
 [node name="Timer" type="Timer" parent="."]
 
-[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("area2d", "damage_timer")]
-script = ExtResource("3_y0uai")
-damage = 5.0
-area2d = NodePath("../Explosion area")
-damage_timer = NodePath("../Timer")
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("DamageTimer")]
+script = ExtResource("2_nqeob")
+Damage = 5.0
+DamageTimer = NodePath("../Timer")
 
-[node name="ExplosiveComponent" type="Node" parent="." node_paths=PackedStringArray("root", "damage", "area2d", "explosion_area2d")]
-script = ExtResource("4_8lw0n")
-root = NodePath("..")
-damage = NodePath("../DamageComponent")
-area2d = NodePath("../BulletArea")
-explosion_area2d = NodePath("../Explosion area")
-explosion_effect = ExtResource("5_6oopj")
+[node name="ExplosiveComponent" type="Node" parent="." node_paths=PackedStringArray("Damage", "Area", "ExplodeArea")]
+script = ExtResource("3_a2b5x")
+Damage = NodePath("../DamageComponent")
+Area = NodePath("../BulletArea")
+ExplodeArea = NodePath("../Explosion area")
+ExplosionEffect = ExtResource("5_6oopj")
 
 [node name="Explosion area" type="Area2D" parent="."]
 collision_layer = 0
@@ -62,22 +60,20 @@ debug_color = Color(0.919034, 6.36289e-05, 0.69998, 0.42)
 [node name="ExplosionFX" parent="." instance=ExtResource("5_6oopj")]
 randomness = 0.24
 
-[node name="LifetimeComponent" type="Node" parent="." node_paths=PackedStringArray("root", "timer")]
-script = ExtResource("7_nqeob")
-root = NodePath("..")
-life_time = 30.0
-timer = NodePath("../Timer")
+[node name="LifetimeComponent" type="Node" parent="."]
+script = ExtResource("5_nqeob")
+LifeTime = 30.0
 
-[node name="LaunchComponent" type="Node2D" parent="." node_paths=PackedStringArray("root")]
-script = ExtResource("7_a2b5x")
-root = NodePath("..")
-speed = 240.0
+[node name="LaunchComponent" type="Node2D" parent="."]
+script = ExtResource("6_a2b5x")
+Speed = 240.0
 metadata/_custom_type_script = "uid://873un8agkyja"
 
-[node name="GravityMotionComponent" type="Node2D" parent="." node_paths=PackedStringArray("character_body", "launch_component")]
-script = ExtResource("8_4ly8b")
-character_body = NodePath("..")
-launch_component = NodePath("../LaunchComponent")
+[node name="GravityMotionComponent" type="Node2D" parent="." node_paths=PackedStringArray("Body", "LaunchComponent")]
+script = ExtResource("7_4ly8b")
+Body = NodePath("..")
+LaunchComponent = NodePath("../LaunchComponent")
+Gravity = Vector2(0, 980)
 
 [node name="BulletArea" type="Area2D" parent="."]
 collision_layer = 16
@@ -85,7 +81,7 @@ collision_layer = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BulletArea"]
 shape = SubResource("RectangleShape2D_nqeob")
 
-[node name="ProjectileInitComponent" type="Node" parent="." node_paths=PackedStringArray("launch_component")]
+[node name="ProjectileInitComponent" type="Node" parent="." node_paths=PackedStringArray("LaunchComponent")]
 script = ExtResource("8_nqeob")
-launch_component = NodePath("../LaunchComponent")
+LaunchComponent = NodePath("../LaunchComponent")
 metadata/_custom_type_script = "uid://bgty7040ams6s"

@@ -1,18 +1,19 @@
-[gd_scene load_steps=26 format=3 uid="uid://bwdlmualj6xbw"]
+[gd_scene load_steps=27 format=3 uid="uid://bwdlmualj6xbw"]
 
 [ext_resource type="Shader" uid="uid://bs4xvm4qkurpr" path="res://shaders/hit_flash.tres" id="1_ep4yr"]
 [ext_resource type="Texture2D" uid="uid://cu72810eyk4dx" path="res://sprites/enemy-robot.png" id="2_hjtwe"]
-[ext_resource type="Script" uid="uid://btfsq0bvtrx3t" path="res://scripts/components/health.gd" id="2_o170m"]
-[ext_resource type="Script" uid="uid://dkmxhjtmu5xlb" path="res://scripts/components/damage_component.gd" id="4_4eajk"]
-[ext_resource type="Script" uid="uid://dmqpif5qhvri3" path="res://scripts/components/side_to_side_movement.gd" id="4_gbsq8"]
-[ext_resource type="Script" uid="uid://b37gqnycj6rtk" path="res://scripts/components/periodic_shooting.gd" id="5_m03v0"]
-[ext_resource type="Script" uid="uid://dqm371fysuk7i" path="res://scripts/components/enemy_death.gd" id="6_6p3gr"]
-[ext_resource type="Script" uid="uid://dqmbvuutd5c3c" path="res://scripts/components/flashing_component.gd" id="7_xsaiy"]
-[ext_resource type="Script" uid="uid://ceq8n7yw7qxpi" path="res://scripts/components/hit_component.gd" id="9_0qjr4"]
-[ext_resource type="Script" uid="uid://c07d50s20rl8s" path="res://scripts/components/status_effect_component.gd" id="10_5i27q"]
-[ext_resource type="Script" uid="uid://qi2irprbqru2" path="res://scripts/components/fire_effect_component.gd" id="10_ej8vg"]
-[ext_resource type="Script" uid="uid://dhj4qtwcqmqkj" path="res://scripts/components/ice_effect_component.gd" id="11_pq0k7"]
+[ext_resource type="Script" uid="uid://dgb8bqcri7nsj" path="res://scripts/components/HealthComponent.cs" id="3_pxaaa"]
+[ext_resource type="Script" uid="uid://2i7p7v135u7c" path="res://scripts/components/DamageComponent.cs" id="4_xku20"]
+[ext_resource type="Script" uid="uid://d2hrr8fruho1d" path="res://scripts/components/SideToSideMovementComponent.cs" id="5_5lji2"]
+[ext_resource type="Script" uid="uid://bnaxy8cw3wrko" path="res://scripts/components/PeriodicShootingComponent.cs" id="6_lgbyy"]
+[ext_resource type="PackedScene" uid="uid://bhc7y4xugu4q7" path="res://objects/entities/bullet.tscn" id="7_r48kf"]
+[ext_resource type="Script" uid="uid://cfdugoeduudar" path="res://scripts/components/EnemyDeathComponent.cs" id="8_pxaaa"]
+[ext_resource type="Script" uid="uid://dvyd26ricriql" path="res://scripts/components/FlashingComponent.cs" id="9_xku20"]
+[ext_resource type="Script" uid="uid://bo506l4x0808e" path="res://scripts/components/HitComponent.cs" id="10_5lji2"]
+[ext_resource type="Script" uid="uid://t8rsvwdwt8ea" path="res://scripts/components/StatusEffectComponent.cs" id="11_lgbyy"]
+[ext_resource type="Script" uid="uid://cxuig4xh8nfov" path="res://scripts/components/FireEffectComponent.cs" id="12_pxaaa"]
 [ext_resource type="AudioStream" uid="uid://b3tsqhr06pbrs" path="res://sfx/enemy_hurt.wav" id="13_u4k3d"]
+[ext_resource type="Script" uid="uid://d1388lhp2gpgr" path="res://scripts/components/IceEffectComponent.cs" id="13_xku20"]
 [ext_resource type="AudioStream" uid="uid://dyev46uqusimi" path="res://sfx/shoot.wav" id="14_tdjks"]
 [ext_resource type="PackedScene" uid="uid://dx80ivlvuuew4" path="res://objects/fxs/fire_fx.tscn" id="15_mc6rj"]
 [ext_resource type="PackedScene" uid="uid://ck6nml06tm6ue" path="res://objects/fxs/ice_fx.tscn" id="16_68hnm"]
@@ -77,38 +78,37 @@ position = Vector2(16, 7)
 [node name="left bullet spawn" type="Node2D" parent="Sprite2D"]
 position = Vector2(-17, 7)
 
-[node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("hurt_fx")]
-script = ExtResource("2_o170m")
-hurt_fx = NodePath("../sfx_hurt")
+[node name="HealthComponent" type="Node2D" parent="." node_paths=PackedStringArray("HurtSfx")]
+script = ExtResource("3_pxaaa")
+HurtSfx = NodePath("../sfx_hurt")
 
-[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("area2d")]
-script = ExtResource("4_4eajk")
-area2d = NodePath("../Hitbox")
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("Area")]
+script = ExtResource("4_xku20")
+Area = NodePath("../Hitbox")
 
-[node name="SideToSideMovement" type="Node" parent="." node_paths=PackedStringArray("root", "sprite2d", "left_ray", "right_ray", "left_wall_ray", "right_wall_ray")]
-script = ExtResource("4_gbsq8")
-root = NodePath("..")
-sprite2d = NodePath("../Sprite2D")
-speed = 60.0
-wait_time = 0.5
-left_ray = NodePath("../Left Ray")
-right_ray = NodePath("../Right Ray")
-left_wall_ray = NodePath("../Left Wall Ray")
-right_wall_ray = NodePath("../Right Wall Ray")
+[node name="SideToSideMovement" type="Node" parent="." node_paths=PackedStringArray("Sprite", "LeftRay", "RightRay", "LeftWallRay", "RightWallRay")]
+script = ExtResource("5_5lji2")
+Sprite = NodePath("../Sprite2D")
+Speed = 60.0
+WaitTime = 0.5
+LeftRay = NodePath("../Left Ray")
+RightRay = NodePath("../Right Ray")
+LeftWallRay = NodePath("../Left Wall Ray")
+RightWallRay = NodePath("../Right Wall Ray")
 
-[node name="PeriodicShootingComponent" type="Node" parent="." node_paths=PackedStringArray("side_to_side_movement", "root", "bullet_spawn_right", "bullet_spawn_left")]
-script = ExtResource("5_m03v0")
-side_to_side_movement = NodePath("../SideToSideMovement")
-root = NodePath("..")
-bullet_spawn_right = NodePath("../Sprite2D/right bullet spawn")
-bullet_spawn_left = NodePath("../Sprite2D/left bullet spawn")
+[node name="PeriodicShootingComponent" type="Node" parent="." node_paths=PackedStringArray("SideToSideMovement", "BulletSpawnRight", "BulletSpawnLeft")]
+script = ExtResource("6_lgbyy")
+BulletScene = ExtResource("7_r48kf")
+SideToSideMovement = NodePath("../SideToSideMovement")
+BulletSpawnRight = NodePath("../Sprite2D/right bullet spawn")
+BulletSpawnLeft = NodePath("../Sprite2D/left bullet spawn")
+ShootingIntervalVariation = 0.1
 
-[node name="EnemyDeathComponent" type="Node" parent="." node_paths=PackedStringArray("root", "collision_shape_2d", "health_component")]
-script = ExtResource("6_6p3gr")
-root = NodePath("..")
-tween_duration = 0.1
-collision_shape_2d = NodePath("../Hitbox/CollisionShape2D")
-health_component = NodePath("../HealthComponent")
+[node name="EnemyDeathComponent" type="Node" parent="." node_paths=PackedStringArray("CollisionShape", "Health")]
+script = ExtResource("8_pxaaa")
+TweenDuration = 0.1
+CollisionShape = NodePath("../Hitbox/CollisionShape2D")
+Health = NodePath("../HealthComponent")
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 8
@@ -136,33 +136,32 @@ target_position = Vector2(0, 8)
 position = Vector2(16, 0)
 target_position = Vector2(8, 0)
 
-[node name="FlashingComponent" type="Node" parent="." node_paths=PackedStringArray("sprite", "health_component")]
+[node name="FlashingComponent" type="Node" parent="." node_paths=PackedStringArray("Sprite", "HealthComponent")]
 process_mode = 3
-script = ExtResource("7_xsaiy")
-sprite = NodePath("../Sprite2D")
-health_component = NodePath("../HealthComponent")
+script = ExtResource("9_xku20")
+Sprite = NodePath("../Sprite2D")
+HealthComponent = NodePath("../HealthComponent")
 
-[node name="HitComponent" type="Node" parent="." node_paths=PackedStringArray("sprite", "health_component", "hit_fx")]
-script = ExtResource("9_0qjr4")
-sprite = NodePath("../Sprite2D")
-health_component = NodePath("../HealthComponent")
-hit_fx = NodePath("../HitParticles")
+[node name="HitComponent" type="Node" parent="." node_paths=PackedStringArray("Sprite", "Health", "HitFx")]
+script = ExtResource("10_5lji2")
+Sprite = NodePath("../Sprite2D")
+Health = NodePath("../HealthComponent")
+HitFx = NodePath("../HitParticles")
 
 [node name="StatusEffectComponent" type="Node" parent="."]
-script = ExtResource("10_5i27q")
+script = ExtResource("11_lgbyy")
 
-[node name="FireEffectComponent" type="Node" parent="." node_paths=PackedStringArray("health_component", "status_effect_component", "root", "fire_fx")]
-script = ExtResource("10_ej8vg")
-health_component = NodePath("../HealthComponent")
-status_effect_component = NodePath("../StatusEffectComponent")
-root = NodePath("..")
-fire_fx = NodePath("../FireFX")
+[node name="FireEffectComponent" type="Node" parent="." node_paths=PackedStringArray("Health", "StatusEffectComponent", "FireFX")]
+script = ExtResource("12_pxaaa")
+Health = NodePath("../HealthComponent")
+StatusEffectComponent = NodePath("../StatusEffectComponent")
+FireFX = NodePath("../FireFX")
 
-[node name="IceEffectComponent" type="Node" parent="." node_paths=PackedStringArray("status_effect_component", "ice_fx")]
-script = ExtResource("11_pq0k7")
-components_to_disable = [NodePath("../SideToSideMovement"), NodePath("../PeriodicShootingComponent"), NodePath("../DamageComponent")]
-status_effect_component = NodePath("../StatusEffectComponent")
-ice_fx = NodePath("../Ice FX")
+[node name="IceEffectComponent" type="Node" parent="." node_paths=PackedStringArray("ComponentsToDisable", "StatusEffectComponent", "IceFx")]
+script = ExtResource("13_xku20")
+ComponentsToDisable = [NodePath("../SideToSideMovement"), NodePath("../PeriodicShootingComponent"), NodePath("../DamageComponent")]
+StatusEffectComponent = NodePath("../StatusEffectComponent")
+IceFx = NodePath("../Ice FX")
 
 [node name="sfx_hurt" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("13_u4k3d")

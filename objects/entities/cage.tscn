@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://to2xnqev0pu1"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_5poh3"]
-[ext_resource type="Script" uid="uid://ddplvyjqguxtl" path="res://scripts/components/cage_component.gd" id="2_unomj"]
+[ext_resource type="Script" uid="uid://dojn0gw8hsv02" path="res://scripts/components/CageComponent.cs" id="2_in1f7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aivtb"]
 texture = ExtResource("1_5poh3")
@@ -23,7 +23,6 @@ position = Vector2(20, 4)
 tile_map_data = PackedByteArray(0, 0, 255, 255, 255, 255, 0, 0, 2, 0, 9, 0, 0, 0)
 tile_set = SubResource("TileSet_67qt2")
 
-[node name="CageComponent" type="Node" parent="." node_paths=PackedStringArray("root")]
-script = ExtResource("2_unomj")
-root = NodePath("..")
-should_free = false
+[node name="CageComponent" type="Node" parent="."]
+script = ExtResource("2_in1f7")
+ShouldFree = false

@@ -3,7 +3,7 @@ using Mr.BrickAdventures.Autoloads;
 
 namespace Mr.BrickAdventures.scripts.UI;
 
-public partial class AudioSettings : Node
+public partial class AudioSettings : Control
 {
     [Export] public Slider MasterVolumeSlider { get; set; }
     [Export] public Slider MusicVolumeSlider { get; set; }

@@ -16,16 +16,13 @@ public partial class DamageComponent : Node
 
     public override void _Ready()
     {
-        if (Area == null)
+        if (Area != null)
         {
-            GD.PushError($"DamageComponent: Area2D node is not set.");
-            return;
+            Area.BodyEntered += OnAreaBodyEntered;
+            Area.BodyExited += OnAreaBodyExited;
+            Area.AreaEntered += OnAreaAreaEntered;
         }
         
-        Area.BodyEntered += OnAreaBodyEntered;
-        Area.BodyExited += OnAreaBodyExited;
-        Area.AreaEntered += OnAreaAreaEntered;
-
         if (DamageTimer != null)
         {
             DamageTimer.Timeout += OnDamageTimerTimeout;

@@ -3,7 +3,7 @@ using Mr.BrickAdventures.Autoloads;
 
 namespace Mr.BrickAdventures.scripts.UI;
 
-public partial class GameOverScreen : Node
+public partial class GameOverScreen : Control
 {
     [Export] public Control GameOverPanel { get; set; }
     [Export] public Button RestartButton { get; set; }

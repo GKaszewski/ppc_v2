@@ -1,22 +1,15 @@
 [gd_scene load_steps=7 format=3 uid="uid://b4eifkc31jsun"]
 
-[ext_resource type="Script" uid="uid://dd30bgqiagi25" path="res://scripts/game_manager.gd" id="1_58t7u"]
+[ext_resource type="Script" uid="uid://c6eoi3ymefc0x" path="res://Autoloads/GameManager.cs" id="1_t2tr6"]
 [ext_resource type="PackedScene" uid="uid://bol7g83v2accs" path="res://scenes/level_village_1.tscn" id="2_bentb"]
 [ext_resource type="PackedScene" uid="uid://chqb11pfoqmeb" path="res://scenes/level_village_2.tscn" id="3_ajlkg"]
 [ext_resource type="PackedScene" uid="uid://h60obxmju6mo" path="res://scenes/level_village_3.tscn" id="4_se5tb"]
 [ext_resource type="PackedScene" uid="uid://bhad760x3vvco" path="res://scenes/level_village_4.tscn" id="5_mnosh"]
-[ext_resource type="Script" uid="uid://bydv4g1n5s3nf" path="res://scripts/screenshot.gd" id="6_t2tr6"]
+[ext_resource type="Script" uid="uid://chrhjch4ymfvr" path="res://scripts/Screenshot.cs" id="6_bbtu1"]
 
 [node name="GameManager" type="Node"]
-script = ExtResource("1_58t7u")
-level_scenes = Array[PackedScene]([ExtResource("2_bentb"), ExtResource("3_ajlkg"), ExtResource("4_se5tb"), ExtResource("5_mnosh")])
-player_state = {
-"coins": 0,
-"current_level": 0,
-"lives": 3,
-"unlocked_levels": [ExtResource("4_se5tb")],
-"unlocked_skills": []
-}
+script = ExtResource("1_t2tr6")
+LevelScenes = Array[PackedScene]([ExtResource("2_bentb"), ExtResource("3_ajlkg"), ExtResource("4_se5tb"), ExtResource("5_mnosh")])
 
-[node name="Node" type="Node" parent="."]
-script = ExtResource("6_t2tr6")
+[node name="Screenshot" type="Node" parent="."]
+script = ExtResource("6_bbtu1")

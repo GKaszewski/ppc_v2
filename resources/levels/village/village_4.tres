@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="LevelResource" load_steps=2 format=3 uid="uid://cxfei28yu3buh"]
 
-[ext_resource type="Script" uid="uid://cp68km8bykymb" path="res://scripts/resources/level_resource.gd" id="1_upuk8"]
+[ext_resource type="Script" uid="uid://c2h0pqhxiqswe" path="res://scripts/Resources/LevelResource.cs" id="1_h4twv"]
 
 [resource]
-script = ExtResource("1_upuk8")
-level_name = "LEVEL_4_NAME"
-scene_path = "res://scenes/level_village_4.tscn"
+script = ExtResource("1_h4twv")
+LevelName = "LEVEL_4_NAME"
+ScenePath = "res://scenes/level_village_4.tscn"
 metadata/_custom_type_script = "uid://cp68km8bykymb"

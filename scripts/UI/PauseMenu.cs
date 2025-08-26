@@ -3,7 +3,7 @@ using Mr.BrickAdventures.Autoloads;
 
 namespace Mr.BrickAdventures.scripts.UI;
 
-public partial class PauseMenu : Node
+public partial class PauseMenu : Control
 {
     [Export] public Control PauseMenuControl { get; set; }
     [Export] public Control SettingsControl { get; set; }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://h60obxmju6mo"]
+[gd_scene load_steps=31 format=4 uid="uid://h60obxmju6mo"]
 
 [ext_resource type="PackedScene" uid="uid://dyp4i4ru2j2jh" path="res://objects/fxs/explosion_fx.tscn" id="1_p30ax"]
 [ext_resource type="PackedScene" uid="uid://dx80ivlvuuew4" path="res://objects/fxs/fire_fx.tscn" id="2_a7yjf"]
@@ -17,9 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://d0s2abysa86rq" path="res://objects/entities/child.tscn" id="15_dv6gh"]
 [ext_resource type="PackedScene" uid="uid://6foggu31cu14" path="res://objects/level/ui_layer.tscn" id="16_nr2eo"]
 [ext_resource type="PackedScene" uid="uid://bqom4cm7r18db" path="res://objects/entities/killzone.tscn" id="17_3xroh"]
-[ext_resource type="Resource" uid="uid://b63u5qfp8p7pv" path="res://resources/levels/village/village_3.tres" id="17_a7yjf"]
 [ext_resource type="PackedScene" uid="uid://b4pdt1gv2ymyi" path="res://objects/tooltip.tscn" id="18_l3a7y"]
-[ext_resource type="Script" uid="uid://8r1y8elyw7kt" path="res://scripts/console_management.gd" id="19_0pba3"]
 [ext_resource type="PackedScene" uid="uid://cawlpch2lk3a2" path="res://objects/level/world_environment.tscn" id="20_embdf"]
 [ext_resource type="PackedScene" uid="uid://cywsu7yrtjdog" path="res://objects/level/global_light.tscn" id="21_fytod"]
 [ext_resource type="PackedScene" uid="uid://t6h2ra7kjyq" path="res://objects/entities/small_heal_potion.tscn" id="23_m6h4x"]
@@ -325,33 +323,14 @@ position = Vector2(880, -578)
 
 [node name="UI Layer" parent="." instance=ExtResource("16_nr2eo")]
 
-[node name="HUD" parent="UI Layer" index="0" node_paths=PackedStringArray("player_health")]
-player_health = NodePath("../../Brick Player/HealthComponent")
-
-[node name="DeathScreen" parent="UI Layer" index="1" node_paths=PackedStringArray("nodes_to_disable")]
-current_level = ExtResource("17_a7yjf")
-nodes_to_disable = [NodePath("../../Brick Player")]
-
-[node name="Marketplace" parent="UI Layer" index="3" node_paths=PackedStringArray("skill_unlocker", "components_to_disable")]
-skill_unlocker = NodePath("../../Brick Player/SkillUnlockerComponent")
-components_to_disable = [NodePath("../../Brick Player")]
-
 [node name="Killzone" parent="." instance=ExtResource("17_3xroh")]
 position = Vector2(2600, 802)
 
 [node name="Tooltip" parent="." instance=ExtResource("18_l3a7y")]
 position = Vector2(1016, -104)
-text = "Press 'down' to fall from platform!"
 
 [node name="Tooltip2" parent="." instance=ExtResource("18_l3a7y")]
 position = Vector2(1576, -40)
-text = "Be careful!"
-
-[node name="ConsoleManagement" type="Node" parent="." node_paths=PackedStringArray("player_health", "skill_unlocker", "skill_manager")]
-script = ExtResource("19_0pba3")
-player_health = NodePath("../Brick Player/HealthComponent")
-skill_unlocker = NodePath("../Brick Player/SkillUnlockerComponent")
-skill_manager = NodePath("../Brick Player/SkillManager")
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("20_embdf")]
 
@@ -365,9 +344,6 @@ position = Vector2(1244, -41)
 
 [node name="SmallHealPotion3" parent="." instance=ExtResource("23_m6h4x")]
 position = Vector2(1359, -42)
-
-[connection signal="on_death" from="Brick Player/HealthComponent" to="UI Layer/DeathScreen" method="on_player_death"]
-[connection signal="on_death" from="Brick Player/HealthComponent" to="UI Layer/GameOverScreen" method="on_player_death"]
 
 [editable path="Brick Player"]
 [editable path="UI Layer"]

@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://dfwpha0d18dmn"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_rwgpm"]
-[ext_resource type="Script" uid="uid://dkmxhjtmu5xlb" path="res://scripts/components/damage_component.gd" id="2_cprue"]
-[ext_resource type="Script" uid="uid://bejv75mi8npj0" path="res://scripts/components/beam_component.gd" id="3_jlh0s"]
+[ext_resource type="Script" uid="uid://2i7p7v135u7c" path="res://scripts/components/DamageComponent.cs" id="2_hrj61"]
+[ext_resource type="Script" uid="uid://df1llrbm80e02" path="res://scripts/components/BeamComponent.cs" id="3_hrj61"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ptfn7"]
 size = Vector2(8, 16)
@@ -20,13 +20,14 @@ region_rect = Rect2(176, 64, 16, 16)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ptfn7")
 
-[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("area2d")]
-script = ExtResource("2_cprue")
-area2d = NodePath("..")
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("Area")]
+script = ExtResource("2_hrj61")
+Area = NodePath("..")
 
-[node name="BeamComponent" type="Node2D" parent="." node_paths=PackedStringArray("root", "sprite2d", "collision_shape")]
+[node name="BeamComponent" type="Node2D" parent="." node_paths=PackedStringArray("Root", "Sprite", "CollisionShape")]
 position = Vector2(0, -8)
-script = ExtResource("3_jlh0s")
-root = NodePath("..")
-sprite2d = NodePath("../Sprite2D")
-collision_shape = NodePath("../CollisionShape2D")
+script = ExtResource("3_hrj61")
+ExpansionSpeed = 16.0
+Root = NodePath(".")
+Sprite = NodePath("../Sprite2D")
+CollisionShape = NodePath("../CollisionShape2D")

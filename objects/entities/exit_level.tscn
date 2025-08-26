@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://12jnkdygpxwc"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_agxwm"]
-[ext_resource type="Script" uid="uid://cmh8k0rdsyh7j" path="res://scripts/components/requirement_component.gd" id="2_iysc1"]
-[ext_resource type="Script" uid="uid://c8xhgkg8gcqu6" path="res://scripts/components/unlock_on_requirement_component.gd" id="3_5ktpq"]
-[ext_resource type="Script" uid="uid://bwamqffvpa452" path="res://scripts/components/exit_door_component.gd" id="4_4jgt0"]
+[ext_resource type="Script" uid="uid://dnh0mekg2vqxi" path="res://scripts/components/RequirementComponent.cs" id="2_ed7mh"]
+[ext_resource type="Script" uid="uid://gwr4eajx8j50" path="res://scripts/components/UnlockOnRequirementComponent.cs" id="3_ed7mh"]
+[ext_resource type="Script" uid="uid://c5mhwlyvfuaip" path="res://scripts/components/ExitDoorComponent.cs" id="4_06sog"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yfu6m"]
 size = Vector2(28, 32)
@@ -25,19 +25,19 @@ position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_yfu6m")
 
 [node name="RequirementComponent" type="Node" parent="."]
-script = ExtResource("2_iysc1")
-requirement_type = 1
+script = ExtResource("2_ed7mh")
+RequirementType = 1
 metadata/_custom_type_script = "uid://cmh8k0rdsyh7j"
 
-[node name="UnlockOnRequirementComponent" type="Node" parent="." node_paths=PackedStringArray("requirement_component", "unlock_target")]
-script = ExtResource("3_5ktpq")
-requirement_component = NodePath("../RequirementComponent")
-unlock_target = NodePath("../ExitDoorComponent")
+[node name="UnlockOnRequirementComponent" type="Node" parent="." node_paths=PackedStringArray("RequirementComponent", "UnlockTarget")]
+script = ExtResource("3_ed7mh")
+RequirementComponent = NodePath("../RequirementComponent")
+UnlockTarget = NodePath("../ExitDoorComponent")
 metadata/_custom_type_script = "uid://c8xhgkg8gcqu6"
 
-[node name="ExitDoorComponent" type="Node" parent="." node_paths=PackedStringArray("exit_area", "door_sprite")]
-script = ExtResource("4_4jgt0")
-exit_area = NodePath("..")
-door_sprite = NodePath("../Sprite2D")
-opened_door_frame = 88
+[node name="ExitDoorComponent" type="Node" parent="." node_paths=PackedStringArray("ExitArea", "DoorSprite")]
+script = ExtResource("4_06sog")
+ExitArea = NodePath("..")
+DoorSprite = NodePath("../Sprite2D")
+OpenedDoorFrame = 1
 metadata/_custom_type_script = "uid://bwamqffvpa452"

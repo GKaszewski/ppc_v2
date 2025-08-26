@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://lpovacvt3yyj"]
 
 [ext_resource type="Texture2D" uid="uid://dhkwyv6ayb5qb" path="res://sprites/flying_ship.png" id="1_r82pf"]
-[ext_resource type="Script" uid="uid://ghb614g22ph7" path="res://scripts/components/spaceship_enter_component.gd" id="2_wanmd"]
+[ext_resource type="Script" uid="uid://dtv2r7q4elgre" path="res://scripts/components/SpaceshipEnterComponent.cs" id="2_wanmd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wanmd"]
 radius = 16.1245
@@ -16,6 +16,6 @@ texture = ExtResource("1_r82pf")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_wanmd")
 
-[node name="SpaceshipEnterComponent" type="Node" parent="." node_paths=PackedStringArray("area2d")]
+[node name="SpaceshipEnterComponent" type="Node" parent="." node_paths=PackedStringArray("Area")]
 script = ExtResource("2_wanmd")
-area2d = NodePath("..")
+Area = NodePath("..")

@@ -1,10 +1,9 @@
-[gd_scene load_steps=21 format=4 uid="uid://fw5fbdy5gcmx"]
+[gd_scene load_steps=19 format=4 uid="uid://fw5fbdy5gcmx"]
 
 [ext_resource type="PackedScene" uid="uid://cawlpch2lk3a2" path="res://objects/level/world_environment.tscn" id="1_hb5r3"]
 [ext_resource type="PackedScene" uid="uid://bqi5s710xb1ju" path="res://objects/entities/brick_player.tscn" id="1_lbnsn"]
 [ext_resource type="PackedScene" uid="uid://6foggu31cu14" path="res://objects/level/ui_layer.tscn" id="2_lbnsn"]
 [ext_resource type="PackedScene" uid="uid://cywsu7yrtjdog" path="res://objects/level/global_light.tscn" id="3_3732a"]
-[ext_resource type="Resource" uid="uid://cqtalsov2bkpo" path="res://resources/levels/village/village_1.tres" id="4_c2yv5"]
 [ext_resource type="PackedScene" uid="uid://cb0mnye1ki5a6" path="res://objects/level/camera_2d.tscn" id="5_517ha"]
 [ext_resource type="Script" uid="uid://d23haq52m7ulv" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="6_6imqp"]
 [ext_resource type="Script" uid="uid://ccfft4b8rwgbo" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="7_kl81p"]
@@ -12,7 +11,6 @@
 [ext_resource type="TileSet" uid="uid://cu2sx7qigrqnv" path="res://resources/tilesets/village/terain.tres" id="9_etwin"]
 [ext_resource type="TileSet" uid="uid://bc5a20s6kuy8e" path="res://resources/tilesets/village/entities.tres" id="10_8xrv5"]
 [ext_resource type="TileSet" uid="uid://bbppo0irxdmqy" path="res://resources/tilesets/village/foreground.tres" id="11_0vx27"]
-[ext_resource type="Script" uid="uid://8r1y8elyw7kt" path="res://scripts/console_management.gd" id="12_8xrv5"]
 [ext_resource type="PackedScene" uid="uid://bqom4cm7r18db" path="res://objects/entities/killzone.tscn" id="13_0vx27"]
 
 [sub_resource type="Gradient" id="Gradient_qb72p"]
@@ -62,17 +60,6 @@ process_material = SubResource("ParticleProcessMaterial_lgb3u")
 
 [node name="UI Layer" parent="." instance=ExtResource("2_lbnsn")]
 
-[node name="HUD" parent="UI Layer" index="0" node_paths=PackedStringArray("player_health")]
-player_health = NodePath("../../Brick Player/HealthComponent")
-
-[node name="DeathScreen" parent="UI Layer" index="1" node_paths=PackedStringArray("nodes_to_disable")]
-current_level = ExtResource("4_c2yv5")
-nodes_to_disable = [NodePath("../../Brick Player")]
-
-[node name="Marketplace" parent="UI Layer" index="3" node_paths=PackedStringArray("skill_unlocker", "components_to_disable")]
-skill_unlocker = NodePath("../../Brick Player/SkillUnlockerComponent")
-components_to_disable = [NodePath("../../Brick Player")]
-
 [node name="Global Light" parent="." instance=ExtResource("3_3732a")]
 
 [node name="Camera2D" parent="." instance=ExtResource("5_517ha")]
@@ -106,18 +93,10 @@ tile_set = ExtResource("10_8xrv5")
 [node name="Foreground layer" type="TileMapLayer" parent="."]
 tile_set = ExtResource("11_0vx27")
 
-[node name="ConsoleManagement" type="Node" parent="." node_paths=PackedStringArray("player_health", "skill_unlocker", "skill_manager")]
-script = ExtResource("12_8xrv5")
-player_health = NodePath("../Brick Player/HealthComponent")
-skill_unlocker = NodePath("../Brick Player/SkillUnlockerComponent")
-skill_manager = NodePath("../Brick Player/SkillManager")
-metadata/_custom_type_script = "uid://8r1y8elyw7kt"
-
 [node name="Killzone" parent="." instance=ExtResource("13_0vx27")]
 position = Vector2(215, 324)
 
-[connection signal="on_death" from="Brick Player/HealthComponent" to="UI Layer/DeathScreen" method="on_player_death"]
-[connection signal="on_death" from="Brick Player/HealthComponent" to="UI Layer/GameOverScreen" method="on_player_death"]
+[connection signal="Death" from="Brick Player/HealthComponent" to="UI Layer/DeathScreen" method="OnPlayerDeath"]
 
 [editable path="Brick Player"]
 [editable path="UI Layer"]

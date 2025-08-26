@@ -34,11 +34,10 @@ PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_came
 AudioController="*res://objects/audio_controller.tscn"
 SteamIntegrationNode="*res://objects/steam_integration.tscn"
 SteamControllerInput="*res://autoloads/steam_controller_input.gd"
-Console="*res://addons/console/console.gd"
 AchievementsManager="*res://objects/achievements.tscn"
-ConfigFileHandler="*res://autoloads/config_file_handler.gd"
-UiManager="*res://autoloads/ui_manager.gd"
-SaveSystem="*res://autoloads/save_system.gd"
+UIManager="*res://Autoloads/UIManager.cs"
+ConfigFileHandler="*res://Autoloads/ConfigFileHandler.cs"
+SaveSystem="*res://Autoloads/SaveSystem.cs"
 
 [debug]
 

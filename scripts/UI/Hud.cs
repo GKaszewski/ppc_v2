@@ -4,7 +4,7 @@ using Mr.BrickAdventures.scripts.components;
 
 namespace Mr.BrickAdventures.scripts.UI;
 
-public partial class Hud : Node
+public partial class Hud : Control
 {
     [Export] public HealthComponent Health { get; set; }
     [Export] public Label CoinsLabel { get; set; }

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bqom4cm7r18db"]
 
-[ext_resource type="Script" uid="uid://dkmxhjtmu5xlb" path="res://scripts/components/damage_component.gd" id="1_un3fl"]
+[ext_resource type="Script" uid="uid://2i7p7v135u7c" path="res://scripts/components/DamageComponent.cs" id="1_ggub0"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_cr00c"]
 
@@ -11,7 +11,7 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("WorldBoundaryShape2D_cr00c")
 
-[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("area2d")]
-script = ExtResource("1_un3fl")
-damage = 999999.0
-area2d = NodePath("..")
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("Area")]
+script = ExtResource("1_ggub0")
+Damage = 400000.0
+Area = NodePath("..")

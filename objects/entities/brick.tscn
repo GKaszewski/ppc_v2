@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bymro4t7angv5"]
+[gd_scene load_steps=10 format=3 uid="uid://bymro4t7angv5"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_1c3jb"]
 [ext_resource type="Script" uid="uid://cfw8nbrarex0i" path="res://scripts/components/BulletComponent.cs" id="2_r41xl"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://cbexrnnj47f87" path="res://scripts/components/LaunchComponent.cs" id="6_t4c40"]
 [ext_resource type="Script" uid="uid://c7p06t0eax8am" path="res://scripts/components/StraightMotionComponent.cs" id="7_y10b5"]
 [ext_resource type="PackedScene" uid="uid://c1iorglk708g0" path="res://objects/fxs/terrain_hit_fx.tscn" id="8_d0tcd"]
-[ext_resource type="Script" uid="uid://cypxrqoeiihbf" path="res://scripts/components/TerrainHitFx.cs" id="9_y1xkr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ar0xf"]
 size = Vector2(16, 10)
@@ -62,4 +61,3 @@ LaunchComponent = NodePath("../LaunchComponent")
 metadata/_custom_type_script = "uid://cvcnfrr1udco5"
 
 [node name="TerrainHitFX" parent="." instance=ExtResource("8_d0tcd")]
-script = ExtResource("9_y1xkr")

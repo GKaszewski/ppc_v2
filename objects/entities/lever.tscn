@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bd51frym6mm7v"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_psg62"]
-[ext_resource type="Script" uid="uid://hyuwsp1b336a" path="res://scripts/components/lever_component.gd" id="2_0p0wb"]
+[ext_resource type="Script" uid="uid://1oo22ieply7n" path="res://scripts/components/LeverComponent.cs" id="2_a6tw0"]
 [ext_resource type="AudioStream" uid="uid://beq14we7v3iw4" path="res://sfx/activate_lever.wav" id="3_gipby"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ke5tv"]
@@ -21,12 +21,12 @@ hframes = 12
 vframes = 12
 frame = 75
 
-[node name="LeverComponent" type="Node" parent="." node_paths=PackedStringArray("area2d", "sprite2d", "sfx")]
-script = ExtResource("2_0p0wb")
-area2d = NodePath("..")
-sprite2d = NodePath("../Sprite2D")
-start_animation_index = 75
-sfx = NodePath("../sfx")
+[node name="LeverComponent" type="Node" parent="." node_paths=PackedStringArray("Area", "Sprite", "Sfx")]
+script = ExtResource("2_a6tw0")
+Area = NodePath("..")
+Sprite = NodePath("../Sprite2D")
+StartAnimationIndex = 75
+Sfx = NodePath("../sfx")
 
 [node name="sfx" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_gipby")

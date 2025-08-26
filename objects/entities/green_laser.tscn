@@ -1,13 +1,13 @@
 [gd_scene load_steps=10 format=3 uid="uid://dtem8jgcyoqar"]
 
-[ext_resource type="Script" uid="uid://dkmxhjtmu5xlb" path="res://scripts/components/damage_component.gd" id="1_nuljg"]
-[ext_resource type="Script" uid="uid://cdnwrn8v05qhi" path="res://scripts/components/bullet_component.gd" id="2_1gu8o"]
-[ext_resource type="Script" uid="uid://1tnr46o1ib4u" path="res://scripts/components/out_of_screen_component.gd" id="3_2vcrp"]
-[ext_resource type="Script" uid="uid://cvcnfrr1udco5" path="res://scripts/components/straight_motion_component.gd" id="4_2bmqm"]
-[ext_resource type="Script" uid="uid://873un8agkyja" path="res://scripts/components/launch_component.gd" id="5_772bd"]
-[ext_resource type="Script" uid="uid://bvsgg8lu0a8m6" path="res://scripts/components/lifetime_component.gd" id="6_vd16u"]
-[ext_resource type="Script" uid="uid://bgty7040ams6s" path="res://scripts/components/projectile_init_component.gd" id="7_1gu8o"]
-[ext_resource type="Script" uid="uid://bpy6xtfm8l3hy" path="res://scripts/components/trigger_lever_component.gd" id="8_2vcrp"]
+[ext_resource type="Script" uid="uid://2i7p7v135u7c" path="res://scripts/components/DamageComponent.cs" id="1_2vcrp"]
+[ext_resource type="Script" uid="uid://cfw8nbrarex0i" path="res://scripts/components/BulletComponent.cs" id="2_2bmqm"]
+[ext_resource type="Script" uid="uid://cs6u3sh68f43j" path="res://scripts/components/OutOfScreenComponent.cs" id="3_772bd"]
+[ext_resource type="Script" uid="uid://c7p06t0eax8am" path="res://scripts/components/StraightMotionComponent.cs" id="4_vd16u"]
+[ext_resource type="Script" uid="uid://cbexrnnj47f87" path="res://scripts/components/LaunchComponent.cs" id="5_8s1u3"]
+[ext_resource type="Script" uid="uid://oyf25mpc5etr" path="res://scripts/components/LifetimeComponent.cs" id="6_vuegc"]
+[ext_resource type="Script" uid="uid://c7n6ecsobohjn" path="res://scripts/components/ProjectileInitComponent.cs" id="7_kkqle"]
+[ext_resource type="Script" uid="uid://cqau0810tjk4d" path="res://scripts/components/TriggerLeverComponent.cs" id="8_g8he0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n4uav"]
 size = Vector2(16, 2)
@@ -16,10 +16,9 @@ size = Vector2(16, 2)
 collision_layer = 16
 collision_mask = 9
 
-[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("area2d")]
-script = ExtResource("1_nuljg")
-damage = 1.0
-area2d = NodePath("..")
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("Area")]
+script = ExtResource("1_2vcrp")
+Area = NodePath("..")
 metadata/_custom_type_script = "uid://dkmxhjtmu5xlb"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -31,50 +30,44 @@ points = PackedVector2Array(0, 0, 16, 0)
 width = 2.0
 default_color = Color(0, 94.012, 1, 1)
 
-[node name="BulletComponent" type="Node" parent="." node_paths=PackedStringArray("root", "area2d")]
-script = ExtResource("2_1gu8o")
-root = NodePath("..")
-area2d = NodePath("..")
+[node name="BulletComponent" type="Node" parent="." node_paths=PackedStringArray("Area")]
+script = ExtResource("2_2bmqm")
+Area = NodePath("..")
 metadata/_custom_type_script = "uid://cdnwrn8v05qhi"
 
-[node name="OutOfScreenComponent" type="Node" parent="." node_paths=PackedStringArray("visibility_notifier", "root")]
-script = ExtResource("3_2vcrp")
-visibility_notifier = NodePath("../VisibleOnScreenNotifier2D")
-root = NodePath("..")
+[node name="OutOfScreenComponent" type="Node" parent="." node_paths=PackedStringArray("VisibilityNotifier")]
+script = ExtResource("3_772bd")
+VisibilityNotifier = NodePath("../VisibleOnScreenNotifier2D")
 metadata/_custom_type_script = "uid://1tnr46o1ib4u"
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(8, 0)
 scale = Vector2(0.8, 0.1)
 
-[node name="StraightMotionComponent" type="Node" parent="." node_paths=PackedStringArray("root", "launch_component")]
-script = ExtResource("4_2bmqm")
-root = NodePath("..")
-launch_component = NodePath("../LaunchComponent")
+[node name="StraightMotionComponent" type="Node" parent="." node_paths=PackedStringArray("LaunchComponent")]
+script = ExtResource("4_vd16u")
+LaunchComponent = NodePath("../LaunchComponent")
 metadata/_custom_type_script = "uid://cvcnfrr1udco5"
 
-[node name="LaunchComponent" type="Node2D" parent="." node_paths=PackedStringArray("root")]
-script = ExtResource("5_772bd")
-root = NodePath("..")
-speed = 320.0
+[node name="LaunchComponent" type="Node2D" parent="."]
+script = ExtResource("5_8s1u3")
+Speed = 320.0
 metadata/_custom_type_script = "uid://873un8agkyja"
 
-[node name="LifetimeComponent" type="Node" parent="." node_paths=PackedStringArray("root", "timer")]
-script = ExtResource("6_vd16u")
-root = NodePath("..")
-life_time = 10.0
-timer = NodePath("../Timer")
+[node name="LifetimeComponent" type="Node" parent="."]
+script = ExtResource("6_vuegc")
+LifeTime = 10.0
 metadata/_custom_type_script = "uid://bvsgg8lu0a8m6"
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
 
-[node name="ProjectileInitComponent" type="Node" parent="." node_paths=PackedStringArray("launch_component")]
-script = ExtResource("7_1gu8o")
-launch_component = NodePath("../LaunchComponent")
+[node name="ProjectileInitComponent" type="Node" parent="." node_paths=PackedStringArray("LaunchComponent")]
+script = ExtResource("7_kkqle")
+LaunchComponent = NodePath("../LaunchComponent")
 metadata/_custom_type_script = "uid://bgty7040ams6s"
 
 [node name="TriggerLeverComponent" type="Node" parent="."]
-script = ExtResource("8_2vcrp")
+script = ExtResource("8_g8he0")
 metadata/_custom_type_script = "uid://bpy6xtfm8l3hy"

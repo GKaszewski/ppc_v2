@@ -1,14 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://bcmx07k12gcsc"]
+[gd_scene load_steps=10 format=3 uid="uid://bcmx07k12gcsc"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_xusxl"]
-[ext_resource type="Script" uid="uid://cdnwrn8v05qhi" path="res://scripts/components/bullet_component.gd" id="2_ilnf5"]
-[ext_resource type="Script" uid="uid://dkmxhjtmu5xlb" path="res://scripts/components/damage_component.gd" id="3_3yf4g"]
-[ext_resource type="Resource" uid="uid://02l4nbnf2aft" path="res://resources/status_effect/ice.tres" id="4_da7hn"]
-[ext_resource type="Script" uid="uid://d3brcje121krs" path="res://scripts/components/effect_inflictor_component.gd" id="5_x7vqb"]
-[ext_resource type="Script" uid="uid://1tnr46o1ib4u" path="res://scripts/components/out_of_screen_component.gd" id="6_7tdxt"]
-[ext_resource type="Script" uid="uid://cvcnfrr1udco5" path="res://scripts/components/straight_motion_component.gd" id="7_22hnt"]
-[ext_resource type="Script" uid="uid://873un8agkyja" path="res://scripts/components/launch_component.gd" id="8_xvjl0"]
-[ext_resource type="Script" uid="uid://bgty7040ams6s" path="res://scripts/components/projectile_init_component.gd" id="9_xvjl0"]
+[ext_resource type="Script" uid="uid://cfw8nbrarex0i" path="res://scripts/components/BulletComponent.cs" id="2_xvjl0"]
+[ext_resource type="Script" uid="uid://2i7p7v135u7c" path="res://scripts/components/DamageComponent.cs" id="3_22hnt"]
+[ext_resource type="Script" uid="uid://xjq33vj0rol0" path="res://scripts/components/EffectInflictorComponent.cs" id="4_22hnt"]
+[ext_resource type="Script" uid="uid://cs6u3sh68f43j" path="res://scripts/components/OutOfScreenComponent.cs" id="5_xvjl0"]
+[ext_resource type="Script" uid="uid://c7p06t0eax8am" path="res://scripts/components/StraightMotionComponent.cs" id="6_6nrp8"]
+[ext_resource type="Script" uid="uid://cbexrnnj47f87" path="res://scripts/components/LaunchComponent.cs" id="7_oml3k"]
+[ext_resource type="Script" uid="uid://c7n6ecsobohjn" path="res://scripts/components/ProjectileInitComponent.cs" id="8_22hnt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ar0xf"]
 size = Vector2(16, 10)
@@ -26,10 +25,10 @@ hframes = 12
 vframes = 12
 frame = 80
 
-[node name="BulletComponent" type="Node" parent="." node_paths=PackedStringArray("root", "area2d")]
-script = ExtResource("2_ilnf5")
-root = NodePath("..")
-area2d = NodePath("..")
+[node name="BulletComponent" type="Node" parent="." node_paths=PackedStringArray("Area", "BulletSprite")]
+script = ExtResource("2_xvjl0")
+Area = NodePath("..")
+BulletSprite = NodePath("../Sprite2D")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(0, 2.38419e-07)
@@ -37,34 +36,29 @@ scale = Vector2(0.8, 0.5)
 
 [node name="Timer" type="Timer" parent="."]
 
-[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("area2d")]
-script = ExtResource("3_3yf4g")
-damage = 0.05
-area2d = NodePath("..")
-status_effect_data = ExtResource("4_da7hn")
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("Area")]
+script = ExtResource("3_22hnt")
+Area = NodePath("..")
 
-[node name="EffectInflictorComponent" type="Node" parent="." node_paths=PackedStringArray("damage")]
-script = ExtResource("5_x7vqb")
-damage = NodePath("../DamageComponent")
+[node name="EffectInflictorComponent" type="Node" parent="." node_paths=PackedStringArray("Damage")]
+script = ExtResource("4_22hnt")
+Damage = NodePath("../DamageComponent")
 
-[node name="OutOfScreenComponent" type="Node" parent="." node_paths=PackedStringArray("visibility_notifier", "root")]
-script = ExtResource("6_7tdxt")
-visibility_notifier = NodePath("../VisibleOnScreenNotifier2D")
-root = NodePath("..")
+[node name="OutOfScreenComponent" type="Node" parent="." node_paths=PackedStringArray("VisibilityNotifier")]
+script = ExtResource("5_xvjl0")
+VisibilityNotifier = NodePath("../VisibleOnScreenNotifier2D")
 
-[node name="StraightMotionComponent" type="Node" parent="." node_paths=PackedStringArray("root", "launch_component")]
-script = ExtResource("7_22hnt")
-root = NodePath("..")
-launch_component = NodePath("../LaunchComponent")
+[node name="StraightMotionComponent" type="Node" parent="." node_paths=PackedStringArray("LaunchComponent")]
+script = ExtResource("6_6nrp8")
+LaunchComponent = NodePath("../LaunchComponent")
 metadata/_custom_type_script = "uid://cvcnfrr1udco5"
 
-[node name="LaunchComponent" type="Node2D" parent="." node_paths=PackedStringArray("root")]
-script = ExtResource("8_xvjl0")
-root = NodePath("..")
-speed = 170.0
+[node name="LaunchComponent" type="Node2D" parent="."]
+script = ExtResource("7_oml3k")
+Speed = 170.0
 metadata/_custom_type_script = "uid://873un8agkyja"
 
-[node name="ProjectileInitComponent" type="Node" parent="." node_paths=PackedStringArray("launch_component")]
-script = ExtResource("9_xvjl0")
-launch_component = NodePath("../LaunchComponent")
+[node name="ProjectileInitComponent" type="Node" parent="." node_paths=PackedStringArray("LaunchComponent")]
+script = ExtResource("8_22hnt")
+LaunchComponent = NodePath("../LaunchComponent")
 metadata/_custom_type_script = "uid://bgty7040ams6s"

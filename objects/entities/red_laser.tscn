@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://t422jkov2t1b"]
 
-[ext_resource type="Script" uid="uid://dkmxhjtmu5xlb" path="res://scripts/components/damage_component.gd" id="1_koyoa"]
-[ext_resource type="Script" uid="uid://cdnwrn8v05qhi" path="res://scripts/components/bullet_component.gd" id="2_eru3x"]
-[ext_resource type="Script" uid="uid://1tnr46o1ib4u" path="res://scripts/components/out_of_screen_component.gd" id="3_m14o3"]
-[ext_resource type="Script" uid="uid://cvcnfrr1udco5" path="res://scripts/components/straight_motion_component.gd" id="4_dolct"]
-[ext_resource type="Script" uid="uid://873un8agkyja" path="res://scripts/components/launch_component.gd" id="5_eafpt"]
-[ext_resource type="Script" uid="uid://bvsgg8lu0a8m6" path="res://scripts/components/lifetime_component.gd" id="6_m14o3"]
+[ext_resource type="Script" uid="uid://2i7p7v135u7c" path="res://scripts/components/DamageComponent.cs" id="1_m14o3"]
+[ext_resource type="Script" uid="uid://cfw8nbrarex0i" path="res://scripts/components/BulletComponent.cs" id="2_m14o3"]
+[ext_resource type="Script" uid="uid://cs6u3sh68f43j" path="res://scripts/components/OutOfScreenComponent.cs" id="3_m14o3"]
+[ext_resource type="Script" uid="uid://c7p06t0eax8am" path="res://scripts/components/StraightMotionComponent.cs" id="4_dolct"]
+[ext_resource type="Script" uid="uid://cbexrnnj47f87" path="res://scripts/components/LaunchComponent.cs" id="5_eafpt"]
+[ext_resource type="Script" uid="uid://oyf25mpc5etr" path="res://scripts/components/LifetimeComponent.cs" id="6_0c45k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n4uav"]
 size = Vector2(16, 2)
@@ -14,9 +14,9 @@ size = Vector2(16, 2)
 collision_layer = 8
 collision_mask = 21
 
-[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("area2d")]
-script = ExtResource("1_koyoa")
-area2d = NodePath("..")
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("Area")]
+script = ExtResource("1_m14o3")
+Area = NodePath("..")
 metadata/_custom_type_script = "uid://dkmxhjtmu5xlb"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -28,41 +28,31 @@ points = PackedVector2Array(0, 0, 16, 0)
 width = 2.0
 default_color = Color(90, 1, 1, 1)
 
-[node name="BulletComponent" type="Node" parent="." node_paths=PackedStringArray("root", "area2d")]
-script = ExtResource("2_eru3x")
-root = NodePath("..")
-area2d = NodePath("..")
+[node name="BulletComponent" type="Node" parent="." node_paths=PackedStringArray("Area")]
+script = ExtResource("2_m14o3")
+Area = NodePath("..")
 metadata/_custom_type_script = "uid://cdnwrn8v05qhi"
 
-[node name="OutOfScreenComponent" type="Node" parent="." node_paths=PackedStringArray("visibility_notifier", "root")]
+[node name="OutOfScreenComponent" type="Node" parent="." node_paths=PackedStringArray("VisibilityNotifier")]
 script = ExtResource("3_m14o3")
-visibility_notifier = NodePath("../VisibleOnScreenNotifier2D")
-root = NodePath("..")
+VisibilityNotifier = NodePath("../VisibleOnScreenNotifier2D")
 metadata/_custom_type_script = "uid://1tnr46o1ib4u"
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(8, 0)
 scale = Vector2(0.8, 0.1)
 
-[node name="StraightMotionComponent" type="Node" parent="." node_paths=PackedStringArray("root", "launch_component")]
+[node name="StraightMotionComponent" type="Node" parent="." node_paths=PackedStringArray("LaunchComponent")]
 script = ExtResource("4_dolct")
-root = NodePath("..")
-launch_component = NodePath("../LaunchComponent")
+LaunchComponent = NodePath("../LaunchComponent")
 metadata/_custom_type_script = "uid://cvcnfrr1udco5"
 
-[node name="LaunchComponent" type="Node2D" parent="." node_paths=PackedStringArray("root")]
+[node name="LaunchComponent" type="Node2D" parent="."]
 script = ExtResource("5_eafpt")
-root = NodePath("..")
-speed = 64.0
+Speed = 64.0
 metadata/_custom_type_script = "uid://873un8agkyja"
 
-[node name="LifetimeComponent" type="Node" parent="." node_paths=PackedStringArray("root", "timer")]
-script = ExtResource("6_m14o3")
-root = NodePath("..")
-life_time = 10.0
-timer = NodePath("../Timer")
+[node name="LifetimeComponent" type="Node" parent="."]
+script = ExtResource("6_0c45k")
+LifeTime = 10.0
 metadata/_custom_type_script = "uid://bvsgg8lu0a8m6"
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 5.0
-autostart = true

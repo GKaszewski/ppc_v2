@@ -3,7 +3,7 @@ using Mr.BrickAdventures.Autoloads;
 
 namespace Mr.BrickAdventures.scripts.UI;
 
-public partial class SettingsMenu : Node
+public partial class SettingsMenu : Control
 {
     [Export] public Control InputSettingsControl { get; set; }
     [Export] public Control AudioSettingsControl { get; set; }

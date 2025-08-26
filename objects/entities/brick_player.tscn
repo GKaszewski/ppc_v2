@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://bqi5s710xb1ju"]
+[gd_scene load_steps=42 format=3 uid="uid://bqi5s710xb1ju"]
 
 [ext_resource type="Script" uid="uid://csel4s0e4g5uf" path="res://scripts/components/PlayerController.cs" id="1_yysbb"]
 [ext_resource type="Shader" uid="uid://bs4xvm4qkurpr" path="res://shaders/hit_flash.tres" id="2_lgb3u"]
@@ -15,27 +15,20 @@
 [ext_resource type="Script" uid="uid://byw1legrv1ep2" path="res://scripts/components/PlayerDeathComponent.cs" id="13_7til7"]
 [ext_resource type="Script" uid="uid://cgfynrn68lp12" path="res://scripts/components/KnockbackComponent.cs" id="14_e5pae"]
 [ext_resource type="Script" uid="uid://cecelixl41t3j" path="res://scripts/components/InvulnerabilityComponent.cs" id="15_xuhvf"]
-[ext_resource type="Resource" uid="uid://dw5ee2lpeypnb" path="res://resources/skills/brick_throw.tres" id="16_smbir"]
 [ext_resource type="Script" uid="uid://dvyd26ricriql" path="res://scripts/components/FlashingComponent.cs" id="16_uno3u"]
-[ext_resource type="Resource" uid="uid://2glvryih82t1" path="res://resources/skills/fire_brick.tres" id="17_6y5qu"]
 [ext_resource type="Script" uid="uid://dtg6115je7b5s" path="res://scripts/components/StompDamageComponent.cs" id="17_bl1gx"]
+[ext_resource type="Script" uid="uid://di572axt0c3s8" path="res://scripts/SkillManager.cs" id="18_6lsog"]
 [ext_resource type="AudioStream" uid="uid://duj2q0rqytaxg" path="res://sfx/jump.wav" id="18_pysae"]
-[ext_resource type="Resource" uid="uid://cx5fsbexblp60" path="res://resources/skills/ice_brick.tres" id="18_umfbf"]
-[ext_resource type="Resource" uid="uid://cdp8sex36vdq2" path="res://resources/skills/explosive_brick.tres" id="19_5wjb7"]
 [ext_resource type="AudioStream" uid="uid://bmfn6p88gy575" path="res://sfx/player_hurt.wav" id="19_7anly"]
+[ext_resource type="Script" uid="uid://dlh5xcv2sy82s" path="res://scripts/components/SkillUnlockedComponent.cs" id="19_gwc8i"]
 [ext_resource type="AudioStream" uid="uid://ycgtf6wj7mto" path="res://sfx/heal.wav" id="20_bptj5"]
-[ext_resource type="Script" uid="uid://cjqe428jwip6b" path="res://scripts/skill_manager.gd" id="20_ppfy7"]
-[ext_resource type="Script" uid="uid://bya240e627ti6" path="res://scripts/resources/skill_data.gd" id="21_d0oiv"]
-[ext_resource type="Resource" uid="uid://d3bjre2etov1n" path="res://resources/skills/magnetic.tres" id="22_vnsgd"]
-[ext_resource type="Script" uid="uid://bjsyeo1n7bsri" path="res://scripts/components/skill_unlocker_component.gd" id="23_qsv2c"]
 [ext_resource type="Script" uid="uid://bo506l4x0808e" path="res://scripts/components/HitComponent.cs" id="26_6n1ss"]
 [ext_resource type="Script" uid="uid://cjcc7fia15wu3" path="res://scripts/components/CanBeLaunchedComponent.cs" id="27_oefns"]
 [ext_resource type="PackedScene" uid="uid://bg76mtpcmfm2j" path="res://objects/ui/charging_bar_layer.tscn" id="28_3f5nm"]
 [ext_resource type="Script" uid="uid://cqau0810tjk4d" path="res://scripts/components/TriggerLeverComponent.cs" id="28_bnap0"]
 [ext_resource type="PackedScene" uid="uid://b12tppjkkqpt4" path="res://objects/fxs/hit_particles.tscn" id="28_jh5m0"]
+[ext_resource type="Script" uid="uid://dr3uv0j7n75s" path="res://scripts/components/ShipShooterComponent.cs" id="30_usc1p"]
 [ext_resource type="AudioStream" uid="uid://dyev46uqusimi" path="res://sfx/shoot.wav" id="32_x2b7c"]
-[ext_resource type="Script" uid="uid://d1ctdx52gskv1" path="res://scripts/components/ship_shooter.gd" id="34_gwc8i"]
-[ext_resource type="Script" uid="uid://dev2q1228otm2" path="res://scripts/UI/ChargeProgressBar.cs" id="34_o1ihh"]
 [ext_resource type="PackedScene" uid="uid://dtem8jgcyoqar" path="res://objects/entities/green_laser.tscn" id="36_oxudy"]
 [ext_resource type="Script" uid="uid://diw6opv6yutgi" path="res://scripts/components/KillPlayerOutOfScreenComponent.cs" id="37_qec3q"]
 [ext_resource type="Script" uid="uid://3qy7rm28q66a" path="res://scripts/components/ProgressiveDamageComponent.cs" id="38_dhjci"]
@@ -206,12 +199,10 @@ Area = NodePath("../StompDamageArea")
 Root = NodePath("..")
 
 [node name="SkillManager" type="Node" parent="."]
-script = ExtResource("20_ppfy7")
-available_skills = Array[ExtResource("21_d0oiv")]([ExtResource("22_vnsgd"), ExtResource("17_6y5qu"), ExtResource("16_smbir"), ExtResource("18_umfbf"), ExtResource("19_5wjb7")])
+script = ExtResource("18_6lsog")
 
-[node name="SkillUnlockerComponent" type="Node" parent="." node_paths=PackedStringArray("skill_manager")]
-script = ExtResource("23_qsv2c")
-skill_manager = NodePath("../SkillManager")
+[node name="SkillUnlockerComponent" type="Node" parent="."]
+script = ExtResource("19_gwc8i")
 
 [node name="HitComponent" type="Node" parent="." node_paths=PackedStringArray("Sprite", "Health", "HitFx")]
 script = ExtResource("26_6n1ss")
@@ -250,22 +241,20 @@ bus = &"sfx"
 stream = ExtResource("32_x2b7c")
 bus = &"sfx"
 
-[node name="ChargingBarLayer" parent="." node_paths=PackedStringArray("ProgressBar") instance=ExtResource("28_3f5nm")]
+[node name="ChargingBarLayer" parent="." instance=ExtResource("28_3f5nm")]
 offset_left = -17.0
 offset_top = -30.0
 offset_right = 23.0
 offset_bottom = -20.0
-script = ExtResource("34_o1ihh")
-ProgressBar = NodePath(".")
 
 [node name="HitParticles" parent="." instance=ExtResource("28_jh5m0")]
 process_material = SubResource("ParticleProcessMaterial_lgb3u")
 
-[node name="ShipShooter" type="Node" parent="." node_paths=PackedStringArray("bullet_spawn", "shoot_sfx")]
-script = ExtResource("34_gwc8i")
-bullet_scene = ExtResource("36_oxudy")
-bullet_spawn = NodePath("../Ship shoot spawn")
-shoot_sfx = NodePath("../sfx_shoot")
+[node name="ShipShooter" type="Node" parent="." node_paths=PackedStringArray("BulletSpawn", "ShootSfx")]
+script = ExtResource("30_usc1p")
+BulletScene = ExtResource("36_oxudy")
+BulletSpawn = NodePath("../Ship shoot spawn")
+ShootSfx = NodePath("../sfx_shoot")
 metadata/_custom_type_script = "uid://d1ctdx52gskv1"
 
 [node name="Ship shoot spawn" type="Marker2D" parent="."]
