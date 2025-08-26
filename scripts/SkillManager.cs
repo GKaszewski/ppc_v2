@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 using Mr.BrickAdventures.Autoloads;
+using Mr.BrickAdventures.scripts.components;
 using Mr.BrickAdventures.scripts.interfaces;
 using Mr.BrickAdventures.scripts.Resources;
 
@@ -10,9 +11,12 @@ public partial class SkillManager : Node
 {
     private GameManager _gameManager;
     [Export] public Array<SkillData> AvailableSkills { get; set; } = [];
-
+    
     public Dictionary ActiveComponents { get; private set; } = new();
 
+    [Signal]
+    public delegate void ActiveThrowSkillChangedEventHandler(BrickThrowComponent throwComponent);
+    
     public override void _Ready()
     {
         _gameManager = GetNode<GameManager>("/root/GameManager");
@@ -58,12 +62,22 @@ public partial class SkillManager : Node
 
         Owner.AddChild(instance);
         ActiveComponents[skillData.Name] = instance;
+        
+        if (instance is BrickThrowComponent btc)
+        {
+            EmitSignalActiveThrowSkillChanged(btc);
+        }
     }
     
     public void RemoveSkill(string skillName)
     {
         if (!ActiveComponents.TryGetValue(skillName, out var component))
             return;
+        
+        if (component.AsGodotObject() is BrickThrowComponent)
+        {
+            EmitSignalActiveThrowSkillChanged(null);
+        }
 
         var inst = (Node)component;
         if (inst is ISkill skill)

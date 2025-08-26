@@ -86,7 +86,9 @@ public partial class BrickThrowComponent : Node, ISkill
     {
         PlayerController = owner as PlayerController;
         _skillData = data;
-        
+
+        ThrowInputBehavior = (ThrowInputResource)ThrowInputBehavior?.Duplicate();
+
         if (PlayerController == null)
         {
             GD.PushError("BrickThrowComponent: Owner is not a PlayerController.");
@@ -101,6 +103,7 @@ public partial class BrickThrowComponent : Node, ISkill
     public void Activate()
     {
         if (ThrowInputBehavior != null) ThrowInputBehavior.ThrowRequested += ThrowBrick;
+        SetProcessInput(true);
     }
 
     public void Deactivate()

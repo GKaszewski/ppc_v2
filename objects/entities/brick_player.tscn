@@ -247,11 +247,12 @@ bus = &"sfx"
 stream = ExtResource("32_x2b7c")
 bus = &"sfx"
 
-[node name="ChargingBarLayer" parent="." instance=ExtResource("28_3f5nm")]
+[node name="ChargingBarLayer" parent="." node_paths=PackedStringArray("_skillManager") instance=ExtResource("28_3f5nm")]
 offset_left = -17.0
 offset_top = -30.0
 offset_right = 23.0
 offset_bottom = -20.0
+_skillManager = NodePath("../SkillManager")
 
 [node name="HitParticles" parent="." instance=ExtResource("28_jh5m0")]
 process_material = SubResource("ParticleProcessMaterial_lgb3u")
