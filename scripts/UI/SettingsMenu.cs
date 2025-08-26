@@ -26,10 +26,10 @@ public partial class SettingsMenu : Control
         DisplaySettingsButton.Pressed += OnDisplaySettingsPressed;
         GameplaySettingsButton.Pressed += OnGameplaySettingsPressed;
         
-        InputSettingsControl.Hide();
-        AudioSettingsControl.Hide();
-        DisplaySettingsControl.Hide();
-        GameplaySettingsControl.Hide();
+        InputSettingsControl?.Hide();
+        AudioSettingsControl?.Hide();
+        DisplaySettingsControl?.Hide();
+        GameplaySettingsControl?.Hide();
     }
 
     public override void _UnhandledInput(InputEvent @event)

@@ -22,8 +22,15 @@ public partial class AudioSettings : Control
         MasterVolumeSlider.ValueChanged += OnMasterVolumeChanged;
         MusicVolumeSlider.ValueChanged += OnMusicVolumeChanged;
         SfxVolumeSlider.ValueChanged += OnSfxVolumeChanged;
+        
+        LoadSettings();
     }
-    
+
+    public override void _ExitTree()
+    {
+        SaveSettings();
+    }
+
     public override void _UnhandledInput(InputEvent @event)
     {
         if (!@event.IsActionReleased("ui_cancel")) return;

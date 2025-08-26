@@ -117,6 +117,7 @@ tile_set = ExtResource("10_ei558")
 tile_set = ExtResource("11_w7c5i")
 
 [node name="Killzone" parent="." instance=ExtResource("13_tvdre")]
+process_mode = 4
 position = Vector2(215, 324)
 
 [node name="Child" parent="." instance=ExtResource("15_vqevu")]
@@ -136,6 +137,9 @@ Text = "LEVEL_1_TOOLTIP_2"
 [node name="Tooltip3" parent="." instance=ExtResource("18_4bhfj")]
 position = Vector2(-59, -247)
 Text = "LEVEL_1_TOOLTIP_3"
+
+[connection signal="Death" from="Brick Player/HealthComponent" to="UI Layer/DeathScreen" method="OnPlayerDeath"]
+[connection signal="Death" from="Brick Player/HealthComponent" to="UI Layer/GameOverScreen" method="OnPlayerDeath"]
 
 [editable path="Brick Player"]
 [editable path="UI Layer"]

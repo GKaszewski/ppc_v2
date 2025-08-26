@@ -97,6 +97,7 @@ tile_set = ExtResource("11_0vx27")
 position = Vector2(215, 324)
 
 [connection signal="Death" from="Brick Player/HealthComponent" to="UI Layer/DeathScreen" method="OnPlayerDeath"]
+[connection signal="Death" from="Brick Player/HealthComponent" to="UI Layer/GameOverScreen" method="OnPlayerDeath"]
 
 [editable path="Brick Player"]
 [editable path="UI Layer"]

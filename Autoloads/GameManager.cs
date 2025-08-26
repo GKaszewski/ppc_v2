@@ -9,11 +9,11 @@ namespace Mr.BrickAdventures.Autoloads;
 
 public partial class GameManager : Node
 {
-    [Export] public Array<PackedScene> LevelScenes { get; set; } = new();
+    [Export] public Array<PackedScene> LevelScenes { get; set; } = [];
     
     public PlayerController Player { get; set; }
     
-    private List<Node> _sceneNodes = new();
+    private List<Node> _sceneNodes = [];
     
     [Export] 
     public Dictionary PlayerState { get; set; } = new()
