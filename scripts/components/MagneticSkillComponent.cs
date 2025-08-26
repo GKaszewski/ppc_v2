@@ -29,7 +29,7 @@ public partial class MagneticSkillComponent : Node, ISkill
     
     private void OnBodyEntered(Node2D body)
     {
-        if (!HasComponentInChildren(body, "Collectable")) return;
+        if (!HasComponentInChildren(body, "CollectableComponent")) return;
 
         if (_collectablesToPickUp.Contains(body)) return;
         _collectablesToPickUp.Add(body);
@@ -37,7 +37,7 @@ public partial class MagneticSkillComponent : Node, ISkill
     
     private void OnAreaEntered(Area2D area)
     {
-        if (!HasComponentInChildren(area, "Collectable")) return;
+        if (!HasComponentInChildren(area, "CollectableComponent")) return;
         
         if (_collectablesToPickUp.Contains(area)) return;
         _collectablesToPickUp.Add(area);
@@ -77,16 +77,38 @@ public partial class MagneticSkillComponent : Node, ISkill
         {
             GD.PushWarning("MagneticSkillComponent: Owner is not a Node2D.");
         }
+
+        if (MagneticArea == null)
+        {
+            if (owner is Area2D area2D) MagneticArea = area2D;
+            else
+            {
+                MagneticArea = owner.GetNodeOrNull<Area2D>("MagneticArea");
+                if (MagneticArea == null)
+                {
+                    GD.PushError("MagneticSkillComponent: MagneticArea is not set.");
+                    return;
+                }
+            }
+        }
     }
 
     public void Activate()
     {
+        if (MagneticArea == null)
+        {
+            GD.PushError("MagneticSkillComponent: MagneticArea is not set.");
+            return;
+        }
+        
         MagneticArea.BodyEntered += OnBodyEntered;
         MagneticArea.AreaEntered += OnAreaEntered;
     }
 
     public void Deactivate()
     {
+        if (MagneticArea == null) return;
+        
         MagneticArea.BodyEntered -= OnBodyEntered;
         MagneticArea.AreaEntered -= OnAreaEntered;
     }

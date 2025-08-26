@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://bcmx07k12gcsc"]
+[gd_scene load_steps=11 format=3 uid="uid://bcmx07k12gcsc"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_xusxl"]
 [ext_resource type="Script" uid="uid://cfw8nbrarex0i" path="res://scripts/components/BulletComponent.cs" id="2_xvjl0"]
 [ext_resource type="Script" uid="uid://2i7p7v135u7c" path="res://scripts/components/DamageComponent.cs" id="3_22hnt"]
 [ext_resource type="Script" uid="uid://xjq33vj0rol0" path="res://scripts/components/EffectInflictorComponent.cs" id="4_22hnt"]
+[ext_resource type="Resource" uid="uid://02l4nbnf2aft" path="res://resources/status_effect/ice.tres" id="4_xvjl0"]
 [ext_resource type="Script" uid="uid://cs6u3sh68f43j" path="res://scripts/components/OutOfScreenComponent.cs" id="5_xvjl0"]
 [ext_resource type="Script" uid="uid://c7p06t0eax8am" path="res://scripts/components/StraightMotionComponent.cs" id="6_6nrp8"]
 [ext_resource type="Script" uid="uid://cbexrnnj47f87" path="res://scripts/components/LaunchComponent.cs" id="7_oml3k"]
@@ -36,9 +37,11 @@ scale = Vector2(0.8, 0.5)
 
 [node name="Timer" type="Timer" parent="."]
 
-[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("Area")]
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("Area", "DamageTimer")]
 script = ExtResource("3_22hnt")
 Area = NodePath("..")
+StatusEffectData = ExtResource("4_xvjl0")
+DamageTimer = NodePath("../Timer")
 
 [node name="EffectInflictorComponent" type="Node" parent="." node_paths=PackedStringArray("Damage")]
 script = ExtResource("4_22hnt")
@@ -51,14 +54,11 @@ VisibilityNotifier = NodePath("../VisibleOnScreenNotifier2D")
 [node name="StraightMotionComponent" type="Node" parent="." node_paths=PackedStringArray("LaunchComponent")]
 script = ExtResource("6_6nrp8")
 LaunchComponent = NodePath("../LaunchComponent")
-metadata/_custom_type_script = "uid://cvcnfrr1udco5"
 
 [node name="LaunchComponent" type="Node2D" parent="."]
 script = ExtResource("7_oml3k")
 Speed = 170.0
-metadata/_custom_type_script = "uid://873un8agkyja"
 
 [node name="ProjectileInitComponent" type="Node" parent="." node_paths=PackedStringArray("LaunchComponent")]
 script = ExtResource("8_22hnt")
 LaunchComponent = NodePath("../LaunchComponent")
-metadata/_custom_type_script = "uid://bgty7040ams6s"

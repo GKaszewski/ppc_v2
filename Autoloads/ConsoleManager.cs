@@ -148,5 +148,11 @@ public partial class ConsoleManager : Node
         }
         LimboConsole.Info("All skills have been deactivated.");
     }
+    
+    [ConsoleCommand("next_level", "Advances the game to the next level.")]
+    private void GoToNextLevelCommand()
+    {
+        _gameManager.OnLevelComplete();
+    }
 
 }

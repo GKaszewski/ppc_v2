@@ -54,14 +54,11 @@ VisibilityNotifier = NodePath("../VisibleOnScreenNotifier2D")
 [node name="LaunchComponent" type="Node2D" parent="."]
 script = ExtResource("7_67bn4")
 Speed = 200.0
-metadata/_custom_type_script = "uid://873un8agkyja"
 
 [node name="StraightMotionComponent" type="Node" parent="." node_paths=PackedStringArray("LaunchComponent")]
 script = ExtResource("8_5ybdf")
 LaunchComponent = NodePath("../LaunchComponent")
-metadata/_custom_type_script = "uid://cvcnfrr1udco5"
 
 [node name="ProjectileInitComponent" type="Node" parent="." node_paths=PackedStringArray("LaunchComponent")]
 script = ExtResource("9_b1kpf")
 LaunchComponent = NodePath("../LaunchComponent")
-metadata/_custom_type_script = "uid://bgty7040ams6s"
