@@ -7,7 +7,7 @@ namespace Mr.BrickAdventures.scripts.components;
 public partial class ScoreComponent : Node
 {
     private GameManager _gameManager;
-    private const string CoinsGroupName = "Coins";
+    private const string CoinsGroupName = "coins";
     
     public override async void _Ready()
     {
@@ -20,30 +20,17 @@ public partial class ScoreComponent : Node
             return;
         }
 
-        var coins = GetTree().GetNodesInGroup("coins");
-        GD.Print($"Found {coins.Count} coins in the scene.");
+        var coins = GetTree().GetNodesInGroup(CoinsGroupName);
         foreach (var coin in coins)
         {
             var c = coin.GetNodeOrNull<CollectableComponent>("CollectableComponent");
-            GD.Print(c == null ? "CollectableComponent not found on coin." : "CollectableComponent found on coin.");
             if (c != null)
             {
                 c.Collected += OnCollected;
             }
         }
     }
-
-    public override void _Process(double delta)
-    {
-        GetCoinsInScene();
-    }
-
-    private void GetCoinsInScene()
-    {
-        var coins = GetTree().GetNodesInGroup("Coins");
-        GD.Print($"Found {coins.Count} coins in the scene.");
-    }
-
+    
     private void OnCollected(float amount, CollectableType type, Node2D body)
     {
         if (type != CollectableType.Coin) return;

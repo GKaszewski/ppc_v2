@@ -39,7 +39,7 @@ script = ExtResource("2_w33sr")
 ToCollapseTimer = NodePath("../ToCollapseTimer")
 ResetTimer = NodePath("../ResetTimer")
 Sprite2D = NodePath("../Sprite2D")
-CollisionShape = NodePath("../Collapsable detector/AreaCollisionShape2D")
+CollisionShape = NodePath("../StaticCollisionShape2D")
 CollapseTime = 0.75
 ResetTime = 3.0
 

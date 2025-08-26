@@ -73,6 +73,7 @@ enabled=PackedStringArray("res://addons/console/plugin.cfg", "res://addons/phant
 coins=""
 levers=""
 player=""
+Collectables=""
 
 [gui]
 

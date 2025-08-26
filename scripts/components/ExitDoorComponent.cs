@@ -35,7 +35,7 @@ public partial class ExitDoorComponent : Node, IUnlockable
         if (Locked) return;
         
         EmitSignalExitTriggered();
-        _gameManager.UnlockLevel((int)_gameManager.PlayerState["CurrentLevel"] + 1);
+        _gameManager.UnlockLevel((int)_gameManager.PlayerState["current_level"] + 1);
         CallDeferred(nameof(GoToNextLevel));
     }
 

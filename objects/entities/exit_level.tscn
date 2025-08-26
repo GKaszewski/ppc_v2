@@ -39,5 +39,5 @@ metadata/_custom_type_script = "uid://c8xhgkg8gcqu6"
 script = ExtResource("4_06sog")
 ExitArea = NodePath("..")
 DoorSprite = NodePath("../Sprite2D")
-OpenedDoorFrame = 1
+OpenedDoorFrame = 88
 metadata/_custom_type_script = "uid://bwamqffvpa452"

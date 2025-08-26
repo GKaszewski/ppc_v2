@@ -37,7 +37,7 @@ script = ExtResource("2_jmsgb")
 ToCollapseTimer = NodePath("../ToCollapseTimer")
 ResetTimer = NodePath("../ResetTimer")
 Sprite2D = NodePath("../Sprite2D")
-CollisionShape = NodePath("../Collapsable detector/AreaCollisionShape2D")
+CollisionShape = NodePath("../StaticCollisionShape2D")
 ResetTime = 1.0
 
 [connection signal="body_entered" from="Collapsable detector" to="CollapsableComponent" method="OnCollapsableDetectorBodyEntered"]
