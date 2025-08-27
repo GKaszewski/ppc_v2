@@ -5,7 +5,9 @@ namespace Mr.BrickAdventures.scripts.components;
 [GlobalClass]
 public partial class GravityAbility : MovementAbility
 {
-    [Export] public float FallGravityMultiplier { get; set; } = 2.0f;
+    public float AscendGravity { get; set; }
+    public float DescendGravity { get; set; }
+    
     private float _gravity;
 
     public override void Initialize()
@@ -18,7 +20,7 @@ public partial class GravityAbility : MovementAbility
     {
         if (_body.IsOnFloor()) return velocity;
         
-        var gravityToApply = velocity.Y > 0 ? _gravity * FallGravityMultiplier : _gravity;
+        var gravityToApply = velocity.Y < 0 ? AscendGravity : DescendGravity;
         velocity.Y += gravityToApply * (float)delta;
         
         return velocity;

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Godot;
-using Mr.BrickAdventures.scripts.interfaces;
 
 namespace Mr.BrickAdventures.scripts.components;
 
@@ -24,6 +25,8 @@ public partial class PlayerController : CharacterBody2D
                 _abilities.Add(ability);
             }
         }
+        
+        _ = ConnectJumpAndGravityAbilities();
     }
     
     public override void _PhysicsProcess(double delta)
@@ -89,5 +92,19 @@ public partial class PlayerController : CharacterBody2D
         ClearMovementAbilities();
         
         AddAbility(new SpaceshipMovementAbility());
+    }
+    
+    private async Task ConnectJumpAndGravityAbilities()
+    {
+        await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+        
+        var jumpAbility = _abilities.OfType<VariableJumpAbility>().FirstOrDefault();
+        var gravityAbility = _abilities.OfType<GravityAbility>().FirstOrDefault();
+        
+        if (jumpAbility != null && gravityAbility != null)
+        {
+            gravityAbility.AscendGravity = jumpAbility.AscendGravity;
+            gravityAbility.DescendGravity = jumpAbility.DescendGravity;
+        }
     }
 }

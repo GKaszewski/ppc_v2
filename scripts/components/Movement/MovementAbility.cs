@@ -26,7 +26,6 @@ public abstract partial class MovementAbility : Node
 
         _body = _controller;
         _input = _controller.GetNode<PlayerInputHandler>("PlayerInputHandler");
-        GD.Print($"Input handler for '{Name}' set to '{_input.Name}'");
     }
 
     public abstract Vector2 ProcessMovement(Vector2 currentVelocity, double delta);
