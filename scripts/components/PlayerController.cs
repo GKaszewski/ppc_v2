@@ -51,6 +51,15 @@ public partial class PlayerController : CharacterBody2D
         MovementAbilitiesContainer.AddChild(ability);
     }
     
+    private void ClearMovementAbilities()
+    {
+        foreach (var ability in _abilities)
+        {
+            ability.QueueFree();
+        }
+        _abilities.Clear();
+    }
+    
     public void RemoveAbility<T>() where T : MovementAbility
     {
         for (var i = _abilities.Count - 1; i >= 0; i--)
@@ -63,5 +72,21 @@ public partial class PlayerController : CharacterBody2D
                 break;
             }
         }
+    }
+
+    public void SetPlatformMovement()
+    {
+        ClearMovementAbilities();
+        
+        AddAbility(new GroundMovementAbility());
+        AddAbility(new JumpAbility());
+        AddAbility(new GravityAbility());
+    }
+    
+    public void SetSpaceshipMovement()
+    {
+        ClearMovementAbilities();
+        
+        AddAbility(new SpaceshipMovementAbility());
     }
 }
