@@ -6,98 +6,62 @@ namespace Mr.BrickAdventures.scripts.components;
 
 public partial class PlayerController : CharacterBody2D
 {
-    [Export]
-    public string DefaultMovementType { get; set; } = "platform";
-
-    [Export]
-    public Godot.Collections.Dictionary<string, NodePath> MovementTypes { get; set; }
-
-    [Export]
-    public Sprite2D ShipSprite { get; set; }
-
-    public IMovement CurrentMovement = null;
-    [Signal]
-    public delegate void MovementSwitchedEventHandler(string movementType);
-
+    [Export] private Node MovementAbilitiesContainer { get; set; }
+    
+    public Vector2 LastDirection { get; private set; } = Vector2.Right;
+    public Vector2 PreviousVelocity { get; private set; } = Vector2.Zero;
+    
+    private List<MovementAbility> _abilities = [];
+    private PlayerInputHandler _inputHandler;
+    
     public override void _Ready()
     {
-        base._Ready();
-
-        foreach (var movementType in MovementTypes.Keys)
+        _inputHandler = GetNode<PlayerInputHandler>("PlayerInputHandler");
+        foreach (var child in MovementAbilitiesContainer.GetChildren())
         {
-            var movementNode = GetNodeOrNull(movementType);
-            if (movementNode is IMovement playerMovement)
+            if (child is MovementAbility ability)
             {
-                playerMovement.Enabled = false;
+                _abilities.Add(ability);
             }
         }
-
-        SwitchMovement(DefaultMovementType);
     }
-
-    public override void _UnhandledInput(InputEvent @event)
+    
+    public override void _PhysicsProcess(double delta)
     {
-        base._UnhandledInput(@event);
-
-        if (@event is InputEventKey inputEventKey && inputEventKey.IsActionPressed("switch_movement"))
+        var velocity = Velocity;
+        
+        foreach (var ability in _abilities)
         {
-            var nextMovementType = GetNextMovementType();
-            SwitchMovement(nextMovementType);
+            velocity = ability.ProcessMovement(velocity, delta);
         }
-    }
-
-    private void SwitchMovement(string movementType)
-    {
-        if (CurrentMovement != null)
+        
+        if (_inputHandler.MoveDirection.X != 0)
         {
-            CurrentMovement.Enabled = false;
+            LastDirection = new Vector2(_inputHandler.MoveDirection.X > 0 ? 1 : -1, 0);
         }
 
-        if (MovementTypes.TryGetValue(movementType, out var movement))
+        PreviousVelocity = Velocity;
+        Velocity = velocity;
+        MoveAndSlide();
+    }
+    
+    public void AddAbility(MovementAbility ability)
+    {
+        _abilities.Add(ability);
+        MovementAbilitiesContainer.AddChild(ability);
+    }
+    
+    public void RemoveAbility<T>() where T : MovementAbility
+    {
+        for (var i = _abilities.Count - 1; i >= 0; i--)
         {
-            CurrentMovement = GetNodeOrNull<IMovement>(movement);
-            if (CurrentMovement == null)
+            if (_abilities[i] is T)
             {
-                GD.PushError($"Movement type '{movementType}' not found in MovementTypes.");
-                return;
+                var ability = _abilities[i];
+                _abilities.RemoveAt(i);
+                ability.QueueFree();
+                break;
             }
-            CurrentMovement.Enabled = true;
-            EmitSignalMovementSwitched(movementType);
         }
-        else
-        {
-            GD.PushError($"Movement type '{movementType}' not found in MovementTypes.");
-        }
-
-        if (CurrentMovement == null)
-        {
-            GD.PushError("No current movement set after switching.");
-        }
-    }
-
-    private string GetNextMovementType()
-    {
-        var keys = new List<string>(MovementTypes.Keys);
-        var currentIndex = keys.IndexOf(CurrentMovement?.MovementType);
-
-        if (currentIndex == -1)
-        {
-            return DefaultMovementType;
-        }
-
-        currentIndex = (currentIndex + 1) % keys.Count;
-        return keys[currentIndex];
-    }
-
-    public void OnSpaceshipEntered()
-    {
-        SwitchMovement("ship");
-        ShipSprite.Visible = true;
-    }
-
-    public void OnSpaceshipExited()
-    {
-        SwitchMovement(DefaultMovementType);
-        ShipSprite.Visible = false;
     }
 }

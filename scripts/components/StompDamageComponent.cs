@@ -23,7 +23,7 @@ public partial class StompDamageComponent : Node
 
         if (!(Root.GlobalPosition.Y < body.GlobalPosition.Y)) return;
         
-        var velocity = Root.CurrentMovement.PreviousVelocity;
+        var velocity = Root.PreviousVelocity;
         if (!(velocity.Y > 0f)) return;
         
         DealDamage(health);
