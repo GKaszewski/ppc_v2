@@ -81,6 +81,7 @@ public partial class PlayerController : CharacterBody2D
         AddAbility(new GroundMovementAbility());
         AddAbility(new JumpAbility());
         AddAbility(new GravityAbility());
+        AddAbility(new OneWayPlatformAbility());
     }
     
     public void SetSpaceshipMovement()
