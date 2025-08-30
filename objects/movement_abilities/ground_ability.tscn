@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bcv8kx6bc7u5e"]
+
+[ext_resource type="Script" uid="uid://bf4yclropol43" path="res://scripts/components/Movement/GroundMovementAbility.cs" id="1_7efrb"]
+
+[node name="GroundAbility" type="Node"]
+script = ExtResource("1_7efrb")
+MaxSpeed = 376.0
+Friction = 2500.0
+metadata/_custom_type_script = "uid://bf4yclropol43"

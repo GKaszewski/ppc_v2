@@ -10,6 +10,13 @@ public partial class PlayerController : CharacterBody2D
 {
     [Export] private Node MovementAbilitiesContainer { get; set; }
     
+    [ExportGroup("Movement Ability Scenes")]
+    [Export] public PackedScene GroundMovementScene { get; set; }
+    [Export] public PackedScene JumpMovementScene { get; set; }
+    [Export] public PackedScene GravityScene { get; set; }
+    [Export] public PackedScene OneWayPlatformScene { get; set; }
+    [Export] public PackedScene SpaceshipMovementScene { get; set; }
+    
     public Vector2 LastDirection { get; private set; } = Vector2.Right;
     public Vector2 PreviousVelocity { get; private set; } = Vector2.Zero;
     
@@ -19,14 +26,16 @@ public partial class PlayerController : CharacterBody2D
     public override void _Ready()
     {
         _inputHandler = GetNode<PlayerInputHandler>("PlayerInputHandler");
-        foreach (var child in MovementAbilitiesContainer.GetChildren())
-        {
-            if (child is MovementAbility ability)
-            {
-                ability.Initialize(this);
-                _abilities.Add(ability);
-            }
-        }
+        // foreach (var child in MovementAbilitiesContainer.GetChildren())
+        // {
+        //     if (child is MovementAbility ability)
+        //     {
+        //         ability.Initialize(this);
+        //         _abilities.Add(ability);
+        //     }
+        // }
+        
+        SetPlatformMovement();
         
         _ = ConnectJumpAndGravityAbilities();
     }
@@ -84,17 +93,19 @@ public partial class PlayerController : CharacterBody2D
     {
         ClearMovementAbilities();
         
-        AddAbility(new GroundMovementAbility());
-        AddAbility(new VariableJumpAbility());
-        AddAbility(new GravityAbility());
-        AddAbility(new OneWayPlatformAbility());
+        if (GroundMovementScene != null) AddAbility(GroundMovementScene.Instantiate<MovementAbility>());
+        if (JumpMovementScene != null) AddAbility(JumpMovementScene.Instantiate<MovementAbility>());
+        if (GravityScene != null) AddAbility(GravityScene.Instantiate<MovementAbility>());
+        if (OneWayPlatformScene != null) AddAbility(OneWayPlatformScene.Instantiate<MovementAbility>());
+        
+        _ = ConnectJumpAndGravityAbilities();
     }
     
     public void SetSpaceshipMovement()
     {
         ClearMovementAbilities();
         
-        AddAbility(new SpaceshipMovementAbility());
+        if (SpaceshipMovementScene != null) AddAbility(SpaceshipMovementScene.Instantiate<MovementAbility>());
     }
     
     private async Task ConnectJumpAndGravityAbilities()

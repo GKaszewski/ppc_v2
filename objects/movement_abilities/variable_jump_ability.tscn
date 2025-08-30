@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0r5edxnx5jqx"]
+
+[ext_resource type="Script" uid="uid://ccksp2e76s7sr" path="res://scripts/components/Movement/VariableJumpAbility.cs" id="1_y30i5"]
+
+[node name="VariableJumpAbility" type="Node"]
+script = ExtResource("1_y30i5")
+JumpCutMultiplier = 0.507
+metadata/_custom_type_script = "uid://ccksp2e76s7sr"

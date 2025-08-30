@@ -43,7 +43,7 @@ public partial class VariableJumpAbility : MovementAbility
         if (!isGrounded && _wasOnFloor) _coyoteTimer.Start();
         if (isGrounded) _hasJumpedInAir = false;
 
-        if (_input.JumpPressed && !_hasJumpedInAir)
+        if (_input.JumpHeld && !_hasJumpedInAir)
         {
             if (isGrounded || !_coyoteTimer.IsStopped())
             {

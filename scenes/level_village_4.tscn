@@ -177,10 +177,24 @@ position = Vector2(7146.51, 21.1388)
 
 [node name="Brick Player" parent="." instance=ExtResource("1_k3uyd")]
 
+[node name="GroundMovementAbility" parent="Brick Player/Movements" index="0"]
+process_mode = 4
+
+[node name="GravityAbility" parent="Brick Player/Movements" index="1"]
+process_mode = 4
+
+[node name="VariableJumpAbility" parent="Brick Player/Movements" index="2"]
+process_mode = 4
+
+[node name="OneWayPlatformAbility" parent="Brick Player/Movements" index="3"]
+process_mode = 4
+
 [node name="HitParticles" parent="Brick Player" index="26"]
 process_material = SubResource("ParticleProcessMaterial_lgb3u")
 
 [node name="Enemies" type="Node2D" parent="."]
+process_mode = 4
+visible = false
 
 [node name="Flying Enemy" parent="Enemies" instance=ExtResource("18_162yw")]
 position = Vector2(1122, -33)

@@ -9,12 +9,6 @@ public partial class SpaceshipMovementAbility : MovementAbility
     [Export] public float Acceleration { get; set; } = 2000f;
     [Export] public float Friction { get; set; } = 1700f;
 
-    public override void Initialize(PlayerController controller)
-    {
-        base.Initialize(controller);
-        _body.Velocity = Vector2.Zero;
-    }
-
     public override Vector2 ProcessMovement(Vector2 currentVelocity, double delta)
     {
         if (_input == null) return Vector2.Zero;

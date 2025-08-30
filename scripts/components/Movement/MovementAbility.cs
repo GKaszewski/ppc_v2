@@ -2,6 +2,7 @@ using Godot;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public abstract partial class MovementAbility : Node
 {
     protected PlayerController _controller;
@@ -29,6 +30,8 @@ public abstract partial class MovementAbility : Node
             SetProcess(false);
             SetPhysicsProcess(false);
         }
+        
+        _body.Velocity = Vector2.Zero;
     }
 
     public abstract Vector2 ProcessMovement(Vector2 currentVelocity, double delta);

@@ -19,7 +19,7 @@ public partial class GravityAbility : MovementAbility
     public override Vector2 ProcessMovement(Vector2 velocity, double delta)
     {
         if (_body.IsOnFloor()) return velocity;
-        
+
         var gravityToApply = velocity.Y < 0 ? AscendGravity : DescendGravity;
         velocity.Y += gravityToApply * (float)delta;
         
