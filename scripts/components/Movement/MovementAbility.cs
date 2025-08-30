@@ -11,7 +11,7 @@ public abstract partial class MovementAbility : Node
     
     public virtual void Initialize(PlayerController controller)
     {
-        Name = $"{this.GetType().Name}";
+        Name = $"{GetType().Name}";
         
         _controller = controller;
         if (_controller == null)

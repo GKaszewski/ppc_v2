@@ -31,7 +31,7 @@ public partial class VariableJumpAbility : MovementAbility
         AscendGravity = (-2.0f * JumpHeight) / (JumpTimeToPeak * JumpTimeToPeak) * -1.0f;
         DescendGravity = (-2.0f * JumpHeight) / (JumpTimeToDescent * JumpTimeToDescent) * -1.0f;
 
-        _coyoteTimer = new Timer { OneShot = true, WaitTime = CoyoteFrames / 60.0f };
+        _coyoteTimer = new Timer { OneShot = true, WaitTime = CoyoteFrames / (float)Engine.GetPhysicsTicksPerSecond() };
         AddChild(_coyoteTimer);
     }
 

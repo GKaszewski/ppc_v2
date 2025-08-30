@@ -14,7 +14,7 @@ public partial class JumpAbility : MovementAbility
     public override void Initialize(PlayerController controller)
     {
         base.Initialize(controller);
-        _coyoteTimer = new Timer { OneShot = true, WaitTime = CoyoteFrames / 60.0f };
+        _coyoteTimer = new Timer { OneShot = true, WaitTime = CoyoteFrames / (float)Engine.GetPhysicsTicksPerSecond() };
         AddChild(_coyoteTimer);
     }
     
