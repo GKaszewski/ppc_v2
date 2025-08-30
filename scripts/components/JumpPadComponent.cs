@@ -25,7 +25,7 @@ public partial class JumpPadComponent : Node
         
         _ = HandleLaunchPadAnimation();
         player.Velocity = new Vector2(player.Velocity.X, -JumpForce);
-        //TODO: Emit sound effect
+        player.EmitSignal(PlayerController.SignalName.JumpInitiated);
     }
 
     private async Task HandleLaunchPadAnimation()

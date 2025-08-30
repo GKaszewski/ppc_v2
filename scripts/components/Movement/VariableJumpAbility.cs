@@ -48,6 +48,7 @@ public partial class VariableJumpAbility : MovementAbility
             if (isGrounded || !_coyoteTimer.IsStopped())
             {
                 velocity.Y = _jumpVelocity;
+                _controller.EmitSignal(PlayerController.SignalName.JumpInitiated);
                 _coyoteTimer.Stop();
                 _hasJumpedInAir = true;
             }

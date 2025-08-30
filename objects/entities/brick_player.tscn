@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://bqi5s710xb1ju"]
+[gd_scene load_steps=59 format=3 uid="uid://bqi5s710xb1ju"]
 
 [ext_resource type="Script" uid="uid://csel4s0e4g5uf" path="res://scripts/components/PlayerController.cs" id="1_yysbb"]
 [ext_resource type="Shader" uid="uid://bs4xvm4qkurpr" path="res://shaders/hit_flash.tres" id="2_lgb3u"]
@@ -48,6 +48,7 @@
 [ext_resource type="Script" uid="uid://3qy7rm28q66a" path="res://scripts/components/ProgressiveDamageComponent.cs" id="38_dhjci"]
 [ext_resource type="Script" uid="uid://dssa2taiwktis" path="res://scripts/components/Movement/PlayerInputHandler.cs" id="42_e5pae"]
 [ext_resource type="Script" uid="uid://ceoxet1nqws8w" path="res://scripts/components/SpriteTilterComponent.cs" id="43_xuhvf"]
+[ext_resource type="Script" uid="uid://b1h8r5irryxcx" path="res://scripts/components/PlayerSfxComponent.cs" id="49_qec3q"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xoue7"]
 shader = ExtResource("2_lgb3u")
@@ -306,3 +307,8 @@ metadata/_custom_type_script = "uid://dssa2taiwktis"
 script = ExtResource("43_xuhvf")
 RotationTarget = NodePath("../Graphics/Root/Base")
 metadata/_custom_type_script = "uid://ceoxet1nqws8w"
+
+[node name="PlayerSfxComponent" type="Node" parent="." node_paths=PackedStringArray("JumpSfx")]
+script = ExtResource("49_qec3q")
+JumpSfx = NodePath("../sfx_jump")
+metadata/_custom_type_script = "uid://b1h8r5irryxcx"

@@ -28,6 +28,7 @@ public partial class WallJumpAbility : MovementAbility
         {
             var wallNormal = _body.GetWallNormal();
             
+            _controller.EmitSignal(PlayerController.SignalName.JumpInitiated);
             velocity = new Vector2(wallNormal.X * WallJumpVelocity.X, WallJumpVelocity.Y);
         }
         

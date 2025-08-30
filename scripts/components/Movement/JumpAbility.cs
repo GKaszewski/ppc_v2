@@ -30,6 +30,7 @@ public partial class JumpAbility : MovementAbility
             if (_body.IsOnFloor() || !_coyoteTimer.IsStopped())
             {
                 velocity.Y = JumpVelocity;
+                _controller.EmitSignal(PlayerController.SignalName.JumpInitiated);
                 _coyoteTimer.Stop();
             }
         }

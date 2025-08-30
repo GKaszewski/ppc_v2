@@ -18,6 +18,8 @@ public partial class PlayerController : CharacterBody2D
     [Export] public PackedScene SpaceshipMovementScene { get; set; }
     [Export] public PackedScene WallJumpScene { get; set; }
     
+    [Signal] public delegate void JumpInitiatedEventHandler();
+    
     public Vector2 LastDirection { get; private set; } = Vector2.Right;
     public Vector2 PreviousVelocity { get; private set; } = Vector2.Zero;
     
