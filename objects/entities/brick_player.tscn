@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://bqi5s710xb1ju"]
+[gd_scene load_steps=58 format=3 uid="uid://bqi5s710xb1ju"]
 
 [ext_resource type="Script" uid="uid://csel4s0e4g5uf" path="res://scripts/components/PlayerController.cs" id="1_yysbb"]
 [ext_resource type="Shader" uid="uid://bs4xvm4qkurpr" path="res://shaders/hit_flash.tres" id="2_lgb3u"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bu3vuxlrvoo1t" path="res://objects/movement_abilities/spaceship_ability.tscn" id="6_721q0"]
 [ext_resource type="Script" uid="uid://chgw53qwt7rt8" path="res://scripts/components/Movement/GravityAbility.cs" id="6_xuhvf"]
 [ext_resource type="Script" uid="uid://ccksp2e76s7sr" path="res://scripts/components/Movement/VariableJumpAbility.cs" id="7_bl1gx"]
+[ext_resource type="PackedScene" uid="uid://chjbi5mgtwhsh" path="res://objects/movement_abilities/wall_jump_ability.tscn" id="7_bnap0"]
 [ext_resource type="Script" uid="uid://ck6kmnbwhsttt" path="res://scripts/components/Movement/OneWayPlatformAbility.cs" id="7_uno3u"]
 [ext_resource type="Texture2D" uid="uid://dhkwyv6ayb5qb" path="res://sprites/flying_ship.png" id="8_6lsog"]
 [ext_resource type="Script" uid="uid://dy78ak8eykw6e" path="res://scripts/components/FlipComponent.cs" id="9_yysbb"]
@@ -102,6 +103,7 @@ JumpMovementScene = ExtResource("3_bnap0")
 GravityScene = ExtResource("4_qec3q")
 OneWayPlatformScene = ExtResource("5_dhjci")
 SpaceshipMovementScene = ExtResource("6_721q0")
+WallJumpScene = ExtResource("7_bnap0")
 metadata/_custom_type_script = "uid://csel4s0e4g5uf"
 
 [node name="Movements" type="Node" parent="."]
@@ -185,9 +187,8 @@ script = ExtResource("13_7til7")
 DeathSfx = NodePath("../sfx_hurt")
 HealthComponent = NodePath("../HealthComponent")
 
-[node name="KnockbackComponent" type="Node" parent="." node_paths=PackedStringArray("Body", "HealthComponent")]
+[node name="KnockbackComponent" type="Node" parent="." node_paths=PackedStringArray("HealthComponent")]
 script = ExtResource("14_e5pae")
-Body = NodePath("")
 KnockbackForce = 1250.0
 HealthComponent = NodePath("../HealthComponent")
 
@@ -213,11 +214,10 @@ Sprite = NodePath("../Graphics/Root/Right Eye")
 FlashDuration = 1.0
 HealthComponent = NodePath("../HealthComponent")
 
-[node name="StompDamageComponent" type="Node" parent="." node_paths=PackedStringArray("Area", "Root")]
+[node name="StompDamageComponent" type="Node" parent="." node_paths=PackedStringArray("Area")]
 script = ExtResource("17_bl1gx")
 Damage = 4.0
 Area = NodePath("../StompDamageArea")
-Root = NodePath("")
 
 [node name="SkillManager" type="Node" parent="."]
 script = ExtResource("18_6lsog")
@@ -292,12 +292,11 @@ script = ExtResource("37_qec3q")
 ScreenNotifier = NodePath("../VisibleOnScreenNotifier2D")
 HealthComponent = NodePath("../HealthComponent")
 
-[node name="ProgressiveDamageComponent" type="Node" parent="." node_paths=PackedStringArray("HealthComponent", "Sprite", "PlatformMovement")]
+[node name="ProgressiveDamageComponent" type="Node" parent="." node_paths=PackedStringArray("HealthComponent", "Sprite")]
 process_mode = 4
 script = ExtResource("38_dhjci")
 HealthComponent = NodePath("../HealthComponent")
 Sprite = NodePath("../Graphics/Root/Base")
-PlatformMovement = NodePath("")
 
 [node name="PlayerInputHandler" type="Node" parent="."]
 script = ExtResource("42_e5pae")

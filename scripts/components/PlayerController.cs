@@ -16,6 +16,7 @@ public partial class PlayerController : CharacterBody2D
     [Export] public PackedScene GravityScene { get; set; }
     [Export] public PackedScene OneWayPlatformScene { get; set; }
     [Export] public PackedScene SpaceshipMovementScene { get; set; }
+    [Export] public PackedScene WallJumpScene { get; set; }
     
     public Vector2 LastDirection { get; private set; } = Vector2.Right;
     public Vector2 PreviousVelocity { get; private set; } = Vector2.Zero;
@@ -26,16 +27,14 @@ public partial class PlayerController : CharacterBody2D
     public override void _Ready()
     {
         _inputHandler = GetNode<PlayerInputHandler>("PlayerInputHandler");
-        // foreach (var child in MovementAbilitiesContainer.GetChildren())
-        // {
-        //     if (child is MovementAbility ability)
-        //     {
-        //         ability.Initialize(this);
-        //         _abilities.Add(ability);
-        //     }
-        // }
-        
-        SetPlatformMovement();
+        foreach (var child in MovementAbilitiesContainer.GetChildren())
+        {
+            if (child is MovementAbility ability)
+            {
+                ability.Initialize(this);
+                _abilities.Add(ability);
+            }
+        }
         
         _ = ConnectJumpAndGravityAbilities();
     }
