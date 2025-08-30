@@ -8,9 +8,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yfu6m"]
 size = Vector2(28, 32)
 
-[node name="ExitLevel" type="Area2D"]
+[node name="ExitLevel" type="Area2D" node_paths=PackedStringArray("DoorSprite")]
 collision_layer = 0
 collision_mask = 4
+script = ExtResource("4_06sog")
+DoorSprite = NodePath("Sprite2D")
+OpenedDoorFrame = 88
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
@@ -27,17 +30,8 @@ shape = SubResource("RectangleShape2D_yfu6m")
 [node name="RequirementComponent" type="Node" parent="."]
 script = ExtResource("2_ed7mh")
 RequirementType = 1
-metadata/_custom_type_script = "uid://cmh8k0rdsyh7j"
 
 [node name="UnlockOnRequirementComponent" type="Node" parent="." node_paths=PackedStringArray("RequirementComponent", "UnlockTarget")]
 script = ExtResource("3_ed7mh")
 RequirementComponent = NodePath("../RequirementComponent")
-UnlockTarget = NodePath("../ExitDoorComponent")
-metadata/_custom_type_script = "uid://c8xhgkg8gcqu6"
-
-[node name="ExitDoorComponent" type="Node" parent="." node_paths=PackedStringArray("ExitArea", "DoorSprite")]
-script = ExtResource("4_06sog")
-ExitArea = NodePath("..")
-DoorSprite = NodePath("../Sprite2D")
-OpenedDoorFrame = 88
-metadata/_custom_type_script = "uid://bwamqffvpa452"
+UnlockTarget = NodePath("..")

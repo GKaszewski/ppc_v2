@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjdhgdolcxxbq"]
+
+[ext_resource type="Script" uid="uid://c4vvuqnx5y33u" path="res://Autoloads/AchievementManager.cs" id="1_lomle"]
+[ext_resource type="PackedScene" uid="uid://tgaadui3lvdc" path="res://objects/ui/achievement_popup.tscn" id="2_k3wdv"]
+
+[node name="AchievementManager" type="Node"]
+script = ExtResource("1_lomle")
+AchievementPopupScene = ExtResource("2_k3wdv")
