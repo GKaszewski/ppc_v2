@@ -4,29 +4,25 @@ using Mr.BrickAdventures.scripts.interfaces;
 
 namespace Mr.BrickAdventures.scripts.components;
 
-public partial class ExitDoorComponent : Node, IUnlockable
+public partial class ExitDoorComponent : Area2D, IUnlockable
 {
     [Export] public bool Locked { get; set; } = true;
-    [Export] public Area2D ExitArea { get; set; }
     [Export] public Sprite2D DoorSprite { get; set; }
     [Export] public AudioStreamPlayer2D OpenDoorSfx { get; set; }
     [Export] public int OpenedDoorFrame { get; set; } = 0;
+    [Export] public string AchievementId = "level_complete_1";
     
     [Signal] public delegate void ExitTriggeredEventHandler();
     
     private GameManager _gameManager;
+    private AchievementManager _achievementManager;
 
     public override void _Ready()
     {
         _gameManager = GetNode<GameManager>("/root/GameManager");
+        _achievementManager = GetNode<AchievementManager>("/root/AchievementManager");
         
-        if (ExitArea == null)
-        {
-            GD.PushError("ExitDoorComponent: ExitArea is not set.");
-            return;
-        }
-        
-        ExitArea.BodyEntered += OnExitAreaBodyEntered;
+        BodyEntered += OnExitAreaBodyEntered;
         
     }
 
@@ -35,6 +31,7 @@ public partial class ExitDoorComponent : Node, IUnlockable
         if (Locked) return;
         
         EmitSignalExitTriggered();
+        _achievementManager.UnlockAchievement(AchievementId);
         _gameManager.UnlockLevel((int)_gameManager.PlayerState["current_level"] + 1);
         CallDeferred(nameof(GoToNextLevel));
     }

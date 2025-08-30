@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AchievementResource" load_steps=3 format=3 uid="uid://3odfkm1ig5"]
+
+[ext_resource type="Texture2D" uid="uid://cebeyr4wnibvk" path="res://sprites/achievement.png" id="1_usw25"]
+[ext_resource type="Script" uid="uid://duib5phrmpro5" path="res://scripts/Resources/AchievementResource.cs" id="2_n7ktn"]
+
+[resource]
+script = ExtResource("2_n7ktn")
+Id = "level_complete_1"
+DisplayName = "Complete level 1"
+Description = ""
+Icon = ExtResource("1_usw25")
+IsSecret = false
+metadata/_custom_type_script = "uid://duib5phrmpro5"

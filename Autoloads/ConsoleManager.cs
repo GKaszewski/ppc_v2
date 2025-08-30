@@ -10,10 +10,12 @@ public partial class ConsoleManager : Node
     private GameManager _gameManager;
     private SkillManager _skillManager;
     private SkillUnlockerComponent _skillUnlockerComponent;
+    private AchievementManager _achievementManager;
 
     public override void _Ready()
     {
         _gameManager = GetNode<GameManager>("/root/GameManager");
+        _achievementManager = GetNode<AchievementManager>("/root/AchievementManager");
 
         RegisterConsoleCommands();
     }
@@ -153,6 +155,19 @@ public partial class ConsoleManager : Node
     private void GoToNextLevelCommand()
     {
         _gameManager.OnLevelComplete();
+    }
+    
+    [ConsoleCommand("unlock_achievement", "Unlocks an achievement by its ID.")]
+    private void UnlockAchievementCommand(string achievementId)
+    {
+        _achievementManager.UnlockAchievement(achievementId);
+        LimboConsole.Info($"Attempted to unlock achievement '{achievementId}'.");
+    }
+    
+    [ConsoleCommand("reset_achievement", "Resets (locks) an achievement by its ID.")]
+    private void ResetAchievementCommand(string achievementId)
+    {
+        _achievementManager.LockAchievement(achievementId);
     }
 
 }
