@@ -7,15 +7,12 @@ public abstract partial class MovementAbility : Node
     protected PlayerController _controller;
     protected CharacterBody2D _body;
     protected PlayerInputHandler _input;
-
-    public override void _Ready()
+    
+    public virtual void Initialize(PlayerController controller)
     {
-        CallDeferred(nameof(Initialize));
-    }
-
-    public virtual void Initialize()
-    {
-        _controller = GetOwner<PlayerController>();
+        Name = $"{this.GetType().Name}";
+        
+        _controller = controller;
         if (_controller == null)
         {
             GD.PushError($"Movement ability '{Name}' must be a child of a PlayerController.");
@@ -26,6 +23,12 @@ public abstract partial class MovementAbility : Node
 
         _body = _controller;
         _input = _controller.GetNode<PlayerInputHandler>("PlayerInputHandler");
+        if (_input == null)
+        {
+            GD.PushError($"PlayerController '{_controller.Name}' must have a PlayerInputHandler child.");
+            SetProcess(false);
+            SetPhysicsProcess(false);
+        }
     }
 
     public abstract Vector2 ProcessMovement(Vector2 currentVelocity, double delta);

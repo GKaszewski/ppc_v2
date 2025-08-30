@@ -5,7 +5,7 @@ namespace Mr.BrickAdventures.scripts.components;
 [GlobalClass]
 public partial class PlayerInputHandler : Node
 {
-    public Vector2 MoveDirection { get; private set; }
+    public Vector2 MoveDirection { get; private set; } = Vector2.Zero;
     public bool JumpPressed { get; private set; }
     public bool JumpReleased { get; private set; }
     public bool JumpHeld { get; private set; }

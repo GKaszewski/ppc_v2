@@ -5,6 +5,7 @@ using Godot;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class PlayerController : CharacterBody2D
 {
     [Export] private Node MovementAbilitiesContainer { get; set; }
@@ -22,6 +23,7 @@ public partial class PlayerController : CharacterBody2D
         {
             if (child is MovementAbility ability)
             {
+                ability.Initialize(this);
                 _abilities.Add(ability);
             }
         }
@@ -50,8 +52,9 @@ public partial class PlayerController : CharacterBody2D
     
     public void AddAbility(MovementAbility ability)
     {
-        _abilities.Add(ability);
         MovementAbilitiesContainer.AddChild(ability);
+        ability.Initialize(this);
+        _abilities.Add(ability);
     }
     
     private void ClearMovementAbilities()
@@ -82,7 +85,7 @@ public partial class PlayerController : CharacterBody2D
         ClearMovementAbilities();
         
         AddAbility(new GroundMovementAbility());
-        AddAbility(new JumpAbility());
+        AddAbility(new VariableJumpAbility());
         AddAbility(new GravityAbility());
         AddAbility(new OneWayPlatformAbility());
     }

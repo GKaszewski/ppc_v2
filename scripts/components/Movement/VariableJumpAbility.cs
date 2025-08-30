@@ -20,13 +20,12 @@ public partial class VariableJumpAbility : MovementAbility
     private bool _hasJumpedInAir = false;
     private Timer _coyoteTimer;
     
-    // --- Public values for GravityAbility ---
     public float AscendGravity { get; private set; }
     public float DescendGravity { get; private set; }
     
-    public override void Initialize()
+    public override void Initialize(PlayerController controller)
     {
-        base.Initialize();
+        base.Initialize(controller);
         
         _jumpVelocity = (2.0f * JumpHeight) / JumpTimeToPeak * -1.0f;
         AscendGravity = (-2.0f * JumpHeight) / (JumpTimeToPeak * JumpTimeToPeak) * -1.0f;
@@ -44,7 +43,7 @@ public partial class VariableJumpAbility : MovementAbility
         if (!isGrounded && _wasOnFloor) _coyoteTimer.Start();
         if (isGrounded) _hasJumpedInAir = false;
 
-        if (_input.JumpHeld && !_hasJumpedInAir)
+        if (_input.JumpPressed && !_hasJumpedInAir)
         {
             if (isGrounded || !_coyoteTimer.IsStopped())
             {

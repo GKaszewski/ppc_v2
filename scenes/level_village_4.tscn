@@ -272,11 +272,10 @@ position = Vector2(16.5, -10)
 [connection signal="Death" from="Brick Player/HealthComponent" to="UI Layer/DeathScreen" method="OnPlayerDeath"]
 [connection signal="Death" from="Brick Player/HealthComponent" to="UI Layer/GameOverScreen" method="OnPlayerDeath"]
 [connection signal="SpaceshipEntered" from="Spaceship Enter" to="Chaser/ChaseLevelComponent" method="OnShipEntered"]
-[connection signal="SpaceshipEntered" from="Spaceship Enter" to="Brick Player" method="OnSpaceshipEntered"]
-[connection signal="SpaceshipEntered" from="Spaceship Enter" to="Brick Player/Movements/PlatformMovement" method="OnShipEntered"]
+[connection signal="SpaceshipEntered" from="Spaceship Enter" to="Brick Player" method="SetSpaceshipMovement"]
 [connection signal="SpaceshipEntered" from="Spaceship Enter" to="Brick Player/ShipShooter" method="OnShipEntered"]
 [connection signal="SpaceshipExit" from="Spaceship exit" to="Chaser/ChaseLevelComponent" method="OnShipExited"]
-[connection signal="SpaceshipExit" from="Spaceship exit" to="Brick Player" method="OnSpaceshipExited"]
+[connection signal="SpaceshipExit" from="Spaceship exit" to="Brick Player" method="SetPlatformMovement"]
 [connection signal="SpaceshipExit" from="Spaceship exit" to="Brick Player/ShipShooter" method="OnShipExited"]
 
 [editable path="Chaser"]

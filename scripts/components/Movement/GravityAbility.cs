@@ -10,9 +10,9 @@ public partial class GravityAbility : MovementAbility
     
     private float _gravity;
 
-    public override void Initialize()
+    public override void Initialize(PlayerController controller)
     {
-        base.Initialize();
+        base.Initialize(controller);
         _gravity = (float)ProjectSettings.GetSetting("physics/2d/default_gravity");
     }
 
