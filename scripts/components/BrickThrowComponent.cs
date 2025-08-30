@@ -64,13 +64,13 @@ public partial class BrickThrowComponent : Node, ISkill
         var instance = BrickScene.Instantiate<Node2D>();
         var init = instance.GetNodeOrNull<ProjectileInitComponent>("ProjectileInitComponent");
         
-        if (init != null && PlayerController.CurrentMovement is PlatformMovementComponent)
+        if (init != null)
         {
             var @params = new ProjectileInitParams()
             {
                 Position = PlayerController.GlobalPosition,
                 Rotation = PlayerController.Rotation,
-                Direction = PlayerController.CurrentMovement.LastDirection,
+                Direction = PlayerController.LastDirection,
                 PowerMultiplier = powerMultiplier,
             };
             

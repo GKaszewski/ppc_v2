@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://chjbi5mgtwhsh"]
+
+[ext_resource type="Script" uid="uid://6foetukqmyoe" path="res://scripts/components/Movement/WallJumpAbility.cs" id="1_jjesg"]
+
+[node name="WallJumpAbility" type="Node"]
+script = ExtResource("1_jjesg")
+metadata/_custom_type_script = "uid://6foetukqmyoe"

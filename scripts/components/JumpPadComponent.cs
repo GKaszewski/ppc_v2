@@ -21,10 +21,11 @@ public partial class JumpPadComponent : Node
         var canBeLaunched = body.GetNodeOrNull<CanBeLaunchedComponent>("CanBeLaunchedComponent");
         if (canBeLaunched == null) return;
 
-        if (body is not PlayerController { CurrentMovement: PlatformMovementComponent movement }) return;
+        if (body is not PlayerController player) return;
+        
         _ = HandleLaunchPadAnimation();
-        movement.Body.Velocity = new Vector2(movement.Body.Velocity.X, -JumpForce);
-        movement.JumpSfx?.Play();
+        player.Velocity = new Vector2(player.Velocity.X, -JumpForce);
+        player.EmitSignal(PlayerController.SignalName.JumpInitiated);
     }
 
     private async Task HandleLaunchPadAnimation()

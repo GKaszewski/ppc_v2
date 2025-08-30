@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cala7bpo1v4no"]
+
+[ext_resource type="Script" uid="uid://chgw53qwt7rt8" path="res://scripts/components/Movement/GravityAbility.cs" id="1_tn5sj"]
+
+[node name="GravityAbility" type="Node"]
+script = ExtResource("1_tn5sj")
+metadata/_custom_type_script = "uid://chgw53qwt7rt8"

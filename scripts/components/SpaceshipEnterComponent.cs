@@ -13,7 +13,8 @@ public partial class SpaceshipEnterComponent : Area2D
 
     private void OnBodyEntered(Node2D body)
     {
-        if (body is not PlayerController) return;
+        if (body is not PlayerController player) return;
+        player.SetSpaceshipMovement();
         EmitSignalSpaceshipEntered();
         QueueFree();
     }

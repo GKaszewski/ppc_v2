@@ -48,8 +48,8 @@ color_ramp = SubResource("GradientTexture1D_f1fvy")
 
 [sub_resource type="Resource" id="Resource_0nwt7"]
 script = ExtResource("7_80vn0")
-duration = 1.0
-transition = 0
+duration = 0.25
+transition = 3
 ease = 2
 
 [node name="World" type="Node2D"]
@@ -86,6 +86,7 @@ AudioSettingsControl = NodePath("../Audio settings")
 
 [node name="Camera2D" parent="." instance=ExtResource("5_sskgn")]
 physics_interpolation_mode = 1
+position = Vector2(32, -16)
 process_callback = 0
 limit_left = -512
 limit_top = -720
@@ -94,10 +95,16 @@ limit_bottom = 320
 
 [node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
 top_level = true
+position = Vector2(32, -16)
 script = ExtResource("6_18aqg")
-follow_mode = 2
+follow_mode = 5
 follow_target = NodePath("../Brick Player")
 tween_resource = SubResource("Resource_0nwt7")
+follow_offset = Vector2(32, -16)
+follow_damping = true
+follow_damping_value = Vector2(0.15, 0.1)
+dead_zone_width = 0.18
+dead_zone_height = 0.15
 draw_limits = true
 limit_target = NodePath("../Terrain Layer")
 metadata/_custom_type_script = "uid://d23haq52m7ulv"

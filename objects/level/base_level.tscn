@@ -45,8 +45,8 @@ color_ramp = SubResource("GradientTexture1D_f1fvy")
 
 [sub_resource type="Resource" id="Resource_0nwt7"]
 script = ExtResource("7_kl81p")
-duration = 1.0
-transition = 0
+duration = 0.25
+transition = 3
 ease = 2
 
 [node name="World" type="Node2D"]
@@ -67,6 +67,7 @@ SkillUnlockerComponent = NodePath("../../Brick Player/SkillUnlockerComponent")
 
 [node name="Camera2D" parent="." instance=ExtResource("5_517ha")]
 physics_interpolation_mode = 1
+position = Vector2(32, -16)
 process_callback = 0
 limit_left = -10000000
 limit_top = -10000000
@@ -76,11 +77,17 @@ limit_bottom = 10000000
 [node name="PhantomCamera" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
 unique_name_in_owner = true
 top_level = true
+position = Vector2(32, -16)
 script = ExtResource("6_6imqp")
-follow_mode = 2
+follow_mode = 5
 follow_target = NodePath("../Brick Player")
 snap_to_pixel = true
 tween_resource = SubResource("Resource_0nwt7")
+follow_offset = Vector2(32, -16)
+follow_damping = true
+follow_damping_value = Vector2(0.15, 0.1)
+dead_zone_width = 0.18
+dead_zone_height = 0.15
 draw_limits = true
 metadata/_custom_type_script = "uid://d23haq52m7ulv"
 

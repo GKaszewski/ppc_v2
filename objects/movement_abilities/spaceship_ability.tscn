@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bu3vuxlrvoo1t"]
+
+[ext_resource type="Script" uid="uid://drgwa5q5k2tbm" path="res://scripts/components/Movement/SpaceshipMovementAbility.cs" id="1_u3vpp"]
+
+[node name="SpaceshipAbility" type="Node"]
+script = ExtResource("1_u3vpp")
+metadata/_custom_type_script = "uid://drgwa5q5k2tbm"

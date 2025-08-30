@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bty3jq8u0pxkf"]
+
+[ext_resource type="Script" uid="uid://ck6kmnbwhsttt" path="res://scripts/components/Movement/OneWayPlatformAbility.cs" id="1_i0f5i"]
+
+[node name="OneWayPlatformAbility" type="Node"]
+script = ExtResource("1_i0f5i")
+metadata/_custom_type_script = "uid://ck6kmnbwhsttt"

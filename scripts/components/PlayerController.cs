@@ -1,103 +1,125 @@
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Godot;
-using Mr.BrickAdventures.scripts.interfaces;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class PlayerController : CharacterBody2D
 {
-    [Export]
-    public string DefaultMovementType { get; set; } = "platform";
-
-    [Export]
-    public Godot.Collections.Dictionary<string, NodePath> MovementTypes { get; set; }
-
-    [Export]
-    public Sprite2D ShipSprite { get; set; }
-
-    public IMovement CurrentMovement = null;
-    [Signal]
-    public delegate void MovementSwitchedEventHandler(string movementType);
-
+    [Export] private Node MovementAbilitiesContainer { get; set; }
+    
+    [ExportGroup("Movement Ability Scenes")]
+    [Export] public PackedScene GroundMovementScene { get; set; }
+    [Export] public PackedScene JumpMovementScene { get; set; }
+    [Export] public PackedScene GravityScene { get; set; }
+    [Export] public PackedScene OneWayPlatformScene { get; set; }
+    [Export] public PackedScene SpaceshipMovementScene { get; set; }
+    [Export] public PackedScene WallJumpScene { get; set; }
+    
+    [Signal] public delegate void JumpInitiatedEventHandler();
+    
+    public Vector2 LastDirection { get; private set; } = Vector2.Right;
+    public Vector2 PreviousVelocity { get; private set; } = Vector2.Zero;
+    
+    private List<MovementAbility> _abilities = [];
+    private PlayerInputHandler _inputHandler;
+    
     public override void _Ready()
     {
-        base._Ready();
-
-        foreach (var movementType in MovementTypes.Keys)
+        _inputHandler = GetNode<PlayerInputHandler>("PlayerInputHandler");
+        foreach (var child in MovementAbilitiesContainer.GetChildren())
         {
-            var movementNode = GetNodeOrNull(movementType);
-            if (movementNode is IMovement playerMovement)
+            if (child is MovementAbility ability)
             {
-                playerMovement.Enabled = false;
+                ability.Initialize(this);
+                _abilities.Add(ability);
             }
         }
-
-        SwitchMovement(DefaultMovementType);
+        
+        _ = ConnectJumpAndGravityAbilities();
     }
-
-    public override void _UnhandledInput(InputEvent @event)
+    
+    public override void _PhysicsProcess(double delta)
     {
-        base._UnhandledInput(@event);
-
-        if (@event is InputEventKey inputEventKey && inputEventKey.IsActionPressed("switch_movement"))
+        var velocity = Velocity;
+        
+        foreach (var ability in _abilities)
         {
-            var nextMovementType = GetNextMovementType();
-            SwitchMovement(nextMovementType);
+            velocity = ability.ProcessMovement(velocity, delta);
         }
-    }
-
-    private void SwitchMovement(string movementType)
-    {
-        if (CurrentMovement != null)
+        
+        if (_inputHandler.MoveDirection.X != 0)
         {
-            CurrentMovement.Enabled = false;
+            LastDirection = new Vector2(_inputHandler.MoveDirection.X > 0 ? 1 : -1, 0);
         }
 
-        if (MovementTypes.TryGetValue(movementType, out var movement))
+        PreviousVelocity = Velocity;
+        Velocity = velocity;
+        MoveAndSlide();
+    }
+    
+    public void AddAbility(MovementAbility ability)
+    {
+        MovementAbilitiesContainer.AddChild(ability);
+        ability.Initialize(this);
+        _abilities.Add(ability);
+    }
+    
+    private void ClearMovementAbilities()
+    {
+        foreach (var ability in _abilities)
         {
-            CurrentMovement = GetNodeOrNull<IMovement>(movement);
-            if (CurrentMovement == null)
+            ability.QueueFree();
+        }
+        _abilities.Clear();
+    }
+    
+    public void RemoveAbility<T>() where T : MovementAbility
+    {
+        for (var i = _abilities.Count - 1; i >= 0; i--)
+        {
+            if (_abilities[i] is T)
             {
-                GD.PushError($"Movement type '{movementType}' not found in MovementTypes.");
-                return;
+                var ability = _abilities[i];
+                _abilities.RemoveAt(i);
+                ability.QueueFree();
+                break;
             }
-            CurrentMovement.Enabled = true;
-            EmitSignalMovementSwitched(movementType);
-        }
-        else
-        {
-            GD.PushError($"Movement type '{movementType}' not found in MovementTypes.");
-        }
-
-        if (CurrentMovement == null)
-        {
-            GD.PushError("No current movement set after switching.");
         }
     }
 
-    private string GetNextMovementType()
+    public void SetPlatformMovement()
     {
-        var keys = new List<string>(MovementTypes.Keys);
-        var currentIndex = keys.IndexOf(CurrentMovement?.MovementType);
-
-        if (currentIndex == -1)
+        ClearMovementAbilities();
+        
+        if (GroundMovementScene != null) AddAbility(GroundMovementScene.Instantiate<MovementAbility>());
+        if (JumpMovementScene != null) AddAbility(JumpMovementScene.Instantiate<MovementAbility>());
+        if (GravityScene != null) AddAbility(GravityScene.Instantiate<MovementAbility>());
+        if (OneWayPlatformScene != null) AddAbility(OneWayPlatformScene.Instantiate<MovementAbility>());
+        
+        _ = ConnectJumpAndGravityAbilities();
+    }
+    
+    public void SetSpaceshipMovement()
+    {
+        ClearMovementAbilities();
+        
+        if (SpaceshipMovementScene != null) AddAbility(SpaceshipMovementScene.Instantiate<MovementAbility>());
+    }
+    
+    private async Task ConnectJumpAndGravityAbilities()
+    {
+        await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+        
+        var jumpAbility = _abilities.OfType<VariableJumpAbility>().FirstOrDefault();
+        var gravityAbility = _abilities.OfType<GravityAbility>().FirstOrDefault();
+        
+        if (jumpAbility != null && gravityAbility != null)
         {
-            return DefaultMovementType;
+            gravityAbility.AscendGravity = jumpAbility.AscendGravity;
+            gravityAbility.DescendGravity = jumpAbility.DescendGravity;
         }
-
-        currentIndex = (currentIndex + 1) % keys.Count;
-        return keys[currentIndex];
-    }
-
-    public void OnSpaceshipEntered()
-    {
-        SwitchMovement("ship");
-        ShipSprite.Visible = true;
-    }
-
-    public void OnSpaceshipExited()
-    {
-        SwitchMovement(DefaultMovementType);
-        ShipSprite.Visible = false;
     }
 }
