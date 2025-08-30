@@ -19,12 +19,15 @@ public partial class PlayerController : CharacterBody2D
     [Export] public PackedScene WallJumpScene { get; set; }
     
     [Signal] public delegate void JumpInitiatedEventHandler();
+    [Signal] public delegate void MovementAbilitiesChangedEventHandler();
     
     public Vector2 LastDirection { get; private set; } = Vector2.Right;
     public Vector2 PreviousVelocity { get; private set; } = Vector2.Zero;
     
     private List<MovementAbility> _abilities = [];
     private PlayerInputHandler _inputHandler;
+    
+    public IReadOnlyList<MovementAbility> GetActiveAbilities() => _abilities;
     
     public override void _Ready()
     {
@@ -39,6 +42,7 @@ public partial class PlayerController : CharacterBody2D
         }
         
         _ = ConnectJumpAndGravityAbilities();
+        EmitSignalMovementAbilitiesChanged();
     }
     
     public override void _PhysicsProcess(double delta)
@@ -100,6 +104,7 @@ public partial class PlayerController : CharacterBody2D
         if (OneWayPlatformScene != null) AddAbility(OneWayPlatformScene.Instantiate<MovementAbility>());
         
         _ = ConnectJumpAndGravityAbilities();
+        EmitSignalMovementAbilitiesChanged();
     }
     
     public void SetSpaceshipMovement()
@@ -107,6 +112,7 @@ public partial class PlayerController : CharacterBody2D
         ClearMovementAbilities();
         
         if (SpaceshipMovementScene != null) AddAbility(SpaceshipMovementScene.Instantiate<MovementAbility>());
+        EmitSignalMovementAbilitiesChanged();
     }
     
     private async Task ConnectJumpAndGravityAbilities()

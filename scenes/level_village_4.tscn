@@ -193,8 +193,6 @@ process_mode = 4
 process_material = SubResource("ParticleProcessMaterial_lgb3u")
 
 [node name="Enemies" type="Node2D" parent="."]
-process_mode = 4
-visible = false
 
 [node name="Flying Enemy" parent="Enemies" instance=ExtResource("18_162yw")]
 position = Vector2(1122, -33)
