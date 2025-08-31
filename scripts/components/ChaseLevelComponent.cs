@@ -86,4 +86,19 @@ public partial class ChaseLevelComponent : Node
         EmitSignalChaseStopped();
         _isChasing = false;
     }
+    
+    public void SetChasing(bool shouldChase)
+    {
+        if (shouldChase && !_isChasing)
+        {
+            _previousCameraFollowTarget = _phantomCamera.FollowTarget;
+            _phantomCamera.FollowTarget = _root;
+            EmitSignalChaseStarted();
+            _isChasing = true;
+        }
+        else if (!shouldChase && _isChasing)
+        {
+            StopChasing();
+        }
+    }
 }

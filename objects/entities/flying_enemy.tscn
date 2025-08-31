@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://xp4njljog0x2"]
+[gd_scene load_steps=30 format=3 uid="uid://xp4njljog0x2"]
 
 [ext_resource type="Texture2D" uid="uid://22k1u37j6k8y" path="res://sprites/flying_enemy.png" id="1_30hhw"]
 [ext_resource type="Shader" uid="uid://bs4xvm4qkurpr" path="res://shaders/hit_flash.tres" id="1_uyhuj"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://dx80ivlvuuew4" path="res://objects/fxs/fire_fx.tscn" id="14_mrjm6"]
 [ext_resource type="Script" uid="uid://d1388lhp2gpgr" path="res://scripts/components/IceEffectComponent.cs" id="14_pkino"]
 [ext_resource type="PackedScene" uid="uid://ck6nml06tm6ue" path="res://objects/fxs/ice_fx.tscn" id="15_pkino"]
+[ext_resource type="Script" uid="uid://b4hvq2i66fjhi" path="res://scripts/components/PathFollowerComponent.cs" id="18_q78ru"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hil2i"]
 radius = 6.0
@@ -190,3 +191,8 @@ collision_mask = 20
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_cmp1h")
+
+[node name="PathFollowerComponent" type="Node2D" parent="."]
+script = ExtResource("18_q78ru")
+ShouldRotate = false
+metadata/_custom_type_script = "uid://b4hvq2i66fjhi"
