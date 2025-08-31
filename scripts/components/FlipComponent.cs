@@ -6,13 +6,13 @@ public partial class FlipComponent : Node2D
 {
     [Export] public Sprite2D LeftEye { get; set; }
     [Export] public Sprite2D RightEye { get; set; }
-    [Export] public PlatformMovementComponent PlatformMovement { get; set; }
+    [Export] public PlayerController PlayerController { get; set; }
 
     public override void _Process(double delta)
     {
-        if (PlatformMovement == null) return;
+        if (PlayerController == null) return;
 
-        var velocity = PlatformMovement.LastDirection;
+        var velocity = PlayerController.LastDirection;
         switch (velocity.X)
         {
             case < 0f:
