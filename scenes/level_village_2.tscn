@@ -59,7 +59,7 @@ ease = 2
 [node name="Brick Player" parent="." instance=ExtResource("1_wcma7")]
 z_index = 1
 
-[node name="HitParticles" parent="Brick Player" index="26"]
+[node name="HitParticles" parent="Brick Player" index="25"]
 process_material = SubResource("ParticleProcessMaterial_lgb3u")
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("2_ot3dy")]

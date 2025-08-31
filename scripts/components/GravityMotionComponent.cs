@@ -2,6 +2,7 @@ using Godot;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class GravityMotionComponent : Node2D
 {
     [Export] public CharacterBody2D Body { get; set; }

@@ -6,6 +6,7 @@ using Mr.BrickAdventures.scripts.Resources;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class SkillUnlockerComponent : Node
 {
     public SkillManager SkillManager { get; private set; }

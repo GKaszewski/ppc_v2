@@ -2,6 +2,7 @@ using Godot;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class TooltipComponent : Area2D
 {
     [Export] public Control UiRoot { get; set; }

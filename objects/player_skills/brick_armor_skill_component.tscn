@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdeh7wfc62fr4"]
+
+[ext_resource type="Script" uid="uid://5fyepa666cc8" path="res://scripts/components/BrickArmorSkillComponent.cs" id="1_i7tox"]
+
+[node name="BrickArmorSkillComponent" type="Node"]
+script = ExtResource("1_i7tox")
+metadata/_custom_type_script = "uid://5fyepa666cc8"

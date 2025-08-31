@@ -3,6 +3,7 @@ using Godot;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class CageComponent : Node
 {
     [Export] public LeverComponent Lever { get; set; }

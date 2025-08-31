@@ -3,6 +3,7 @@ using Godot;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class JumpPadComponent : Node
 {
     [Export] public float JumpForce { get; set; } = 10f;

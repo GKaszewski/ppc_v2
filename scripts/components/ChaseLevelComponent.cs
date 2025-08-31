@@ -3,6 +3,7 @@ using PhantomCamera;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class ChaseLevelComponent : Node
 {
     [Export] public float ChaseSpeed { get; set; } = 200.0f;

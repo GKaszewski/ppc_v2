@@ -2,6 +2,7 @@ using Godot;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class SideToSideMovementComponent : Node
 {
     [Export] public Sprite2D Sprite { get; set; }

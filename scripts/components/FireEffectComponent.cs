@@ -3,6 +3,7 @@ using Mr.BrickAdventures.scripts.Resources;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class FireEffectComponent : Node
 {
     [Export] public HealthComponent Health { get; set; }

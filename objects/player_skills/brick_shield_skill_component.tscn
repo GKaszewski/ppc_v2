@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://blwk5qduvdnxv"]
+
+[ext_resource type="Script" uid="uid://dbiu2qrr8sprx" path="res://scripts/components/BrickShieldSkillComponent.cs" id="1_gjjt4"]
+[ext_resource type="PackedScene" uid="uid://c6rgh0qn4jqlc" path="res://objects/items/shield.tscn" id="2_wjvuq"]
+
+[node name="BrickShieldSkillComponent" type="Node"]
+script = ExtResource("1_gjjt4")
+ShieldScene = ExtResource("2_wjvuq")
+metadata/_custom_type_script = "uid://dbiu2qrr8sprx"

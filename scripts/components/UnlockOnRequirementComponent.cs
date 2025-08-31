@@ -4,6 +4,7 @@ using Mr.BrickAdventures.scripts.Resources;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class UnlockOnRequirementComponent : Node
 {
     [Export] public RequirementComponent RequirementComponent { get; set; }

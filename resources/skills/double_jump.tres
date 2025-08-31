@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="SkillData" load_steps=5 format=3 uid="uid://bxsgq8703qx4u"]
+
+[ext_resource type="Script" uid="uid://d4crrfmbgxnqf" path="res://scripts/Resources/SkillData.cs" id="1_p5qvt"]
+[ext_resource type="PackedScene" uid="uid://dwaxbojb44a6l" path="res://objects/player_skills/double_jump_skill.tscn" id="1_t7o84"]
+[ext_resource type="Script" uid="uid://dwb0e05pewcsn" path="res://scripts/Resources/SkillUpgrade.cs" id="2_kywbf"]
+
+[sub_resource type="Resource" id="Resource_0fn2n"]
+script = ExtResource("2_kywbf")
+Cost = 80
+Description = ""
+Properties = Dictionary[String, Variant]({})
+metadata/_custom_type_script = "uid://dwb0e05pewcsn"
+
+[resource]
+script = ExtResource("1_p5qvt")
+Name = "DOUBLE_JUMP"
+Description = "DOUBLE_JUMP_DESCRIPTION"
+IsActive = false
+Level = 1
+Type = 2
+Node = ExtResource("1_t7o84")
+Upgrades = [SubResource("Resource_0fn2n")]
+metadata/_custom_type_script = "uid://d4crrfmbgxnqf"

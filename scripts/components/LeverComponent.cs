@@ -3,6 +3,7 @@ using Godot;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class LeverComponent : Node
 {
     [Export] public Area2D Area { get; set; }

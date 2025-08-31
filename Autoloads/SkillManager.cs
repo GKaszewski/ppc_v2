@@ -19,6 +19,8 @@ public partial class SkillManager : Node
 
     [Signal]
     public delegate void ActiveThrowSkillChangedEventHandler(BrickThrowComponent throwComponent);
+    [Signal]
+    public delegate void SkillRemovedEventHandler(SkillData skillData);
     
     public override void _Ready()
     {
@@ -145,6 +147,8 @@ public partial class SkillManager : Node
             }
         }
         ActiveComponents.Remove(skillName);
+        var sd = GetSkillByName(skillName);
+        if (sd != null) EmitSignalSkillRemoved(sd);
     }
     
     private void RemoveAllActiveSkills()

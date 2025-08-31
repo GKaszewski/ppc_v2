@@ -2,6 +2,7 @@ using Godot;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class DestroyableComponent : Node2D
 {
     [Export] public HealthComponent Health { get; set; }

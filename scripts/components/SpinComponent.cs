@@ -2,6 +2,7 @@ using Godot;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class SpinComponent : Node
 {
     [Export] public float SpinSpeed { get; set; } = 8f;

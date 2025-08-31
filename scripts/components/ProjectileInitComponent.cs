@@ -10,6 +10,7 @@ public class ProjectileInitParams
     public float PowerMultiplier { get; set; } = 1f;
 }
 
+[GlobalClass]
 public partial class ProjectileInitComponent : Node
 {
     [Export] public LaunchComponent LaunchComponent { get; set; }

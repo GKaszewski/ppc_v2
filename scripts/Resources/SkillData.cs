@@ -4,6 +4,7 @@ using Godot.Collections;
 
 namespace Mr.BrickAdventures.scripts.Resources;
 
+[GlobalClass]
 public partial class SkillData : Resource
 {
     [Export] public string Name { get; set; } = "New Skill";

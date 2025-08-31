@@ -3,6 +3,7 @@ using Godot;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class TrailComponent : Line2D
 {
     [Export] public int MaxPoints { get; set; } = 100;

@@ -2,6 +2,7 @@ using Godot;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class LaunchComponent : Node2D
 {
     [Export] public Vector2 InitialDirection { get; set; } = Vector2.Right;

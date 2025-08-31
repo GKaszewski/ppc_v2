@@ -2,6 +2,7 @@ using Godot;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class HitComponent : Node
 {
     [Export] public Sprite2D Sprite { get; set; }

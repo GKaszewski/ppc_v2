@@ -2,6 +2,7 @@ using Godot;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class HomingMissileMotionComponent : Node
 {
     [Export] public LaunchComponent Launch { get; set; }

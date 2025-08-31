@@ -2,6 +2,7 @@ using Godot;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class FlashingComponent : Node
 {
     [Export] public Node2D Sprite { get; set; }
