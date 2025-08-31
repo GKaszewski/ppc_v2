@@ -8,8 +8,8 @@ namespace Mr.BrickAdventures.scripts.UI;
 public partial class ChargeProgressBar : ProgressBar
 {
     [Export] public ProgressBar ProgressBar { get; set; }
-    [Export] private SkillManager _skillManager;
 
+    private SkillManager _skillManager;
     private BrickThrowComponent _throwComponent;
     private ChargeThrowInputResource _throwInput;
 
@@ -17,8 +17,10 @@ public partial class ChargeProgressBar : ProgressBar
     {
         ProgressBar.Hide();
 
+        _skillManager = GetNodeOrNull<SkillManager>("/root/SkillManager");
         if (_skillManager == null)
         {
+            GD.PrintErr("ChargeProgressBar: SkillManager autoload not found.");
             return;
         }
         
@@ -26,12 +28,21 @@ public partial class ChargeProgressBar : ProgressBar
         
         SetupDependencies();
     }
-    
+
+    public override void _ExitTree()
+    {
+        if (_skillManager != null && IsInstanceValid(_skillManager))
+        {
+            _skillManager.ActiveThrowSkillChanged -= OnActiveThrowSkillChanged;
+        }
+        OnOwnerExiting();
+    }
+
     private void OnActiveThrowSkillChanged(BrickThrowComponent throwComponent)
     {
         OnOwnerExiting();
 
-        if (throwComponent == null) return;
+        if (throwComponent == null || !IsInstanceValid(throwComponent)) return;
         
         _throwComponent = throwComponent;
         _throwComponent.TreeExiting += OnOwnerExiting;

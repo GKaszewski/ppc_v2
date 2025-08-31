@@ -58,6 +58,10 @@ public partial class GameManager : Node
     private void OnNodeRemoved(Node node)
     {
         _sceneNodes.Remove(node);
+        if (node == _player)
+        {
+            _player = null;
+        }
     }
 
     public void AddCoins(int amount)
@@ -231,7 +235,9 @@ public partial class GameManager : Node
 
     public PlayerController GetPlayer()
     {
-        if (_player != null) return _player;
+        if (_player != null && IsInstanceValid(_player)) return _player;
+        
+        _player = null;
 
         foreach (var node in _sceneNodes)
         {

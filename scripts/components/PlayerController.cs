@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
+using Mr.BrickAdventures.Autoloads;
 
 namespace Mr.BrickAdventures.scripts.components;
 
@@ -31,6 +32,9 @@ public partial class PlayerController : CharacterBody2D
     
     public override void _Ready()
     {
+        var skillManager = GetNodeOrNull<SkillManager>("/root/SkillManager");
+        skillManager?.RegisterPlayer(this);
+        
         _inputHandler = GetNode<PlayerInputHandler>("PlayerInputHandler");
         foreach (var child in MovementAbilitiesContainer.GetChildren())
         {

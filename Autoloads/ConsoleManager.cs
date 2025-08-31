@@ -16,6 +16,7 @@ public partial class ConsoleManager : Node
     {
         _gameManager = GetNode<GameManager>("/root/GameManager");
         _achievementManager = GetNode<AchievementManager>("/root/AchievementManager");
+        _skillManager = GetNode<SkillManager>("/root/SkillManager");
 
         RegisterConsoleCommands();
     }
@@ -96,13 +97,12 @@ public partial class ConsoleManager : Node
     private bool GetSkillManagement()
     {
         var player = _gameManager.Player;
-        if (player == null)
+        if (player == null || !IsInstanceValid(player))
         {
-            LimboConsole.Warn("Player node not found.");
+            LimboConsole.Warn("Player node not found or is invalid.");
             return false;
         }
 
-        _skillManager ??= player.GetNode<SkillManager>("SkillManager");
         _skillUnlockerComponent ??= player.GetNode<SkillUnlockerComponent>("SkillUnlockerComponent");
 
         if (_skillManager != null && _skillUnlockerComponent != null) return true;
