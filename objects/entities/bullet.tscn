@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bhc7y4xugu4q7"]
+[gd_scene load_steps=11 format=3 uid="uid://bhc7y4xugu4q7"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_w543f"]
 [ext_resource type="Script" uid="uid://2i7p7v135u7c" path="res://scripts/components/DamageComponent.cs" id="2_6th6w"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://c7p06t0eax8am" path="res://scripts/components/StraightMotionComponent.cs" id="6_lycw2"]
 [ext_resource type="Script" uid="uid://cfw8nbrarex0i" path="res://scripts/components/BulletComponent.cs" id="7_2aweg"]
 [ext_resource type="PackedScene" uid="uid://c1iorglk708g0" path="res://objects/fxs/terrain_hit_fx.tscn" id="8_6th6w"]
+[ext_resource type="Script" uid="uid://dgb8bqcri7nsj" path="res://scripts/components/HealthComponent.cs" id="9_e0mqp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_txsw8"]
 radius = 4.0
@@ -63,3 +64,8 @@ BulletSprite = NodePath("../Sprite2D")
 
 [node name="TerrainHitFX" parent="." instance=ExtResource("8_6th6w")]
 z_index = 3
+
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("9_e0mqp")
+Health = 0.1
+metadata/_custom_type_script = "uid://dgb8bqcri7nsj"

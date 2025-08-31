@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://chqb11pfoqmeb"]
+[gd_scene load_steps=25 format=4 uid="uid://chqb11pfoqmeb"]
 
 [ext_resource type="PackedScene" uid="uid://bqi5s710xb1ju" path="res://objects/entities/brick_player.tscn" id="1_wcma7"]
 [ext_resource type="PackedScene" uid="uid://cawlpch2lk3a2" path="res://objects/level/world_environment.tscn" id="2_ot3dy"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://d0s2abysa86rq" path="res://objects/entities/child.tscn" id="16_lc0ll"]
 [ext_resource type="PackedScene" uid="uid://to2xnqev0pu1" path="res://objects/entities/cage.tscn" id="17_h4uvs"]
 [ext_resource type="PackedScene" uid="uid://bwdlmualj6xbw" path="res://objects/entities/enemy.tscn" id="18_girek"]
+[ext_resource type="PackedScene" uid="uid://bqom4cm7r18db" path="res://objects/entities/killzone.tscn" id="18_hcsb6"]
 [ext_resource type="PackedScene" uid="uid://bd51frym6mm7v" path="res://objects/entities/lever.tscn" id="20_h4uvs"]
 
 [sub_resource type="Gradient" id="Gradient_qb72p"]
@@ -50,7 +51,7 @@ color_ramp = SubResource("GradientTexture1D_f1fvy")
 
 [sub_resource type="Resource" id="Resource_0nwt7"]
 script = ExtResource("7_y1tp2")
-duration = 0.25
+duration = 0.1
 transition = 3
 ease = 2
 
@@ -61,6 +62,12 @@ z_index = 1
 
 [node name="HitParticles" parent="Brick Player" index="25"]
 process_material = SubResource("ParticleProcessMaterial_lgb3u")
+
+[node name="VisibleOnScreenNotifier2D" parent="Brick Player" index="28"]
+process_mode = 4
+
+[node name="KillPlayerOutOfScreen" parent="Brick Player" index="29"]
+process_mode = 4
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("2_ot3dy")]
 
@@ -164,6 +171,9 @@ position = Vector2(792, -784)
 
 [node name="Lever" parent="." instance=ExtResource("20_h4uvs")]
 position = Vector2(-231, -776)
+
+[node name="Killzone" parent="." instance=ExtResource("18_hcsb6")]
+position = Vector2(625, 568)
 
 [connection signal="Death" from="Brick Player/HealthComponent" to="UI Layer/DeathScreen" method="OnPlayerDeath"]
 [connection signal="Death" from="Brick Player/HealthComponent" to="UI Layer/GameOverScreen" method="OnPlayerDeath"]

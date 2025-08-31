@@ -4,10 +4,10 @@
 [ext_resource type="Script" uid="uid://oyf25mpc5etr" path="res://scripts/components/LifetimeComponent.cs" id="2_mcqxt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jwgyp"]
-size = Vector2(128, 20)
+size = Vector2(128, 32)
 
 [node name="Shockwave" type="Area2D"]
-collision_layer = 0
+collision_layer = 20
 collision_mask = 72
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

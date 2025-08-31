@@ -30,5 +30,5 @@ IsActive = false
 Level = 1
 Type = 1
 Node = ExtResource("1_ax2d8")
-Upgrades = [SubResource("Resource_72ltj"), SubResource("Resource_2kdfi")]
+Upgrades = Array[ExtResource("2_o726x")]([SubResource("Resource_72ltj"), SubResource("Resource_2kdfi")])
 metadata/_custom_type_script = "uid://d4crrfmbgxnqf"

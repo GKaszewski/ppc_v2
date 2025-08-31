@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=6 format=3 uid="uid://dw5ee2lpeypnb"]
+[gd_resource type="Resource" script_class="SkillData" load_steps=6 format=3 uid="uid://dw5ee2lpeypnb"]
 
 [ext_resource type="PackedScene" uid="uid://coayig4dxelo2" path="res://objects/player_skills/brick_throw_skill.tscn" id="1_5gnea"]
 [ext_resource type="Texture2D" uid="uid://dxtdwgg3po0eg" path="res://sprites/brick_power_Skill_icon.png" id="2_yimbq"]

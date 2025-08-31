@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=6 format=3 uid="uid://cr5lo4h8wm0jc"]
+[gd_resource type="Resource" script_class="SkillData" load_steps=6 format=3 uid="uid://cr5lo4h8wm0jc"]
 
 [ext_resource type="PackedScene" uid="uid://dfm2you3v5ap4" path="res://objects/player_skills/fire_brick_throw_skill.tscn" id="2_d6y6i"]
 [ext_resource type="Script" uid="uid://dwb0e05pewcsn" path="res://scripts/Resources/SkillUpgrade.cs" id="3_1ooyb"]
