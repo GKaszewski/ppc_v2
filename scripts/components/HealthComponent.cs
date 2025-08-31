@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Godot;
+using Mr.BrickAdventures.Autoloads;
 
 namespace Mr.BrickAdventures.scripts.components;
 
@@ -12,7 +13,15 @@ public partial class HealthComponent : Node2D
     
     [Signal] public delegate void HealthChangedEventHandler(float delta, float totalHealth);
     [Signal] public delegate void DeathEventHandler();
+    
+    private DamageNumberManager _damageNumberManager;
 
+    public override void _Ready()
+    {
+        _damageNumberManager = GetNode<DamageNumberManager>("/root/DamageNumberManager");
+        _damageNumberManager?.Register(Owner);
+    }
+    
     public void SetHealth(float newValue)
     {
         _ = ApplyHealthChange(newValue);

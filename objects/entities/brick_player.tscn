@@ -216,10 +216,11 @@ Sprite = NodePath("../Graphics/Root/Right Eye")
 FlashDuration = 1.0
 HealthComponent = NodePath("../HealthComponent")
 
-[node name="StompDamageComponent" type="Node" parent="." node_paths=PackedStringArray("Area")]
+[node name="StompDamageComponent" type="Node" parent="." node_paths=PackedStringArray("Area", "Root")]
 script = ExtResource("17_bl1gx")
 Damage = 4.0
 Area = NodePath("../StompDamageArea")
+Root = NodePath("..")
 
 [node name="SkillManager" type="Node" parent="."]
 script = ExtResource("18_6lsog")
