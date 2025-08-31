@@ -41,6 +41,7 @@ DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 SteamManager="*res://Autoloads/SteamManager.cs"
 AchievementManager="*res://objects/achievement_manager.tscn"
 DamageNumberManager="*res://objects/damage_number_manager.tscn"
+SkillManager="*res://objects/skill_manager.tscn"
 
 [debug]
 

@@ -1,0 +1,13 @@
+[gd_scene load_steps=8 format=3 uid="uid://bi6v7u17vg1ww"]
+
+[ext_resource type="Script" uid="uid://dru77vj07e18s" path="res://Autoloads/SkillManager.cs" id="1_31033"]
+[ext_resource type="Script" uid="uid://d4crrfmbgxnqf" path="res://scripts/Resources/SkillData.cs" id="2_87da4"]
+[ext_resource type="Resource" uid="uid://dw5ee2lpeypnb" path="res://resources/skills/brick_throw.tres" id="3_shjvi"]
+[ext_resource type="Resource" uid="uid://cdp8sex36vdq2" path="res://resources/skills/explosive_brick.tres" id="4_53vnv"]
+[ext_resource type="Resource" uid="uid://cr5lo4h8wm0jc" path="res://resources/skills/fire_brick.tres" id="5_77gav"]
+[ext_resource type="Resource" uid="uid://ceakv6oqob6m7" path="res://resources/skills/ice_brick.tres" id="6_gib8v"]
+[ext_resource type="Resource" uid="uid://d3bjre2etov1n" path="res://resources/skills/magnetic.tres" id="7_6wy8o"]
+
+[node name="SkillManager" type="Node"]
+script = ExtResource("1_31033")
+AvailableSkills = Array[ExtResource("2_87da4")]([ExtResource("3_shjvi"), ExtResource("4_53vnv"), ExtResource("5_77gav"), ExtResource("6_gib8v"), ExtResource("7_6wy8o")])

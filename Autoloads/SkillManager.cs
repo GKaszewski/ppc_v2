@@ -1,15 +1,18 @@
+using System.Collections.Generic;
+using System.Linq;
 using Godot;
 using Godot.Collections;
-using Mr.BrickAdventures.Autoloads;
 using Mr.BrickAdventures.scripts.components;
 using Mr.BrickAdventures.scripts.interfaces;
 using Mr.BrickAdventures.scripts.Resources;
 
-namespace Mr.BrickAdventures.scripts;
+namespace Mr.BrickAdventures.Autoloads;
 
 public partial class SkillManager : Node
 {
     private GameManager _gameManager;
+    private PlayerController _player;
+
     [Export] public Array<SkillData> AvailableSkills { get; set; } = [];
     
     public Dictionary ActiveComponents { get; private set; } = new();
@@ -20,11 +23,52 @@ public partial class SkillManager : Node
     public override void _Ready()
     {
         _gameManager = GetNode<GameManager>("/root/GameManager");
-        ApplyUnlockedSkills();
+    }
+    
+    /// <summary>
+    /// Called by the PlayerController from its _Ready method to register itself with the manager.
+    /// </summary>
+    public void RegisterPlayer(PlayerController player)
+    {
+        if (_player == player) return;
+
+        // If a player is already registered (e.g., from a previous scene), unregister it first.
+        if (_player != null && IsInstanceValid(_player))
+        {
+            UnregisterPlayer();
+        }
+        
+        _player = player;
+        if (_player != null)
+        {
+            // Automatically unregister when the player node is removed from the scene.
+            _player.TreeExiting += UnregisterPlayer;
+            ApplyUnlockedSkills();
+        }
     }
 
+    /// <summary>
+    /// Cleans up skills and references related to the current player.
+    /// </summary>
+    private void UnregisterPlayer()
+    {
+        if (_player != null && IsInstanceValid(_player))
+        {
+            _player.TreeExiting -= UnregisterPlayer;
+            RemoveAllActiveSkills();
+        }
+        _player = null;
+    }
+    
     public void AddSkill(SkillData skillData)
     {
+        // Ensure a valid player is registered before adding a skill.
+        if (_player == null || !IsInstanceValid(_player))
+        {
+            GD.Print("SkillManager: Player not available to add skill.");
+            return;
+        }
+    
         if (ActiveComponents.ContainsKey(skillData.Name))
             return;
 
@@ -42,6 +86,7 @@ public partial class SkillManager : Node
                         break;
                     }
                 }
+                // Remove other throw skills if a new one is added
                 if (data is { Type: SkillType.Throw })
                     RemoveSkill(data.Name);
             }
@@ -50,7 +95,8 @@ public partial class SkillManager : Node
         var instance = skillData.Node.Instantiate();
         if (instance is ISkill skill)
         {
-            skill.Initialize(Owner, skillData); 
+            // Initialize the skill with the registered player instance.
+            skill.Initialize(_player, skillData); 
             skill.Activate();
         } 
         else
@@ -60,12 +106,13 @@ public partial class SkillManager : Node
             return;
         }
 
-        Owner.AddChild(instance);
+        // Add the skill node as a child of the player.
+        _player.AddChild(instance);
         ActiveComponents[skillData.Name] = instance;
         
         if (instance is BrickThrowComponent btc)
         {
-            EmitSignalActiveThrowSkillChanged(btc);
+           EmitSignalActiveThrowSkillChanged(btc);
         }
     }
     
@@ -89,7 +136,7 @@ public partial class SkillManager : Node
             inst.QueueFree();
 
         var skills = _gameManager.GetUnlockedSkills();
-        foreach (SkillData s in skills)
+        foreach (var s in skills)
         {
             if (s.Name == skillName)
             {
@@ -99,9 +146,23 @@ public partial class SkillManager : Node
         }
         ActiveComponents.Remove(skillName);
     }
+    
+    private void RemoveAllActiveSkills()
+    {
+        // Create a copy of keys to avoid modification during iteration
+        var keys = ActiveComponents.Keys.ToArray();
+        var skillNames = keys.Select(key => key.ToString()).ToList();
+
+        foreach (var skillName in skillNames)
+        {
+            RemoveSkill(skillName);
+        }
+    }
 
     public void ApplyUnlockedSkills()
     {
+        if (_player == null || !IsInstanceValid(_player)) return;
+
         foreach (var sd in AvailableSkills)
         {
             if (_gameManager.IsSkillUnlocked(sd))

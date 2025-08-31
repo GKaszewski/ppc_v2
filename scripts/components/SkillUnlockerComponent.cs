@@ -8,7 +8,7 @@ namespace Mr.BrickAdventures.scripts.components;
 
 public partial class SkillUnlockerComponent : Node
 {
-    [Export] public SkillManager SkillManager { get; set; }
+    public SkillManager SkillManager { get; private set; }
 
     [Signal]
     public delegate void SkillUnlockedEventHandler(SkillData skill);
@@ -18,6 +18,7 @@ public partial class SkillUnlockerComponent : Node
     public override void _Ready()
     {
         _gameManager = GetNode<GameManager>("/root/GameManager");
+        SkillManager = GetNode<SkillManager>("/root/SkillManager");
     }
 
     private bool HasEnoughCoins(int amount)
