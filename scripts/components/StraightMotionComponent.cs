@@ -2,6 +2,7 @@ using Godot;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class StraightMotionComponent : Node
 {
     [Export] public LaunchComponent LaunchComponent { get; set; }

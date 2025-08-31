@@ -2,6 +2,7 @@ using Godot;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class SpaceshipExitComponent : Area2D
 {
     [Signal] public delegate void SpaceshipExitEventHandler();

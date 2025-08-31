@@ -4,6 +4,7 @@ using Mr.BrickAdventures.scripts.interfaces;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class ExitDoorComponent : Area2D, IUnlockable
 {
     [Export] public bool Locked { get; set; } = true;

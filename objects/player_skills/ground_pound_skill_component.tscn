@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://lu3wvpqefekn"]
+
+[ext_resource type="Script" uid="uid://3sclg5kdjg13" path="res://scripts/components/GroundPoundSkillComponent.cs" id="1_gx4wb"]
+[ext_resource type="PackedScene" uid="uid://d0074by8ith81" path="res://objects/fxs/shockwave.tscn" id="2_3vdwu"]
+
+[node name="GroundPoundSkillComponent" type="Node"]
+script = ExtResource("1_gx4wb")
+ShockwaveScene = ExtResource("2_3vdwu")
+metadata/_custom_type_script = "uid://3sclg5kdjg13"

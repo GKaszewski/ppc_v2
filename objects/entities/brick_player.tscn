@@ -90,7 +90,7 @@ color_ramp = SubResource("GradientTexture1D_lgb3u")
 
 [node name="Brick Player" type="CharacterBody2D" node_paths=PackedStringArray("MovementAbilitiesContainer") groups=["player"]]
 collision_layer = 4
-collision_mask = 43
+collision_mask = 107
 script = ExtResource("1_yysbb")
 MovementAbilitiesContainer = NodePath("Movements")
 GroundMovementScene = ExtResource("2_oefns")

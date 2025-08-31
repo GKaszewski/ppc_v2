@@ -11,6 +11,7 @@ public partial class StatusEffect : GodotObject
     public Timer Timer { get; set; }
 }
 
+[GlobalClass]
 public partial class StatusEffectComponent : Node
 {
     private List<StatusEffect> _activeEffects = [];

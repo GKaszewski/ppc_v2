@@ -2,6 +2,7 @@ using Godot;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class FlipComponent : Node2D
 {
     [Export] public Sprite2D LeftEye { get; set; }

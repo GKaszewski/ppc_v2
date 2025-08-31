@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0074by8ith81"]
+
+[ext_resource type="Script" uid="uid://2i7p7v135u7c" path="res://scripts/components/DamageComponent.cs" id="1_dkcj7"]
+[ext_resource type="Script" uid="uid://oyf25mpc5etr" path="res://scripts/components/LifetimeComponent.cs" id="2_mcqxt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jwgyp"]
+size = Vector2(128, 20)
+
+[node name="Shockwave" type="Area2D"]
+collision_layer = 0
+collision_mask = 72
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jwgyp")
+
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("Area")]
+script = ExtResource("1_dkcj7")
+Area = NodePath("..")
+metadata/_custom_type_script = "uid://2i7p7v135u7c"
+
+[node name="LifetimeComponent" type="Node" parent="."]
+script = ExtResource("2_mcqxt")
+LifeTime = 0.2

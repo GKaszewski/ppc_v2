@@ -2,6 +2,7 @@ using Godot;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class LifetimeComponent : Node
 {
     [Export] public float LifeTime { get; set; } = 5.0f;

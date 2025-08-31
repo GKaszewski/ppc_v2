@@ -3,6 +3,7 @@ using Godot;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class EnemyDeathComponent : Node
 {
     [Export] public float TweenDuration { get; set; } = 0.5f;

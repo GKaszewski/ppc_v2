@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwaxbojb44a6l"]
+
+[ext_resource type="Script" uid="uid://c61jxwtgiuqsy" path="res://scripts/components/DoubleJumpSkillComponent.cs" id="1_d8v8j"]
+[ext_resource type="PackedScene" uid="uid://bktuhojquwesl" path="res://objects/movement_abilities/double_jump.tscn" id="2_romvo"]
+
+[node name="DoubleJumpSkill" type="Node"]
+script = ExtResource("1_d8v8j")
+_doubleJumpAbilityScene = ExtResource("2_romvo")
+metadata/_custom_type_script = "uid://c61jxwtgiuqsy"

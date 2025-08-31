@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="SkillData" load_steps=6 format=3 uid="uid://d12defdtmlk0u"]
+
+[ext_resource type="Script" uid="uid://d4crrfmbgxnqf" path="res://scripts/Resources/SkillData.cs" id="1_m360g"]
+[ext_resource type="PackedScene" uid="uid://blwk5qduvdnxv" path="res://objects/player_skills/brick_shield_skill_component.tscn" id="1_xjknp"]
+[ext_resource type="Script" uid="uid://dwb0e05pewcsn" path="res://scripts/Resources/SkillUpgrade.cs" id="2_lr0w4"]
+
+[sub_resource type="Resource" id="Resource_mu2sy"]
+script = ExtResource("2_lr0w4")
+Cost = 100
+Description = ""
+Properties = Dictionary[String, Variant]({
+"health": 0.25
+})
+metadata/_custom_type_script = "uid://dwb0e05pewcsn"
+
+[sub_resource type="Resource" id="Resource_5ab4a"]
+script = ExtResource("2_lr0w4")
+Cost = 150
+Description = ""
+Properties = Dictionary[String, Variant]({
+"health": 0.5
+})
+metadata/_custom_type_script = "uid://dwb0e05pewcsn"
+
+[resource]
+script = ExtResource("1_m360g")
+Name = "BRICK_SHIELD"
+Description = "BRICK_SHIELD_DESCRIPTION"
+IsActive = false
+Level = 1
+Type = 2
+Node = ExtResource("1_xjknp")
+Upgrades = [SubResource("Resource_mu2sy"), SubResource("Resource_5ab4a")]
+metadata/_custom_type_script = "uid://d4crrfmbgxnqf"

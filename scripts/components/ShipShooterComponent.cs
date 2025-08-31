@@ -3,6 +3,7 @@ using Godot;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class ShipShooterComponent : Node
 {
     [Export] public PackedScene BulletScene { get; set; }

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bktuhojquwesl"]
+
+[ext_resource type="Script" uid="uid://xc0j26e88np7" path="res://scripts/components/Movement/DoubleJumpAbility.cs" id="1_vu3oa"]
+
+[node name="DoubleJump" type="Node"]
+script = ExtResource("1_vu3oa")
+metadata/_custom_type_script = "uid://xc0j26e88np7"

@@ -4,6 +4,7 @@ using Mr.BrickAdventures.scripts.Resources;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class CollectableComponent : Node
 {
     private bool _hasFadeAway = false;

@@ -2,6 +2,7 @@ using Godot;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class OutOfScreenComponent : Node
 {
     [Export] public VisibleOnScreenNotifier2D VisibilityNotifier { get; set; }

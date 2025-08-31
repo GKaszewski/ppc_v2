@@ -3,6 +3,7 @@ using Godot;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class CollapsableComponent : Node
 {
     [Export] public Timer ToCollapseTimer { get; set; }

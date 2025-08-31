@@ -5,6 +5,7 @@ using Godot;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class TerrainHitFx : Node
 {
     private List<GpuParticles2D> _gpuParticles = [];

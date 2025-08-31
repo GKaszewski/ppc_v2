@@ -13,7 +13,7 @@
 radius = 4.0
 
 [node name="Bullet" type="Area2D"]
-collision_layer = 8
+collision_layer = 64
 collision_mask = 21
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -50,7 +50,6 @@ LifeTime = 10.0
 [node name="LaunchComponent" type="Node2D" parent="."]
 script = ExtResource("5_7bijt")
 Speed = 120.0
-metadata/_custom_type_script = "uid://873un8agkyja"
 
 [node name="StraightMotionComponent" type="Node" parent="." node_paths=PackedStringArray("LaunchComponent")]
 script = ExtResource("6_lycw2")
@@ -61,7 +60,6 @@ script = ExtResource("7_2aweg")
 Area = NodePath("..")
 TerrainHitFx = NodePath("../TerrainHitFX")
 BulletSprite = NodePath("../Sprite2D")
-metadata/_custom_type_script = "uid://cdnwrn8v05qhi"
 
 [node name="TerrainHitFX" parent="." instance=ExtResource("8_6th6w")]
 z_index = 3

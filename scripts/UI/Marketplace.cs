@@ -19,12 +19,17 @@ public partial class Marketplace : Control
     [Export] public PackedScene SkillButtonScene { get; set; }
     
     private GameManager _gameManager;
+    private SkillManager _skillManager;
     private readonly List<Button> _unlockButtons = [];
     private readonly List<SkillButton> _skillButtons = [];
 
     public override void _Ready()
     {
         _gameManager = GetNode<GameManager>("/root/GameManager");
+        _skillManager = GetNode<SkillManager>("/root/SkillManager");
+        _skillManager.SkillRemoved += OnSkillRemoved;
+        
+        Skills = _skillManager.AvailableSkills;
         
         var skillsToUnlock = new List<SkillData>();
         
@@ -135,6 +140,24 @@ public partial class Marketplace : Control
                 btn.Activate();
             else
                 btn.Deactivate();
+        }
+    }
+    
+    private void OnSkillRemoved(SkillData skill)
+    {
+        SkillButton buttonToRemove = null;
+        foreach (var button in _skillButtons)
+        {
+            if (button.Data == skill)
+            {
+                buttonToRemove = button;
+                break;
+            }
+        }
+        if (buttonToRemove != null)
+        {
+            _skillButtons.Remove(buttonToRemove);
+            buttonToRemove.QueueFree();
         }
     }
 }

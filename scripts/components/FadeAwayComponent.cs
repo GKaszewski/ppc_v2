@@ -3,6 +3,7 @@ using Godot;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class FadeAwayComponent : Node
 {
     [Export] public Sprite2D Sprite { get; set; }

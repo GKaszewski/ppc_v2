@@ -4,6 +4,7 @@ using Mr.BrickAdventures.Autoloads;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class HealthComponent : Node2D
 {
     [Export] public float Health { get; set; } = 1.0f;

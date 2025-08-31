@@ -2,6 +2,7 @@ using Godot;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class StompDamageComponent : Node
 {
     [Export] public float Damage { get; set; } = 0.25f;

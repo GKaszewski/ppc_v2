@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtxkjif7prm70"]
+
+[ext_resource type="Script" uid="uid://dl7vthhurirwc" path="res://scripts/components/XRayVisionSkillComponent.cs" id="1_ebn6n"]
+
+[node name="XRayVisionSkillComponent" type="Node"]
+script = ExtResource("1_ebn6n")
+SecretLayer = 2
+metadata/_custom_type_script = "uid://dl7vthhurirwc"

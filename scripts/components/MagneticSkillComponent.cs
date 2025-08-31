@@ -6,6 +6,7 @@ using Mr.BrickAdventures.scripts.Resources;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class MagneticSkillComponent : Node, ISkill
 {
     [Export] public Area2D MagneticArea { get; set; }

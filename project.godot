@@ -193,12 +193,14 @@ locale/translations=PackedStringArray("res://translations.en.translation", "res:
 
 [layer_names]
 
+2d_render/layer_2="SECRET"
 2d_physics/layer_1="Terrain"
 2d_physics/layer_2="Collectible Entities"
 2d_physics/layer_3="Player"
 2d_physics/layer_4="Enemy"
 2d_physics/layer_5="player projectiles"
 2d_physics/layer_6="Environment"
+2d_physics/layer_7="Enemy Projectiles"
 
 [physics]
 

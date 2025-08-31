@@ -3,6 +3,7 @@ using Mr.BrickAdventures.Autoloads;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class PlayerDeathComponent : Node2D
 {
     [Export] public AudioStreamPlayer2D DeathSfx { get; set; }

@@ -3,6 +3,7 @@ using Mr.BrickAdventures.scripts.Resources;
 
 namespace Mr.BrickAdventures.scripts.components;
 
+[GlobalClass]
 public partial class DamageComponent : Node
 {
     [Export] public float Damage { get; set; } = 0.25f;

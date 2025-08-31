@@ -14,6 +14,7 @@ public partial class MarketplaceButton : Button
     
     private GameManager _gameManager;
     private SkillUnlockerComponent _skillUnlockerComponent;
+    private SkillManager _skillManager;
 
     public override void _Ready()
     {
@@ -26,6 +27,9 @@ public partial class MarketplaceButton : Button
         {
             _skillUnlockerComponent.SkillUnlocked += OnSkillStateChanged;
         }
+        
+        _skillManager = GetNode<SkillManager>("/root/SkillManager");
+        _skillManager.SkillRemoved += OnSkillStateChanged;
         
         UpdateButtonState();
     }
