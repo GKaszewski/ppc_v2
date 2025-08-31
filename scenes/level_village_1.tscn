@@ -60,10 +60,6 @@ z_index = 10
 [node name="HitParticles" parent="Brick Player" index="26"]
 process_material = SubResource("ParticleProcessMaterial_lgb3u")
 
-[node name="ProgressiveDamageComponent" parent="Brick Player" index="31"]
-MinJumpHeight = null
-JumpReductionPercentage = null
-
 [node name="WorldEnvironment" parent="." instance=ExtResource("2_1vw1j")]
 
 [node name="UI Layer" parent="." instance=ExtResource("3_4fsls")]
