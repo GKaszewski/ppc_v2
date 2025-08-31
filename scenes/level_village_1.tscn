@@ -57,6 +57,9 @@ ease = 2
 [node name="Brick Player" parent="." instance=ExtResource("1_dnj2y")]
 z_index = 10
 
+[node name="SkillManager" parent="Brick Player" index="15"]
+script = null
+
 [node name="HitParticles" parent="Brick Player" index="26"]
 process_material = SubResource("ParticleProcessMaterial_lgb3u")
 

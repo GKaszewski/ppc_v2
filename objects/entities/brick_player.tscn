@@ -25,7 +25,6 @@
 [ext_resource type="Script" uid="uid://cecelixl41t3j" path="res://scripts/components/InvulnerabilityComponent.cs" id="15_xuhvf"]
 [ext_resource type="Script" uid="uid://dvyd26ricriql" path="res://scripts/components/FlashingComponent.cs" id="16_uno3u"]
 [ext_resource type="Script" uid="uid://dtg6115je7b5s" path="res://scripts/components/StompDamageComponent.cs" id="17_bl1gx"]
-[ext_resource type="Script" path="res://Autoloads/SkillManager.cs" id="18_6lsog"]
 [ext_resource type="AudioStream" uid="uid://duj2q0rqytaxg" path="res://sfx/jump.wav" id="18_pysae"]
 [ext_resource type="AudioStream" uid="uid://bmfn6p88gy575" path="res://sfx/player_hurt.wav" id="19_7anly"]
 [ext_resource type="Script" uid="uid://d4crrfmbgxnqf" path="res://scripts/Resources/SkillData.cs" id="19_yysbb"]
@@ -37,6 +36,7 @@
 [ext_resource type="Resource" uid="uid://d3bjre2etov1n" path="res://resources/skills/magnetic.tres" id="24_xuhvf"]
 [ext_resource type="Script" uid="uid://dlh5xcv2sy82s" path="res://scripts/components/SkillUnlockerComponent.cs" id="25_yysbb"]
 [ext_resource type="Script" uid="uid://bo506l4x0808e" path="res://scripts/components/HitComponent.cs" id="26_6n1ss"]
+[ext_resource type="Script" uid="uid://di572axt0c3s8" path="res://scripts/SkillManager.cs" id="26_uno3u"]
 [ext_resource type="Script" uid="uid://cjcc7fia15wu3" path="res://scripts/components/CanBeLaunchedComponent.cs" id="27_oefns"]
 [ext_resource type="PackedScene" uid="uid://bg76mtpcmfm2j" path="res://objects/ui/charging_bar_layer.tscn" id="28_3f5nm"]
 [ext_resource type="Script" uid="uid://cqau0810tjk4d" path="res://scripts/components/TriggerLeverComponent.cs" id="28_bnap0"]
@@ -224,11 +224,12 @@ Area = NodePath("../StompDamageArea")
 Root = NodePath("..")
 
 [node name="SkillManager" type="Node" parent="."]
-script = ExtResource("18_6lsog")
+script = ExtResource("26_uno3u")
 AvailableSkills = Array[ExtResource("19_yysbb")]([ExtResource("20_o1ihh"), ExtResource("21_ur2y5"), ExtResource("22_7til7"), ExtResource("23_e5pae"), ExtResource("24_xuhvf")])
 
-[node name="SkillUnlockerComponent" type="Node" parent="."]
+[node name="SkillUnlockerComponent" type="Node" parent="." node_paths=PackedStringArray("SkillManager")]
 script = ExtResource("25_yysbb")
+SkillManager = NodePath("../SkillManager")
 
 [node name="HitComponent" type="Node" parent="." node_paths=PackedStringArray("Sprite", "Health", "HitFx")]
 script = ExtResource("26_6n1ss")

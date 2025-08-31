@@ -194,6 +194,9 @@ process_mode = 4
 [node name="OneWayPlatformAbility" parent="Brick Player/Movements" index="3"]
 process_mode = 4
 
+[node name="SkillManager" parent="Brick Player" index="15"]
+script = null
+
 [node name="HitParticles" parent="Brick Player" index="26"]
 process_material = SubResource("ParticleProcessMaterial_lgb3u")
 
