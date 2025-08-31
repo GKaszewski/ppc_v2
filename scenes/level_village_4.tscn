@@ -197,6 +197,10 @@ process_mode = 4
 [node name="HitParticles" parent="Brick Player" index="26"]
 process_material = SubResource("ParticleProcessMaterial_lgb3u")
 
+[node name="ProgressiveDamageComponent" parent="Brick Player" index="31"]
+MinJumpHeight = null
+JumpReductionPercentage = null
+
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Flying Enemy" parent="Enemies" instance=ExtResource("18_162yw")]
