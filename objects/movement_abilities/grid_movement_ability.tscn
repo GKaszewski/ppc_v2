@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dre1vit1m4d2n"]
+
+[ext_resource type="Script" uid="uid://ctm5glmeu502l" path="res://scripts/components/Movement/GridMovementAbility.cs" id="1_xeoy8"]
+
+[node name="GridMovementAbility" type="Node"]
+script = ExtResource("1_xeoy8")
+metadata/_custom_type_script = "uid://ctm5glmeu502l"

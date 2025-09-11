@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://bqi5s710xb1ju"]
+[gd_scene load_steps=53 format=3 uid="uid://bqi5s710xb1ju"]
 
 [ext_resource type="Script" uid="uid://csel4s0e4g5uf" path="res://scripts/components/PlayerController.cs" id="1_yysbb"]
 [ext_resource type="Shader" uid="uid://bs4xvm4qkurpr" path="res://shaders/hit_flash.tres" id="2_lgb3u"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://chjbi5mgtwhsh" path="res://objects/movement_abilities/wall_jump_ability.tscn" id="7_bnap0"]
 [ext_resource type="Script" uid="uid://ck6kmnbwhsttt" path="res://scripts/components/Movement/OneWayPlatformAbility.cs" id="7_uno3u"]
 [ext_resource type="Texture2D" uid="uid://dhkwyv6ayb5qb" path="res://sprites/flying_ship.png" id="8_6lsog"]
+[ext_resource type="PackedScene" uid="uid://dre1vit1m4d2n" path="res://objects/movement_abilities/grid_movement_ability.tscn" id="8_xuhvf"]
 [ext_resource type="Script" uid="uid://dy78ak8eykw6e" path="res://scripts/components/FlipComponent.cs" id="9_yysbb"]
 [ext_resource type="Script" uid="uid://mnjg3p0aw1ow" path="res://scripts/components/CanPickUpComponent.cs" id="10_yysbb"]
 [ext_resource type="Script" uid="uid://ccqb8kd5m0eh7" path="res://scripts/components/ScoreComponent.cs" id="11_o1ihh"]
@@ -38,6 +39,7 @@
 [ext_resource type="PackedScene" uid="uid://dtem8jgcyoqar" path="res://objects/entities/green_laser.tscn" id="36_oxudy"]
 [ext_resource type="Script" uid="uid://dupnaark1f7gm" path="res://scripts/components/ProgressiveDamageComponent.cs" id="38_dhjci"]
 [ext_resource type="Script" uid="uid://dssa2taiwktis" path="res://scripts/components/Movement/PlayerInputHandler.cs" id="42_e5pae"]
+[ext_resource type="Script" uid="uid://c00siqtssccr6" path="res://scripts/components/PacXonGridInteractor.cs" id="42_xuhvf"]
 [ext_resource type="Script" uid="uid://ceoxet1nqws8w" path="res://scripts/components/SpriteTilterComponent.cs" id="43_xuhvf"]
 [ext_resource type="Script" uid="uid://b1h8r5irryxcx" path="res://scripts/components/PlayerSfxComponent.cs" id="49_qec3q"]
 [ext_resource type="Script" uid="uid://b2aanqykvdnev" path="res://scripts/components/PlayerGraphicsComponent.cs" id="50_dhjci"]
@@ -97,6 +99,7 @@ GravityScene = ExtResource("4_qec3q")
 OneWayPlatformScene = ExtResource("5_dhjci")
 SpaceshipMovementScene = ExtResource("6_721q0")
 WallJumpScene = ExtResource("7_bnap0")
+GridMovementScene = ExtResource("8_xuhvf")
 metadata/_custom_type_script = "uid://csel4s0e4g5uf"
 
 [node name="Movements" type="Node" parent="."]
@@ -296,3 +299,7 @@ script = ExtResource("38_dhjci")
 HealthComponent = NodePath("../HealthComponent")
 Sprite = NodePath("../Graphics/Root/Base")
 metadata/_custom_type_script = "uid://dupnaark1f7gm"
+
+[node name="PacXonGridInteractor" type="Node" parent="."]
+script = ExtResource("42_xuhvf")
+metadata/_custom_type_script = "uid://c00siqtssccr6"
