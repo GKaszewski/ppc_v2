@@ -62,10 +62,10 @@ ease = 2
 z_index = 1
 position = Vector2(-203, 9)
 
-[node name="HitParticles" parent="Brick Player" index="25"]
+[node name="HitParticles" parent="Brick Player" index="24"]
 process_material = SubResource("ParticleProcessMaterial_lgb3u")
 
-[node name="VisibleOnScreenNotifier2D" parent="Brick Player" index="28"]
+[node name="VisibleOnScreenNotifier2D" parent="Brick Player" index="27"]
 process_mode = 4
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("2_ot3dy")]

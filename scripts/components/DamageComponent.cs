@@ -12,11 +12,14 @@ public partial class DamageComponent : Node
     [Export] public Timer DamageTimer { get; set; }
     
     private Node _currentTarget = null;
+    private KnockbackComponent _knockbackComponent = null;
     
     [Signal] public delegate void EffectInflictedEventHandler(Node2D target, StatusEffectDataResource effect);
 
     public override void _Ready()
     {
+        _knockbackComponent = Owner.GetNodeOrNull<KnockbackComponent>("KnockbackComponent");
+        
         if (Area != null)
         {
             Area.BodyEntered += OnAreaBodyEntered;
@@ -92,6 +95,11 @@ public partial class DamageComponent : Node
             EmitSignalEffectInflicted(body, StatusEffectData);
 
         DealDamage(health);
+
+        if (_knockbackComponent != null && body is CharacterBody2D characterBody && Owner is Node2D source)
+        {
+            _knockbackComponent.ApplyKnockback(characterBody, source);
+        }
 
         inv?.Activate();
     }

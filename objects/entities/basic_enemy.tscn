@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bockkmyn8il4c"]
+[gd_scene load_steps=26 format=3 uid="uid://bockkmyn8il4c"]
 
 [ext_resource type="Shader" uid="uid://bs4xvm4qkurpr" path="res://shaders/hit_flash.tres" id="1_hh6y0"]
 [ext_resource type="Texture2D" uid="uid://duxx56wxmjoxd" path="res://sprites/basic_enemy.png" id="2_laaj3"]
@@ -14,6 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://b3tsqhr06pbrs" path="res://sfx/enemy_hurt.wav" id="14_ndloc"]
 [ext_resource type="AudioStream" uid="uid://dyev46uqusimi" path="res://sfx/shoot.wav" id="15_cg63s"]
 [ext_resource type="PackedScene" uid="uid://dx80ivlvuuew4" path="res://objects/fxs/fire_fx.tscn" id="16_jqaq6"]
+[ext_resource type="Script" uid="uid://cgfynrn68lp12" path="res://scripts/components/KnockbackComponent.cs" id="17_ih01d"]
 [ext_resource type="PackedScene" uid="uid://ck6nml06tm6ue" path="res://objects/fxs/ice_fx.tscn" id="17_o7qsb"]
 [ext_resource type="PackedScene" uid="uid://b12tppjkkqpt4" path="res://objects/fxs/hit_particles.tscn" id="18_v861c"]
 
@@ -172,3 +173,7 @@ visible = false
 [node name="HitParticles" parent="." instance=ExtResource("18_v861c")]
 position = Vector2(0, 1)
 process_material = SubResource("ParticleProcessMaterial_pxaaa")
+
+[node name="KnockbackComponent" type="Node" parent="."]
+script = ExtResource("17_ih01d")
+metadata/_custom_type_script = "uid://cgfynrn68lp12"

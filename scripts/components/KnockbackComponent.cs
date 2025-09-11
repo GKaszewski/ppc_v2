@@ -5,45 +5,33 @@ namespace Mr.BrickAdventures.scripts.components;
 [GlobalClass]
 public partial class KnockbackComponent : Node
 {
-    [Export] public CharacterBody2D Body { get; set; }
-    [Export] public float KnockbackForce { get; set; } = 25f;
-    [Export] public HealthComponent HealthComponent { get; set; }
-
-    private bool _knockbackMode = false;
-    private int _knockbackFrames = 0;
-
-    public override void _Ready()
-    {
-        HealthComponent.HealthChanged += OnHealthChanged;
-    }
-
-    public override void _Process(double delta)
-    {
-        if (_knockbackMode) _knockbackFrames++;
-
-        if (_knockbackFrames <= 1) return;
-        
-        _knockbackMode = false;
-        _knockbackFrames = 0;
-    }
-
-    public override void _PhysicsProcess(double delta)
-    {
-        if (_knockbackMode) ApplyKnockback((float)delta);
-    }
+    [Export] public float KnockbackForce { get; set; } = 400f;
+    [Export] public float KnockbackDuration { get; set; } = 0.2f; // Duration in seconds
     
-    private void OnHealthChanged(float delta, float totalHealth)
+    /// <summary>
+    /// Applies a knockback force to a target body, pushing it away from a source.
+    /// </summary>
+    /// <param name="target">The CharacterBody2D to apply the knockback to.</param>
+    /// <param name="source">The Node2D causing the knockback (e.g., the enemy, the cactus).</param>
+    public void ApplyKnockback(CharacterBody2D target, Node2D source)
     {
-        if (totalHealth <= 0f || delta >= 0f) return;
-        
-        _knockbackMode = true;
-    }
+        if (target == null || source == null)
+        {
+            return;
+        }
 
-    private void ApplyKnockback(float delta)
-    {
-        var velocity = Body.Velocity.Normalized();
-        var knockbackDirection = new Vector2(Mathf.Sign(velocity.X), 0.4f);
-        var knockbackVector = -knockbackDirection * KnockbackForce * delta;
-        Body.Velocity += knockbackVector;
+        var direction = (target.GlobalPosition - source.GlobalPosition).Normalized();
+        
+        if (direction == Vector2.Zero)
+        {
+            direction = Vector2.Up;
+        }
+
+        target.Velocity = direction * KnockbackForce;
+        
+        var tween = CreateTween();
+        tween.TweenProperty(target, "velocity", Vector2.Zero, KnockbackDuration)
+            .SetEase(Tween.EaseType.Out)
+            .SetTrans(Tween.TransitionType.Quad);
     }
 }
