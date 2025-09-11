@@ -15,12 +15,11 @@ public partial class HealthComponent : Node2D
     [Signal] public delegate void HealthChangedEventHandler(float delta, float totalHealth);
     [Signal] public delegate void DeathEventHandler();
     
-    private DamageNumberManager _damageNumberManager;
+    private FloatingTextManager _floatingTextManager;
 
     public override void _Ready()
     {
-        _damageNumberManager = GetNode<DamageNumberManager>("/root/DamageNumberManager");
-        _damageNumberManager?.Register(Owner);
+        _floatingTextManager = GetNode<FloatingTextManager>("/root/FloatingTextManager");
     }
     
     public void SetHealth(float newValue)
@@ -47,6 +46,11 @@ public partial class HealthComponent : Node2D
 
         if (delta == 0.0f)
             return;
+        
+        if (delta < 0.0f)
+            _floatingTextManager?.ShowDamage(Mathf.Abs(delta), GlobalPosition);
+        else
+            _floatingTextManager?.ShowHeal(delta, GlobalPosition);
 
         if (playSfx)
         {

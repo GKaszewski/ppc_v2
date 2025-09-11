@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://bol7g83v2accs"]
+[gd_scene load_steps=23 format=4 uid="uid://bol7g83v2accs"]
 
 [ext_resource type="PackedScene" uid="uid://bqi5s710xb1ju" path="res://objects/entities/brick_player.tscn" id="1_dnj2y"]
 [ext_resource type="PackedScene" uid="uid://cawlpch2lk3a2" path="res://objects/level/world_environment.tscn" id="2_1vw1j"]
@@ -13,6 +13,7 @@
 [ext_resource type="TileSet" uid="uid://bc5a20s6kuy8e" path="res://resources/tilesets/village/entities.tres" id="10_ei558"]
 [ext_resource type="TileSet" uid="uid://bbppo0irxdmqy" path="res://resources/tilesets/village/foreground.tres" id="11_w7c5i"]
 [ext_resource type="PackedScene" uid="uid://d0s2abysa86rq" path="res://objects/entities/child.tscn" id="15_vqevu"]
+[ext_resource type="PackedScene" uid="uid://bqom4cm7r18db" path="res://objects/entities/killzone.tscn" id="16_bxal3"]
 [ext_resource type="PackedScene" uid="uid://12jnkdygpxwc" path="res://objects/entities/exit_level.tscn" id="16_chnw1"]
 [ext_resource type="PackedScene" uid="uid://b4pdt1gv2ymyi" path="res://objects/tooltip.tscn" id="18_4bhfj"]
 
@@ -57,10 +58,7 @@ ease = 2
 [node name="Brick Player" parent="." instance=ExtResource("1_dnj2y")]
 z_index = 10
 
-[node name="SkillManager" parent="Brick Player" index="15"]
-script = null
-
-[node name="HitParticles" parent="Brick Player" index="26"]
+[node name="HitParticles" parent="Brick Player" index="25"]
 process_material = SubResource("ParticleProcessMaterial_lgb3u")
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("2_1vw1j")]
@@ -143,6 +141,9 @@ Text = "LEVEL_1_TOOLTIP_2"
 [node name="Tooltip3" parent="." instance=ExtResource("18_4bhfj")]
 position = Vector2(-59, -247)
 Text = "LEVEL_1_TOOLTIP_3"
+
+[node name="Killzone" parent="." instance=ExtResource("16_bxal3")]
+position = Vector2(704, 337)
 
 [connection signal="Death" from="Brick Player/HealthComponent" to="UI Layer/DeathScreen" method="OnPlayerDeath"]
 [connection signal="Death" from="Brick Player/HealthComponent" to="UI Layer/GameOverScreen" method="OnPlayerDeath"]

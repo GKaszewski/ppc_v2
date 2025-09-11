@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://dpibw6s3dcggr"]
-
-[ext_resource type="Script" uid="uid://i06td076ej68" path="res://Autoloads/DamageNumberManager.cs" id="1_me007"]
-[ext_resource type="PackedScene" uid="uid://c7mp0o2goauyy" path="res://objects/ui/damage_number.tscn" id="2_ghslv"]
-
-[node name="DamageNumberManager" type="Node"]
-script = ExtResource("1_me007")
-DamageNumberScene = ExtResource("2_ghslv")

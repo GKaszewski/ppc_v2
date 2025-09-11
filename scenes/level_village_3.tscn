@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://h60obxmju6mo"]
+[gd_scene load_steps=31 format=4 uid="uid://h60obxmju6mo"]
 
 [ext_resource type="PackedScene" uid="uid://dyp4i4ru2j2jh" path="res://objects/fxs/explosion_fx.tscn" id="1_p30ax"]
 [ext_resource type="PackedScene" uid="uid://dx80ivlvuuew4" path="res://objects/fxs/fire_fx.tscn" id="2_a7yjf"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://b4pdt1gv2ymyi" path="res://objects/tooltip.tscn" id="18_l3a7y"]
 [ext_resource type="PackedScene" uid="uid://cawlpch2lk3a2" path="res://objects/level/world_environment.tscn" id="20_embdf"]
 [ext_resource type="PackedScene" uid="uid://cywsu7yrtjdog" path="res://objects/level/global_light.tscn" id="21_fytod"]
+[ext_resource type="PackedScene" uid="uid://bqom4cm7r18db" path="res://objects/entities/killzone.tscn" id="21_p30ax"]
 [ext_resource type="PackedScene" uid="uid://t6h2ra7kjyq" path="res://objects/entities/small_heal_potion.tscn" id="23_m6h4x"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j7bvy"]
@@ -294,7 +295,7 @@ z_index = 5
 position = Vector2(903, -118)
 metadata/_edit_group_ = true
 
-[node name="HitParticles" parent="Brick Player" index="26"]
+[node name="HitParticles" parent="Brick Player" index="25"]
 process_material = SubResource("ParticleProcessMaterial_lgb3u")
 
 [node name="Camera2D" parent="." instance=ExtResource("12_qhkyq")]
@@ -349,6 +350,9 @@ position = Vector2(1244, -41)
 
 [node name="SmallHealPotion3" parent="." instance=ExtResource("23_m6h4x")]
 position = Vector2(1359, -42)
+
+[node name="Killzone" parent="." instance=ExtResource("21_p30ax")]
+position = Vector2(2456, 815)
 
 [connection signal="Death" from="Brick Player/HealthComponent" to="UI Layer/DeathScreen" method="OnPlayerDeath"]
 [connection signal="Death" from="Brick Player/HealthComponent" to="UI Layer/GameOverScreen" method="OnPlayerDeath"]

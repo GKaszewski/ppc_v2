@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://chqb11pfoqmeb"]
+[gd_scene load_steps=26 format=4 uid="uid://chqb11pfoqmeb"]
 
 [ext_resource type="PackedScene" uid="uid://bqi5s710xb1ju" path="res://objects/entities/brick_player.tscn" id="1_wcma7"]
 [ext_resource type="PackedScene" uid="uid://cawlpch2lk3a2" path="res://objects/level/world_environment.tscn" id="2_ot3dy"]
@@ -13,6 +13,7 @@
 [ext_resource type="TileSet" uid="uid://bbppo0irxdmqy" path="res://resources/tilesets/village/foreground.tres" id="11_r0ngp"]
 [ext_resource type="TileSet" uid="uid://ccffmjebvuoaj" path="res://resources/tilesets/village/small_foreground.tres" id="13_lc0ll"]
 [ext_resource type="PackedScene" uid="uid://12jnkdygpxwc" path="res://objects/entities/exit_level.tscn" id="15_hcsb6"]
+[ext_resource type="PackedScene" uid="uid://bockkmyn8il4c" path="res://objects/entities/basic_enemy.tscn" id="16_h4uvs"]
 [ext_resource type="PackedScene" uid="uid://d0s2abysa86rq" path="res://objects/entities/child.tscn" id="16_lc0ll"]
 [ext_resource type="PackedScene" uid="uid://to2xnqev0pu1" path="res://objects/entities/cage.tscn" id="17_h4uvs"]
 [ext_resource type="PackedScene" uid="uid://bwdlmualj6xbw" path="res://objects/entities/enemy.tscn" id="18_girek"]
@@ -59,14 +60,12 @@ ease = 2
 
 [node name="Brick Player" parent="." instance=ExtResource("1_wcma7")]
 z_index = 1
+position = Vector2(-203, 9)
 
 [node name="HitParticles" parent="Brick Player" index="25"]
 process_material = SubResource("ParticleProcessMaterial_lgb3u")
 
 [node name="VisibleOnScreenNotifier2D" parent="Brick Player" index="28"]
-process_mode = 4
-
-[node name="KillPlayerOutOfScreen" parent="Brick Player" index="29"]
 process_mode = 4
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("2_ot3dy")]
@@ -84,7 +83,7 @@ ComponentsToDisable = [NodePath("../../Brick Player")]
 
 [node name="Camera2D" parent="." instance=ExtResource("5_8nvkd")]
 physics_interpolation_mode = 1
-position = Vector2(32, -16)
+position = Vector2(-171, -7)
 process_callback = 0
 limit_left = -1952
 limit_top = -1744
@@ -93,7 +92,7 @@ limit_bottom = 560
 
 [node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
 top_level = true
-position = Vector2(32, -16)
+position = Vector2(-171, -7)
 script = ExtResource("6_ono4h")
 follow_mode = 5
 follow_target = NodePath("../Brick Player")
@@ -142,6 +141,18 @@ position = Vector2(-1329, 184)
 
 [node name="Enemies" type="Node" parent="."]
 
+[node name="Enemy5" parent="Enemies" instance=ExtResource("16_h4uvs")]
+position = Vector2(187, -784)
+
+[node name="Enemy7" parent="Enemies" instance=ExtResource("16_h4uvs")]
+position = Vector2(792, -784)
+
+[node name="Enemy8" parent="Enemies" instance=ExtResource("16_h4uvs")]
+position = Vector2(1147, -783)
+
+[node name="Enemy10" parent="Enemies" instance=ExtResource("16_h4uvs")]
+position = Vector2(1272, -143)
+
 [node name="Enemy" parent="Enemies" instance=ExtResource("18_girek")]
 position = Vector2(-1526, 256)
 
@@ -154,20 +165,8 @@ position = Vector2(-1190, 175)
 [node name="Enemy4" parent="Enemies" instance=ExtResource("18_girek")]
 position = Vector2(-1326, 320)
 
-[node name="Enemy5" parent="Enemies" instance=ExtResource("18_girek")]
-position = Vector2(1272, -143)
-
 [node name="Enemy6" parent="Enemies" instance=ExtResource("18_girek")]
 position = Vector2(1648, -352)
-
-[node name="Enemy7" parent="Enemies" instance=ExtResource("18_girek")]
-position = Vector2(1147, -783)
-
-[node name="Enemy8" parent="Enemies" instance=ExtResource("18_girek")]
-position = Vector2(187, -784)
-
-[node name="Enemy9" parent="Enemies" instance=ExtResource("18_girek")]
-position = Vector2(792, -784)
 
 [node name="Lever" parent="." instance=ExtResource("20_h4uvs")]
 position = Vector2(-231, -776)

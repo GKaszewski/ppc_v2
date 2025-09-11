@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://bhad760x3vvco"]
+[gd_scene load_steps=38 format=4 uid="uid://bhad760x3vvco"]
 
 [ext_resource type="PackedScene" uid="uid://bqi5s710xb1ju" path="res://objects/entities/brick_player.tscn" id="1_k3uyd"]
 [ext_resource type="PackedScene" uid="uid://bon6raeddf3tu" path="res://objects/entities/chaser.tscn" id="1_xraal"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://ctg4awndvgfd8" path="res://scripts/components/WaveTriggerComponent.cs" id="20_e6jir"]
 [ext_resource type="PackedScene" uid="uid://to2xnqev0pu1" path="res://objects/entities/cage.tscn" id="20_l8w2k"]
 [ext_resource type="PackedScene" uid="uid://dkqa3q6j2gof4" path="res://objects/entities/spaceship_exit.tscn" id="21_e6jir"]
+[ext_resource type="Script" uid="uid://diw6opv6yutgi" path="res://scripts/components/KillPlayerOutOfScreenComponent.cs" id="21_o1yb3"]
 
 [sub_resource type="Gradient" id="Gradient_l8w2k"]
 offsets = PackedFloat32Array(0)
@@ -194,10 +195,7 @@ process_mode = 4
 [node name="OneWayPlatformAbility" parent="Brick Player/Movements" index="3"]
 process_mode = 4
 
-[node name="SkillManager" parent="Brick Player" index="15"]
-script = null
-
-[node name="HitParticles" parent="Brick Player" index="26"]
+[node name="HitParticles" parent="Brick Player" index="25"]
 process_material = SubResource("ParticleProcessMaterial_lgb3u")
 
 [node name="Enemies" type="Node2D" parent="."]
@@ -301,6 +299,12 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="First Wave Area"]
 shape = SubResource("RectangleShape2D_o1yb3")
+
+[node name="KillPlayerOutOfScreenComponent" type="Node" parent="." node_paths=PackedStringArray("ScreenNotifier", "HealthComponent")]
+script = ExtResource("21_o1yb3")
+ScreenNotifier = NodePath("../Brick Player/VisibleOnScreenNotifier2D")
+HealthComponent = NodePath("../Brick Player/HealthComponent")
+metadata/_custom_type_script = "uid://diw6opv6yutgi"
 
 [connection signal="Death" from="Brick Player/HealthComponent" to="UI Layer/DeathScreen" method="OnPlayerDeath"]
 [connection signal="Death" from="Brick Player/HealthComponent" to="UI Layer/GameOverScreen" method="OnPlayerDeath"]

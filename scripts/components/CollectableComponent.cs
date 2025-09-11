@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using Mr.BrickAdventures.Autoloads;
 using Mr.BrickAdventures.scripts.Resources;
 
 namespace Mr.BrickAdventures.scripts.components;
@@ -15,6 +16,8 @@ public partial class CollectableComponent : Node
     [Export] public AudioStreamPlayer2D Sfx {get; set; }
     
     [Signal] public delegate void CollectedEventHandler(float amount, CollectableType type, Node2D body);
+    
+    private FloatingTextManager _floatingTextManager;
 
     public override void _Ready()
     {
@@ -25,6 +28,8 @@ public partial class CollectableComponent : Node
         
         if (Owner.HasNode("FadeAwayComponent"))
             _hasFadeAway = true;
+        
+        _floatingTextManager = GetNode<FloatingTextManager>("/root/FloatingTextManager");
     }
 
     private async void OnArea2DBodyEntered(Node2D body)
@@ -32,6 +37,22 @@ public partial class CollectableComponent : Node
         try
         {
             if (!body.HasNode("CanPickUpComponent")) return;
+
+            if (Owner is Node2D ownerNode)
+            {
+                switch (Data.Type)
+                {
+                    case CollectableType.Coin:
+                        _floatingTextManager?.ShowCoin((int)Data.Amount, ownerNode.GlobalPosition);
+                        break;
+                    case CollectableType.Health:
+                        _floatingTextManager?.ShowMessage("Healed!", ownerNode.GlobalPosition);
+                        break;
+                    case CollectableType.Kid:
+                        _floatingTextManager?.ShowMessage("Rescued!", ownerNode.GlobalPosition);
+                        break;
+                }
+            }
             
             EmitSignalCollected(Data.Amount, Data.Type, body);
             CollisionShape?.CallDeferred("set_disabled", true);

@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://bqi5s710xb1ju"]
+[gd_scene load_steps=52 format=3 uid="uid://bqi5s710xb1ju"]
 
 [ext_resource type="Script" uid="uid://csel4s0e4g5uf" path="res://scripts/components/PlayerController.cs" id="1_yysbb"]
 [ext_resource type="Shader" uid="uid://bs4xvm4qkurpr" path="res://shaders/hit_flash.tres" id="2_lgb3u"]
@@ -37,7 +37,6 @@
 [ext_resource type="Script" uid="uid://dr3uv0j7n75s" path="res://scripts/components/ShipShooterComponent.cs" id="30_usc1p"]
 [ext_resource type="AudioStream" uid="uid://dyev46uqusimi" path="res://sfx/shoot.wav" id="32_x2b7c"]
 [ext_resource type="PackedScene" uid="uid://dtem8jgcyoqar" path="res://objects/entities/green_laser.tscn" id="36_oxudy"]
-[ext_resource type="Script" uid="uid://diw6opv6yutgi" path="res://scripts/components/KillPlayerOutOfScreenComponent.cs" id="37_qec3q"]
 [ext_resource type="Script" uid="uid://dupnaark1f7gm" path="res://scripts/components/ProgressiveDamageComponent.cs" id="38_dhjci"]
 [ext_resource type="Script" uid="uid://dssa2taiwktis" path="res://scripts/components/Movement/PlayerInputHandler.cs" id="42_e5pae"]
 [ext_resource type="Script" uid="uid://ceoxet1nqws8w" path="res://scripts/components/SpriteTilterComponent.cs" id="43_xuhvf"]
@@ -277,11 +276,6 @@ gizmo_extents = 1.0
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(0, 3)
 scale = Vector2(0.8, 1.9)
-
-[node name="KillPlayerOutOfScreen" type="Node" parent="." node_paths=PackedStringArray("ScreenNotifier", "HealthComponent")]
-script = ExtResource("37_qec3q")
-ScreenNotifier = NodePath("../VisibleOnScreenNotifier2D")
-HealthComponent = NodePath("../HealthComponent")
 
 [node name="PlayerInputHandler" type="Node" parent="."]
 script = ExtResource("42_e5pae")
