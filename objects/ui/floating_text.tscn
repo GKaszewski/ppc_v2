@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7mp0o2goauyy"]
+
+[ext_resource type="Script" uid="uid://bgh1dilc82oat" path="res://scripts/UI/FloatingText.cs" id="1_721jx"]
+
+[node name="FloatingText" type="Label"]
+offset_right = 40.0
+offset_bottom = 8.0
+theme_override_constants/outline_size = 1
+theme_override_constants/shadow_outline_size = 3
+theme_override_font_sizes/font_size = 8
+text = "23"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_721jx")
+metadata/_custom_type_script = "uid://bbupymh6krrgx"

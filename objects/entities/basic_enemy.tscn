@@ -1,0 +1,174 @@
+[gd_scene load_steps=25 format=3 uid="uid://bockkmyn8il4c"]
+
+[ext_resource type="Shader" uid="uid://bs4xvm4qkurpr" path="res://shaders/hit_flash.tres" id="1_hh6y0"]
+[ext_resource type="Texture2D" uid="uid://cu72810eyk4dx" path="res://sprites/enemy-robot.png" id="2_os2h8"]
+[ext_resource type="Script" uid="uid://dgb8bqcri7nsj" path="res://scripts/components/HealthComponent.cs" id="3_n6phc"]
+[ext_resource type="Script" uid="uid://2i7p7v135u7c" path="res://scripts/components/DamageComponent.cs" id="4_t0yic"]
+[ext_resource type="Script" uid="uid://d2hrr8fruho1d" path="res://scripts/components/SideToSideMovementComponent.cs" id="5_h333r"]
+[ext_resource type="Script" uid="uid://cfdugoeduudar" path="res://scripts/components/EnemyDeathComponent.cs" id="8_dbywb"]
+[ext_resource type="Script" uid="uid://dvyd26ricriql" path="res://scripts/components/FlashingComponent.cs" id="9_bph85"]
+[ext_resource type="Script" uid="uid://bo506l4x0808e" path="res://scripts/components/HitComponent.cs" id="10_4upf6"]
+[ext_resource type="Script" uid="uid://t8rsvwdwt8ea" path="res://scripts/components/StatusEffectComponent.cs" id="11_28moq"]
+[ext_resource type="Script" uid="uid://cxuig4xh8nfov" path="res://scripts/components/FireEffectComponent.cs" id="12_dgcex"]
+[ext_resource type="Script" uid="uid://d1388lhp2gpgr" path="res://scripts/components/IceEffectComponent.cs" id="13_kga14"]
+[ext_resource type="AudioStream" uid="uid://b3tsqhr06pbrs" path="res://sfx/enemy_hurt.wav" id="14_ndloc"]
+[ext_resource type="AudioStream" uid="uid://dyev46uqusimi" path="res://sfx/shoot.wav" id="15_cg63s"]
+[ext_resource type="PackedScene" uid="uid://dx80ivlvuuew4" path="res://objects/fxs/fire_fx.tscn" id="16_jqaq6"]
+[ext_resource type="PackedScene" uid="uid://ck6nml06tm6ue" path="res://objects/fxs/ice_fx.tscn" id="17_o7qsb"]
+[ext_resource type="PackedScene" uid="uid://b12tppjkkqpt4" path="res://objects/fxs/hit_particles.tscn" id="18_v861c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pwwji"]
+size = Vector2(25, 31)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j18j0"]
+shader = ExtResource("1_hh6y0")
+shader_parameter/enabled = false
+shader_parameter/tint = Color(1, 1, 1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ejbqt"]
+size = Vector2(34, 31)
+
+[sub_resource type="Gradient" id="Gradient_qb72p"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lvsna"]
+gradient = SubResource("Gradient_qb72p")
+
+[sub_resource type="Curve" id="Curve_82d6e"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_pxaaa"]
+curve = SubResource("Curve_82d6e")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pxaaa"]
+resource_local_to_scene = true
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 8.0
+direction = Vector3(0.1, -0.5, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 400.0
+gravity = Vector3(0, 80, 0)
+damping_min = 400.0
+damping_max = 800.0
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_pxaaa")
+color = Color(0.635294, 1, 0.952941, 1)
+color_ramp = SubResource("GradientTexture1D_lvsna")
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-1.5, 0.5)
+shape = SubResource("RectangleShape2D_pwwji")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_j18j0")
+texture = ExtResource("2_os2h8")
+
+[node name="right bullet spawn" type="Node2D" parent="Sprite2D"]
+position = Vector2(16, 7)
+
+[node name="left bullet spawn" type="Node2D" parent="Sprite2D"]
+position = Vector2(-17, 7)
+
+[node name="HealthComponent" type="Node2D" parent="." node_paths=PackedStringArray("HurtSfx")]
+script = ExtResource("3_n6phc")
+HurtSfx = NodePath("../sfx_hurt")
+
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("Area")]
+script = ExtResource("4_t0yic")
+Area = NodePath("../Hitbox")
+
+[node name="SideToSideMovement" type="Node" parent="." node_paths=PackedStringArray("Sprite", "LeftRay", "RightRay", "LeftWallRay", "RightWallRay")]
+script = ExtResource("5_h333r")
+Sprite = NodePath("../Sprite2D")
+Speed = 60.0
+WaitTime = 0.5
+LeftRay = NodePath("../Left Ray")
+RightRay = NodePath("../Right Ray")
+LeftWallRay = NodePath("../Left Wall Ray")
+RightWallRay = NodePath("../Right Wall Ray")
+
+[node name="EnemyDeathComponent" type="Node" parent="." node_paths=PackedStringArray("CollisionShape", "Health")]
+script = ExtResource("8_dbywb")
+TweenDuration = 0.1
+CollisionShape = NodePath("../Hitbox/CollisionShape2D")
+Health = NodePath("../HealthComponent")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+visible = false
+position = Vector2(-2, 0.5)
+shape = SubResource("RectangleShape2D_ejbqt")
+debug_color = Color(0.913521, 0.265052, 0.323172, 0.42)
+
+[node name="Left Ray" type="RayCast2D" parent="."]
+position = Vector2(-16, 13)
+target_position = Vector2(0, 8)
+
+[node name="Left Wall Ray" type="RayCast2D" parent="."]
+position = Vector2(-16, 0)
+target_position = Vector2(-8, 0)
+
+[node name="Right Ray" type="RayCast2D" parent="."]
+position = Vector2(16, 13)
+target_position = Vector2(0, 8)
+
+[node name="Right Wall Ray" type="RayCast2D" parent="."]
+position = Vector2(16, 0)
+target_position = Vector2(8, 0)
+
+[node name="FlashingComponent" type="Node" parent="." node_paths=PackedStringArray("Sprite", "HealthComponent")]
+process_mode = 3
+script = ExtResource("9_bph85")
+Sprite = NodePath("../Sprite2D")
+HealthComponent = NodePath("../HealthComponent")
+
+[node name="HitComponent" type="Node" parent="." node_paths=PackedStringArray("Sprite", "Health", "HitFx")]
+script = ExtResource("10_4upf6")
+Sprite = NodePath("../Sprite2D")
+Health = NodePath("../HealthComponent")
+HitFx = NodePath("../HitParticles")
+
+[node name="StatusEffectComponent" type="Node" parent="."]
+script = ExtResource("11_28moq")
+
+[node name="FireEffectComponent" type="Node" parent="." node_paths=PackedStringArray("Health", "StatusEffectComponent", "FireFX")]
+script = ExtResource("12_dgcex")
+Health = NodePath("../HealthComponent")
+StatusEffectComponent = NodePath("../StatusEffectComponent")
+FireFX = NodePath("../FireFX")
+
+[node name="IceEffectComponent" type="Node" parent="." node_paths=PackedStringArray("ComponentsToDisable", "StatusEffectComponent", "IceFx")]
+script = ExtResource("13_kga14")
+ComponentsToDisable = [NodePath("../SideToSideMovement"), NodePath(""), NodePath("../DamageComponent")]
+StatusEffectComponent = NodePath("../StatusEffectComponent")
+IceFx = NodePath("../Ice FX")
+
+[node name="sfx_hurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_ndloc")
+bus = &"sfx"
+
+[node name="sfx_shoot" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_cg63s")
+bus = &"sfx"
+
+[node name="FireFX" parent="." instance=ExtResource("16_jqaq6")]
+position = Vector2(0, 9)
+emitting = false
+amount = 2048
+
+[node name="Ice FX" parent="." instance=ExtResource("17_o7qsb")]
+visible = false
+
+[node name="HitParticles" parent="." instance=ExtResource("18_v861c")]
+position = Vector2(0, 1)
+process_material = SubResource("ParticleProcessMaterial_pxaaa")
