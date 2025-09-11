@@ -27,11 +27,20 @@ public partial class GridMovementAbility : MovementAbility
     public override Vector2 ProcessMovement(Vector2 currentVelocity, double delta)
     {
         var inputDirection = _input.MoveDirection;
-
-        if (inputDirection != Vector2.Zero && inputDirection != -_currentDirection)
+        var newDirection = Vector2.Zero;
+        
+        if (Mathf.Abs(inputDirection.Y) > 0.1f)
         {
-            _nextDirection = inputDirection.Sign();
-            GD.Print($"Next Direction: {_nextDirection}");
+            newDirection = new Vector2(0, Mathf.Sign(inputDirection.Y));
+        }
+        else if (Mathf.Abs(inputDirection.X) > 0.1f)
+        {
+            newDirection = new Vector2(Mathf.Sign(inputDirection.X), 0);
+        }
+    
+        if (newDirection != Vector2.Zero && newDirection != -_currentDirection)
+        {
+            _nextDirection = newDirection;
         }
         
         return Vector2.Zero; 

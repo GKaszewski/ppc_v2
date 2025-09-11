@@ -14,16 +14,22 @@ public partial class PacXonGridInteractor : Node
     
     private PlayerGridState _currentState = PlayerGridState.OnSolid;
     private readonly List<Vector2I> _currentTrail = [];
+    private List<Node2D> _ghosts = [];
+    
+    [Signal] public delegate void TrailStartedEventHandler(Vector2 startPosition);
+    [Signal] public delegate void TrailExtendedEventHandler(Vector2 newPosition);
+    [Signal] public delegate void TrailClearedEventHandler();
 
     public override void _Ready()
     {
         _healthComponent = Owner.GetNodeOrNull<HealthComponent>("HealthComponent");
     }
 
-    public void Initialize(PacXonGridManager gridManager, GridMovementAbility gridMovement)
+    public void Initialize(PacXonGridManager gridManager, GridMovementAbility gridMovement, List<Node2D> ghosts)
     {
         _gridManager = gridManager;
         _gridMovement = gridMovement;
+        _ghosts = ghosts;
         _gridMovement.Moved += OnPlayerMoved;
     }
     
@@ -33,9 +39,12 @@ public partial class PacXonGridInteractor : Node
         
         var mapCoords = _gridManager.LocalToMap(newPosition);
         var destinationState = _gridManager.GetCellState(mapCoords);
+        
+        if (_currentState == PlayerGridState.DrawingTrail) EmitSignalTrailExtended(newPosition);
 
         if (destinationState == CellState.Trail)
         {
+            EmitSignalTrailCleared();
             _healthComponent?.DecreaseHealth(9999);
             return;
         }
@@ -49,6 +58,7 @@ public partial class PacXonGridInteractor : Node
                 _currentTrail.Clear();
                 _currentTrail.Add(mapCoords);
                 _gridManager.SetCellState(mapCoords, CellState.Trail);
+                EmitSignalTrailStarted(newPosition);
             }
         }
         else if (_currentState == PlayerGridState.DrawingTrail)
@@ -61,11 +71,12 @@ public partial class PacXonGridInteractor : Node
             }
             else if (destinationState == CellState.Solid)
             {
-                // Reached solid ground, time to fill! (Logic to come)
+                _gridManager.PerformFloodFill(_ghosts);
                 GD.Print("Fill logic triggered!");
                 _currentState = PlayerGridState.OnSolid;
                 SolidifyTrail();
                 _currentTrail.Clear();
+                EmitSignalTrailCleared();
             }
         }
     }

@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://bljbcv22gq872"]
+[gd_scene load_steps=14 format=3 uid="uid://bljbcv22gq872"]
 
 [ext_resource type="Script" uid="uid://dx4m2ouyvwkir" path="res://scripts/components/PacXonGridManager.cs" id="1_0g620"]
 [ext_resource type="Texture2D" uid="uid://bolouq7v3acmx" path="res://sprites/pacxon_tileset.png" id="1_7fq4x"]
 [ext_resource type="Script" uid="uid://b8lu5pdufiy37" path="res://scripts/PacXonLevel.cs" id="2_lbrge"]
 [ext_resource type="PackedScene" uid="uid://bqi5s710xb1ju" path="res://objects/entities/brick_player.tscn" id="3_tehv8"]
 [ext_resource type="Texture2D" uid="uid://dedn7c7464pg2" path="res://sprites/brick_pacxon.png" id="5_tn615"]
+[ext_resource type="PackedScene" uid="uid://b3877xt5upsj2" path="res://objects/entities/ghost.tscn" id="6_8wuxa"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tn615"]
 texture = ExtResource("1_7fq4x")
@@ -52,10 +53,12 @@ tile_set = SubResource("TileSet_8wuxa")
 script = ExtResource("1_0g620")
 metadata/_custom_type_script = "uid://dx4m2ouyvwkir"
 
-[node name="PacXonLevel" type="Node" parent="." node_paths=PackedStringArray("Player", "GridManager")]
+[node name="PacXonLevel" type="Node" parent="." node_paths=PackedStringArray("Player", "GridManager", "GhostContainer", "PercentageLabel")]
 script = ExtResource("2_lbrge")
 Player = NodePath("../Brick Player")
 GridManager = NodePath("../PacXonGridManager")
+GhostContainer = NodePath("../Ghosts")
+PercentageLabel = NodePath("../Label")
 metadata/_custom_type_script = "uid://b8lu5pdufiy37"
 
 [node name="Brick Player" parent="." instance=ExtResource("3_tehv8")]
@@ -76,5 +79,16 @@ process_material = SubResource("ParticleProcessMaterial_lgb3u")
 [node name="VisibleOnScreenNotifier2D" parent="Brick Player" index="27"]
 position = Vector2(0, -4.76837e-07)
 scale = Vector2(0.8, 0.8)
+
+[node name="Ghosts" type="Node2D" parent="."]
+
+[node name="Ghost" parent="Ghosts" instance=ExtResource("6_8wuxa")]
+position = Vector2(59, 64)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 73.0
+offset_right = 121.0
+offset_bottom = 8.0
+text = "sdsdsd"
 
 [editable path="Brick Player"]

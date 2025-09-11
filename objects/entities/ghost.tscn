@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3877xt5upsj2"]
+
+[ext_resource type="Texture2D" uid="uid://dpbpjffbdbovp" path="res://sprites/cap.png" id="1_ksysq"]
+[ext_resource type="Script" uid="uid://7i20oc4cyabl" path="res://scripts/components/GhostMovementComponent.cs" id="2_0qila"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0xbgb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ksysq"]
+
+[node name="Ghost" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_0xbgb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2.98023e-08, 0)
+scale = Vector2(0.609375, 0.78125)
+texture = ExtResource("1_ksysq")
+
+[node name="GhostMovementComponent" type="Node2D" parent="."]
+script = ExtResource("2_0qila")
+metadata/_custom_type_script = "uid://7i20oc4cyabl"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_ksysq")
