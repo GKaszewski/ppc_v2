@@ -9,9 +9,9 @@ public partial class FloatingTextManager : Node
     [Export] public PackedScene FloatingTextScene { get; set; }
     
     [ExportGroup("Colors")]
-    [Export] public Color DamageColor { get; set; } = new Color("#ff4b4b"); // Red
-    [Export] public Color HealColor { get; set; } = new Color("#4bff65");   // Green
-    [Export] public Color CoinColor { get; set; } = new Color("#ffd700");   // Gold
+    [Export] public Color DamageColor { get; set; } = new Color("#b21030"); // Red
+    [Export] public Color HealColor { get; set; } = new Color("#71f341");   // Green
+    [Export] public Color CoinColor { get; set; } = new Color("#ebd320");   // Gold
     [Export] public Color MessageColor { get; set; } = new Color("#ffffff"); // White
     
     public void ShowDamage(float amount, Vector2 position)

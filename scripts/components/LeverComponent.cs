@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Godot;
+using Mr.BrickAdventures.Autoloads;
 
 namespace Mr.BrickAdventures.scripts.components;
 
@@ -14,9 +15,13 @@ public partial class LeverComponent : Node
 
     [Signal]
     public delegate void ActivatedEventHandler();
+    
+    private FloatingTextManager _floatingTextManager;
 
     public override void _Ready()
     {
+        _floatingTextManager = GetNode<FloatingTextManager>("/root/FloatingTextManager");
+        
         if (Area == null)
         {
             GD.PushError("LeverComponent: Area is not set.");
@@ -46,6 +51,7 @@ public partial class LeverComponent : Node
     private async Task Activate()
     {
         EmitSignalActivated();
+        _floatingTextManager?.ShowMessage("Activated!", ((Node2D)Owner).GlobalPosition);
         Sfx?.Play();
         Sprite.Frame = StartAnimationIndex + 1;
         var timer = GetTree().CreateTimer(AnimationDuration);

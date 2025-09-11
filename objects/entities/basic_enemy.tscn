@@ -1,7 +1,7 @@
 [gd_scene load_steps=25 format=3 uid="uid://bockkmyn8il4c"]
 
 [ext_resource type="Shader" uid="uid://bs4xvm4qkurpr" path="res://shaders/hit_flash.tres" id="1_hh6y0"]
-[ext_resource type="Texture2D" uid="uid://cu72810eyk4dx" path="res://sprites/enemy-robot.png" id="2_os2h8"]
+[ext_resource type="Texture2D" uid="uid://duxx56wxmjoxd" path="res://sprites/basic_enemy.png" id="2_laaj3"]
 [ext_resource type="Script" uid="uid://dgb8bqcri7nsj" path="res://scripts/components/HealthComponent.cs" id="3_n6phc"]
 [ext_resource type="Script" uid="uid://2i7p7v135u7c" path="res://scripts/components/DamageComponent.cs" id="4_t0yic"]
 [ext_resource type="Script" uid="uid://d2hrr8fruho1d" path="res://scripts/components/SideToSideMovementComponent.cs" id="5_h333r"]
@@ -68,7 +68,7 @@ shape = SubResource("RectangleShape2D_pwwji")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_j18j0")
-texture = ExtResource("2_os2h8")
+texture = ExtResource("2_laaj3")
 
 [node name="right bullet spawn" type="Node2D" parent="Sprite2D"]
 position = Vector2(16, 7)
@@ -149,7 +149,7 @@ FireFX = NodePath("../FireFX")
 
 [node name="IceEffectComponent" type="Node" parent="." node_paths=PackedStringArray("ComponentsToDisable", "StatusEffectComponent", "IceFx")]
 script = ExtResource("13_kga14")
-ComponentsToDisable = [NodePath("../SideToSideMovement"), NodePath(""), NodePath("../DamageComponent")]
+ComponentsToDisable = [NodePath("../SideToSideMovement"), null, NodePath("../DamageComponent")]
 StatusEffectComponent = NodePath("../StatusEffectComponent")
 IceFx = NodePath("../Ice FX")
 
