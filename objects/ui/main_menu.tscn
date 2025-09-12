@@ -12,6 +12,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+focus_neighbor_bottom = NodePath("PanelContainer/MarginContainer/VBoxContainer/ContinueButton")
+focus_next = NodePath("PanelContainer/MarginContainer/VBoxContainer/ContinueButton")
 script = ExtResource("1_epxpl")
 MainMenuControl = NodePath(".")
 NewGameButton = NodePath("PanelContainer/MarginContainer/VBoxContainer/NewGameButton")
@@ -54,26 +56,42 @@ size_flags_vertical = 3
 
 [node name="ContinueButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../NewGameButton")
+focus_next = NodePath("../NewGameButton")
 text = "CONTINUE_BUTTON"
 flat = true
 
 [node name="NewGameButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../ContinueButton")
+focus_neighbor_bottom = NodePath("../SettingsButton")
+focus_next = NodePath("../SettingsButton")
+focus_previous = NodePath("../ContinueButton")
 text = "NEW_GAME_BUTTON"
 flat = true
 
 [node name="SettingsButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../NewGameButton")
+focus_neighbor_bottom = NodePath("../CreditsButton")
+focus_next = NodePath("../CreditsButton")
+focus_previous = NodePath("../NewGameButton")
 text = "SETTINGS_BUTTON"
 flat = true
 
 [node name="CreditsButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../SettingsButton")
+focus_neighbor_bottom = NodePath("../QuitButton")
+focus_next = NodePath("../QuitButton")
+focus_previous = NodePath("../SettingsButton")
 text = "CREDITS_BUTTON"
 flat = true
 
 [node name="QuitButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../CreditsButton")
+focus_previous = NodePath("../CreditsButton")
 text = "QUIT_BUTTON"
 flat = true
 

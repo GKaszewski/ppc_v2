@@ -18,6 +18,7 @@ public partial class PlayerController : CharacterBody2D
     [Export] public PackedScene OneWayPlatformScene { get; set; }
     [Export] public PackedScene SpaceshipMovementScene { get; set; }
     [Export] public PackedScene WallJumpScene { get; set; }
+    [Export] public PackedScene GridMovementScene { get; set; }
     
     [Signal] public delegate void JumpInitiatedEventHandler();
     [Signal] public delegate void MovementAbilitiesChangedEventHandler();
@@ -75,7 +76,7 @@ public partial class PlayerController : CharacterBody2D
         _abilities.Add(ability);
     }
     
-    private void ClearMovementAbilities()
+    public void ClearMovementAbilities()
     {
         foreach (var ability in _abilities)
         {
@@ -118,7 +119,14 @@ public partial class PlayerController : CharacterBody2D
         if (SpaceshipMovementScene != null) AddAbility(SpaceshipMovementScene.Instantiate<MovementAbility>());
         EmitSignalMovementAbilitiesChanged();
     }
-    
+
+    public void SetGridMovement()
+    {
+        ClearMovementAbilities();
+        if (GridMovementScene != null) AddAbility(GridMovementScene.Instantiate<MovementAbility>());
+        EmitSignalMovementAbilitiesChanged();
+    }
+
     private async Task ConnectJumpAndGravityAbilities()
     {
         await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);

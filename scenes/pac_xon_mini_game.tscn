@@ -1,0 +1,159 @@
+[gd_scene load_steps=18 format=3 uid="uid://bljbcv22gq872"]
+
+[ext_resource type="Script" uid="uid://dx4m2ouyvwkir" path="res://scripts/components/PacXonGridManager.cs" id="1_0g620"]
+[ext_resource type="Texture2D" uid="uid://bolouq7v3acmx" path="res://sprites/pacxon_tileset.png" id="1_7fq4x"]
+[ext_resource type="Script" uid="uid://b8lu5pdufiy37" path="res://scripts/PacXonLevel.cs" id="2_lbrge"]
+[ext_resource type="PackedScene" uid="uid://bqi5s710xb1ju" path="res://objects/entities/brick_player.tscn" id="3_tehv8"]
+[ext_resource type="Texture2D" uid="uid://dedn7c7464pg2" path="res://sprites/brick_pacxon.png" id="5_tn615"]
+[ext_resource type="PackedScene" uid="uid://b3877xt5upsj2" path="res://objects/entities/ghost.tscn" id="6_8wuxa"]
+[ext_resource type="Script" uid="uid://d23haq52m7ulv" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="7_7j16a"]
+[ext_resource type="Script" uid="uid://ccfft4b8rwgbo" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="8_2w5m3"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tn615"]
+texture = ExtResource("1_7fq4x")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_8wuxa"]
+sources/0 = SubResource("TileSetAtlasSource_tn615")
+
+[sub_resource type="Gradient" id="Gradient_qb72p"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lgb3u"]
+gradient = SubResource("Gradient_qb72p")
+
+[sub_resource type="Curve" id="Curve_82d6e"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_xoue7"]
+curve = SubResource("Curve_82d6e")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lgb3u"]
+resource_local_to_scene = true
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 8.0
+direction = Vector3(0.1, -0.5, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 400.0
+gravity = Vector3(0, 80, 0)
+damping_min = 400.0
+damping_max = 800.0
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_xoue7")
+color = Color(0.764706, 0.443137, 0, 1)
+color_ramp = SubResource("GradientTexture1D_lgb3u")
+
+[sub_resource type="Resource" id="Resource_uptla"]
+script = ExtResource("8_2w5m3")
+duration = 1.0
+transition = 0
+ease = 2
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7j16a"]
+
+[node name="PacXonMiniGame" type="Node2D"]
+
+[node name="PacXonGridManager" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_8wuxa")
+script = ExtResource("1_0g620")
+PlayArea = Rect2i(1, 1, 27, 14)
+metadata/_custom_type_script = "uid://dx4m2ouyvwkir"
+
+[node name="PacXonLevel" type="Node" parent="." node_paths=PackedStringArray("Player", "GridManager", "GhostContainer", "PercentageLabel")]
+script = ExtResource("2_lbrge")
+Player = NodePath("../Brick Player")
+GridManager = NodePath("../PacXonGridManager")
+GhostContainer = NodePath("../Ghosts")
+PercentageLabel = NodePath("../Label")
+metadata/_custom_type_script = "uid://b8lu5pdufiy37"
+
+[node name="Brick Player" parent="." instance=ExtResource("3_tehv8")]
+position = Vector2(101, 213)
+motion_mode = 1
+metadata/_edit_group_ = true
+
+[node name="GroundMovementAbility" parent="Brick Player/Movements" index="0"]
+process_mode = 4
+
+[node name="GravityAbility" parent="Brick Player/Movements" index="1"]
+process_mode = 4
+
+[node name="VariableJumpAbility" parent="Brick Player/Movements" index="2"]
+process_mode = 4
+
+[node name="OneWayPlatformAbility" parent="Brick Player/Movements" index="3"]
+process_mode = 4
+
+[node name="Base" parent="Brick Player/Graphics/Root" index="0"]
+texture = ExtResource("5_tn615")
+hframes = 1
+
+[node name="Left Eye" parent="Brick Player/Graphics/Root" index="1"]
+visible = false
+
+[node name="Right Eye" parent="Brick Player/Graphics/Root" index="2"]
+visible = false
+
+[node name="HitParticles" parent="Brick Player" index="24"]
+process_material = SubResource("ParticleProcessMaterial_lgb3u")
+
+[node name="VisibleOnScreenNotifier2D" parent="Brick Player" index="27"]
+position = Vector2(0, -4.76837e-07)
+scale = Vector2(0.8, 0.8)
+
+[node name="Ghosts" type="Node2D" parent="."]
+
+[node name="Ghost" parent="Ghosts" instance=ExtResource("6_8wuxa")]
+position = Vector2(252, 155)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 73.0
+offset_right = 121.0
+offset_bottom = 8.0
+text = "sdsdsd"
+
+[node name="PhantomCamera2D" type="Node2D" parent="."]
+position = Vector2(-240, -135)
+script = ExtResource("7_7j16a")
+snap_to_pixel = true
+tween_resource = SubResource("Resource_uptla")
+draw_limits = true
+limit_target = NodePath("../PacXonGridManager")
+metadata/_custom_type_script = "uid://d23haq52m7ulv"
+
+[node name="Word boundary top" type="StaticBody2D" parent="."]
+position = Vector2(0, -2)
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Word boundary top"]
+shape = SubResource("WorldBoundaryShape2D_7j16a")
+
+[node name="Word boundary bottom" type="StaticBody2D" parent="."]
+position = Vector2(0, 272)
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Word boundary bottom"]
+shape = SubResource("WorldBoundaryShape2D_7j16a")
+
+[node name="Word boundary left" type="StaticBody2D" parent="."]
+position = Vector2(0, 272)
+rotation = 1.5708
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Word boundary left"]
+shape = SubResource("WorldBoundaryShape2D_7j16a")
+
+[node name="Word boundary right" type="StaticBody2D" parent="."]
+position = Vector2(482, 272)
+rotation = -1.5708
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Word boundary right"]
+shape = SubResource("WorldBoundaryShape2D_7j16a")
+
+[editable path="Brick Player"]
