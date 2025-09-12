@@ -30,6 +30,8 @@ public partial class PacXonGridManager : TileMapLayer
     
     private void InitializeGrid()
     {
+        Clear();
+        
         for (var x = PlayArea.Position.X - 1; x <= PlayArea.End.X + 1; x++)
         {
             for (var y = PlayArea.Position.Y - 1; y <= PlayArea.End.Y + 1; y++)

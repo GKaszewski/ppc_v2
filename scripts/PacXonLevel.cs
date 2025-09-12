@@ -17,17 +17,14 @@ public partial class PacXonLevel : Node
     public override void _Ready()
     {
         var ghosts = GhostContainer.GetChildren().OfType<Node2D>().ToList();
-        
-        var playerMapPos = GridManager.LocalToMap(Player.Position);
-        Player.GlobalPosition = GridManager.MapToLocal(playerMapPos);
+        Player.ClearMovementAbilities();
+        Player.SetGridMovement();
         
         foreach (var ghost in ghosts)
         {
             var movement = ghost.GetNode<GhostMovementComponent>("GhostMovementComponent");
             movement?.Initialize(GridManager, Player);
         }
-        
-        Player.SetGridMovement();
         
         var gridMovement = Player.GetNodeOrNull<GridMovementAbility>("Movements/GridMovementAbility");
         var gridInteractor = Player.GetNodeOrNull<PacXonGridInteractor>("PacXonGridInteractor");
@@ -45,6 +42,9 @@ public partial class PacXonLevel : Node
         
         GridManager.FillPercentageChanged += OnFillPercentageChanged;
         OnFillPercentageChanged(GridManager.GetFillPercentage());
+        
+        var playerMapPos = GridManager.LocalToMap(Player.Position);
+        Player.GlobalPosition = GridManager.MapToLocal(playerMapPos);
     }
     
     private void OnFillPercentageChanged(float percentage)

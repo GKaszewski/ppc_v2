@@ -76,7 +76,7 @@ public partial class PlayerController : CharacterBody2D
         _abilities.Add(ability);
     }
     
-    private void ClearMovementAbilities()
+    public void ClearMovementAbilities()
     {
         foreach (var ability in _abilities)
         {

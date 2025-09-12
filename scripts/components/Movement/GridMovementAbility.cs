@@ -8,8 +8,8 @@ public partial class GridMovementAbility : MovementAbility
     [Export] public float MoveSpeed { get; set; } = 0.15f; // Time in seconds between moves
     [Export] public int GridSize { get; set; } = 16; // Size of one grid cell in pixels
 
-    private Vector2 _currentDirection = Vector2.Right;
-    private Vector2 _nextDirection = Vector2.Right;
+    private Vector2 _currentDirection = Vector2.Zero;
+    private Vector2 _nextDirection = Vector2.Zero;
     private Timer _moveTimer;
     
     [Signal]
@@ -26,6 +26,8 @@ public partial class GridMovementAbility : MovementAbility
     
     public override Vector2 ProcessMovement(Vector2 currentVelocity, double delta)
     {
+        GD.Print($"Player position: {_body.Position}, {_body.GlobalPosition}");
+        
         var inputDirection = _input.MoveDirection;
         var newDirection = Vector2.Zero;
         
