@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://tgaadui3lvdc"]
+[gd_scene load_steps=5 format=3 uid="uid://tgaadui3lvdc"]
 
 [ext_resource type="Script" uid="uid://cejjan582nhfn" path="res://scripts/UI/AchievementPopup.cs" id="1_8pd1y"]
 [ext_resource type="Texture2D" uid="uid://cebeyr4wnibvk" path="res://sprites/achievement.png" id="2_1wq1d"]
+[ext_resource type="Texture2D" uid="uid://fvgvlqh7vv1l" path="res://sprites/achievement_panel.png" id="2_enx8n"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_enx8n"]
-bg_color = Color(0, 0, 0, 1)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_enx8n"]
+texture = ExtResource("2_enx8n")
 
 [node name="AchievementPopup" type="CanvasLayer" node_paths=PackedStringArray("TitleLabel", "DescriptionLabel", "IconRect")]
 script = ExtResource("1_8pd1y")
@@ -33,7 +34,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_enx8n")
+theme_override_styles/panel = SubResource("StyleBoxTexture_enx8n")
 
 [node name="MarginContainer" type="MarginContainer" parent="Container/Panel"]
 layout_mode = 1
@@ -42,22 +43,26 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Container/Panel/MarginContainer"]
 layout_mode = 2
+size_flags_vertical = 4
 
 [node name="Title" type="Label" parent="Container/Panel/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(120, 30)
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "saaaaaaaaaaaaaaaaaaa"
+horizontal_alignment = 1
+vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="Description" type="Label" parent="Container/Panel/MarginContainer/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
