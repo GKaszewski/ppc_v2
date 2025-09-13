@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=16 format=3 uid="uid://bc5a20s6kuy8e"]
+[gd_resource type="TileSet" load_steps=17 format=3 uid="uid://bc5a20s6kuy8e"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_ej5iv"]
 [ext_resource type="PackedScene" uid="uid://54w4wisfj8v8" path="res://objects/entities/coin.tscn" id="2_31a0q"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://c0j1yun5s7kns" path="res://objects/entities/bouncing_mushroom.tscn" id="5_ov0dn"]
 [ext_resource type="PackedScene" uid="uid://d08dfqmirnd66" path="res://objects/entities/big_treasure.tscn" id="5_xxibl"]
 [ext_resource type="PackedScene" uid="uid://073ts5cxtwbl" path="res://objects/entities/treasure.tscn" id="6_fmgww"]
+[ext_resource type="PackedScene" uid="uid://dstko446qydsc" path="res://objects/entities/cannon.tscn" id="6_xxibl"]
 [ext_resource type="PackedScene" uid="uid://cm3rixnnev1pg" path="res://objects/entities/jump_pad.tscn" id="7_0kjxj"]
 [ext_resource type="PackedScene" uid="uid://to2xnqev0pu1" path="res://objects/entities/cage.tscn" id="8_83o0w"]
 [ext_resource type="PackedScene" uid="uid://bd51frym6mm7v" path="res://objects/entities/lever.tscn" id="9_at40q"]
@@ -151,6 +152,7 @@ scenes/9/scene = ExtResource("10_ivcjr")
 scenes/10/scene = ExtResource("3_31a0q")
 scenes/11/scene = ExtResource("4_x63lh")
 scenes/12/scene = ExtResource("5_ov0dn")
+scenes/13/scene = ExtResource("6_xxibl")
 
 [resource]
 physics_layer_0/collision_layer = 1

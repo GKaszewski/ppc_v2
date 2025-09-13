@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 namespace Mr.BrickAdventures.scripts.components;
@@ -8,31 +9,27 @@ public partial class PeriodicShootingComponent : Node
     [Export] public PackedScene BulletScene { get; set; }
     [Export] public float ShootInterval { get; set; } = 1.0f;
     [Export] public Vector2 ShootDirection { get; set; } = Vector2.Right;
-    [Export] public SideToSideMovementComponent SideToSideMovement { get; set; }
-    [Export] public Node2D BulletSpawnRight { get; set; }
-    [Export] public Node2D BulletSpawnLeft { get; set; }
+    [Export] public Node2D BulletSpawnPointRight { get; set; }
+    [Export] public Node2D BulletSpawnPointLeft { get; set; }
     [Export] public float ShootingIntervalVariation { get; set; } = 0.0f;
 
     private Timer _timer;
+    private RandomNumberGenerator _rng;
 
     public override void _Ready()
     {
+        _rng = new RandomNumberGenerator();
         SetupTimer();
-    }
-
-    public override void _Process(double delta)
-    {
-        if (SideToSideMovement == null) return;
-        
-        ShootDirection = SideToSideMovement.Direction != Vector2.Zero ? SideToSideMovement.Direction : Vector2.Right;
     }
 
     private void SetupTimer()
     {
-        _timer = new Timer();
-        _timer.WaitTime = GetShootInterval();
-        _timer.OneShot = false;
-        _timer.Autostart = true;
+        _timer = new Timer
+        {
+            WaitTime = GetNextShootInterval(),
+            OneShot = false,
+            Autostart = true
+        };
         _timer.Timeout += OnTimerTimeout;
         AddChild(_timer);
     }
@@ -40,33 +37,52 @@ public partial class PeriodicShootingComponent : Node
     private void OnTimerTimeout()
     {
         Shoot();
-        _timer.Start();
+        _timer.WaitTime = GetNextShootInterval();
     }
 
-    private double GetShootInterval()
+    private double GetNextShootInterval()
     {
-        if (ShootingIntervalVariation == 0f) return ShootInterval;
+        if (ShootingIntervalVariation <= 0f)
+        {
+            return ShootInterval;
+        }
         
-        var rng = new RandomNumberGenerator();
-        return ShootInterval + rng.RandfRange(-ShootingIntervalVariation, ShootingIntervalVariation);
+        return Math.Max(0.01, ShootInterval + _rng.RandfRange(-ShootingIntervalVariation, ShootingIntervalVariation));
     }
 
     private void Shoot()
     {
+        if (BulletScene == null)
+        {
+            GD.PushError("PeriodicShootingComponent: BulletScene is not set.");
+            return;
+        }
+        
         if (ShootDirection == Vector2.Zero) return;
+        
+        var spawnNode = (ShootDirection.X >= 0 || BulletSpawnPointLeft == null) 
+            ? BulletSpawnPointRight 
+            : BulletSpawnPointLeft;
+        
+        if (spawnNode == null)
+        {
+            GD.PrintErr("PeriodicShootingComponent: A suitable bullet spawn point is not set.");
+            return;
+        }
 
-        var root = Owner as Node2D;
+        var spawnPosition = spawnNode.GlobalPosition;
+        var owner = Owner as Node2D;
+        var ownerRotation = owner?.Rotation ?? 0f;
+        
         var bulletInstance = BulletScene.Instantiate<Node2D>();
-        var launchComponent = bulletInstance.GetNodeOrNull<LaunchComponent>("LaunchComponent");
-        var spawnPosition = ShootDirection == Vector2.Right ? BulletSpawnRight.GlobalPosition : BulletSpawnLeft.GlobalPosition;
-        if (launchComponent != null)
+        if (bulletInstance.GetNodeOrNull<LaunchComponent>("LaunchComponent") is { } launchComponent)
         {
             launchComponent.InitialDirection = ShootDirection;
             launchComponent.SpawnPosition = spawnPosition;
-            if (root != null) launchComponent.SpawnRotation = root.Rotation;
+            launchComponent.SpawnRotation = ownerRotation;
         }
         
-        bulletInstance.Position = spawnPosition;
+        bulletInstance.GlobalPosition = spawnPosition;
         GetTree().CurrentScene.AddChild(bulletInstance);
     }
 }

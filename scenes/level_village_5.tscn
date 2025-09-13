@@ -65,7 +65,6 @@ polygon = PackedVector2Array(-214, -1594, 571, -1596, 571, 321, -220, 317)
 [node name="WorldEnvironment" parent="." instance=ExtResource("2_yd68a")]
 
 [node name="UI Layer" parent="." instance=ExtResource("3_qbt57")]
-visible = false
 
 [node name="HUD" parent="UI Layer" index="0" node_paths=PackedStringArray("Health")]
 Health = NodePath("../../Brick Player/HealthComponent")
@@ -124,7 +123,7 @@ tile_map_data = PackedByteArray("AAAjABMAAQAEAAMAAAAjABIAAQAEAAIAAAAjABEAAQAEAAI
 tile_set = ExtResource("9_tmn5u")
 
 [node name="Entities layer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAANAAEAAQAAAAAADAA=")
+tile_map_data = PackedByteArray("AAANAAEAAQAAAAAADAAWAPP/AQAAAAAADAAYAAIAAQAAAAAADQA=")
 tile_set = ExtResource("10_yka2u")
 
 [node name="Foreground layer" type="TileMapLayer" parent="."]
