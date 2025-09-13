@@ -123,12 +123,12 @@ bus = &"sfx"
 script = ExtResource("6_q78ru")
 Area = NodePath("../Hitbox")
 
-[node name="PeriodicShootingComponent" type="Node" parent="." node_paths=PackedStringArray("BulletSpawnRight", "BulletSpawnLeft")]
+[node name="PeriodicShootingComponent" type="Node" parent="." node_paths=PackedStringArray("BulletSpawnPointRight", "BulletSpawnPointLeft")]
 script = ExtResource("7_weo6b")
 BulletScene = ExtResource("7_4ajjm")
 ShootInterval = 2.0
-BulletSpawnRight = NodePath("../laser spawn point right")
-BulletSpawnLeft = NodePath("../laser spawn point left")
+BulletSpawnPointRight = NodePath("../laser spawn point right")
+BulletSpawnPointLeft = NodePath("../laser spawn point left")
 ShootingIntervalVariation = 0.5
 
 [node name="EnemyDeathComponent" type="Node" parent="." node_paths=PackedStringArray("CollisionShape", "Health")]

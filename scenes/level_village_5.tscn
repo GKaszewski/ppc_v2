@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://bbwef3n2gjkt8"]
+[gd_scene load_steps=25 format=4 uid="uid://bbwef3n2gjkt8"]
 
 [ext_resource type="PackedScene" uid="uid://bqi5s710xb1ju" path="res://objects/entities/brick_player.tscn" id="1_cchob"]
 [ext_resource type="PackedScene" uid="uid://cawlpch2lk3a2" path="res://objects/level/world_environment.tscn" id="2_yd68a"]
@@ -14,6 +14,7 @@
 [ext_resource type="TileSet" uid="uid://bbppo0irxdmqy" path="res://resources/tilesets/village/foreground.tres" id="11_osyc3"]
 [ext_resource type="PackedScene" uid="uid://bqom4cm7r18db" path="res://objects/entities/killzone.tscn" id="12_m6e8x"]
 [ext_resource type="PackedScene" uid="uid://bwdlmualj6xbw" path="res://objects/entities/enemy.tscn" id="14_qxp43"]
+[ext_resource type="PackedScene" uid="uid://dt6rnh7v6dcmd" path="res://objects/level/moving_platform.tscn" id="15_1jx8o"]
 
 [sub_resource type="Resource" id="Resource_qxp43"]
 script = ExtResource("3_ggm0n")
@@ -60,6 +61,12 @@ color_ramp = SubResource("GradientTexture1D_f1fvy")
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qxp43"]
 polygon = PackedVector2Array(-214, -1594, 571, -1596, 571, 321, -220, 317)
 
+[sub_resource type="Curve2D" id="Curve2D_8fwqm"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 256, -436, 0, 0, 0, 0, 0, -436, 0, 0, 0, 0, 0, -665, 0, 0, 0, 0, 358, -665, 0, 0, 0, 0, 362, -899, 0, 0, 0, 0, 0, -898, 0, 0, 0, 0, -1, -1159, 0, 0, 0, 0, 260, -1159)
+}
+point_count = 8
+
 [node name="World" type="Node2D"]
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("2_yd68a")]
@@ -102,7 +109,6 @@ position = Vector2(32, -16)
 script = ExtResource("6_qm38r")
 follow_mode = 5
 follow_target = NodePath("../Brick Player")
-snap_to_pixel = true
 tween_resource = SubResource("Resource_0nwt7")
 follow_offset = Vector2(32, -16)
 follow_damping = true
@@ -123,7 +129,7 @@ tile_map_data = PackedByteArray("AAAjABMAAQAEAAMAAAAjABIAAQAEAAIAAAAjABEAAQAEAAI
 tile_set = ExtResource("9_tmn5u")
 
 [node name="Entities layer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAANAAEAAQAAAAAADAAWAPP/AQAAAAAADAAYAAIAAQAAAAAADQA=")
+tile_map_data = PackedByteArray("AAANAAEAAQAAAAAADAAWAPP/AQAAAAAADAAYAAIAAQAAAAAADQD4/wIAAQAAAAAADQD1/wEAAQAAAAAAAQD0/wEAAQAAAAAAAQDz/wEAAQAAAAAAAQDz/wAAAQAAAAAAAQD0/wAAAQAAAAAAAQD1/wAAAQAAAAAAAQD1////AQAAAAAAAQD0////AQAAAAAAAQDz////AQAAAAAAAQAdAAEAAQAAAAAAAQAeAAEAAQAAAAAAAQAfAAEAAQAAAAAAAQAfAAAAAQAAAAAAAQAeAAAAAQAAAAAAAQAdAAAAAQAAAAAAAQAdAP//AQAAAAAAAQAeAP//AQAAAAAAAQAfAP//AQAAAAAAAQAMANP/AQAAAAAACgALANP/AQAAAAAACgAKANP/AQAAAAAACgAJANP/AQAAAAAACgAIANP/AQAAAAAACgAHANP/AQAAAAAACgAKANH/AQAAAAAAAwA=")
 tile_set = ExtResource("10_yka2u")
 
 [node name="Foreground layer" type="TileMapLayer" parent="."]
@@ -148,6 +154,14 @@ occluder = SubResource("OccluderPolygon2D_qxp43")
 [node name="Polygon2D" type="Polygon2D" parent="LightOccluder2D"]
 visible = false
 polygon = PackedVector2Array(-208, 32, 561, 33, 565, 311, -216, 310)
+
+[node name="MovingPlatformComponent" parent="." node_paths=PackedStringArray("Path") instance=ExtResource("15_1jx8o")]
+position = Vector2(236, -436)
+Path = NodePath("../Moving Platform Path")
+Speed = 32.0
+
+[node name="Moving Platform Path" type="Path2D" parent="."]
+curve = SubResource("Curve2D_8fwqm")
 
 [connection signal="Death" from="Brick Player/HealthComponent" to="UI Layer/DeathScreen" method="OnPlayerDeath"]
 [connection signal="Death" from="Brick Player/HealthComponent" to="UI Layer/GameOverScreen" method="OnPlayerDeath"]

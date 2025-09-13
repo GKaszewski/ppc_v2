@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://dt6rnh7v6dcmd"]
+
+[ext_resource type="Script" uid="uid://g4ryqvpelmvl" path="res://scripts/components/MovingPlatformComponent.cs" id="1_hd47u"]
+[ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="2_6wunj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1avbh"]
+size = Vector2(48, 4)
+
+[node name="MovingPlatformComponent" type="AnimatableBody2D"]
+script = ExtResource("1_hd47u")
+metadata/_custom_type_script = "uid://g4ryqvpelmvl"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1avbh")
+
+[node name="Gfx" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Gfx"]
+position = Vector2(-16, 6)
+texture = ExtResource("2_6wunj")
+hframes = 12
+vframes = 12
+frame = 81
+
+[node name="Sprite2D2" type="Sprite2D" parent="Gfx"]
+position = Vector2(0, 6)
+texture = ExtResource("2_6wunj")
+hframes = 12
+vframes = 12
+frame = 82
+
+[node name="Sprite2D3" type="Sprite2D" parent="Gfx"]
+position = Vector2(16, 6)
+texture = ExtResource("2_6wunj")
+hframes = 12
+vframes = 12
+frame = 83
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+scale = Vector2(1, 0.2)
