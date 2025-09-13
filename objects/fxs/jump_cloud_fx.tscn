@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://bqhondao5bm6k"]
+
+[ext_resource type="Script" uid="uid://v7tt4w6bejux" path="res://scripts/components/CleanupComponent.cs" id="1_0051n"]
+
+[sub_resource type="Curve" id="Curve_0051n"]
+_data = [Vector2(0.00771208, 1), 0.0, 0.0, 0, 0, Vector2(0.347044, 0.89662), -1.20644, -1.20644, 0, 0, Vector2(1, 0.0114315), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_oxugj"]
+curve = SubResource("Curve_0051n")
+
+[sub_resource type="Curve" id="Curve_cc2b5"]
+_data = [Vector2(0, 1), 0.0, -2.46687, 0, 0, Vector2(0.192802, 0.6834), 0.0, 0.0, 0, 0, Vector2(0.449871, 1), -0.471266, -0.471266, 0, 0, Vector2(1, 0), -3.06444, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_qdic5"]
+width = 2048
+curve = SubResource("Curve_cc2b5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vwfwg"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 2.25
+angle_min = 23.1
+angle_max = 107.8
+direction = Vector3(0, 1, 0)
+spread = 4.0
+initial_velocity_min = 8.0
+initial_velocity_max = 8.0
+angular_velocity_min = -80.0
+angular_velocity_max = -80.0
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_qdic5")
+alpha_curve = SubResource("CurveTexture_oxugj")
+
+[node name="FootStepGfx" type="GPUParticles2D"]
+emitting = false
+amount = 64
+lifetime = 2.0
+one_shot = true
+speed_scale = 4.0
+explosiveness = 1.0
+fixed_fps = 24
+process_material = SubResource("ParticleProcessMaterial_vwfwg")
+
+[node name="CleanupComponent" type="Node" parent="."]
+script = ExtResource("1_0051n")
+metadata/_custom_type_script = "uid://v7tt4w6bejux"
+
+[connection signal="finished" from="." to="CleanupComponent" method="CleanUp"]

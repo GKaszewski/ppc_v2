@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://bqi5s710xb1ju"]
+[gd_scene load_steps=58 format=3 uid="uid://bqi5s710xb1ju"]
 
 [ext_resource type="Script" uid="uid://csel4s0e4g5uf" path="res://scripts/components/PlayerController.cs" id="1_yysbb"]
 [ext_resource type="Shader" uid="uid://bs4xvm4qkurpr" path="res://shaders/hit_flash.tres" id="2_lgb3u"]
@@ -42,6 +42,10 @@
 [ext_resource type="Script" uid="uid://c00siqtssccr6" path="res://scripts/components/PacXonGridInteractor.cs" id="42_xuhvf"]
 [ext_resource type="Script" uid="uid://ceoxet1nqws8w" path="res://scripts/components/SpriteTilterComponent.cs" id="43_xuhvf"]
 [ext_resource type="Script" uid="uid://cmk4m7mplqnrm" path="res://scripts/components/PacXonTrailComponent.cs" id="44_uno3u"]
+[ext_resource type="PackedScene" uid="uid://de5emerpbiknb" path="res://objects/fxs/foot_step_gfx.tscn" id="45_bl1gx"]
+[ext_resource type="Script" uid="uid://d3ksrjt1ek4gi" path="res://scripts/components/FootstepGfx.cs" id="46_6n1ss"]
+[ext_resource type="Script" uid="uid://bpopfy6m4a0br" path="res://scripts/components/JumpGfxComponent.cs" id="47_oefns"]
+[ext_resource type="PackedScene" uid="uid://bqhondao5bm6k" path="res://objects/fxs/jump_cloud_fx.tscn" id="48_bnap0"]
 [ext_resource type="Script" uid="uid://b1h8r5irryxcx" path="res://scripts/components/PlayerSfxComponent.cs" id="49_qec3q"]
 [ext_resource type="Script" uid="uid://b2aanqykvdnev" path="res://scripts/components/PlayerGraphicsComponent.cs" id="50_dhjci"]
 
@@ -308,3 +312,23 @@ metadata/_custom_type_script = "uid://c00siqtssccr6"
 [node name="PacXonTrailComponent" type="Line2D" parent="."]
 script = ExtResource("44_uno3u")
 metadata/_custom_type_script = "uid://cmk4m7mplqnrm"
+
+[node name="Feet" type="Marker2D" parent="."]
+position = Vector2(0, 16)
+
+[node name="FootstepGfx" type="Node2D" parent="." node_paths=PackedStringArray("_controller", "_marker")]
+script = ExtResource("46_6n1ss")
+_particles = ExtResource("45_bl1gx")
+_controller = NodePath("..")
+_marker = NodePath("../Feet")
+_stepInterval = 0.4
+_stepIntervalRandomness = 0.15
+_minMoveSpeed = 4.0
+_randomOffsetRange = 0.3
+metadata/_custom_type_script = "uid://d3ksrjt1ek4gi"
+
+[node name="JumpGfxComponent" type="Node2D" parent="." node_paths=PackedStringArray("Controller")]
+script = ExtResource("47_oefns")
+ParticleScene = ExtResource("48_bnap0")
+Controller = NodePath("..")
+metadata/_custom_type_script = "uid://bpopfy6m4a0br"

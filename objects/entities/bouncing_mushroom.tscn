@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0j1yun5s7kns"]
+
+[ext_resource type="Texture2D" uid="uid://bu0yv6rktj221" path="res://sprites/bouncing_mushroom.png" id="1_t1exj"]
+[ext_resource type="Script" uid="uid://bgbnof7aeydmq" path="res://scripts/components/JumpPadComponent.cs" id="2_w2gbr"]
+[ext_resource type="PackedScene" uid="uid://qo2ngbnkix85" path="res://objects/fxs/bounce_gfx.tscn" id="3_w2gbr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ci3ij"]
+size = Vector2(22, 10)
+
+[node name="Bouncing Mushrrom" type="Area2D"]
+modulate = Color(1.1, 1.1, 1.1, 1)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -13)
+shape = SubResource("RectangleShape2D_ci3ij")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_t1exj")
+hframes = 2
+
+[node name="JumpPadComponent" type="Node" parent="." node_paths=PackedStringArray("Area", "Sprite", "Particles")]
+script = ExtResource("2_w2gbr")
+JumpForce = 600.0
+Area = NodePath("..")
+Sprite = NodePath("../Sprite2D")
+Particles = NodePath("../BounceGFX")
+
+[node name="BounceGFX" parent="." instance=ExtResource("3_w2gbr")]

@@ -6,7 +6,7 @@ namespace Mr.BrickAdventures.Autoloads;
 public partial class SpeedRunManager : Node
 {
     public bool IsRunning { get; private set; } = false;
-    public bool IsVisible { get; private set; } = true;
+    public bool IsVisible { get; private set; } = false;
     
     private double _startTime;
     private double _levelStartTime;

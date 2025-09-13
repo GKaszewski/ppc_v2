@@ -11,6 +11,7 @@ public partial class JumpPadComponent : Node
     [Export] public Sprite2D Sprite { get; set; }
     [Export] public int StartAnimationIndex { get; set; } = 0;
     [Export] public float AnimationDuration { get; set; } = 0.5f;
+    [Export] public GpuParticles2D Particles { get; set; }
 
     public override void _Ready()
     {
@@ -27,6 +28,7 @@ public partial class JumpPadComponent : Node
         _ = HandleLaunchPadAnimation();
         player.Velocity = new Vector2(player.Velocity.X, -JumpForce);
         player.EmitSignal(PlayerController.SignalName.JumpInitiated);
+        Particles?.Restart();
     }
 
     private async Task HandleLaunchPadAnimation()
