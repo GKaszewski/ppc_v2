@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dstko446qydsc"]
+[gd_scene load_steps=7 format=3 uid="uid://dstko446qydsc"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_6gptm"]
 [ext_resource type="Script" uid="uid://bnaxy8cw3wrko" path="res://scripts/components/PeriodicShootingComponent.cs" id="2_q37h7"]
 [ext_resource type="PackedScene" uid="uid://bhc7y4xugu4q7" path="res://objects/entities/bullet.tscn" id="3_bhwy3"]
+[ext_resource type="Script" uid="uid://b3j23e7b7x8ro" path="res://scripts/components/RecoilComponent.cs" id="4_bhwy3"]
+[ext_resource type="Script" uid="uid://c707c53k7c5ae" path="res://scripts/components/SquashAndStretchComponent.cs" id="5_ww0hb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j5sus"]
 size = Vector2(16, 16)
@@ -23,7 +25,7 @@ shape = SubResource("RectangleShape2D_j5sus")
 [node name="PeriodicShootingComponent" type="Node" parent="." node_paths=PackedStringArray("BulletSpawnPointRight")]
 script = ExtResource("2_q37h7")
 BulletScene = ExtResource("3_bhwy3")
-ShootInterval = 3.5
+ShootInterval = 0.2
 ShootDirection = Vector2(0, -1)
 BulletSpawnPointRight = NodePath("../Bullet spawn")
 ShootingIntervalVariation = 0.3
@@ -31,3 +33,15 @@ metadata/_custom_type_script = "uid://bnaxy8cw3wrko"
 
 [node name="Bullet spawn" type="Marker2D" parent="."]
 position = Vector2(0, -16)
+
+[node name="RecoilComponent" type="Node" parent="." node_paths=PackedStringArray("RecoilTarget")]
+script = ExtResource("4_bhwy3")
+RecoilTarget = NodePath("../Sprite2D")
+RecoilDistance = 4.0
+RecoilDuration = 0.12
+metadata/_custom_type_script = "uid://b3j23e7b7x8ro"
+
+[node name="SquashAndStretchComponent" type="Node" parent="." node_paths=PackedStringArray("TargetNode")]
+script = ExtResource("5_ww0hb")
+TargetNode = NodePath("../Sprite2D")
+metadata/_custom_type_script = "uid://c707c53k7c5ae"

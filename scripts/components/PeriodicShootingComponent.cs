@@ -12,6 +12,8 @@ public partial class PeriodicShootingComponent : Node
     [Export] public Node2D BulletSpawnPointRight { get; set; }
     [Export] public Node2D BulletSpawnPointLeft { get; set; }
     [Export] public float ShootingIntervalVariation { get; set; } = 0.0f;
+    
+    [Signal] public delegate void ShotFiredEventHandler(Vector2 shootDirection);
 
     private Timer _timer;
     private RandomNumberGenerator _rng;
@@ -84,5 +86,6 @@ public partial class PeriodicShootingComponent : Node
         
         bulletInstance.GlobalPosition = spawnPosition;
         GetTree().CurrentScene.AddChild(bulletInstance);
+        EmitSignalShotFired(ShootDirection);
     }
 }
