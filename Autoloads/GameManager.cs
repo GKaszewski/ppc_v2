@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using System.Linq;
 using Godot;
 using Godot.Collections;
 using Mr.BrickAdventures.scripts.components;
 using Mr.BrickAdventures.scripts.Resources;
+using Double = System.Double;
 
 namespace Mr.BrickAdventures.Autoloads;
 
@@ -18,6 +18,8 @@ public partial class GameManager : Node
     
     private List<Node> _sceneNodes = [];
     private PlayerController _player;
+    private SpeedRunManager _speedRunManager;
+    private EventBus _eventBus;
     
     [Export] 
     public Dictionary PlayerState { get; set; } = new()
@@ -48,6 +50,12 @@ public partial class GameManager : Node
         GetTree().NodeAdded -= OnNodeAdded;
         GetTree().NodeRemoved -= OnNodeRemoved;
         _sceneNodes.Clear();
+    }
+
+    public override void _Ready()
+    {
+        _speedRunManager = GetNode<SpeedRunManager>("/root/SpeedRunManager");
+        _eventBus = GetNode<EventBus>("/root/EventBus");
     }
 
     private void OnNodeAdded(Node node)
@@ -133,7 +141,8 @@ public partial class GameManager : Node
             { "current_level", 0 },
             { "completed_levels", new Array<int>() },
             { "unlocked_levels", new Array<int>() {0}},
-            { "unlocked_skills", new Array<SkillData>() }
+            { "unlocked_skills", new Array<SkillData>() },
+            { "statistics", new Godot.Collections.Dictionary<string, Variant>()}
         };
     }
     
@@ -151,6 +160,7 @@ public partial class GameManager : Node
         {
             PlayerState["current_level"] = next;
             GetTree().ChangeSceneToPacked(LevelScenes[next]);
+            _eventBus.EmitSignal(EventBus.SignalName.LevelStarted, next, GetTree().CurrentScene);
         }
     }
     
@@ -187,6 +197,9 @@ public partial class GameManager : Node
     {
         ResetPlayerState();
         ResetCurrentSessionState();
+        
+        _speedRunManager?.StartTimer();
+        
         GetTree().ChangeSceneToPacked(LevelScenes[0]);
         GetNode<SaveSystem>("/root/SaveSystem").SaveGame();
     }
@@ -212,10 +225,14 @@ public partial class GameManager : Node
     {
         var levelIndex = (int)PlayerState["current_level"];
         MarkLevelComplete(levelIndex);
+        
         AddCoins((int)CurrentSessionState["coins_collected"]);
         foreach (var s in (Array)CurrentSessionState["skills_unlocked"])
             UnlockSkill((SkillData)s);
 
+        var completionTime = _speedRunManager?.GetCurrentLevelTime() ?? 0.0;
+        _eventBus.EmitSignal(EventBus.SignalName.LevelCompleted, levelIndex, GetTree().CurrentScene, completionTime);
+        
         ResetCurrentSessionState();
         TryToGoToNextLevel();
         GetNode<SaveSystem>("/root/SaveSystem").SaveGame();

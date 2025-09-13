@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=4 uid="uid://bol7g83v2accs"]
+[gd_scene load_steps=26 format=4 uid="uid://bol7g83v2accs"]
 
 [ext_resource type="PackedScene" uid="uid://bqi5s710xb1ju" path="res://objects/entities/brick_player.tscn" id="1_dnj2y"]
 [ext_resource type="PackedScene" uid="uid://cawlpch2lk3a2" path="res://objects/level/world_environment.tscn" id="2_1vw1j"]
 [ext_resource type="PackedScene" uid="uid://6foggu31cu14" path="res://objects/level/ui_layer.tscn" id="3_4fsls"]
 [ext_resource type="PackedScene" uid="uid://cywsu7yrtjdog" path="res://objects/level/global_light.tscn" id="4_mc58c"]
 [ext_resource type="Resource" uid="uid://cqtalsov2bkpo" path="res://resources/levels/village/village_1.tres" id="4_onnch"]
+[ext_resource type="PackedScene" uid="uid://kh85xqo6j848" path="res://objects/ui/speed_run_hud.tscn" id="5_chnw1"]
 [ext_resource type="PackedScene" uid="uid://cb0mnye1ki5a6" path="res://objects/level/camera_2d.tscn" id="5_sskgn"]
 [ext_resource type="Script" uid="uid://d23haq52m7ulv" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="6_18aqg"]
 [ext_resource type="Script" uid="uid://ccfft4b8rwgbo" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="7_80vn0"]
@@ -16,6 +17,8 @@
 [ext_resource type="PackedScene" uid="uid://bqom4cm7r18db" path="res://objects/entities/killzone.tscn" id="16_bxal3"]
 [ext_resource type="PackedScene" uid="uid://12jnkdygpxwc" path="res://objects/entities/exit_level.tscn" id="16_chnw1"]
 [ext_resource type="PackedScene" uid="uid://b4pdt1gv2ymyi" path="res://objects/tooltip.tscn" id="18_4bhfj"]
+[ext_resource type="Script" uid="uid://dkqeys6lsf04v" path="res://scripts/Events/GhostEventHandler.cs" id="18_p7e1u"]
+[ext_resource type="Script" uid="uid://bysxvcvt00t04" path="res://scripts/Events/SpeedRunEventHandler.cs" id="19_84xgs"]
 
 [sub_resource type="Gradient" id="Gradient_qb72p"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -83,6 +86,17 @@ SettingsControl = NodePath("../Settings menu")
 InputSettingsControl = NodePath("../Input Settings")
 AudioSettingsControl = NodePath("../Audio settings")
 
+[node name="SpeedRunHud" parent="UI Layer" instance=ExtResource("5_chnw1")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_bottom = 0.0
+offset_left = -40.0
+offset_top = 38.0
+offset_right = -40.0
+offset_bottom = 38.0
+grow_horizontal = 0
+grow_vertical = 1
+
 [node name="Global Light" parent="." instance=ExtResource("4_mc58c")]
 
 [node name="Camera2D" parent="." instance=ExtResource("5_sskgn")]
@@ -144,6 +158,14 @@ Text = "LEVEL_1_TOOLTIP_3"
 
 [node name="Killzone" parent="." instance=ExtResource("16_bxal3")]
 position = Vector2(704, 337)
+
+[node name="GhostEventHandler" type="Node" parent="."]
+script = ExtResource("18_p7e1u")
+metadata/_custom_type_script = "uid://dkqeys6lsf04v"
+
+[node name="SpeedRunEventHandler" type="Node" parent="."]
+script = ExtResource("19_84xgs")
+metadata/_custom_type_script = "uid://bysxvcvt00t04"
 
 [connection signal="Death" from="Brick Player/HealthComponent" to="UI Layer/DeathScreen" method="OnPlayerDeath"]
 [connection signal="Death" from="Brick Player/HealthComponent" to="UI Layer/GameOverScreen" method="OnPlayerDeath"]

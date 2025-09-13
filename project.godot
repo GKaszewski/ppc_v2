@@ -42,6 +42,10 @@ SteamManager="*res://Autoloads/SteamManager.cs"
 AchievementManager="*res://objects/achievement_manager.tscn"
 SkillManager="*res://objects/skill_manager.tscn"
 FloatingTextManager="*res://objects/floating_text_manager.tscn"
+EventBus="*res://Autoloads/EventBus.cs"
+StatisticsManager="*res://Autoloads/StatisticsManager.cs"
+SpeedRunManager="res://Autoloads/SpeedRunManager.cs"
+GhostManager="res://objects/ghost_manager.tscn"
 
 [debug]
 
@@ -124,7 +128,6 @@ jump={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":87,"key_label":0,"unicode":119,"location":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":11,"pressure":0.0,"pressed":true,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":0,"pressure":0.0,"pressed":true,"script":null)
-, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":1,"axis_value":-1.0,"script":null)
 ]
 }
 up={

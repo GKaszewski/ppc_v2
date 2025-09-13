@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://gknrmek1jmjx"]
+
+[ext_resource type="Shader" uid="uid://bs4xvm4qkurpr" path="res://shaders/hit_flash.tres" id="13_uybbp"]
+[ext_resource type="Texture2D" uid="uid://0l454rfplmqg" path="res://sprites/MrBrick_base-sheet.png" id="14_4rwar"]
+[ext_resource type="Texture2D" uid="uid://jl1gwqchhpdc" path="res://sprites/left_eye.png" id="15_qkwlh"]
+[ext_resource type="Texture2D" uid="uid://iiawtnwmeny3" path="res://sprites/right_eye.png" id="16_kt5il"]
+[ext_resource type="Texture2D" uid="uid://dhkwyv6ayb5qb" path="res://sprites/flying_ship.png" id="17_i5nnv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xoue7"]
+shader = ExtResource("13_uybbp")
+shader_parameter/enabled = false
+shader_parameter/tint = Color(1, 1, 1, 1)
+
+[node name="Brick Player" type="Node2D"]
+
+[node name="Graphics" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0.443137)
+
+[node name="Root" type="Node2D" parent="Graphics"]
+
+[node name="Base" type="Sprite2D" parent="Graphics/Root"]
+material = SubResource("ShaderMaterial_xoue7")
+texture = ExtResource("14_4rwar")
+hframes = 5
+
+[node name="Left Eye" type="Sprite2D" parent="Graphics/Root"]
+position = Vector2(-7, -6)
+texture = ExtResource("15_qkwlh")
+hframes = 2
+
+[node name="Right Eye" type="Sprite2D" parent="Graphics/Root"]
+position = Vector2(6, -5)
+texture = ExtResource("16_kt5il")
+hframes = 2
+
+[node name="Ship" type="Sprite2D" parent="Graphics"]
+visible = false
+position = Vector2(1, 7)
+texture = ExtResource("17_i5nnv")

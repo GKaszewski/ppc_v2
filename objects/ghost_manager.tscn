@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckeu2eddl5b3m"]
+
+[ext_resource type="Script" uid="uid://cgmuod4p2hg5h" path="res://Autoloads/GhostManager.cs" id="1_u0u02"]
+[ext_resource type="PackedScene" uid="uid://gknrmek1jmjx" path="res://objects/entities/ghost_player.tscn" id="2_jnk6u"]
+
+[node name="GhostManager" type="Node"]
+script = ExtResource("1_u0u02")
+GhostPlayerScene = ExtResource("2_jnk6u")
