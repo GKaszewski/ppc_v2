@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://cm0rd70wafif1"]
+
+[ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_hnnrt"]
+[ext_resource type="Script" uid="uid://bnaxy8cw3wrko" path="res://scripts/components/PeriodicShootingComponent.cs" id="2_cho7n"]
+[ext_resource type="PackedScene" uid="uid://chetx6gmnwbxi" path="res://objects/entities/cannon_bullet.tscn" id="3_kgmtj"]
+[ext_resource type="Script" uid="uid://b3j23e7b7x8ro" path="res://scripts/components/RecoilComponent.cs" id="4_nfk87"]
+[ext_resource type="Script" uid="uid://c707c53k7c5ae" path="res://scripts/components/SquashAndStretchComponent.cs" id="5_43fqe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j5sus"]
+size = Vector2(16, 16)
+
+[node name="Cannon" type="StaticBody2D"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -1.5708
+texture = ExtResource("1_hnnrt")
+hframes = 12
+vframes = 12
+frame = 42
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_j5sus")
+
+[node name="PeriodicShootingComponent" type="Node" parent="." node_paths=PackedStringArray("BulletSpawnPointRight")]
+script = ExtResource("2_cho7n")
+BulletScene = ExtResource("3_kgmtj")
+ShootInterval = 3.0
+ShootDirection = Vector2(-1, 0)
+BulletSpawnPointRight = NodePath("../Bullet spawn")
+ShootingIntervalVariation = 0.61
+metadata/_custom_type_script = "uid://bnaxy8cw3wrko"
+
+[node name="Bullet spawn" type="Marker2D" parent="."]
+position = Vector2(-12, 0)
+
+[node name="RecoilComponent" type="Node" parent="." node_paths=PackedStringArray("RecoilTarget")]
+script = ExtResource("4_nfk87")
+RecoilTarget = NodePath("../Sprite2D")
+RecoilDistance = 4.0
+RecoilDuration = 0.12
+metadata/_custom_type_script = "uid://b3j23e7b7x8ro"
+
+[node name="SquashAndStretchComponent" type="Node" parent="." node_paths=PackedStringArray("TargetNode")]
+script = ExtResource("5_43fqe")
+TargetNode = NodePath("../Sprite2D")
+metadata/_custom_type_script = "uid://c707c53k7c5ae"

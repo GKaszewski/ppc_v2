@@ -9,14 +9,20 @@ namespace Mr.BrickAdventures.scripts.components;
 public partial class CollectableComponent : Node
 {
     private bool _hasFadeAway = false;
-    
+
     [Export] public Area2D Area2D { get; set; }
     [Export] public CollisionShape2D CollisionShape { get; set; }
     [Export] public CollectableResource Data { get; set; }
-    [Export] public AudioStreamPlayer2D Sfx {get; set; }
-    
+    [Export] public AudioStreamPlayer2D Sfx { get; set; }
+
     [Signal] public delegate void CollectedEventHandler(float amount, CollectableType type, Node2D body);
-    
+
+    /// <summary>
+    /// Delegate for checking if collection should be allowed.
+    /// Return false to prevent collection.
+    /// </summary>
+    public Func<Node2D, bool> CanCollect { get; set; }
+
     private FloatingTextManager _floatingTextManager;
 
     public override void _Ready()
@@ -25,10 +31,10 @@ public partial class CollectableComponent : Node
             Area2D.BodyEntered += OnArea2DBodyEntered;
         else
             GD.PushError("Collectable node missing Area2D node.");
-        
+
         if (Owner.HasNode("FadeAwayComponent"))
             _hasFadeAway = true;
-        
+
         _floatingTextManager = GetNode<FloatingTextManager>("/root/FloatingTextManager");
     }
 
@@ -37,6 +43,9 @@ public partial class CollectableComponent : Node
         try
         {
             if (!body.HasNode("CanPickUpComponent")) return;
+
+            // Allow components to veto collection (e.g., full health for potions)
+            if (CanCollect != null && !CanCollect(body)) return;
 
             if (Owner is Node2D ownerNode)
             {
@@ -53,13 +62,13 @@ public partial class CollectableComponent : Node
                         break;
                 }
             }
-            
+
             EmitSignalCollected(Data.Amount, Data.Type, body);
             CollisionShape?.CallDeferred("set_disabled", true);
             Sfx?.Play();
 
             if (_hasFadeAway) return;
-                
+
             if (Sfx != null)
                 await ToSignal(Sfx, AudioStreamPlayer2D.SignalName.Finished);
             Owner.QueueFree();

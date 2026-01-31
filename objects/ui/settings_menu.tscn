@@ -53,11 +53,13 @@ size_flags_vertical = 3
 
 [node name="Input Settings Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+disabled = true
 text = "INPUT_BUTTON"
 flat = true
 
 [node name="Display Settings Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+disabled = true
 text = "DISPLAY_BUTTON"
 flat = true
 
@@ -68,6 +70,7 @@ flat = true
 
 [node name="Gameplay Settings Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+disabled = true
 text = "GAMEPLAY_BUTTON"
 flat = true
 

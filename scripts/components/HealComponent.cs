@@ -16,8 +16,19 @@ public partial class HealComponent : Node
             GD.PushError("HealComponent: Collectable is not set.");
             return;
         }
-        
+
+        // Register check to prevent collecting when at full health
+        Collectable.CanCollect = CanCollectHealth;
         Collectable.Collected += OnCollected;
+    }
+
+    private bool CanCollectHealth(Node2D body)
+    {
+        var healthComponent = body.GetNodeOrNull<HealthComponent>("HealthComponent");
+        if (healthComponent == null) return true; // Allow collection if no health component
+
+        // Prevent collection if already at full health
+        return healthComponent.Health < healthComponent.MaxHealth;
     }
 
     private void OnCollected(float amount, CollectableType type, Node2D body)
@@ -25,7 +36,7 @@ public partial class HealComponent : Node
         if (type != CollectableType.Health) return;
 
         if (Collectable == null) return;
-        
+
         var healthComponent = body.GetNodeOrNull<HealthComponent>("HealthComponent");
         if (healthComponent == null) return;
 
@@ -34,14 +45,14 @@ public partial class HealComponent : Node
         {
             PlayHealFx();
         }
-        
+
         Owner.QueueFree();
     }
 
     private void PlayHealFx()
     {
         if (HealFx == null) return;
-        
+
         HealFx.Restart();
         HealFx.Emitting = true;
     }

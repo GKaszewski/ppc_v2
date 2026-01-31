@@ -1,0 +1,78 @@
+[gd_scene load_steps=11 format=3 uid="uid://bmk3ddwv33dud"]
+
+[ext_resource type="Texture2D" uid="uid://ccjihsk6w8sow" path="res://sprites/BFT - Mega Metroidvania Tileset.png" id="1_erbp6"]
+[ext_resource type="Script" uid="uid://2i7p7v135u7c" path="res://scripts/components/DamageComponent.cs" id="2_fq2gn"]
+[ext_resource type="Script" uid="uid://v7tt4w6bejux" path="res://scripts/components/CleanupComponent.cs" id="4_mgh1e"]
+[ext_resource type="Script" uid="uid://nhu2xd8611fk" path="res://scripts/components/HazardComponent.cs" id="5_8g254"]
+[ext_resource type="Script" uid="uid://chusyr5vwgwf0" path="res://scripts/components/CleanupOnCollisionComponent.cs" id="6_2rpon"]
+[ext_resource type="Script" uid="uid://cgfynrn68lp12" path="res://scripts/components/KnockbackComponent.cs" id="6_3n0l8"]
+[ext_resource type="Script" uid="uid://co05ugnvx0v3e" path="res://scripts/components/FallOnDetectionComponent.cs" id="7_mgh1e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t3a48"]
+size = Vector2(16, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fq2gn"]
+size = Vector2(16, 320)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2rpon"]
+size = Vector2(17, 9)
+
+[node name="FallingSpike" type="RigidBody2D"]
+collision_mask = 5
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_t3a48")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -3.14159
+texture = ExtResource("1_erbp6")
+hframes = 13
+vframes = 45
+frame = 9
+
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("Area")]
+script = ExtResource("2_fq2gn")
+Area = NodePath("")
+metadata/_custom_type_script = "uid://2i7p7v135u7c"
+
+[node name="HazardComponent" type="Node2D" parent="." node_paths=PackedStringArray("KnockbackComponent", "HazardArea")]
+script = ExtResource("5_8g254")
+KnockbackComponent = NodePath("../KnockbackComponent")
+HazardArea = NodePath("../HazardArea")
+metadata/_custom_type_script = "uid://nhu2xd8611fk"
+
+[node name="KnockbackComponent" type="Node" parent="."]
+script = ExtResource("6_3n0l8")
+metadata/_custom_type_script = "uid://cgfynrn68lp12"
+
+[node name="FallTriggerArea" type="Area2D" parent="."]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallTriggerArea"]
+position = Vector2(0, 155)
+shape = SubResource("RectangleShape2D_fq2gn")
+debug_color = Color(0.916282, 7.47952e-05, 0.709809, 0.42)
+
+[node name="CleanupComponent" type="Node" parent="."]
+script = ExtResource("4_mgh1e")
+metadata/_custom_type_script = "uid://v7tt4w6bejux"
+
+[node name="CleanupOnCollisionComponent" type="Node" parent="."]
+script = ExtResource("6_2rpon")
+metadata/_custom_type_script = "uid://chusyr5vwgwf0"
+
+[node name="FallOnDetectionComponent" type="Node2D" parent="." node_paths=PackedStringArray("DetectionArea", "TargetBody")]
+script = ExtResource("7_mgh1e")
+DetectionArea = NodePath("../FallTriggerArea")
+TargetBody = NodePath("..")
+metadata/_custom_type_script = "uid://co05ugnvx0v3e"
+
+[node name="HazardArea" type="Area2D" parent="."]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HazardArea"]
+position = Vector2(0, -4.5)
+shape = SubResource("RectangleShape2D_2rpon")
+debug_color = Color(0.73011, 0.468379, 0.188355, 0.42)

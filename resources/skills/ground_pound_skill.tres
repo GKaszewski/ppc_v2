@@ -8,15 +8,12 @@
 script = ExtResource("2_tkhf7")
 Cost = 300
 Description = ""
-Properties = Dictionary[String, Variant]({})
 metadata/_custom_type_script = "uid://dwb0e05pewcsn"
 
 [resource]
 script = ExtResource("1_i1qac")
 Name = "GROUND_POUND_SKILL"
 Description = "GROUND_POUND_SKILL_DESCRIPTION"
-IsActive = false
-Level = 1
 Type = 2
 Node = ExtResource("1_auljr")
 Upgrades = Array[ExtResource("2_tkhf7")]([SubResource("Resource_upxa7")])

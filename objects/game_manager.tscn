@@ -1,15 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://b4eifkc31jsun"]
+[gd_scene load_steps=8 format=3 uid="uid://b4eifkc31jsun"]
 
 [ext_resource type="Script" uid="uid://c6eoi3ymefc0x" path="res://Autoloads/GameManager.cs" id="1_t2tr6"]
 [ext_resource type="PackedScene" uid="uid://bol7g83v2accs" path="res://scenes/level_village_1.tscn" id="2_bentb"]
 [ext_resource type="PackedScene" uid="uid://chqb11pfoqmeb" path="res://scenes/level_village_2.tscn" id="3_ajlkg"]
 [ext_resource type="PackedScene" uid="uid://h60obxmju6mo" path="res://scenes/level_village_3.tscn" id="4_se5tb"]
 [ext_resource type="PackedScene" uid="uid://bhad760x3vvco" path="res://scenes/level_village_4.tscn" id="5_mnosh"]
+[ext_resource type="PackedScene" uid="uid://bbwef3n2gjkt8" path="res://scenes/level_village_5.tscn" id="6_7rb6w"]
 [ext_resource type="Script" uid="uid://chrhjch4ymfvr" path="res://scripts/Screenshot.cs" id="6_bbtu1"]
 
 [node name="GameManager" type="Node"]
 script = ExtResource("1_t2tr6")
-LevelScenes = Array[PackedScene]([ExtResource("2_bentb"), ExtResource("3_ajlkg"), ExtResource("4_se5tb"), ExtResource("5_mnosh")])
+LevelScenes = Array[PackedScene]([ExtResource("2_bentb"), ExtResource("3_ajlkg"), ExtResource("4_se5tb"), ExtResource("5_mnosh"), ExtResource("6_7rb6w")])
 
 [node name="Screenshot" type="Node" parent="."]
 script = ExtResource("6_bbtu1")

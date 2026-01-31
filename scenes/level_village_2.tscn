@@ -1,8 +1,9 @@
-[gd_scene load_steps=26 format=4 uid="uid://chqb11pfoqmeb"]
+[gd_scene load_steps=27 format=4 uid="uid://chqb11pfoqmeb"]
 
 [ext_resource type="PackedScene" uid="uid://bqi5s710xb1ju" path="res://objects/entities/brick_player.tscn" id="1_wcma7"]
 [ext_resource type="PackedScene" uid="uid://cawlpch2lk3a2" path="res://objects/level/world_environment.tscn" id="2_ot3dy"]
 [ext_resource type="PackedScene" uid="uid://6foggu31cu14" path="res://objects/level/ui_layer.tscn" id="3_cjqhe"]
+[ext_resource type="Resource" uid="uid://dlwkbjw1l33uq" path="res://resources/levels/village/village_2.tres" id="4_h4uvs"]
 [ext_resource type="PackedScene" uid="uid://cywsu7yrtjdog" path="res://objects/level/global_light.tscn" id="4_wykfl"]
 [ext_resource type="PackedScene" uid="uid://cb0mnye1ki5a6" path="res://objects/level/camera_2d.tscn" id="5_8nvkd"]
 [ext_resource type="Script" uid="uid://d23haq52m7ulv" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="6_ono4h"]
@@ -54,7 +55,6 @@ color_ramp = SubResource("GradientTexture1D_f1fvy")
 script = ExtResource("7_y1tp2")
 duration = 0.1
 transition = 3
-ease = 2
 
 [node name="World" type="Node2D"]
 
@@ -74,6 +74,9 @@ process_mode = 4
 
 [node name="HUD" parent="UI Layer" index="0" node_paths=PackedStringArray("Health")]
 Health = NodePath("../../Brick Player/HealthComponent")
+
+[node name="DeathScreen" parent="UI Layer" index="1"]
+CurrentLevel = ExtResource("4_h4uvs")
 
 [node name="Marketplace" parent="UI Layer" index="3" node_paths=PackedStringArray("SkillUnlockerComponent", "ComponentsToDisable")]
 SkillUnlockerComponent = NodePath("../../Brick Player/SkillUnlockerComponent")
@@ -132,6 +135,7 @@ tile_set = ExtResource("13_lc0ll")
 
 [node name="ExitLevel" parent="." instance=ExtResource("15_hcsb6")]
 position = Vector2(987, -776)
+AchievementId = "level_complete_2"
 
 [node name="Child" parent="." instance=ExtResource("16_lc0ll")]
 position = Vector2(-1326, 176)
@@ -156,17 +160,17 @@ position = Vector2(1272, -143)
 [node name="Enemy" parent="Enemies" instance=ExtResource("18_girek")]
 position = Vector2(-1526, 256)
 
-[node name="Enemy2" parent="Enemies" instance=ExtResource("18_girek")]
-position = Vector2(-1098, 254)
-
 [node name="Enemy3" parent="Enemies" instance=ExtResource("18_girek")]
 position = Vector2(-1190, 175)
 
-[node name="Enemy4" parent="Enemies" instance=ExtResource("18_girek")]
-position = Vector2(-1326, 320)
-
 [node name="Enemy6" parent="Enemies" instance=ExtResource("18_girek")]
 position = Vector2(1648, -352)
+
+[node name="Enemy9" parent="Enemies" instance=ExtResource("16_h4uvs")]
+position = Vector2(-1097, 255)
+
+[node name="Enemy2" parent="Enemies" instance=ExtResource("16_h4uvs")]
+position = Vector2(-1326, 320)
 
 [node name="Lever" parent="." instance=ExtResource("20_h4uvs")]
 position = Vector2(-231, -776)
