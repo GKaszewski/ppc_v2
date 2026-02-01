@@ -1,4 +1,5 @@
 using Godot;
+using Mr.BrickAdventures;
 using Mr.BrickAdventures.Autoloads;
 using Mr.BrickAdventures.scripts.components;
 using Mr.BrickAdventures.scripts.Resources;
@@ -11,26 +12,26 @@ public partial class MarketplaceButton : Button
     [Export] public Texture2D UnlockedSkillIcon { get; set; }
     [Export] public Texture2D LockedSkillIcon { get; set; }
     [Export] public Container SkillLevelContainer { get; set; }
-    
+
     private GameManager _gameManager;
     private SkillUnlockerComponent _skillUnlockerComponent;
     private SkillManager _skillManager;
 
     public override void _Ready()
     {
-        _gameManager = GetNode<GameManager>("/root/GameManager");
+        _gameManager = GameManager.Instance;
         var player = _gameManager.Player;
         if (player == null) return;
-        
+
         _skillUnlockerComponent = player.GetNodeOrNull<SkillUnlockerComponent>("SkillUnlockerComponent");
         if (_skillUnlockerComponent != null)
         {
             _skillUnlockerComponent.SkillUnlocked += OnSkillStateChanged;
         }
-        
-        _skillManager = GetNode<SkillManager>("/root/SkillManager");
+
+        _skillManager = SkillManager.Instance;
         _skillManager.SkillRemoved += OnSkillStateChanged;
-        
+
         UpdateButtonState();
     }
 
@@ -41,7 +42,7 @@ public partial class MarketplaceButton : Button
             _skillUnlockerComponent.SkillUnlocked -= OnSkillStateChanged;
         }
     }
-    
+
     private void OnSkillStateChanged(SkillData skill)
     {
         if (skill.Name == Data.Name)
@@ -59,7 +60,7 @@ public partial class MarketplaceButton : Button
         }
 
         var isUnlocked = _gameManager.IsSkillUnlocked(Data);
-        
+
         for (var i = 0; i < SkillLevelContainer.GetChildCount(); i++)
         {
             SkillLevelContainer.GetChild(i).QueueFree();

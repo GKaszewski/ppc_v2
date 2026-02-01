@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using Mr.BrickAdventures;
 using Mr.BrickAdventures.Autoloads;
 using Mr.BrickAdventures.scripts.Resources;
 
@@ -35,7 +36,7 @@ public partial class CollectableComponent : Node
         if (Owner.HasNode("FadeAwayComponent"))
             _hasFadeAway = true;
 
-        _floatingTextManager = GetNode<FloatingTextManager>("/root/FloatingTextManager");
+        _floatingTextManager = GetNode<FloatingTextManager>(Constants.FloatingTextManagerPath);
     }
 
     private async void OnArea2DBodyEntered(Node2D body)
@@ -53,12 +54,25 @@ public partial class CollectableComponent : Node
                 {
                     case CollectableType.Coin:
                         _floatingTextManager?.ShowCoin((int)Data.Amount, ownerNode.GlobalPosition);
+                        EventBus.EmitCoinCollected((int)Data.Amount, ownerNode.GlobalPosition);
                         break;
                     case CollectableType.Health:
                         _floatingTextManager?.ShowMessage("Healed!", ownerNode.GlobalPosition);
+                        EventBus.EmitItemCollected(Data.Type, Data.Amount, ownerNode.GlobalPosition);
                         break;
                     case CollectableType.Kid:
                         _floatingTextManager?.ShowMessage("Rescued!", ownerNode.GlobalPosition);
+                        EventBus.EmitChildRescued(ownerNode.GlobalPosition);
+                        break;
+                    case CollectableType.Skill:
+                        if (Data.Skill != null)
+                        {
+                            _floatingTextManager?.ShowMessage($"{Data.Skill.Name} Unlocked!", ownerNode.GlobalPosition);
+                            EventBus.EmitSkillCollected(Data.Skill, ownerNode.GlobalPosition);
+                        }
+                        break;
+                    default:
+                        EventBus.EmitItemCollected(Data.Type, Data.Amount, ownerNode.GlobalPosition);
                         break;
                 }
             }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://h60obxmju6mo"]
+[gd_scene load_steps=34 format=4 uid="uid://h60obxmju6mo"]
 
 [ext_resource type="PackedScene" uid="uid://dyp4i4ru2j2jh" path="res://objects/fxs/explosion_fx.tscn" id="1_p30ax"]
 [ext_resource type="PackedScene" uid="uid://dx80ivlvuuew4" path="res://objects/fxs/fire_fx.tscn" id="2_a7yjf"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://bqom4cm7r18db" path="res://objects/entities/killzone.tscn" id="21_p30ax"]
 [ext_resource type="PackedScene" uid="uid://12jnkdygpxwc" path="res://objects/entities/exit_level.tscn" id="22_a7yjf"]
 [ext_resource type="PackedScene" uid="uid://t6h2ra7kjyq" path="res://objects/entities/small_heal_potion.tscn" id="23_m6h4x"]
+[ext_resource type="PackedScene" uid="uid://dk2cu8qs7odib" path="res://objects/entities/double_jump_skill_pickup.tscn" id="24_6fdf4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j7bvy"]
 texture = ExtResource("7_uvxky")
@@ -300,7 +301,7 @@ z_index = 5
 position = Vector2(903, -118)
 metadata/_edit_group_ = true
 
-[node name="HitParticles" parent="Brick Player" index="24"]
+[node name="HitParticles" parent="Brick Player" index="23"]
 process_material = SubResource("ParticleProcessMaterial_lgb3u")
 
 [node name="Camera2D" parent="." instance=ExtResource("12_qhkyq")]
@@ -363,6 +364,9 @@ position = Vector2(1359, -42)
 
 [node name="Killzone" parent="." instance=ExtResource("21_p30ax")]
 position = Vector2(2456, 815)
+
+[node name="SkillPickup" parent="." instance=ExtResource("24_6fdf4")]
+position = Vector2(1136, -109)
 
 [connection signal="Death" from="Brick Player/HealthComponent" to="UI Layer/DeathScreen" method="OnPlayerDeath"]
 [connection signal="Death" from="Brick Player/HealthComponent" to="UI Layer/GameOverScreen" method="OnPlayerDeath"]

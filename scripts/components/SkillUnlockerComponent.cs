@@ -1,8 +1,10 @@
 using Godot;
 using Godot.Collections;
+using Mr.BrickAdventures;
 using Mr.BrickAdventures.Autoloads;
 using Mr.BrickAdventures.scripts.interfaces;
 using Mr.BrickAdventures.scripts.Resources;
+using Mr.BrickAdventures.scripts.State;
 
 namespace Mr.BrickAdventures.scripts.components;
 
@@ -18,8 +20,8 @@ public partial class SkillUnlockerComponent : Node
 
     public override void _Ready()
     {
-        _gameManager = GetNode<GameManager>("/root/GameManager");
-        SkillManager = GetNode<SkillManager>("/root/SkillManager");
+        _gameManager = GameManager.Instance;
+        SkillManager = SkillManager.Instance;
     }
 
     private bool HasEnoughCoins(int amount)
@@ -34,11 +36,10 @@ public partial class SkillUnlockerComponent : Node
         if (!HasEnoughCoins(skill.Upgrades[0].Cost)) return false;
 
         skill.Level = 1;
-        skill.IsActive = true;
         _gameManager.RemoveCoins(skill.Upgrades[0].Cost);
 
-        var skillsUnlocked = (Array<SkillData>)_gameManager.CurrentSessionState["skills_unlocked"];
-        skillsUnlocked.Add(skill);
+        // Add to session state via GameStateStore
+        GameStateStore.Instance?.UnlockSkillInSession(skill);
         SkillManager.AddSkill(skill);
         EmitSignalSkillUnlocked(skill);
 

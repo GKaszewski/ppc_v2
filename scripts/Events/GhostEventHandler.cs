@@ -1,4 +1,5 @@
 using Godot;
+using Mr.BrickAdventures;
 using Mr.BrickAdventures.Autoloads;
 
 namespace Mr.BrickAdventures.scripts.Events;
@@ -10,11 +11,10 @@ public partial class GhostEventHandler : Node
 
     public override void _Ready()
     {
-        _ghostManager = GetNode<GhostManager>("/root/GhostManager");
-        var eventBus = GetNode<EventBus>("/root/EventBus");
-        
-        eventBus.LevelStarted += OnLevelStarted;
-        eventBus.LevelCompleted += OnLevelCompleted;
+        _ghostManager = GetNode<GhostManager>(Constants.GhostManagerPath);
+
+        EventBus.Instance.LevelStarted += OnLevelStarted;
+        EventBus.Instance.LevelCompleted += OnLevelCompleted;
     }
 
     private void OnLevelStarted(int levelIndex, Node currentScene)
@@ -23,7 +23,7 @@ public partial class GhostEventHandler : Node
         _ghostManager.StartRecording(levelIndex);
         _ghostManager.SpawnGhostPlayer(levelIndex, currentScene);
     }
-    
+
     private void OnLevelCompleted(int levelIndex, Node currentScene, double completionTime)
     {
         _ghostManager.StopRecording(true, completionTime);

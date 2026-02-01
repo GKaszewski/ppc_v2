@@ -1,4 +1,5 @@
 using Godot;
+using Mr.BrickAdventures;
 using Mr.BrickAdventures.Autoloads;
 
 namespace Mr.BrickAdventures.scripts.UI;
@@ -9,7 +10,7 @@ public partial class Credits : Control
 
     public override void _Ready()
     {
-        _uiManager = GetNode<UIManager>("/root/UIManager");
+        _uiManager = GetNode<UIManager>(Constants.UIManagerPath);
     }
 
     public override void _UnhandledInput(InputEvent @event)

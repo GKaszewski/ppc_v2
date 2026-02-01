@@ -7,14 +7,12 @@ using Mr.BrickAdventures.scripts.Resources;
 namespace Mr.BrickAdventures.scripts.components;
 
 [GlobalClass]
-public partial class MagneticSkillComponent : Node, ISkill
+public partial class MagneticSkillComponent : SkillComponentBase
 {
     [Export] public Area2D MagneticArea { get; set; }
     [Export] public float MagneticMoveDuration { get; set; } = 1.25f;
 
     private Array<Node2D> _collectablesToPickUp = [];
-    private Node2D _owner;
-    private SkillData _skillData;
 
     public override void _Process(double delta)
     {
@@ -25,11 +23,11 @@ public partial class MagneticSkillComponent : Node, ISkill
                 _collectablesToPickUp.Remove(collectable);
                 continue;
             }
-            
+
             MoveCollectableToOwner(collectable);
         }
     }
-    
+
     private void OnBodyEntered(Node2D body)
     {
         if (!HasComponentInChildren(body, "CollectableComponent")) return;
@@ -37,11 +35,11 @@ public partial class MagneticSkillComponent : Node, ISkill
         if (_collectablesToPickUp.Contains(body)) return;
         _collectablesToPickUp.Add(body);
     }
-    
+
     private void OnAreaEntered(Area2D area)
     {
         if (!HasComponentInChildren(area, "CollectableComponent")) return;
-        
+
         if (_collectablesToPickUp.Contains(area)) return;
         _collectablesToPickUp.Add(area);
     }
@@ -49,7 +47,7 @@ public partial class MagneticSkillComponent : Node, ISkill
     private bool HasComponentInChildren(Node node, string componentName)
     {
         if (node == null) return false;
-        
+
         if (node.HasNode(componentName)) return true;
 
         foreach (var child in node.GetChildren())
@@ -59,28 +57,27 @@ public partial class MagneticSkillComponent : Node, ISkill
                 return true;
             }
         }
-        
+
         return false;
     }
 
     private void MoveCollectableToOwner(Node2D collectable)
     {
-        if (!IsInstanceValid(collectable) || !IsInstanceValid(_owner)) return;
-        
-        var direction = (_owner.GlobalPosition - collectable.GlobalPosition).Normalized();
+        if (!IsInstanceValid(collectable) || !IsInstanceValid(Player)) return;
+
+        var direction = (Player.GlobalPosition - collectable.GlobalPosition).Normalized();
         var speed = direction.Length() / MagneticMoveDuration;
 
         collectable.GlobalPosition += direction.Normalized() * speed;
     }
 
-    public void Initialize(Node owner, SkillData data)
+    public override void Initialize(Node owner, SkillData data)
     {
-        _owner = owner as Node2D;
-        _skillData = data;
-        
-        if (_owner == null)
+        base.Initialize(owner, data);
+
+        if (Player == null)
         {
-            GD.PushWarning("MagneticSkillComponent: Owner is not a Node2D.");
+            GD.PushWarning("MagneticSkillComponent: Owner is not a Player/Node2D.");
         }
 
         if (MagneticArea == null)
@@ -96,34 +93,34 @@ public partial class MagneticSkillComponent : Node, ISkill
                 }
             }
         }
-        
-        if (_skillData.Level > 0 && _skillData.Upgrades.Count >= _skillData.Level)
+
+        if (Data.Level > 0 && Data.Upgrades.Count >= Data.Level)
         {
-            ApplyUpgrade(_skillData.Upgrades[_skillData.Level - 1]);
+            ApplyUpgrade(Data.Upgrades[Data.Level - 1]);
         }
     }
 
-    public void Activate()
+    public override void Activate()
     {
         if (MagneticArea == null)
         {
             GD.PushError("MagneticSkillComponent: MagneticArea is not set.");
             return;
         }
-        
+
         MagneticArea.BodyEntered += OnBodyEntered;
         MagneticArea.AreaEntered += OnAreaEntered;
     }
 
-    public void Deactivate()
+    public override void Deactivate()
     {
         if (MagneticArea == null) return;
-        
+
         MagneticArea.BodyEntered -= OnBodyEntered;
         MagneticArea.AreaEntered -= OnAreaEntered;
     }
 
-    public void ApplyUpgrade(SkillUpgrade upgrade)
+    public override void ApplyUpgrade(SkillUpgrade upgrade)
     {
         foreach (var property in upgrade.Properties)
         {

@@ -29,7 +29,6 @@ config/icon="uid://jix7wdn0isr3"
 
 [autoload]
 
-GameManager="*res://objects/game_manager.tscn"
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 AudioController="*res://objects/audio_controller.tscn"
 UIManager="*res://Autoloads/UIManager.cs"
@@ -46,6 +45,13 @@ EventBus="*res://Autoloads/EventBus.cs"
 StatisticsManager="*res://Autoloads/StatisticsManager.cs"
 SpeedRunManager="res://Autoloads/SpeedRunManager.cs"
 GhostManager="res://objects/ghost_manager.tscn"
+StatisticsEventHandler="*res://scripts/Events/StatisticsEventHandler.cs"
+CoinStateHandler="*res://scripts/Events/CoinStateHandler.cs"
+LevelStateHandler="*res://scripts/Events/LevelStateHandler.cs"
+LivesStateHandler="*res://scripts/Events/LivesStateHandler.cs"
+SkillCollectHandler="*res://scripts/Events/SkillCollectHandler.cs"
+GameStateStore="*res://Autoloads/GameStateStore.cs"
+GameManager="*res://objects/game_manager.tscn"
 
 [debug]
 

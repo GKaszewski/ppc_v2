@@ -1,4 +1,5 @@
 using Godot;
+using Mr.BrickAdventures;
 using Mr.BrickAdventures.Autoloads;
 using Mr.BrickAdventures.scripts.components;
 using Mr.BrickAdventures.scripts.Resources;
@@ -17,15 +18,15 @@ public partial class ChargeProgressBar : ProgressBar
     {
         ProgressBar.Hide();
 
-        _skillManager = GetNodeOrNull<SkillManager>("/root/SkillManager");
+        _skillManager = GetNodeOrNull<SkillManager>(Constants.SkillManagerPath);
         if (_skillManager == null)
         {
             GD.PrintErr("ChargeProgressBar: SkillManager autoload not found.");
             return;
         }
-        
+
         _skillManager.ActiveThrowSkillChanged += OnActiveThrowSkillChanged;
-        
+
         SetupDependencies();
     }
 
@@ -43,7 +44,7 @@ public partial class ChargeProgressBar : ProgressBar
         OnOwnerExiting();
 
         if (throwComponent == null || !IsInstanceValid(throwComponent)) return;
-        
+
         _throwComponent = throwComponent;
         _throwComponent.TreeExiting += OnOwnerExiting;
         SetupDependencies();
@@ -60,7 +61,7 @@ public partial class ChargeProgressBar : ProgressBar
         }
         _throwComponent = null;
     }
-    
+
 
     private void SetupDependencies()
     {
@@ -68,7 +69,7 @@ public partial class ChargeProgressBar : ProgressBar
         {
             return;
         }
-        
+
         if (_throwComponent.ThrowInputBehavior is ChargeThrowInputResource throwInput)
         {
             _throwInput = throwInput;
@@ -77,7 +78,7 @@ public partial class ChargeProgressBar : ProgressBar
         {
             _throwInput = null;
         }
-        
+
         if (_throwInput == null)
         {
             return;
@@ -88,9 +89,9 @@ public partial class ChargeProgressBar : ProgressBar
             ProgressBar.Hide();
             return;
         }
-        
+
         SetupProgressBar();
-        
+
         _throwInput.ChargeStarted += OnChargeStarted;
         _throwInput.ChargeStopped += OnChargeStopped;
         _throwInput.ChargeUpdated += OnChargeUpdated;

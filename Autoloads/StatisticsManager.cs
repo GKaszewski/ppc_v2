@@ -1,78 +1,62 @@
+using System.Collections.Generic;
 using Godot;
-using Godot.Collections;
+using Mr.BrickAdventures.scripts.State;
 
 namespace Mr.BrickAdventures.Autoloads;
 
+/// <summary>
+/// Manages game statistics using GameStateStore.
+/// </summary>
 public partial class StatisticsManager : Node
 {
-    private GameManager _gameManager;
-    private AchievementManager _achievementManager;
-    private Dictionary<string, Variant> _stats = new();
 
-    public override void _Ready()
+    /// <summary>
+    /// Gets the statistics dictionary from the store.
+    /// </summary>
+    private Dictionary<string, int> GetStats()
     {
-        _gameManager = GetNode<GameManager>("/root/GameManager");
-        _achievementManager = GetNode<AchievementManager>("/root/AchievementManager");
-        LoadStatistics();
+        return GameStateStore.Instance?.Player.Statistics ?? new Dictionary<string, int>();
     }
 
-    private void LoadStatistics()
-    {
-        if (_gameManager.PlayerState.TryGetValue("statistics", out var statsObj))
-        {
-            _stats = (Dictionary<string, Variant>)statsObj;
-        }
-        else
-        {
-            _stats = new Dictionary<string, Variant>();
-            _gameManager.PlayerState["statistics"] = _stats;
-        }
-    }
-    
     /// <summary>
     /// Increases a numerical statistic by a given amount.
     /// </summary>
     public void IncrementStat(string statName, int amount = 1)
     {
-        if (_stats.TryGetValue(statName, out var currentValue))
+        var stats = GetStats();
+        if (stats.TryGetValue(statName, out var currentValue))
         {
-            _stats[statName] = (int)currentValue + amount;
+            stats[statName] = currentValue + amount;
         }
         else
         {
-            _stats[statName] = amount;
+            stats[statName] = amount;
         }
-        GD.Print($"Stat '{statName}' updated to: {_stats[statName]}");
-        CheckAchievementsForStat(statName);
+    }
+
+    /// <summary>
+    /// Sets a statistic to a specific value.
+    /// </summary>
+    public void SetStat(string statName, int value)
+    {
+        var stats = GetStats();
+        stats[statName] = value;
     }
 
     /// <summary>
     /// Gets the value of a statistic.
     /// </summary>
-    public Variant GetStat(string statName, Variant defaultValue = default)
+    public int GetStat(string statName)
     {
-        return _stats.TryGetValue(statName, out var value) ? value : defaultValue;
+        var stats = GetStats();
+        return stats.TryGetValue(statName, out var value) ? value : 0;
     }
 
     /// <summary>
-    /// Checks if the updated stat meets the criteria for any achievements.
+    /// Gets a copy of all statistics.
     /// </summary>
-    private void CheckAchievementsForStat(string statName)
+    public Dictionary<string, int> GetAllStats()
     {
-        switch (statName)
-        {
-            case "enemies_defeated":
-                if ((int)GetStat(statName, 0) >= 100)
-                {
-                    _achievementManager.UnlockAchievement("slayer_100_enemies");
-                }
-                break;
-            case "jumps_made":
-                if ((int)GetStat(statName, 0) >= 1000)
-                {
-                    _achievementManager.UnlockAchievement("super_jumper");
-                }
-                break;
-        }
+        return new Dictionary<string, int>(GetStats());
     }
 }

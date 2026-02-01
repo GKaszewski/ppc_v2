@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Godot;
+using Mr.BrickAdventures.Autoloads;
 
 namespace Mr.BrickAdventures.scripts.components;
 
@@ -23,7 +24,7 @@ public partial class EnemyDeathComponent : Node
             GD.PushError("EnemyDeathComponent: Health is not set.");
             return;
         }
-        
+
         Health.Death += OnDeath;
     }
 
@@ -34,6 +35,12 @@ public partial class EnemyDeathComponent : Node
 
     private async Task Die()
     {
+        // Emit enemy defeated event for statistics and other systems
+        if (Owner is Node2D ownerNode)
+        {
+            EventBus.EmitEnemyDefeated(Owner, ownerNode.GlobalPosition);
+        }
+
         CollisionShape.SetDisabled(true);
         var tween = CreateTween();
         tween.TweenProperty(Owner, "scale", Vector2.Zero, TweenDuration);

@@ -1,4 +1,5 @@
 using Godot;
+using Mr.BrickAdventures;
 using Mr.BrickAdventures.Autoloads;
 using Mr.BrickAdventures.scripts.components;
 
@@ -15,7 +16,7 @@ public partial class Hud : Control
 
     public override void _Ready()
     {
-        _gameManager = GetNode<GameManager>("/root/GameManager");
+        _gameManager = GameManager.Instance;
     }
 
     public override void _Process(double delta)

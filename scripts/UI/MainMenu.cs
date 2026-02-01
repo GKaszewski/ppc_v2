@@ -1,4 +1,5 @@
 using Godot;
+using Mr.BrickAdventures;
 using Mr.BrickAdventures.Autoloads;
 
 namespace Mr.BrickAdventures.scripts.UI;
@@ -14,16 +15,16 @@ public partial class MainMenu : Control
     [Export] public Label VersionLabel { get; set; }
     [Export] public Control SettingsControl { get; set; }
     [Export] public Control CreditsControl { get; set; }
-    
+
     private SaveSystem _saveSystem;
     private GameManager _gameManager;
     private UIManager _uiManager;
 
     public override void _Ready()
     {
-        _saveSystem = GetNode<SaveSystem>("/root/SaveSystem");
-        _gameManager = GetNode<GameManager>("/root/GameManager");
-        _uiManager = GetNode<UIManager>("/root/UIManager");
+        _saveSystem = SaveSystem.Instance;
+        _gameManager = GameManager.Instance;
+        _uiManager = GetNode<UIManager>(Constants.UIManagerPath);
 
         NewGameButton.Pressed += OnNewGamePressed;
         ContinueButton.Pressed += OnContinuePressed;

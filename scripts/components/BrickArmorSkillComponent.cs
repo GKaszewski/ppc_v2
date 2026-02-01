@@ -5,26 +5,27 @@ using Mr.BrickAdventures.scripts.Resources;
 namespace Mr.BrickAdventures.scripts.components;
 
 [GlobalClass]
-public partial class BrickArmorSkillComponent : Node, ISkill
+public partial class BrickArmorSkillComponent : SkillComponentBase
 {
     private HealthComponent _healthComponent;
-    private SkillData _skillData;
     private float _armorBonus = 0;
-    
-    public void Initialize(Node owner, SkillData data)
+
+    public override void Initialize(Node owner, SkillData data)
     {
-        if (owner is not PlayerController player) return;
-        _healthComponent = player.GetNode<HealthComponent>("HealthComponent");
-        _skillData = data;
+        base.Initialize(owner, data);
+        if (Player != null)
+        {
+            _healthComponent = Player.GetNode<HealthComponent>("HealthComponent");
+        }
     }
 
-    public void Activate()
+    public override void Activate()
     {
-        if (_healthComponent == null || _skillData == null) return;
-        ApplyUpgrade(_skillData.Upgrades[_skillData.Level - 1]);
+        if (_healthComponent == null || Data == null) return;
+        ApplyUpgrade(Data.Upgrades[Data.Level - 1]);
     }
 
-    public void Deactivate()
+    public override void Deactivate()
     {
         if (_healthComponent == null) return;
         _healthComponent.MaxHealth -= _armorBonus;
@@ -35,7 +36,7 @@ public partial class BrickArmorSkillComponent : Node, ISkill
         _armorBonus = 0;
     }
 
-    public void ApplyUpgrade(SkillUpgrade upgrade)
+    public override void ApplyUpgrade(SkillUpgrade upgrade)
     {
         if (_healthComponent == null || upgrade == null) return;
 

@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Godot;
+using Mr.BrickAdventures;
 using Mr.BrickAdventures.Autoloads;
 
 namespace Mr.BrickAdventures.scripts.components;
@@ -15,25 +16,25 @@ public partial class LeverComponent : Node
 
     [Signal]
     public delegate void ActivatedEventHandler();
-    
+
     private FloatingTextManager _floatingTextManager;
 
     public override void _Ready()
     {
-        _floatingTextManager = GetNode<FloatingTextManager>("/root/FloatingTextManager");
-        
+        _floatingTextManager = GetNode<FloatingTextManager>(Constants.FloatingTextManagerPath);
+
         if (Area == null)
         {
             GD.PushError("LeverComponent: Area is not set.");
             return;
         }
-        
+
         if (Sprite == null)
         {
             GD.PushError("LeverComponent: Sprite is not set.");
             return;
         }
-        
+
         Area.BodyEntered += OnBodyEntered;
         Area.AreaEntered += OnAreaEntered;
     }
@@ -58,7 +59,7 @@ public partial class LeverComponent : Node
         await timer.ToSignal(timer, Timer.SignalName.Timeout);
         Sprite.Frame = StartAnimationIndex;
     }
-    
+
     private void HandleTriggerLogic(Node2D obj)
     {
         var triggerLever = obj.GetNodeOrNull<TriggerLeverComponent>("TriggerLeverComponent");

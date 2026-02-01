@@ -1,4 +1,5 @@
 using Godot;
+using Mr.BrickAdventures;
 using Mr.BrickAdventures.Autoloads;
 
 namespace Mr.BrickAdventures.scripts.UI;
@@ -18,8 +19,8 @@ public partial class PauseMenu : Control
 
     public override void _Ready()
     {
-        _gameManager = GetNode<GameManager>("/root/GameManager");
-        _uiManager = GetNode<UIManager>("/root/UIManager");
+        _gameManager = GameManager.Instance;
+        _uiManager = GetNode<UIManager>(Constants.UIManagerPath);
 
         ResumeButton.Pressed += OnResumePressed;
         MainMenuButton.Pressed += OnMainMenuPressed;

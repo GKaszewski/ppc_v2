@@ -1,4 +1,5 @@
 using Godot;
+using Mr.BrickAdventures;
 using Mr.BrickAdventures.Autoloads;
 
 namespace Mr.BrickAdventures.scripts.UI;
@@ -7,15 +8,15 @@ namespace Mr.BrickAdventures.scripts.UI;
 public partial class SpeedRunHud : Control
 {
     [Export] private Label _timerLabel;
-    
+
     private SpeedRunManager _speedRunManager;
 
     public override void _Ready()
     {
-        _speedRunManager = GetNode<SpeedRunManager>("/root/SpeedRunManager");
-        
+        _speedRunManager = GetNode<SpeedRunManager>(Constants.SpeedRunManagerPath);
+
         _speedRunManager.TimeUpdated += OnTimerUpdated;
-        
+
         Visible = _speedRunManager.IsVisible;
     }
 

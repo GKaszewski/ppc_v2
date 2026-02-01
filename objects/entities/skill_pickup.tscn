@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://0idmnkwids1r"]
+
+[ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_sprite"]
+[ext_resource type="Script" uid="uid://r4jybneigfcn" path="res://scripts/components/CollectableComponent.cs" id="2_collectable"]
+[ext_resource type="Script" uid="uid://bjln6jb1sigx2" path="res://scripts/components/FadeAwayComponent.cs" id="3_fadeaway"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pickup"]
+radius = 12.0
+
+[node name="SkillPickup" type="Area2D" groups=["Collectables"]]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_pickup")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_sprite")
+hframes = 12
+vframes = 12
+frame = 24
+
+[node name="CollectableComponent" type="Node" parent="." node_paths=PackedStringArray("Area2D", "CollisionShape")]
+script = ExtResource("2_collectable")
+Area2D = NodePath("..")
+CollisionShape = NodePath("../CollisionShape2D")
+
+[node name="FadeAwayComponent" type="Node" parent="." node_paths=PackedStringArray("Sprite", "Area")]
+script = ExtResource("3_fadeaway")
+Sprite = NodePath("../Sprite2D")
+FadeDuration = 0.5
+Area = NodePath("..")

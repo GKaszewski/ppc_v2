@@ -1,4 +1,5 @@
 using Godot;
+using Mr.BrickAdventures;
 using Mr.BrickAdventures.Autoloads;
 
 namespace Mr.BrickAdventures.scripts.Events;
@@ -10,10 +11,9 @@ public partial class SpeedRunEventHandler : Node
 
     public override void _Ready()
     {
-        _speedRunManager = GetNode<SpeedRunManager>("/root/SpeedRunManager");
-        var eventBus = GetNode<EventBus>("/root/EventBus");
-        
-        eventBus.LevelCompleted += OnLevelCompleted;
+        _speedRunManager = GetNode<SpeedRunManager>(Constants.SpeedRunManagerPath);
+
+        EventBus.Instance.LevelCompleted += OnLevelCompleted;
     }
 
     private void OnLevelCompleted(int levelIndex, Node currentScene, double completionTime)

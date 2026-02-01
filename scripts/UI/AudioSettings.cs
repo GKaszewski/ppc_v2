@@ -1,4 +1,5 @@
 using Godot;
+using Mr.BrickAdventures;
 using Mr.BrickAdventures.Autoloads;
 
 namespace Mr.BrickAdventures.scripts.UI;
@@ -10,19 +11,19 @@ public partial class AudioSettings : Control
     [Export] public Slider SfxVolumeSlider { get; set; }
     [Export] public Control AudioSettingsControl { get; set; }
     [Export] public float MuteThreshold { get; set; } = -20f;
-    
+
     private UIManager _uiManager;
     private ConfigFileHandler _configFileHandler;
 
     public override void _Ready()
     {
-        _uiManager = GetNode<UIManager>("/root/UIManager");
-        _configFileHandler = GetNode<ConfigFileHandler>("/root/ConfigFileHandler");
+        _uiManager = GetNode<UIManager>(Constants.UIManagerPath);
+        _configFileHandler = GetNode<ConfigFileHandler>(Constants.ConfigFileHandlerPath);
         Initialize();
         MasterVolumeSlider.ValueChanged += OnMasterVolumeChanged;
         MusicVolumeSlider.ValueChanged += OnMusicVolumeChanged;
         SfxVolumeSlider.ValueChanged += OnSfxVolumeChanged;
-        
+
         LoadSettings();
     }
 
@@ -35,7 +36,7 @@ public partial class AudioSettings : Control
     {
         if (!@event.IsActionReleased("ui_cancel")) return;
         if (!_uiManager.IsScreenOnTop(AudioSettingsControl)) return;
-        
+
         SaveSettings();
         _uiManager.PopScreen();
     }
@@ -64,12 +65,12 @@ public partial class AudioSettings : Control
         MasterVolumeSlider.Value = volumeDb;
         MasterVolumeSlider.MinValue = MuteThreshold;
         MasterVolumeSlider.MaxValue = 0f;
-        
+
         var musicVolumeDb = AudioServer.GetBusVolumeDb(AudioServer.GetBusIndex("music"));
         MusicVolumeSlider.Value = musicVolumeDb;
         MusicVolumeSlider.MinValue = MuteThreshold;
         MusicVolumeSlider.MaxValue = 0f;
-        
+
         var sfxVolumeDb = AudioServer.GetBusVolumeDb(AudioServer.GetBusIndex("sfx"));
         SfxVolumeSlider.Value = sfxVolumeDb;
         SfxVolumeSlider.MinValue = MuteThreshold;
@@ -95,12 +96,12 @@ public partial class AudioSettings : Control
     {
         var settingsConfig = _configFileHandler.SettingsConfig;
         if (!settingsConfig.HasSection("audio_settings")) return;
-        
+
         var masterVolume = (float)settingsConfig.GetValue("audio_settings", "master_volume", MasterVolumeSlider.Value);
         var musicVolume = (float)settingsConfig.GetValue("audio_settings", "music_volume", MusicVolumeSlider.Value);
         var sfxVolume = (float)settingsConfig.GetValue("audio_settings", "sfx_volume", SfxVolumeSlider.Value);
         var muteThreshold = (float)settingsConfig.GetValue("audio_settings", "mute_threshold", MuteThreshold);
-        
+
         MasterVolumeSlider.Value = masterVolume;
         MusicVolumeSlider.Value = musicVolume;
         SfxVolumeSlider.Value = sfxVolume;

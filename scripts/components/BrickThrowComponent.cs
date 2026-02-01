@@ -5,16 +5,14 @@ using Mr.BrickAdventures.scripts.Resources;
 namespace Mr.BrickAdventures.scripts.components;
 
 [GlobalClass]
-public partial class BrickThrowComponent : Node, ISkill
+public partial class BrickThrowComponent : SkillComponentBase
 {
     [Export] public PackedScene BrickScene { get; set; }
     [Export] public float FireRate { get; set; } = 1.0f;
-    [Export] public PlayerController PlayerController { get; set; }
     [Export] public ThrowInputResource ThrowInputBehavior { get; set; }
-    
+
     private bool _canThrow = true;
     private Timer _timer;
-    private SkillData _skillData;
 
     public override void _Ready()
     {
@@ -59,60 +57,54 @@ public partial class BrickThrowComponent : Node, ISkill
 
     private void ThrowBrick(float powerMultiplier = 1f)
     {
-        if (!_canThrow || PlayerController == null || BrickScene == null)
+        if (!_canThrow || Player == null || BrickScene == null)
             return;
 
         var instance = BrickScene.Instantiate<Node2D>();
         var init = instance.GetNodeOrNull<ProjectileInitComponent>("ProjectileInitComponent");
-        
+
         if (init != null)
         {
             var @params = new ProjectileInitParams()
             {
-                Position = PlayerController.GlobalPosition,
-                Rotation = PlayerController.Rotation,
-                Direction = PlayerController.LastDirection,
+                Position = Player.GlobalPosition,
+                Rotation = Player.Rotation,
+                Direction = Player.LastDirection,
                 PowerMultiplier = powerMultiplier,
             };
-            
+
             init.Initialize(@params);
         }
-        
+
         GetTree().CurrentScene.AddChild(instance);
         _canThrow = false;
         _timer.Start();
     }
 
-    public void Initialize(Node owner, SkillData data)
+    public override void Initialize(Node owner, SkillData data)
     {
-        PlayerController = owner as PlayerController;
-        _skillData = data;
+        base.Initialize(owner, data);
 
         ThrowInputBehavior = (ThrowInputResource)ThrowInputBehavior?.Duplicate();
 
-        if (PlayerController == null)
+        if (Data.Level > 0 && Data.Upgrades.Count >= Data.Level)
         {
-            GD.PushError("BrickThrowComponent: Owner is not a PlayerController.");
-        }
-        
-        if (_skillData.Level > 0 && _skillData.Upgrades.Count >= _skillData.Level)
-        {
-            ApplyUpgrade(_skillData.Upgrades[_skillData.Level - 1]);
+            ApplyUpgrade(Data.Upgrades[Data.Level - 1]);
         }
     }
 
-    public void Activate()
+    public override void Activate()
     {
         if (ThrowInputBehavior != null) ThrowInputBehavior.ThrowRequested += ThrowBrick;
         SetProcessInput(true);
     }
 
-    public void Deactivate()
+    public override void Deactivate()
     {
         if (ThrowInputBehavior != null) ThrowInputBehavior.ThrowRequested -= ThrowBrick;
     }
 
-    public void ApplyUpgrade(SkillUpgrade upgrade)
+    public override void ApplyUpgrade(SkillUpgrade upgrade)
     {
         foreach (var property in upgrade.Properties)
         {

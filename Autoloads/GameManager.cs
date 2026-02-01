@@ -3,41 +3,34 @@ using Godot;
 using Godot.Collections;
 using Mr.BrickAdventures.scripts.components;
 using Mr.BrickAdventures.scripts.Resources;
-using Double = System.Double;
+using Mr.BrickAdventures.scripts.State;
 
 namespace Mr.BrickAdventures.Autoloads;
 
+/// <summary>
+/// Game orchestrator - handles scene management and game flow.
+/// State is delegated to GameStateStore for better separation of concerns.
+/// </summary>
 public partial class GameManager : Node
 {
     [Export] public Array<PackedScene> LevelScenes { get; set; } = [];
-    
-    public PlayerController Player {
+
+    public PlayerController Player
+    {
         get => GetPlayer();
         private set => _player = value;
     }
-    
+
     private List<Node> _sceneNodes = [];
     private PlayerController _player;
     private SpeedRunManager _speedRunManager;
-    private EventBus _eventBus;
-    
-    [Export] 
-    public Dictionary PlayerState { get; set; } = new()
-    {
-        { "coins", 0 },
-        { "lives", 3 },
-        { "current_level", 0 },
-        { "completed_levels", new Array<int>() },
-        { "unlocked_levels", new Array<int>() {0}},
-        { "unlocked_skills", new Array<SkillData>() }
-    };
-    
-    [Export]
-    public Dictionary CurrentSessionState { get; private set; } = new()
-    {
-        { "coins_collected", 0 },
-        { "skills_unlocked", new Array<SkillData>() }
-    };
+
+    /// <summary>
+    /// Lazy accessor for GameStateStore - avoids initialization order issues.
+    /// </summary>
+    private GameStateStore Store => GameStateStore.Instance;
+
+    public static GameManager Instance { get; private set; }
 
     public override void _EnterTree()
     {
@@ -47,6 +40,7 @@ public partial class GameManager : Node
 
     public override void _ExitTree()
     {
+        if (Instance == this) Instance = null;
         GetTree().NodeAdded -= OnNodeAdded;
         GetTree().NodeRemoved -= OnNodeRemoved;
         _sceneNodes.Clear();
@@ -54,15 +48,15 @@ public partial class GameManager : Node
 
     public override void _Ready()
     {
-        _speedRunManager = GetNode<SpeedRunManager>("/root/SpeedRunManager");
-        _eventBus = GetNode<EventBus>("/root/EventBus");
+        Instance = this;
+        _speedRunManager = GetNode<SpeedRunManager>(Constants.SpeedRunManagerPath);
     }
 
     private void OnNodeAdded(Node node)
     {
         _sceneNodes.Add(node);
     }
-    
+
     private void OnNodeRemoved(Node node)
     {
         _sceneNodes.Remove(node);
@@ -72,57 +66,71 @@ public partial class GameManager : Node
         }
     }
 
+    #region Coin Operations
+
     public void AddCoins(int amount)
     {
-        PlayerState["coins"] = Mathf.Max(0, (int)PlayerState["coins"] + amount);
-    }
-    
-    public void SetCoins(int amount) => PlayerState["coins"] = Mathf.Max(0, amount);
-    
-    public int GetCoins() => (int)PlayerState["coins"] + (int)CurrentSessionState["coins_collected"];
-    
-    public void RemoveCoins(int amount)
-    {
-        var sessionCoins = (int)CurrentSessionState["coins_collected"];
-        if (amount <= sessionCoins)
+        if (Store != null)
         {
-            CurrentSessionState["coins_collected"] = sessionCoins - amount;
+            Store.Player.Coins += amount;
+            EventBus.EmitCoinsChanged(Store.GetTotalCoins());
         }
-        else
-        {
-            var remaining = amount - sessionCoins;
-            CurrentSessionState["coins_collected"] = 0;
-            PlayerState["coins"] = Mathf.Max(0, (int)PlayerState["coins"] - remaining);
-        }
-        PlayerState["coins"] = Mathf.Max(0, (int)PlayerState["coins"]);
     }
-    
-    public void AddLives(int amount) => PlayerState["lives"] = (int)PlayerState["lives"] + amount;
-    public void RemoveLives(int amount) => PlayerState["lives"] = (int)PlayerState["lives"] - amount;
-    public void SetLives(int amount) => PlayerState["lives"] = amount;
-    public int GetLives() => (int)PlayerState["lives"];
-    
-    public bool IsSkillUnlocked(SkillData skill)
+
+    public void SetCoins(int amount)
     {
-        return ((Array)PlayerState["unlocked_skills"]).Contains(skill)
-               || ((Array)CurrentSessionState["skills_unlocked"]).Contains(skill);
+        if (Store != null)
+        {
+            Store.Player.Coins = Mathf.Max(0, amount);
+            EventBus.EmitCoinsChanged(Store.GetTotalCoins());
+        }
     }
+
+    public int GetCoins() => Store?.GetTotalCoins() ?? 0;
+
+    public void RemoveCoins(int amount) => Store?.RemoveCoins(amount);
+
+    #endregion
+
+    #region Lives Operations
+
+    public void AddLives(int amount) => Store?.AddLives(amount);
+    public void RemoveLives(int amount) => Store?.RemoveLife();
+    public void SetLives(int amount)
+    {
+        if (Store != null)
+        {
+            Store.Player.Lives = amount;
+            EventBus.EmitLivesChanged(amount);
+        }
+    }
+    public int GetLives() => Store?.Player.Lives ?? 0;
+
+    #endregion
+
+    #region Skill Operations
+
+    public bool IsSkillUnlocked(SkillData skill) => Store?.IsSkillUnlocked(skill) ?? false;
 
     public void UnlockSkill(SkillData skill)
     {
-        if (!IsSkillUnlocked(skill))
-            ((Array)PlayerState["unlocked_skills"]).Add(skill);
+        if (Store != null && !Store.IsSkillUnlocked(skill))
+        {
+            Store.Player.UnlockedSkills.Add(skill);
+        }
     }
 
     public void RemoveSkill(string skillName)
     {
-        var arr = (Array)PlayerState["unlocked_skills"];
-        foreach (SkillData s in arr)
+        if (Store == null) return;
+        var skills = Store.Player.UnlockedSkills;
+        for (int i = 0; i < skills.Count; i++)
         {
-            if (s.Name != skillName) continue;
-            
-            arr.Remove(s);
-            break;
+            if (skills[i].Name == skillName)
+            {
+                skills.RemoveAt(i);
+                break;
+            }
         }
     }
 
@@ -132,81 +140,82 @@ public partial class GameManager : Node
             UnlockSkill(s);
     }
 
-    public void ResetPlayerState()
+    public Array<SkillData> GetUnlockedSkills()
     {
-        PlayerState = new Dictionary
-        {
-            { "coins", 0 },
-            { "lives", 3 },
-            { "current_level", 0 },
-            { "completed_levels", new Array<int>() },
-            { "unlocked_levels", new Array<int>() {0}},
-            { "unlocked_skills", new Array<SkillData>() },
-            { "statistics", new Godot.Collections.Dictionary<string, Variant>()}
-        };
+        if (Store == null) return new Array<SkillData>();
+
+        var skills = Store.GetAllUnlockedSkills();
+        var result = new Array<SkillData>();
+        foreach (var s in skills) result.Add(s);
+        return result;
     }
-    
-    public void UnlockLevel(int levelIndex)
-    {
-        var unlocked = (Array)PlayerState["unlocked_levels"];
-        if (!unlocked.Contains(levelIndex)) unlocked.Add(levelIndex);
-    }
+
+    #endregion
+
+    #region Level Operations
+
+    public void UnlockLevel(int levelIndex) => Store?.UnlockLevel(levelIndex);
+
+    public void MarkLevelComplete(int levelIndex) => Store?.MarkLevelComplete(levelIndex);
 
     public void TryToGoToNextLevel()
     {
-        var next = (int)PlayerState["current_level"] + 1;
-        var unlocked = (Array)PlayerState["unlocked_levels"];
-        if (next < LevelScenes.Count && unlocked.Contains(next))
+        if (Store == null) return;
+
+        var next = Store.Session.CurrentLevel + 1;
+        if (next < LevelScenes.Count && Store.IsLevelUnlocked(next))
         {
-            PlayerState["current_level"] = next;
+            Store.Session.CurrentLevel = next;
             GetTree().ChangeSceneToPacked(LevelScenes[next]);
-            _eventBus.EmitSignal(EventBus.SignalName.LevelStarted, next, GetTree().CurrentScene);
+            EventBus.EmitLevelStarted(next, GetTree().CurrentScene);
         }
     }
-    
-    public void MarkLevelComplete(int levelIndex)
-    {
-        UnlockLevel(levelIndex + 1);
-        var completed = (Array)PlayerState["completed_levels"];
-        if (!completed.Contains(levelIndex)) completed.Add(levelIndex);
-    }
 
-    public void ResetCurrentSessionState()
-    {
-        CurrentSessionState = new Dictionary
-        {
-            { "coins_collected", 0 },
-            { "skills_unlocked", new Array<SkillData>() }
-        };
-    }
-    
+    #endregion
+
+    #region State Reset
+
+    public void ResetPlayerState() => Store?.ResetAll();
+
+    public void ResetCurrentSessionState() => Store?.ResetSession();
+
+    #endregion
+
+    #region Game Flow
+
     public void RestartGame()
     {
-        ResetPlayerState();
-        ResetCurrentSessionState();
+        Store?.ResetAll();
         GetTree().ChangeSceneToPacked(LevelScenes[0]);
-        GetNode<SaveSystem>("/root/SaveSystem").SaveGame();
+        GetNode<SaveSystem>(Constants.SaveSystemPath).SaveGame();
     }
-    
+
     public void QuitGame() => GetTree().Quit();
 
-    public void PauseGame() => Engine.TimeScale = 0;
-    public void ResumeGame() => Engine.TimeScale = 1;
-    
+    public void PauseGame()
+    {
+        Engine.TimeScale = 0;
+        EventBus.EmitGamePaused();
+    }
+
+    public void ResumeGame()
+    {
+        Engine.TimeScale = 1;
+        EventBus.EmitGameResumed();
+    }
+
     public void StartNewGame()
     {
-        ResetPlayerState();
-        ResetCurrentSessionState();
-        
+        Store?.ResetAll();
         _speedRunManager?.StartTimer();
-        
         GetTree().ChangeSceneToPacked(LevelScenes[0]);
-        GetNode<SaveSystem>("/root/SaveSystem").SaveGame();
+        GetNode<SaveSystem>(Constants.SaveSystemPath).SaveGame();
+        EventBus.EmitGameStarted();
     }
 
     public void ContinueGame()
     {
-        var save = GetNode<SaveSystem>("/root/SaveSystem");
+        var save = GetNode<SaveSystem>(Constants.SaveSystemPath);
         if (!save.LoadGame())
         {
             GD.PrintErr("Failed to load game. Starting a new game instead.");
@@ -214,57 +223,56 @@ public partial class GameManager : Node
             return;
         }
 
-        var idx = (int)PlayerState["current_level"];
+        var idx = Store?.Session.CurrentLevel ?? 0;
         if (idx < LevelScenes.Count)
+        {
             GetTree().ChangeSceneToPacked(LevelScenes[idx]);
+            EventBus.EmitGameContinued();
+        }
         else
+        {
             GD.PrintErr("No levels unlocked to continue.");
+        }
     }
-    
+
     public void OnLevelComplete()
     {
-        var levelIndex = (int)PlayerState["current_level"];
-        MarkLevelComplete(levelIndex);
-        
-        AddCoins((int)CurrentSessionState["coins_collected"]);
-        foreach (var s in (Array)CurrentSessionState["skills_unlocked"])
-            UnlockSkill((SkillData)s);
+        if (Store == null) return;
+
+        var levelIndex = Store.Session.CurrentLevel;
+        Store.MarkLevelComplete(levelIndex);
+        Store.CommitSessionCoins();
+        Store.CommitSessionSkills();
 
         var completionTime = _speedRunManager?.GetCurrentLevelTime() ?? 0.0;
-        _eventBus.EmitSignal(EventBus.SignalName.LevelCompleted, levelIndex, GetTree().CurrentScene, completionTime);
-        
-        ResetCurrentSessionState();
+        EventBus.EmitLevelCompleted(levelIndex, GetTree().CurrentScene, completionTime);
+
+        Store.ResetSession();
         TryToGoToNextLevel();
-        GetNode<SaveSystem>("/root/SaveSystem").SaveGame();
+        GetNode<SaveSystem>(Constants.SaveSystemPath).SaveGame();
     }
 
-    public Array<SkillData> GetUnlockedSkills()
-    {
-        var unlocked = (Array<SkillData>)PlayerState["unlocked_skills"];
-        var session = (Array<SkillData>)CurrentSessionState["skills_unlocked"];
-        if (session!.Count == 0) return unlocked;
-        if (unlocked!.Count == 0) return session;
-        var joined = new Array<SkillData>();
-        joined.AddRange(unlocked);
-        joined.AddRange(session);
-        return joined;
-    }
+    #endregion
+
+    #region Player Lookup
 
     public PlayerController GetPlayer()
     {
         if (_player != null && IsInstanceValid(_player)) return _player;
-        
+
         _player = null;
 
         foreach (var node in _sceneNodes)
         {
             if (node is not PlayerController player) continue;
-            
+
             _player = player;
             return _player;
         }
-        
+
         GD.PrintErr("PlayerController not found in the scene tree.");
         return null;
     }
+
+    #endregion
 }

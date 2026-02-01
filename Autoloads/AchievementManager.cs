@@ -1,23 +1,22 @@
 using Godot;
-using Godot.Collections;
 using Mr.BrickAdventures.scripts.Resources;
+using Mr.BrickAdventures.scripts.State;
 
 namespace Mr.BrickAdventures.Autoloads;
 
+/// <summary>
+/// Manages achievements using GameStateStore.
+/// </summary>
 public partial class AchievementManager : Node
 {
     [Export] private string AchievementsFolderPath = "res://achievements/";
     [Export] private PackedScene AchievementPopupScene { get; set; }
-    
+
     private System.Collections.Generic.Dictionary<string, AchievementResource> _achievements = new();
-    private Array<string> _unlockedAchievementIds = [];
-    private GameManager _gameManager;
-    
+
     public override void _Ready()
     {
-        _gameManager = GetNode<GameManager>("/root/GameManager");
         LoadAchievementsFromFolder();
-        LoadUnlockedAchievements();
     }
 
     private void LoadAchievementsFromFolder()
@@ -44,7 +43,15 @@ public partial class AchievementManager : Node
             fileName = dir.GetNext();
         }
     }
-    
+
+    /// <summary>
+    /// Gets the list of unlocked achievement IDs from the store.
+    /// </summary>
+    private System.Collections.Generic.List<string> GetUnlockedIds()
+    {
+        return GameStateStore.Instance?.Player.UnlockedAchievements ?? new System.Collections.Generic.List<string>();
+    }
+
     public void UnlockAchievement(string achievementId)
     {
         if (!_achievements.TryGetValue(achievementId, out var achievement))
@@ -53,13 +60,14 @@ public partial class AchievementManager : Node
             return;
         }
 
-        if (_unlockedAchievementIds.Contains(achievementId))
+        var unlockedIds = GetUnlockedIds();
+        if (unlockedIds.Contains(achievementId))
         {
             return; // Already unlocked
         }
 
-        // 1. Mark as unlocked internally
-        _unlockedAchievementIds.Add(achievementId);
+        // 1. Mark as unlocked
+        unlockedIds.Add(achievementId);
         GD.Print($"Achievement Unlocked: {achievement.DisplayName}");
 
         // 2. Show the UI popup
@@ -75,31 +83,19 @@ public partial class AchievementManager : Node
         {
             SteamManager.UnlockAchievement(achievement.Id);
         }
-        
-        // 4. Save progress
-        SaveUnlockedAchievements();
-    }
-    
-    public void LockAchievement(string achievementId)
-    {
-        if (_unlockedAchievementIds.Contains(achievementId))
-        {
-            _unlockedAchievementIds.Remove(achievementId);
-            SaveUnlockedAchievements();
-        }
-    }
-    
-    private void SaveUnlockedAchievements()
-    {
-        _gameManager.PlayerState["unlocked_achievements"] = _unlockedAchievementIds;
-        // You might want to trigger a save game here, depending on your SaveSystem
     }
 
-    private void LoadUnlockedAchievements()
+    public void LockAchievement(string achievementId)
     {
-        if (_gameManager.PlayerState.TryGetValue("unlocked_achievements", out var unlocked))
+        var unlockedIds = GetUnlockedIds();
+        if (unlockedIds.Contains(achievementId))
         {
-            _unlockedAchievementIds = (Array<string>)unlocked;
+            unlockedIds.Remove(achievementId);
         }
+    }
+
+    public bool IsAchievementUnlocked(string achievementId)
+    {
+        return GetUnlockedIds().Contains(achievementId);
     }
 }

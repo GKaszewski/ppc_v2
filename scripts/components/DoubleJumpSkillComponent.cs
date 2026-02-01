@@ -6,40 +6,25 @@ using Mr.BrickAdventures.scripts.Resources;
 namespace Mr.BrickAdventures.scripts.components;
 
 [GlobalClass]
-public partial class DoubleJumpSkillComponent : Node, ISkill
+public partial class DoubleJumpSkillComponent : SkillComponentBase
 {
     [Export] private PackedScene _doubleJumpAbilityScene;
-    private PlayerController _playerController;
-    
-    public void Initialize(Node owner, SkillData data)
-    {
-        _playerController = owner as PlayerController;
-        if (_playerController == null)
-        {
-            GD.PrintErr("DoubleJumpSkillComponent must be a child of a PlayerController.");
-        }
-    }
 
-    public void Activate()
+    public override void Activate()
     {
-        if (_playerController == null) return;
+        if (Player == null) return;
 
-        var hasAbility = _playerController.GetActiveAbilities().Any(ability => ability is DoubleJumpAbility);
+        var hasAbility = Player.GetActiveAbilities().Any(ability => ability is DoubleJumpAbility);
 
         if (!hasAbility)
         {
             var abilityInstance = _doubleJumpAbilityScene.Instantiate<DoubleJumpAbility>();
-            _playerController.AddAbility(abilityInstance);
+            Player.AddAbility(abilityInstance);
         }
     }
 
-    public void Deactivate()
+    public override void Deactivate()
     {
-        _playerController?.RemoveAbility<DoubleJumpAbility>();
-    }
-
-    public void ApplyUpgrade(SkillUpgrade upgrade)
-    {
-        
+        Player?.RemoveAbility<DoubleJumpAbility>();
     }
 }

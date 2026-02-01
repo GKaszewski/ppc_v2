@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using Godot.Collections;
+using Mr.BrickAdventures;
 using Mr.BrickAdventures.scripts.components;
 using Mr.BrickAdventures.scripts.interfaces;
 using Mr.BrickAdventures.scripts.Resources;
@@ -14,19 +15,27 @@ public partial class SkillManager : Node
     private PlayerController _player;
 
     [Export] public Array<SkillData> AvailableSkills { get; set; } = [];
-    
+
     public Dictionary ActiveComponents { get; private set; } = new();
+
+    public static SkillManager Instance { get; private set; }
 
     [Signal]
     public delegate void ActiveThrowSkillChangedEventHandler(BrickThrowComponent throwComponent);
     [Signal]
     public delegate void SkillRemovedEventHandler(SkillData skillData);
-    
+
     public override void _Ready()
     {
-        _gameManager = GetNode<GameManager>("/root/GameManager");
+        Instance = this;
+        _gameManager = GetNode<GameManager>(Constants.GameManagerPath);
     }
-    
+
+    public override void _ExitTree()
+    {
+        if (Instance == this) Instance = null;
+    }
+
     /// <summary>
     /// Called by the PlayerController from its _Ready method to register itself with the manager.
     /// </summary>
@@ -39,7 +48,7 @@ public partial class SkillManager : Node
         {
             UnregisterPlayer();
         }
-        
+
         _player = player;
         if (_player != null)
         {
@@ -61,7 +70,7 @@ public partial class SkillManager : Node
         }
         _player = null;
     }
-    
+
     public void AddSkill(SkillData skillData)
     {
         // Ensure a valid player is registered before adding a skill.
@@ -70,7 +79,7 @@ public partial class SkillManager : Node
             GD.Print("SkillManager: Player not available to add skill.");
             return;
         }
-    
+
         if (ActiveComponents.ContainsKey(skillData.Name))
             return;
 
@@ -98,9 +107,9 @@ public partial class SkillManager : Node
         if (instance is ISkill skill)
         {
             // Initialize the skill with the registered player instance.
-            skill.Initialize(_player, skillData); 
+            skill.Initialize(_player, skillData);
             skill.Activate();
-        } 
+        }
         else
         {
             GD.PrintErr($"Skill scene for '{skillData.Name}' does not implement ISkill!");
@@ -111,18 +120,18 @@ public partial class SkillManager : Node
         // Add the skill node as a child of the player.
         _player.AddChild(instance);
         ActiveComponents[skillData.Name] = instance;
-        
+
         if (instance is BrickThrowComponent btc)
         {
-           EmitSignalActiveThrowSkillChanged(btc);
+            EmitSignalActiveThrowSkillChanged(btc);
         }
     }
-    
+
     public void RemoveSkill(string skillName)
     {
         if (!ActiveComponents.TryGetValue(skillName, out var component))
             return;
-        
+
         if (component.AsGodotObject() is BrickThrowComponent)
         {
             EmitSignalActiveThrowSkillChanged(null);
@@ -133,7 +142,7 @@ public partial class SkillManager : Node
         {
             skill.Deactivate();
         }
-        
+
         if (IsInstanceValid(inst))
             inst.QueueFree();
 
@@ -142,7 +151,6 @@ public partial class SkillManager : Node
         {
             if (s.Name == skillName)
             {
-                s.IsActive = false;
                 break;
             }
         }
@@ -150,7 +158,7 @@ public partial class SkillManager : Node
         var sd = GetSkillByName(skillName);
         if (sd != null) EmitSignalSkillRemoved(sd);
     }
-    
+
     private void RemoveAllActiveSkills()
     {
         // Create a copy of keys to avoid modification during iteration
@@ -187,12 +195,16 @@ public partial class SkillManager : Node
         return null;
     }
 
+    public bool IsSkillActive(SkillData skill)
+    {
+        return skill != null && ActiveComponents.ContainsKey(skill.Name);
+    }
+
     public void ActivateSkill(SkillData skill)
     {
         if (!ActiveComponents.ContainsKey(skill.Name))
         {
             AddSkill(skill);
-            skill.IsActive = true;
         }
     }
 
@@ -201,7 +213,6 @@ public partial class SkillManager : Node
         if (ActiveComponents.ContainsKey(skill.Name))
         {
             RemoveSkill(skill.Name);
-            skill.IsActive = false;
         }
     }
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://dtxkjif7prm70"]
+[gd_scene load_steps=2 format=3 uid="uid://bimyb8suadq3u"]
 
 [ext_resource type="Script" uid="uid://dl7vthhurirwc" path="res://scripts/components/XRayVisionSkillComponent.cs" id="1_ebn6n"]
 

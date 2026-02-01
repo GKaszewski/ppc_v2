@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Godot;
 using Godot.Collections;
+using Mr.BrickAdventures;
 using Mr.BrickAdventures.Autoloads;
 using Mr.BrickAdventures.scripts.components;
 using Mr.BrickAdventures.scripts.Resources;
@@ -17,7 +18,7 @@ public partial class Marketplace : Control
     [Export] public Array<Node> ComponentsToDisable { get; set; } = [];
     [Export] public PackedScene MarketplaceButtonScene { get; set; }
     [Export] public PackedScene SkillButtonScene { get; set; }
-    
+
     private GameManager _gameManager;
     private SkillManager _skillManager;
     private readonly List<Button> _unlockButtons = [];
@@ -25,33 +26,37 @@ public partial class Marketplace : Control
 
     public override void _Ready()
     {
-        _gameManager = GetNode<GameManager>("/root/GameManager");
-        _skillManager = GetNode<SkillManager>("/root/SkillManager");
-        _skillManager.SkillRemoved += OnSkillRemoved;
-        
+        _gameManager = GameManager.Instance;
+        _skillManager = SkillManager.Instance;
+
         Skills = _skillManager.AvailableSkills;
-        
+
         var skillsToUnlock = new List<SkillData>();
-        
+
         foreach (var skill in Skills) skillsToUnlock.Add(skill);
 
         foreach (var skill in skillsToUnlock) CreateUpgradeButton(skill);
 
         var unlockedSkills = _gameManager.GetUnlockedSkills();
         foreach (var skill in unlockedSkills) CreateSkillButton(skill);
-        
+
         SkillUnlockerComponent.SkillUnlocked += OnSkillUnlocked;
+        EventBus.Instance.SkillCollected += OnGlobalSkillCollected;
     }
 
     public override void _ExitTree()
     {
         SkillUnlockerComponent.SkillUnlocked -= OnSkillUnlocked;
+        if (EventBus.Instance != null)
+        {
+            EventBus.Instance.SkillCollected -= OnGlobalSkillCollected;
+        }
     }
 
     public override void _Input(InputEvent @event)
     {
         if (!@event.IsActionPressed("show_marketplace")) return;
-        
+
         if (IsVisible())
         {
             Hide();
@@ -75,12 +80,12 @@ public partial class Marketplace : Control
                 break;
             }
         }
-        
+
         if (!buttonExists) CreateSkillButton(skill);
 
         foreach (var btn in _skillButtons)
         {
-            if (btn.Data.IsActive) btn.Activate();
+            if (_skillManager.IsSkillActive(btn.Data)) btn.Activate();
             else btn.Deactivate();
         }
     }
@@ -92,7 +97,7 @@ public partial class Marketplace : Control
         button.Setup();
         button.Pressed += () => OnSkillButtonPressed(button);
         button.Activate();
-        
+
         _skillButtons.Add(button);
         UnlockedGrid.AddChild(button);
         UnlockedGrid.QueueSort();
@@ -104,7 +109,7 @@ public partial class Marketplace : Control
         button.Data = skill;
         button.Icon = skill.Icon;
         button.Pressed += () => OnUpgradeButtonPressed(skill);
-        
+
         _unlockButtons.Add(button);
         ToUnlockGrid.AddChild(button);
         ToUnlockGrid.QueueSort();
@@ -117,7 +122,7 @@ public partial class Marketplace : Control
             if (skill.Level < skill.MaxLevel)
             {
                 SkillUnlockerComponent.TryUpgradeSkill(skill);
-                if (!skill.IsActive) SkillUnlockerComponent.SkillManager.ToggleSkillActivation(skill);
+                if (!SkillUnlockerComponent.SkillManager.IsSkillActive(skill)) SkillUnlockerComponent.SkillManager.ToggleSkillActivation(skill);
             }
             else
             {
@@ -133,31 +138,18 @@ public partial class Marketplace : Control
     private void OnSkillButtonPressed(SkillButton button)
     {
         SkillUnlockerComponent.SkillManager.ToggleSkillActivation(button.Data);
-        
+
         foreach (var btn in _skillButtons)
         {
-            if (btn.Data.IsActive)
+            if (SkillUnlockerComponent.SkillManager.IsSkillActive(btn.Data))
                 btn.Activate();
             else
                 btn.Deactivate();
         }
     }
-    
-    private void OnSkillRemoved(SkillData skill)
+
+    private void OnGlobalSkillCollected(SkillData skill, Vector2 position)
     {
-        SkillButton buttonToRemove = null;
-        foreach (var button in _skillButtons)
-        {
-            if (button.Data == skill)
-            {
-                buttonToRemove = button;
-                break;
-            }
-        }
-        if (buttonToRemove != null)
-        {
-            _skillButtons.Remove(buttonToRemove);
-            buttonToRemove.QueueFree();
-        }
+        OnSkillUnlocked(skill);
     }
 }

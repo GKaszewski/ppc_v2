@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
+using Mr.BrickAdventures;
 using Mr.BrickAdventures.Autoloads;
 
 namespace Mr.BrickAdventures.scripts.components;
@@ -10,7 +11,7 @@ namespace Mr.BrickAdventures.scripts.components;
 public partial class PlayerController : CharacterBody2D
 {
     [Export] private Node MovementAbilitiesContainer { get; set; }
-    
+
     [ExportGroup("Movement Ability Scenes")]
     [Export] public PackedScene GroundMovementScene { get; set; }
     [Export] public PackedScene JumpMovementScene { get; set; }
@@ -19,23 +20,23 @@ public partial class PlayerController : CharacterBody2D
     [Export] public PackedScene SpaceshipMovementScene { get; set; }
     [Export] public PackedScene WallJumpScene { get; set; }
     [Export] public PackedScene GridMovementScene { get; set; }
-    
+
     [Signal] public delegate void JumpInitiatedEventHandler();
     [Signal] public delegate void MovementAbilitiesChangedEventHandler();
-    
+
     public Vector2 LastDirection { get; private set; } = Vector2.Right;
     public Vector2 PreviousVelocity { get; private set; } = Vector2.Zero;
-    
+
     private List<MovementAbility> _abilities = [];
     private PlayerInputHandler _inputHandler;
-    
+
     public IReadOnlyList<MovementAbility> GetActiveAbilities() => _abilities;
-    
+
     public override void _Ready()
     {
-        var skillManager = GetNodeOrNull<SkillManager>("/root/SkillManager");
+        var skillManager = GetNodeOrNull<SkillManager>(Constants.SkillManagerPath);
         skillManager?.RegisterPlayer(this);
-        
+
         _inputHandler = GetNode<PlayerInputHandler>("PlayerInputHandler");
         foreach (var child in MovementAbilitiesContainer.GetChildren())
         {
@@ -45,20 +46,20 @@ public partial class PlayerController : CharacterBody2D
                 _abilities.Add(ability);
             }
         }
-        
+
         _ = ConnectJumpAndGravityAbilities();
         EmitSignalMovementAbilitiesChanged();
     }
-    
+
     public override void _PhysicsProcess(double delta)
     {
         var velocity = Velocity;
-        
+
         foreach (var ability in _abilities)
         {
             velocity = ability.ProcessMovement(velocity, delta);
         }
-        
+
         if (_inputHandler.MoveDirection.X != 0)
         {
             LastDirection = new Vector2(_inputHandler.MoveDirection.X > 0 ? 1 : -1, 0);
@@ -68,14 +69,14 @@ public partial class PlayerController : CharacterBody2D
         Velocity = velocity;
         MoveAndSlide();
     }
-    
+
     public void AddAbility(MovementAbility ability)
     {
         MovementAbilitiesContainer.AddChild(ability);
         ability.Initialize(this);
         _abilities.Add(ability);
     }
-    
+
     public void ClearMovementAbilities()
     {
         foreach (var ability in _abilities)
@@ -84,7 +85,7 @@ public partial class PlayerController : CharacterBody2D
         }
         _abilities.Clear();
     }
-    
+
     public void RemoveAbility<T>() where T : MovementAbility
     {
         for (var i = _abilities.Count - 1; i >= 0; i--)
@@ -102,20 +103,20 @@ public partial class PlayerController : CharacterBody2D
     public void SetPlatformMovement()
     {
         ClearMovementAbilities();
-        
+
         if (GroundMovementScene != null) AddAbility(GroundMovementScene.Instantiate<MovementAbility>());
         if (JumpMovementScene != null) AddAbility(JumpMovementScene.Instantiate<MovementAbility>());
         if (GravityScene != null) AddAbility(GravityScene.Instantiate<MovementAbility>());
         if (OneWayPlatformScene != null) AddAbility(OneWayPlatformScene.Instantiate<MovementAbility>());
-        
+
         _ = ConnectJumpAndGravityAbilities();
         EmitSignalMovementAbilitiesChanged();
     }
-    
+
     public void SetSpaceshipMovement()
     {
         ClearMovementAbilities();
-        
+
         if (SpaceshipMovementScene != null) AddAbility(SpaceshipMovementScene.Instantiate<MovementAbility>());
         EmitSignalMovementAbilitiesChanged();
     }
@@ -130,10 +131,10 @@ public partial class PlayerController : CharacterBody2D
     private async Task ConnectJumpAndGravityAbilities()
     {
         await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
-        
+
         var jumpAbility = _abilities.OfType<VariableJumpAbility>().FirstOrDefault();
         var gravityAbility = _abilities.OfType<GravityAbility>().FirstOrDefault();
-        
+
         if (jumpAbility != null && gravityAbility != null)
         {
             gravityAbility.AscendGravity = jumpAbility.AscendGravity;

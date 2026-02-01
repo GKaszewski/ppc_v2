@@ -1,4 +1,5 @@
 using Godot;
+using Mr.BrickAdventures;
 using Mr.BrickAdventures.scripts.components;
 
 namespace Mr.BrickAdventures.Autoloads;
@@ -12,9 +13,9 @@ public partial class ConsoleManager : Node
 
     public override void _Ready()
     {
-        _gameManager = GetNode<GameManager>("/root/GameManager");
-        _achievementManager = GetNode<AchievementManager>("/root/AchievementManager");
-        _skillManager = GetNode<SkillManager>("/root/SkillManager");
+        _gameManager = GameManager.Instance;
+        _achievementManager = GetNode<AchievementManager>(Constants.AchievementManagerPath);
+        _skillManager = SkillManager.Instance;
     }
 
     private void AddCoinsCommand(int amount)
@@ -88,7 +89,7 @@ public partial class ConsoleManager : Node
 
         _skillUnlockerComponent.UnlockAllSkills();
     }
-    
+
     private void RemoveSkillCommand(string skillName)
     {
         if (!GetSkillManagement()) return;
@@ -102,28 +103,28 @@ public partial class ConsoleManager : Node
         _gameManager.RemoveSkill(skill.Name);
         _skillManager.DeactivateSkill(skill);
     }
-    
+
     private void RemoveAllSkillsCommand()
     {
         if (!GetSkillManagement()) return;
-        
+
         foreach (var skill in _skillManager.AvailableSkills)
         {
             _gameManager.RemoveSkill(skill.Name);
             _skillManager.DeactivateSkill(skill);
         }
     }
-    
+
     private void GoToNextLevelCommand()
     {
         _gameManager.OnLevelComplete();
     }
-    
+
     private void UnlockAchievementCommand(string achievementId)
     {
         _achievementManager.UnlockAchievement(achievementId);
     }
-    
+
     private void ResetAchievementCommand(string achievementId)
     {
         _achievementManager.LockAchievement(achievementId);
