@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SkillData" load_steps=5 format=3 uid="uid://dghnl301o1aiy"]
+[gd_resource type="Resource" script_class="SkillData" format=3 uid="uid://dghnl301o1aiy"]
 
 [ext_resource type="PackedScene" uid="uid://cdeh7wfc62fr4" path="res://objects/player_skills/brick_armor_skill_component.tscn" id="1_aqcna"]
 [ext_resource type="Script" uid="uid://d4crrfmbgxnqf" path="res://scripts/Resources/SkillData.cs" id="1_unqwr"]

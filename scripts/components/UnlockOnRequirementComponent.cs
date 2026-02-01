@@ -13,6 +13,11 @@ public partial class UnlockOnRequirementComponent : Node
     public override void _Ready()
     {
         RequirementComponent.RequirementMet += OnRequirementMet;
+
+        if (RequirementComponent.RequirementType == CollectableType.None)
+        {
+            OnRequirementMet(RequirementComponent.RequirementType);
+        }
     }
 
     private void OnRequirementMet(CollectableType requirementType)

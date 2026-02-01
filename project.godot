@@ -8,6 +8,10 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="Mr. Brick Adventures"
@@ -19,11 +23,11 @@ config/version="in-dev"
 run/main_scene="uid://cl00e2ocomk3m"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="MrBrickAdventures"
-config/features=PackedStringArray("4.5", "C#", "GL Compatibility")
+config/features=PackedStringArray("4.6", "C#", "GL Compatibility")
 run/max_fps=180
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
-boot_splash/fullsize=false
+boot_splash/stretch_mode=0
 boot_splash/use_filter=false
 config/icon="uid://jix7wdn0isr3"
 
@@ -35,7 +39,7 @@ UIManager="*res://Autoloads/UIManager.cs"
 ConfigFileHandler="*res://Autoloads/ConfigFileHandler.cs"
 SaveSystem="*res://Autoloads/SaveSystem.cs"
 ConsoleManager="*res://Autoloads/ConsoleManager.cs"
-LimboConsole="*res://addons/limbo_console/limbo_console.gd"
+LimboConsole="*uid://dyxornv8vwibg"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 SteamManager="*res://Autoloads/SteamManager.cs"
 AchievementManager="*res://objects/achievement_manager.tscn"

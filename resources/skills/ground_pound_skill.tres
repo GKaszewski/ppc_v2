@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SkillData" load_steps=5 format=3 uid="uid://cseilsspimw1n"]
+[gd_resource type="Resource" script_class="SkillData" format=3 uid="uid://cseilsspimw1n"]
 
 [ext_resource type="PackedScene" uid="uid://lu3wvpqefekn" path="res://objects/player_skills/ground_pound_skill_component.tscn" id="1_auljr"]
 [ext_resource type="Script" uid="uid://d4crrfmbgxnqf" path="res://scripts/Resources/SkillData.cs" id="1_i1qac"]

@@ -18,6 +18,11 @@ public partial class RequirementComponent : Node
 
     public override void _Ready()
     {
+        if (RequirementType == CollectableType.None)
+        {
+            EmitSignalRequirementMet(RequirementType);
+        }
+        
         var collectables = GetTree().GetNodesInGroup(CollectableGroupName);
         foreach (var collectable in collectables)
         {
