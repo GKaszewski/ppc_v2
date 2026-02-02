@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d08dfqmirnd66"]
+[gd_scene format=3 uid="uid://d08dfqmirnd66"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_1co1x"]
 [ext_resource type="Script" uid="uid://r4jybneigfcn" path="res://scripts/components/CollectableComponent.cs" id="2_lthbn"]
@@ -9,32 +9,32 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_3ask2"]
 radius = 9.0
 
-[node name="Big Treasure" type="Area2D" groups=["coins"]]
+[node name="Big Treasure" type="Area2D" unique_id=1021217632 groups=["coins"]]
 collision_layer = 2
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=458290011]
 shape = SubResource("CircleShape2D_3ask2")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=564060301]
 texture = ExtResource("1_1co1x")
 hframes = 12
 vframes = 12
 frame = 64
 
-[node name="CollectableComponent" type="Node" parent="." node_paths=PackedStringArray("Area2D", "CollisionShape", "Sfx")]
+[node name="CollectableComponent" type="Node" parent="." unique_id=2009195182 node_paths=PackedStringArray("Area2D", "CollisionShape", "Sfx")]
 script = ExtResource("2_lthbn")
 Area2D = NodePath("..")
 CollisionShape = NodePath("../CollisionShape2D")
 Data = ExtResource("3_k64cr")
 Sfx = NodePath("../sfx")
 
-[node name="FadeAwayComponent" type="Node" parent="." node_paths=PackedStringArray("Sprite", "Area")]
+[node name="FadeAwayComponent" type="Node" parent="." unique_id=1809580000 node_paths=PackedStringArray("Sprite", "Area")]
 script = ExtResource("4_qwwsj")
 Sprite = NodePath("../Sprite2D")
 FadeDuration = 0.4
 Area = NodePath("..")
 
-[node name="sfx" type="AudioStreamPlayer2D" parent="."]
+[node name="sfx" type="AudioStreamPlayer2D" parent="." unique_id=466669009]
 stream = ExtResource("5_fxf8v")
 bus = &"sfx"

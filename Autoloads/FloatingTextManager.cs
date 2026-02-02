@@ -1,5 +1,7 @@
+using System;
 using System.Globalization;
 using Godot;
+using Mr.BrickAdventures.scripts.Resources;
 using Mr.BrickAdventures.scripts.UI;
 
 namespace Mr.BrickAdventures.Autoloads;

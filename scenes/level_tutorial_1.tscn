@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bqi5s710xb1ju" path="res://objects/entities/brick_player.tscn" id="1_37wjj"]
 [ext_resource type="PackedScene" uid="uid://cawlpch2lk3a2" path="res://objects/level/world_environment.tscn" id="2_edawf"]
 [ext_resource type="PackedScene" uid="uid://6foggu31cu14" path="res://objects/level/ui_layer.tscn" id="3_4xc2i"]
+[ext_resource type="Script" uid="uid://c2h0pqhxiqswe" path="res://scripts/Resources/LevelResource.cs" id="3_ph1yb"]
 [ext_resource type="PackedScene" uid="uid://cywsu7yrtjdog" path="res://objects/level/global_light.tscn" id="4_quuvq"]
 [ext_resource type="PackedScene" uid="uid://cb0mnye1ki5a6" path="res://objects/level/camera_2d.tscn" id="5_xakqe"]
 [ext_resource type="Script" uid="uid://d23haq52m7ulv" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="6_8kvwk"]
@@ -15,6 +16,12 @@
 [ext_resource type="PackedScene" uid="uid://cm3rixnnev1pg" path="res://objects/entities/jump_pad.tscn" id="13_gvbho"]
 [ext_resource type="PackedScene" uid="uid://b4pdt1gv2ymyi" path="res://objects/tooltip.tscn" id="14_tiikr"]
 [ext_resource type="PackedScene" uid="uid://12jnkdygpxwc" path="res://objects/entities/exit_level.tscn" id="15_x1nqv"]
+
+[sub_resource type="Resource" id="Resource_asu0i"]
+script = ExtResource("3_ph1yb")
+LevelName = "Tutorial 1"
+ScenePath = "res://scenes/level_tutorial_1.tscn"
+metadata/_custom_type_script = "uid://c2h0pqhxiqswe"
 
 [sub_resource type="Resource" id="Resource_0nwt7"]
 script = ExtResource("7_3r0gs")
@@ -34,7 +41,7 @@ point_count = 2
 [sub_resource type="CurveTexture" id="CurveTexture_7b7mt"]
 curve = SubResource("Curve_82d6e")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c4p0h"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8xasx"]
 resource_local_to_scene = true
 lifetime_randomness = 1.0
 particle_flag_disable_z = true
@@ -59,6 +66,9 @@ color_ramp = SubResource("GradientTexture1D_f1fvy")
 
 [node name="HUD" parent="UI Layer" index="0" node_paths=PackedStringArray("Health")]
 Health = NodePath("../../Brick Player/HealthComponent")
+
+[node name="DeathScreen" parent="UI Layer" index="1"]
+CurrentLevel = SubResource("Resource_asu0i")
 
 [node name="Marketplace" parent="UI Layer" index="3" node_paths=PackedStringArray("SkillUnlockerComponent", "ComponentsToDisable")]
 SkillUnlockerComponent = NodePath("../../Brick Player/SkillUnlockerComponent")
@@ -138,7 +148,7 @@ RequirementAmount = 0
 position = Vector2(-93, 13)
 
 [node name="HitParticles" parent="Brick Player" index="23"]
-process_material = SubResource("ParticleProcessMaterial_c4p0h")
+process_material = SubResource("ParticleProcessMaterial_8xasx")
 
 [connection signal="Death" from="Brick Player/HealthComponent" to="UI Layer/DeathScreen" method="OnPlayerDeath"]
 [connection signal="Death" from="Brick Player/HealthComponent" to="UI Layer/GameOverScreen" method="OnPlayerDeath"]

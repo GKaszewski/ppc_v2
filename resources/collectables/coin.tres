@@ -1,8 +1,8 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://vql535ckoeqm"]
+[gd_resource type="Resource" format=3 uid="uid://vql535ckoeqm"]
 
 [ext_resource type="Script" uid="uid://gptsgaw3agkf" path="res://scripts/Resources/CollectableResource.cs" id="1_7pquc"]
 
 [resource]
 script = ExtResource("1_7pquc")
 Amount = 1.0
-Type = 0
+Type = 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://12jnkdygpxwc"]
+[gd_scene format=3 uid="uid://12jnkdygpxwc"]
 
 [ext_resource type="Texture2D" uid="uid://djifxc5x0dyrw" path="res://sprites/ppc_tileset.png" id="1_agxwm"]
 [ext_resource type="Script" uid="uid://dnh0mekg2vqxi" path="res://scripts/components/RequirementComponent.cs" id="2_ed7mh"]
@@ -8,14 +8,14 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yfu6m"]
 size = Vector2(28, 32)
 
-[node name="ExitLevel" type="Area2D" node_paths=PackedStringArray("DoorSprite")]
+[node name="ExitLevel" type="Area2D" unique_id=1951927125 node_paths=PackedStringArray("DoorSprite")]
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("4_06sog")
 DoorSprite = NodePath("Sprite2D")
 OpenedDoorFrame = 88
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1296410089]
 position = Vector2(0, -8)
 scale = Vector2(2, 2)
 texture = ExtResource("1_agxwm")
@@ -23,15 +23,15 @@ hframes = 12
 vframes = 12
 frame = 54
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=220927363]
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_yfu6m")
 
-[node name="RequirementComponent" type="Node" parent="."]
+[node name="RequirementComponent" type="Node" parent="." unique_id=1338124097]
 script = ExtResource("2_ed7mh")
-RequirementType = 1
+RequirementType = 2
 
-[node name="UnlockOnRequirementComponent" type="Node" parent="." node_paths=PackedStringArray("RequirementComponent", "UnlockTarget")]
+[node name="UnlockOnRequirementComponent" type="Node" parent="." unique_id=1279359200 node_paths=PackedStringArray("RequirementComponent", "UnlockTarget")]
 script = ExtResource("3_ed7mh")
 RequirementComponent = NodePath("../RequirementComponent")
 UnlockTarget = NodePath("..")

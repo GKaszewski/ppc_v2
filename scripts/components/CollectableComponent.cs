@@ -23,9 +23,7 @@ public partial class CollectableComponent : Node
     /// Return false to prevent collection.
     /// </summary>
     public Func<Node2D, bool> CanCollect { get; set; }
-
-    private FloatingTextManager _floatingTextManager;
-
+    
     public override void _Ready()
     {
         if (Area2D != null)
@@ -35,8 +33,6 @@ public partial class CollectableComponent : Node
 
         if (Owner.HasNode("FadeAwayComponent"))
             _hasFadeAway = true;
-
-        _floatingTextManager = GetNode<FloatingTextManager>(Constants.FloatingTextManagerPath);
     }
 
     private async void OnArea2DBodyEntered(Node2D body)
@@ -53,21 +49,21 @@ public partial class CollectableComponent : Node
                 switch (Data.Type)
                 {
                     case CollectableType.Coin:
-                        _floatingTextManager?.ShowCoin((int)Data.Amount, ownerNode.GlobalPosition);
+                        FloatingTextManager.Instance?.ShowCoin((int)Data.Amount, ownerNode.GlobalPosition);
                         EventBus.EmitCoinCollected((int)Data.Amount, ownerNode.GlobalPosition);
                         break;
                     case CollectableType.Health:
-                        _floatingTextManager?.ShowMessage("Healed!", ownerNode.GlobalPosition);
+                        FloatingTextManager.Instance?.ShowMessage("Healed!", ownerNode.GlobalPosition);
                         EventBus.EmitItemCollected(Data.Type, Data.Amount, ownerNode.GlobalPosition);
                         break;
                     case CollectableType.Kid:
-                        _floatingTextManager?.ShowMessage("Rescued!", ownerNode.GlobalPosition);
+                        FloatingTextManager.Instance?.ShowMessage("Rescued!", ownerNode.GlobalPosition);
                         EventBus.EmitChildRescued(ownerNode.GlobalPosition);
                         break;
                     case CollectableType.Skill:
                         if (Data.Skill != null)
                         {
-                            _floatingTextManager?.ShowMessage($"{Data.Skill.Name} Unlocked!", ownerNode.GlobalPosition);
+                            FloatingTextManager.Instance?.ShowMessage($"{Data.Skill.Name} Unlocked!", ownerNode.GlobalPosition);
                             EventBus.EmitSkillCollected(Data.Skill, ownerNode.GlobalPosition);
                         }
                         break;

@@ -1,10 +1,9 @@
-[gd_resource type="Resource" script_class="CollectableResource" load_steps=3 format=3]
+[gd_resource type="Resource" format=3 uid="uid://dfyp1n4p52ydm"]
 
-[ext_resource type="Script" path="res://scripts/Resources/CollectableResource.cs" id="1_script"]
+[ext_resource type="Script" uid="uid://gptsgaw3agkf" path="res://scripts/Resources/CollectableResource.cs" id="1_script"]
 [ext_resource type="Resource" uid="uid://bxsgq8703qx4u" path="res://resources/skills/double_jump.tres" id="2_skill"]
 
 [resource]
 script = ExtResource("1_script")
-Amount = 0.0
-Type = 3
+Type = 4
 Skill = ExtResource("2_skill")
