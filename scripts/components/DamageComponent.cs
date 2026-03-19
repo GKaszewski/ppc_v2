@@ -11,7 +11,7 @@ public partial class DamageComponent : Node
     [Export] public StatusEffectDataResource StatusEffectData { get; set; }
     [Export] public Timer DamageTimer { get; set; }
     
-    private Node _currentTarget = null;
+    private readonly System.Collections.Generic.HashSet<Node> _currentTargets = new();
     private KnockbackComponent _knockbackComponent = null;
     
     [Signal] public delegate void EffectInflictedEventHandler(Node2D target, StatusEffectDataResource effect);
@@ -35,10 +35,11 @@ public partial class DamageComponent : Node
 
     public override void _Process(double delta)
     {
-        if (_currentTarget == null) return;
+        if (_currentTargets.Count == 0) return;
         if (DamageTimer != null) return;
-        
-        ProcessEntityAndApplyDamage(_currentTarget as Node2D);
+
+        foreach (var target in _currentTargets)
+            ProcessEntityAndApplyDamage(target as Node2D);
     }
 
     public void DealDamage(HealthComponent target) => target.DecreaseHealth(Damage);
@@ -56,28 +57,28 @@ public partial class DamageComponent : Node
 
     private void OnAreaBodyExited(Node2D body)
     {
-        if (body != _currentTarget) return;
-        _currentTarget = null;
-        DamageTimer?.Stop();
+        _currentTargets.Remove(body);
+        if (_currentTargets.Count == 0)
+            DamageTimer?.Stop();
     }
 
     private void OnAreaBodyEntered(Node2D body)
     {
-        _currentTarget = body;
+        _currentTargets.Add(body);
 
         if (!CheckIfProcessingIsOn())
             return;
 
-        DamageTimer?.Start();
+        if (_currentTargets.Count == 1)
+            DamageTimer?.Start();
 
         ProcessEntityAndApplyDamage(body);
     }
-    
+
     private void OnDamageTimerTimeout()
     {
-        if (_currentTarget == null) return;
-        
-        ProcessEntityAndApplyDamage(_currentTarget as Node2D);
+        foreach (var target in _currentTargets)
+            ProcessEntityAndApplyDamage(target as Node2D);
     }
     
     private void ProcessEntityAndApplyDamage(Node2D body)

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Godot;
 using Godot.Collections;
 using Mr.BrickAdventures.scripts.components;
@@ -21,7 +20,6 @@ public partial class GameManager : Node
         private set => _player = value;
     }
 
-    private List<Node> _sceneNodes = [];
     private PlayerController _player;
     private SpeedRunManager _speedRunManager;
 
@@ -32,38 +30,24 @@ public partial class GameManager : Node
 
     public static GameManager Instance { get; private set; }
 
-    public override void _EnterTree()
+    public override void _Ready()
     {
-        GetTree().NodeAdded += OnNodeAdded;
-        GetTree().NodeRemoved += OnNodeRemoved;
+        Instance = this;
+        _speedRunManager = SpeedRunManager.Instance;
+        EventBus.Instance.PlayerSpawned += OnPlayerSpawned;
     }
 
     public override void _ExitTree()
     {
         if (Instance == this) Instance = null;
-        GetTree().NodeAdded -= OnNodeAdded;
-        GetTree().NodeRemoved -= OnNodeRemoved;
-        _sceneNodes.Clear();
+        if (EventBus.Instance != null)
+            EventBus.Instance.PlayerSpawned -= OnPlayerSpawned;
     }
 
-    public override void _Ready()
+    private void OnPlayerSpawned(PlayerController player)
     {
-        Instance = this;
-        _speedRunManager = GetNode<SpeedRunManager>(Constants.SpeedRunManagerPath);
-    }
-
-    private void OnNodeAdded(Node node)
-    {
-        _sceneNodes.Add(node);
-    }
-
-    private void OnNodeRemoved(Node node)
-    {
-        _sceneNodes.Remove(node);
-        if (node == _player)
-        {
-            _player = null;
-        }
+        _player = player;
+        player.TreeExiting += () => { if (_player == player) _player = null; };
     }
 
     #region Coin Operations
@@ -187,7 +171,7 @@ public partial class GameManager : Node
     {
         Store?.ResetAll();
         GetTree().ChangeSceneToPacked(LevelScenes[0]);
-        GetNode<SaveSystem>(Constants.SaveSystemPath).SaveGame();
+        SaveSystem.Instance.SaveGame();
     }
 
     public void QuitGame() => GetTree().Quit();
@@ -209,13 +193,13 @@ public partial class GameManager : Node
         Store?.ResetAll();
         _speedRunManager?.StartTimer();
         GetTree().ChangeSceneToPacked(LevelScenes[0]);
-        GetNode<SaveSystem>(Constants.SaveSystemPath).SaveGame();
+        SaveSystem.Instance.SaveGame();
         EventBus.EmitGameStarted();
     }
 
     public void ContinueGame()
     {
-        var save = GetNode<SaveSystem>(Constants.SaveSystemPath);
+        var save = SaveSystem.Instance;
         if (!save.LoadGame())
         {
             GD.PrintErr("Failed to load game. Starting a new game instead.");
@@ -249,7 +233,7 @@ public partial class GameManager : Node
 
         Store.ResetSession();
         TryToGoToNextLevel();
-        GetNode<SaveSystem>(Constants.SaveSystemPath).SaveGame();
+        SaveSystem.Instance.SaveGame();
     }
 
     #endregion
@@ -259,18 +243,7 @@ public partial class GameManager : Node
     public PlayerController GetPlayer()
     {
         if (_player != null && IsInstanceValid(_player)) return _player;
-
         _player = null;
-
-        foreach (var node in _sceneNodes)
-        {
-            if (node is not PlayerController player) continue;
-
-            _player = player;
-            return _player;
-        }
-
-        GD.PrintErr("PlayerController not found in the scene tree.");
         return null;
     }
 

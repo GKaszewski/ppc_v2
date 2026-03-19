@@ -23,17 +23,7 @@ public partial class LevelStateHandler : Node
 
     private void OnLevelCompleted(int levelIndex, Node currentScene, double completionTime)
     {
-        var store = GameStateStore.Instance;
-        if (store == null) return;
-
-        // Mark level complete and unlock next
-        store.MarkLevelComplete(levelIndex);
-
-        // Commit session data to persistent state
-        store.CommitSessionCoins();
-        store.CommitSessionSkills();
-
-        // Reset session for next level
-        store.ResetSession();
+        // State mutations (commit coins/skills, reset session) are handled by GameManager.OnLevelComplete
+        // before this event fires. This handler is reserved for future level-specific side-effects.
     }
 }

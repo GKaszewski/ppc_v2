@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using Godot.Collections;
-using Mr.BrickAdventures;
 using Mr.BrickAdventures.scripts.components;
 using Mr.BrickAdventures.scripts.interfaces;
 using Mr.BrickAdventures.scripts.Resources;
@@ -11,8 +10,8 @@ namespace Mr.BrickAdventures.Autoloads;
 
 public partial class SkillManager : Node
 {
-    private GameManager _gameManager;
     private PlayerController _player;
+    private GameManager GameManager => GameManager.Instance;
 
     [Export] public Array<SkillData> AvailableSkills { get; set; } = [];
 
@@ -28,7 +27,6 @@ public partial class SkillManager : Node
     public override void _Ready()
     {
         Instance = this;
-        _gameManager = GetNode<GameManager>(Constants.GameManagerPath);
     }
 
     public override void _ExitTree()
@@ -85,21 +83,11 @@ public partial class SkillManager : Node
 
         if (skillData.Type == SkillType.Throw)
         {
-            var unlocked = _gameManager.GetUnlockedSkills();
-            foreach (var sd in unlocked)
+            // Remove any other active throw skill before adding the new one
+            foreach (var sd in AvailableSkills)
             {
-                SkillData data = null;
-                foreach (var s in AvailableSkills)
-                {
-                    if (s == sd)
-                    {
-                        data = s;
-                        break;
-                    }
-                }
-                // Remove other throw skills if a new one is added
-                if (data is { Type: SkillType.Throw })
-                    RemoveSkill(data.Name);
+                if (sd != skillData && sd.Type == SkillType.Throw)
+                    RemoveSkill(sd.Name);
             }
         }
 
@@ -146,14 +134,6 @@ public partial class SkillManager : Node
         if (IsInstanceValid(inst))
             inst.QueueFree();
 
-        var skills = _gameManager.GetUnlockedSkills();
-        foreach (var s in skills)
-        {
-            if (s.Name == skillName)
-            {
-                break;
-            }
-        }
         ActiveComponents.Remove(skillName);
         var sd = GetSkillByName(skillName);
         if (sd != null) EmitSignalSkillRemoved(sd);
@@ -174,10 +154,11 @@ public partial class SkillManager : Node
     public void ApplyUnlockedSkills()
     {
         if (_player == null || !IsInstanceValid(_player)) return;
+        if (GameManager == null) return;
 
         foreach (var sd in AvailableSkills)
         {
-            if (_gameManager.IsSkillUnlocked(sd))
+            if (GameManager.IsSkillUnlocked(sd))
             {
                 CallDeferred(MethodName.AddSkill, sd);
             }

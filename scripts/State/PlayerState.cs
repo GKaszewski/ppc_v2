@@ -9,6 +9,8 @@ namespace Mr.BrickAdventures.scripts.State;
 /// </summary>
 public class PlayerState
 {
+    private const int DefaultLives = 3;
+
     /// <summary>
     /// Saved coins (not including current session).
     /// </summary>
@@ -17,7 +19,7 @@ public class PlayerState
     /// <summary>
     /// Remaining lives.
     /// </summary>
-    public int Lives { get; set; } = 3;
+    public int Lives { get; set; } = DefaultLives;
 
     /// <summary>
     /// Indices of completed levels.
@@ -45,17 +47,9 @@ public class PlayerState
     public List<string> UnlockedAchievements { get; set; } = new();
 
     /// <summary>
-    /// Creates a fresh default player state.
+    /// Creates a fresh default player state (same as <c>new PlayerState()</c>).
     /// </summary>
-    public static PlayerState CreateDefault() => new()
-    {
-        Coins = 0,
-        Lives = 3,
-        CompletedLevels = new List<int>(),
-        UnlockedLevels = new List<int> { 0 },
-        UnlockedSkills = new List<SkillData>(),
-        Statistics = new Dictionary<string, int>()
-    };
+    public static PlayerState CreateDefault() => new();
 
     /// <summary>
     /// Resets this state to default values.
@@ -63,7 +57,7 @@ public class PlayerState
     public void Reset()
     {
         Coins = 0;
-        Lives = 3;
+        Lives = DefaultLives;
         CompletedLevels.Clear();
         UnlockedLevels.Clear();
         UnlockedLevels.Add(0);

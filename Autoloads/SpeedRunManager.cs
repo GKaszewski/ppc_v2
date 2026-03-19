@@ -5,6 +5,11 @@ namespace Mr.BrickAdventures.Autoloads;
 
 public partial class SpeedRunManager : Node
 {
+    public static SpeedRunManager Instance { get; private set; }
+
+    public override void _EnterTree() => Instance = this;
+    public override void _ExitTree() { if (Instance == this) Instance = null; }
+
     public bool IsRunning { get; private set; } = false;
     public bool IsVisible { get; private set; } = false;
     

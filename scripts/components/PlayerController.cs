@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Godot;
-using Mr.BrickAdventures;
 using Mr.BrickAdventures.Autoloads;
 
 namespace Mr.BrickAdventures.scripts.components;
@@ -34,8 +33,19 @@ public partial class PlayerController : CharacterBody2D
 
     public override void _Ready()
     {
-        var skillManager = GetNodeOrNull<SkillManager>(Constants.SkillManagerPath);
-        skillManager?.RegisterPlayer(this);
+        SkillManager.Instance?.RegisterPlayer(this);
+
+        // Wire HealthComponent signals to global EventBus events
+        var health = GetNodeOrNull<HealthComponent>("HealthComponent");
+        if (health != null)
+        {
+            health.Death += () => EventBus.EmitPlayerDied(GlobalPosition);
+            health.HealthChanged += (delta, total) =>
+            {
+                if (delta < 0f) EventBus.EmitPlayerDamaged(Mathf.Abs(delta), total, GlobalPosition);
+                else EventBus.EmitPlayerHealed(delta, total, GlobalPosition);
+            };
+        }
 
         _inputHandler = GetNode<PlayerInputHandler>("PlayerInputHandler");
         foreach (var child in MovementAbilitiesContainer.GetChildren())
@@ -49,6 +59,7 @@ public partial class PlayerController : CharacterBody2D
 
         _ = ConnectJumpAndGravityAbilities();
         EmitSignalMovementAbilitiesChanged();
+        EventBus.EmitPlayerSpawned(this);
     }
 
     public override void _PhysicsProcess(double delta)

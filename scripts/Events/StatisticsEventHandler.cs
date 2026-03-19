@@ -1,5 +1,4 @@
 using Godot;
-using Mr.BrickAdventures;
 using Mr.BrickAdventures.Autoloads;
 
 namespace Mr.BrickAdventures.scripts.Events;
@@ -14,7 +13,7 @@ public partial class StatisticsEventHandler : Node
 
     public override void _Ready()
     {
-        _statisticsManager = GetNode<StatisticsManager>(Constants.StatisticsManagerPath);
+        _statisticsManager = StatisticsManager.Instance;
 
         // Subscribe to events
         EventBus.Instance.CoinCollected += OnCoinCollected;

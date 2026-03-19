@@ -9,6 +9,10 @@ namespace Mr.BrickAdventures.Autoloads;
 /// </summary>
 public partial class StatisticsManager : Node
 {
+    public static StatisticsManager Instance { get; private set; }
+
+    public override void _Ready() => Instance = this;
+    public override void _ExitTree() { if (Instance == this) Instance = null; }
 
     /// <summary>
     /// Gets the statistics dictionary from the store.
